@@ -3,28 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conway Golf</title>
+<title>Bryan Conway | Kentucky Golf</title>
+<meta name="description" content="Bryan Conway — 1995 Kentucky Amateur Champion, Kentucky Senior Golf.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{
-    background:linear-gradient(135deg,#0d2b1a 0%,#123d24 100%);
-    color:#fff;
-    font-family:Arial,sans-serif;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:24px;
+    font-family:'Inter',system-ui,sans-serif;
+    background:#fafaf8;
+    color:#1a1a1a;
+    line-height:1.6;
   }
-  h1{font-size:clamp(28px,6vw,52px);font-weight:900;letter-spacing:1px;margin-bottom:12px;}
-  p{font-size:15px;color:rgba(255,255,255,.7);}
+  .wrap{max-width:720px;margin:0 auto;padding:80px 24px 100px;}
+
+  /* HERO */
+  .hero{margin-bottom:64px;}
+  .hero-name{font-size:clamp(36px,7vw,56px);font-weight:900;letter-spacing:-1px;margin-bottom:10px;}
+  .hero-tagline{font-size:17px;color:#555;max-width:520px;}
+  .hero-meta{margin-top:18px;font-size:13px;color:#888;letter-spacing:.3px;text-transform:uppercase;font-weight:600;}
+
+  /* RECORD */
+  .section-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#1a6b2e;margin-bottom:20px;}
+  .record{list-style:none;margin-bottom:64px;}
+  .record-item{
+    display:flex;gap:20px;align-items:baseline;
+    padding:18px 0;border-bottom:1px solid #e8e6df;
+  }
+  .record-item:first-child{border-top:1px solid #e8e6df;}
+  .record-year{font-size:14px;font-weight:700;color:#1a6b2e;min-width:52px;flex-shrink:0;}
+  .record-body{flex:1;}
+  .record-title{font-size:16px;font-weight:700;margin-bottom:3px;}
+  .record-note{font-size:13.5px;color:#777;}
+
+  /* SCHEDULE */
+  .schedule{margin-bottom:64px;}
+  .schedule-empty{font-size:14px;color:#999;font-style:italic;padding:20px 0;border-top:1px solid #e8e6df;border-bottom:1px solid #e8e6df;}
+
+  /* CONTACT */
+  .contact p{font-size:14px;color:#555;}
+  .contact a{color:#1a6b2e;text-decoration:none;font-weight:600;}
+  .contact a:hover{text-decoration:underline;}
+
+  footer{max-width:720px;margin:0 auto;padding:0 24px 48px;font-size:11px;color:#aaa;}
+
+  @media(max-width:600px){
+    .wrap{padding:56px 20px 72px;}
+    .record-item{flex-direction:column;gap:4px;}
+    .record-year{min-width:0;}
+  }
 </style>
 </head>
 <body>
-  <div>
-    <h1>Conway Golf</h1>
-    <p>Site coming soon — schedule &amp; results.</p>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-name">Bryan Conway</div>
+    <p class="hero-tagline">Kentucky amateur golfer. 1995 Kentucky Amateur Champion, competing in Kentucky Golf Association Senior Division events.</p>
+    <div class="hero-meta">Kentucky &middot; Senior Division</div>
   </div>
+
+  <div>
+    <div class="section-label">The Record</div>
+    <ul class="record">
+      <li class="record-item">
+        <div class="record-year">2026</div>
+        <div class="record-body">
+          <div class="record-title">Kentucky Men's Match Play — Senior Division Qualifying Medalist</div>
+          <div class="record-note">Led the Senior Division qualifying round at the 14th Clark's Pump-N-Shop Kentucky Men's Match Play Championship, Kearney Hill Golf Links — three-under 69 with an eagle on hole 3 and birdies on 9 and 11.</div>
+        </div>
+      </li>
+      <li class="record-item">
+        <div class="record-year">1995</div>
+        <div class="record-body">
+          <div class="record-title">Kentucky Amateur Champion</div>
+          <div class="record-note">Won the Kentucky State Amateur Championship at Kearney Hill Links, representing The Players Club, with a score of 281.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="schedule">
+    <div class="section-label">Schedule</div>
+    <div class="schedule-empty">Upcoming events to be announced.</div>
+  </div>
+
+  <div class="contact">
+    <div class="section-label">Get In Touch</div>
+    <p>For updates and event info, reach out directly.</p>
+  </div>
+
+</div>
+<footer>Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</footer>
 </body>
 </html>
