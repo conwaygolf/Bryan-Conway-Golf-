@@ -16,13 +16,58 @@
     color:#1a1a1a;
     line-height:1.6;
   }
-  .wrap{max-width:720px;margin:0 auto;padding:80px 24px 100px;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 24px 100px;}
+
+  /* LOGO BAR */
+  .logo-bar{
+    background:linear-gradient(160deg,#0a1f0f 0%,#0d2b17 60%,#12351d 100%);
+    padding:36px 24px 32px;
+    text-align:center;
+    border-bottom:3px solid #d4a030;
+    margin-bottom:64px;
+  }
+  .logo-mark{
+    font-family:'Inter',sans-serif;
+    font-size:clamp(38px,9vw,64px);
+    font-weight:900;
+    font-style:italic;
+    letter-spacing:-1.5px;
+    transform:skew(-6deg);
+    display:inline-block;
+    background:linear-gradient(180deg,#f3d886 0%,#d4a030 55%,#a87418 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 2px 0 rgba(0,0,0,.25);
+    line-height:1;
+  }
+  .logo-sub{
+    margin-top:6px;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:8px;
+    color:#fff;
+    text-transform:uppercase;
+  }
+  .logo-sub span{color:#d4a030;}
 
   /* HERO */
-  .hero{margin-bottom:64px;}
-  .hero-name{font-size:clamp(36px,7vw,56px);font-weight:900;letter-spacing:-1px;margin-bottom:10px;}
-  .hero-tagline{font-size:17px;color:#555;max-width:520px;}
+  .hero{margin-bottom:64px;display:flex;gap:32px;align-items:flex-start;}
+  .hero-photo{flex-shrink:0;width:220px;aspect-ratio:4/5;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.18);}
+  .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;}
+  .hero-name{font-size:clamp(32px,6vw,48px);font-weight:900;letter-spacing:-1px;margin-bottom:10px;}
+  .hero-tagline{font-size:16px;color:#555;max-width:460px;}
   .hero-meta{margin-top:18px;font-size:13px;color:#888;letter-spacing:.3px;text-transform:uppercase;font-weight:600;}
+  @media(max-width:560px){
+    .hero{flex-direction:column;}
+    .hero-photo{width:160px;}
+  }
+
+  /* TROPHY PHOTO */
+  .trophy-wrap{margin-bottom:64px;}
+  .trophy-photo{border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.15);}
+  .trophy-photo img{width:100%;display:block;}
+  .trophy-caption{margin-top:10px;font-size:12.5px;color:#999;text-align:center;font-style:italic;}
 
   /* RECORD */
   .section-label{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#1a6b2e;margin-bottom:20px;}
@@ -56,17 +101,31 @@
 </style>
 </head>
 <body>
+<div class="logo-bar">
+  <div class="logo-mark">CONWAY</div>
+  <div class="logo-sub">Kentucky <span>&middot;</span> Golf</div>
+</div>
 <div class="wrap">
 
   <div class="hero">
+    <div class="hero-photo">
+      <img src="/static/images/367D2631-20DC-44D8-B1FD-7924299ABBAC.png" alt="Bryan Conway">
+    </div>
     <div class="hero-name">Bryan Conway</div>
-    <p class="hero-tagline">Kentucky amateur golfer. 1995 Kentucky Amateur Champion, competing in Kentucky Golf Association Senior Division events.</p>
-    <div class="hero-meta">Kentucky &middot; Senior Division</div>
+    <p class="hero-tagline">Kentucky golfer. Played collegiately at the University of Louisville. 2026 Kentucky Senior Stroke Play Champion and 1995 Kentucky Amateur Champion.</p>
+    <div class="hero-meta">Kentucky &middot; Senior Division &middot; University of Louisville</div>
   </div>
 
   <div>
     <div class="section-label">The Record</div>
     <ul class="record">
+      <li class="record-item">
+        <div class="record-year">2026</div>
+        <div class="record-body">
+          <div class="record-title">Kentucky Men's Senior Stroke Play Champion</div>
+          <div class="record-note">Won the Kentucky Golf Association Men's Senior Stroke Play Championship, July 27&ndash;28, at Bardstown Country Club.</div>
+        </div>
+      </li>
       <li class="record-item">
         <div class="record-year">2026</div>
         <div class="record-body">
@@ -82,6 +141,13 @@
         </div>
       </li>
     </ul>
+  </div>
+
+  <div class="trophy-wrap">
+    <div class="trophy-photo">
+      <img src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway receiving the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
+    </div>
+    <div class="trophy-caption">2026 Kentucky Senior Stroke Play Champion &mdash; Bardstown Country Club</div>
   </div>
 
   <div class="schedule">
