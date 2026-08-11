@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bryan Conway | Kentucky Golf</title>
-<meta name="description" content="Bryan Conway — 2x Kentucky Golf Association Champion. 2026 Kentucky Senior Stroke Play Champion, 1995 Kentucky Amateur Champion.">
+<meta name="description" content="Bryan Conway — Franklin County state champion, Canadian PGA Tour veteran, 2x Kentucky Golf Association Champion. 2026 Kentucky Senior Stroke Play Champion.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" href="/static/images/logo.png">
+<link rel="icon" href="/static/images/bcg_logo.png">
 <style>
   :root{
-    --gold:#e0b430;
-    --gold-text:#a5761f;
-    --green:#0a3323;
-    --green-deep:#052f1d;
+    --red:#a8171c;
+    --red-text:#8a1418;
+    --black:#141110;
+    --black-soft:#241a19;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -39,26 +39,26 @@
   .nav-mark{display:flex;align-items:center;gap:11px;}
   .nav-mark img{width:38px;height:38px;border-radius:50%;display:block;}
   .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;}
-  .nav-links{display:flex;gap:36px;list-style:none;}
+  .nav-links{display:flex;gap:32px;list-style:none;}
   .nav-links a{font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#3a3a30;transition:color .15s;}
-  .nav-links a:hover{color:var(--gold-text);}
+  .nav-links a:hover{color:var(--red-text);}
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
   .nav-toggle span{width:22px;height:2px;background:#18180f;}
-  @media(max-width:720px){
+  @media(max-width:800px){
     .nav-links{
       position:fixed;top:72px;left:0;right:0;
       flex-direction:column;gap:0;
       background:#fdfdfb;border-bottom:1px solid #e8e6dc;
       max-height:0;overflow:hidden;transition:max-height .25s ease;
     }
-    .nav-links.open{max-height:300px;}
+    .nav-links.open{max-height:340px;}
     .nav-links a{display:block;padding:16px 32px;border-top:1px solid #eeece3;}
     .nav-toggle{display:flex;}
   }
 
   /* LIVE BANNER */
   .live-banner{
-    background:var(--green-deep);color:#fff;
+    background:var(--black);color:#fff;
     display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
     padding:11px 24px;font-size:13px;text-align:center;
   }
@@ -66,43 +66,47 @@
     width:8px;height:8px;border-radius:50%;background:#ff5a4e;flex-shrink:0;
     animation:live-pulse 1.6s ease-in-out infinite;
   }
-  .live-dot.result{background:var(--gold);animation:none;}
+  .live-dot.result{background:var(--red);animation:none;}
   @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
-  .live-label{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;color:var(--gold);}
+  .live-label{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;color:#ff8a86;}
   .live-detail{color:rgba(255,255,255,.85);font-weight:500;}
   .live-detail strong{color:#fff;font-weight:800;}
 
   /* HERO */
-  .hero{position:relative;height:clamp(460px,72vh,680px);overflow:hidden;}
-  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;}
-  .hero::after{
+  .hero{position:relative;display:flex;min-height:clamp(460px,72vh,640px);overflow:hidden;background:var(--black);}
+  .hero-text{
+    flex:1 1 56%;display:flex;flex-direction:column;justify-content:center;
+    padding:60px clamp(32px,5vw,72px);position:relative;z-index:2;
+  }
+  .hero-photo{flex:1 1 44%;position:relative;overflow:hidden;min-height:280px;}
+  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;}
+  .hero-photo::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(5,47,29,.08) 0%,rgba(5,47,29,.2) 45%,rgba(5,47,29,.92) 100%);
+    background:linear-gradient(100deg,rgba(20,17,16,.85) 0%,rgba(20,17,16,0) 22%);
   }
   .hero-seal{
-    position:absolute;top:24px;right:24px;z-index:2;
-    width:clamp(64px,9vw,96px);height:clamp(64px,9vw,96px);
-    border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.35);
+    position:absolute;top:20px;right:20px;z-index:2;
+    width:clamp(56px,7vw,80px);height:clamp(56px,7vw,80px);
+    border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.45);
   }
-  .hero-content{position:absolute;left:0;right:0;bottom:0;padding:0 32px 52px;max-width:1080px;margin:0 auto;}
   .hero-badge{
     display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-    color:var(--green);background:var(--gold);padding:6px 14px;border-radius:2px;margin-bottom:18px;
+    color:#fff;background:var(--red);padding:6px 14px;border-radius:2px;margin-bottom:18px;
   }
-  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px;}
-  .hero-tagline{font-size:16px;color:rgba(255,255,255,.72);max-width:480px;font-weight:500;}
+  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(38px,6.5vw,72px);font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px;}
+  .hero-tagline{font-size:16px;color:rgba(255,255,255,.72);max-width:420px;font-weight:500;}
   .scroll-cue{
-    position:absolute;bottom:22px;right:32px;
-    font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);
-    display:flex;align-items:center;gap:8px;
+    position:absolute;bottom:22px;left:clamp(32px,5vw,72px);
+    font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);
+    display:flex;align-items:center;gap:8px;z-index:2;
   }
-  .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
-  @media(max-width:720px){
-    .hero{height:auto;display:flex;flex-direction:column;}
-    .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 55%;}
-    .hero::after{display:none;}
-    .hero-seal{top:16px;right:16px;width:56px;height:56px;}
-    .hero-content{position:static;padding:26px 24px 34px;max-width:none;background:var(--green);}
+  @media(max-width:800px){
+    .hero{flex-direction:column;min-height:0;}
+    .hero-photo{order:-1;min-height:0;aspect-ratio:4/3;}
+    .hero-photo-img{object-position:50% 16%;}
+    .hero-photo::after{background:linear-gradient(0deg,rgba(20,17,16,1) 0%,rgba(20,17,16,0) 30%);}
+    .hero-text{padding:32px 24px 40px;}
+    .hero-seal{top:16px;right:16px;width:52px;height:52px;}
     .scroll-cue{display:none;}
   }
 
@@ -112,64 +116,82 @@
     border-bottom:1px solid #e8e6dc;
   }
   .stat{
-    padding:36px 20px;text-align:center;border-right:1px solid #e8e6dc;border-top:3px solid var(--gold);
+    padding:36px 20px;text-align:center;border-right:1px solid #e8e6dc;border-top:3px solid var(--red);
   }
   .stat:last-child{border-right:none;}
-  .stat-num{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,38px);font-weight:900;color:#18180f;line-height:1;margin-bottom:8px;}
+  .stat-num{font-family:'Playfair Display',serif;font-size:clamp(24px,3.6vw,36px);font-weight:900;color:#18180f;line-height:1;margin-bottom:8px;}
   .stat-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8a8a7c;}
   @media(max-width:680px){
     .stats{grid-template-columns:repeat(2,1fr);}
     .stat{padding:26px 14px;}
   }
 
+  /* SECTION SCAFFOLD */
+  section{padding:88px 0;border-bottom:1px solid #e8e6dc;position:relative;overflow:hidden;}
+  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--red-text);margin-bottom:16px;}
+  .section-head{max-width:640px;margin-bottom:48px;position:relative;z-index:1;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,36px);font-weight:800;line-height:1.15;}
+
+  /* ABOUT */
+  .about-body{max-width:660px;font-size:17px;color:#45453c;position:relative;z-index:1;}
+  .about-body p{margin-bottom:18px;}
+  .about-body p:first-of-type::first-letter{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:58px;line-height:.75;
+    float:left;padding:6px 10px 0 0;color:var(--red-text);
+  }
+
+  /* ROOTS */
+  .roots-watermark{
+    position:absolute;top:-40px;right:-60px;width:420px;max-width:60vw;opacity:.05;
+    pointer-events:none;z-index:0;
+  }
+  .roots-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;position:relative;z-index:1;}
+  .roots-gallery figure{margin:0;}
+  .roots-gallery img{
+    width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:3px;
+    filter:grayscale(1) contrast(1.05);
+  }
+  .roots-gallery figcaption{font-size:10.5px;color:#8a8a7c;margin-top:8px;line-height:1.4;}
+  @media(max-width:800px){.roots-gallery{grid-template-columns:repeat(2,1fr);}}
+  .roots-link{
+    display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:12.5px;font-weight:700;
+    color:var(--red-text);border-bottom:1px solid var(--red);padding-bottom:2px;position:relative;z-index:1;
+  }
+
   /* PLAYER OF THE YEAR */
-  .poy-table{width:100%;border-collapse:collapse;}
+  .poy-table{width:100%;border-collapse:collapse;position:relative;z-index:1;}
   .poy-table th{
     text-align:left;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8a8a7c;
     padding:0 12px 12px;border-bottom:1px solid #e8e6dc;
   }
   .poy-table th.num,.poy-table td.num{text-align:right;}
   .poy-table td{padding:14px 12px;border-bottom:1px solid #e8e6dc;font-size:14.5px;}
-  .poy-table tr.leader{background:rgba(224,180,48,.1);}
+  .poy-table tr.leader{background:rgba(168,23,28,.07);}
   .poy-table tr.leader td{font-weight:800;}
-  .poy-rank{font-family:'Playfair Display',serif;font-weight:800;color:var(--gold-text);}
+  .poy-rank{font-family:'Playfair Display',serif;font-weight:800;color:var(--red-text);}
   .poy-leader-tag{
     display:inline-block;margin-left:8px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
-    color:var(--green);background:var(--gold);padding:2px 8px;border-radius:999px;vertical-align:middle;
+    color:#fff;background:var(--red);padding:2px 8px;border-radius:999px;vertical-align:middle;
   }
   .poy-city{color:#8a8a7c;font-size:12.5px;}
-  .poy-note{margin-top:16px;font-size:12px;color:#8a8a7c;font-style:italic;}
+  .poy-note{margin-top:16px;font-size:12px;color:#8a8a7c;font-style:italic;position:relative;z-index:1;}
   @media(max-width:600px){
     .poy-table{font-size:12px;}
     .poy-table .th-city,.poy-table .td-city,.poy-table .th-events,.poy-table .td-events{display:none;}
   }
 
-  /* SECTION SCAFFOLD */
-  section{padding:88px 0;border-bottom:1px solid #e8e6dc;}
-  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-text);margin-bottom:16px;}
-  .section-head{max-width:640px;margin-bottom:48px;}
-  .section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,36px);font-weight:800;line-height:1.15;}
-
-  /* ABOUT */
-  .about-body{max-width:660px;font-size:17px;color:#45453c;}
-  .about-body p{margin-bottom:18px;}
-  .about-body p:first-of-type::first-letter{
-    font-family:'Playfair Display',serif;font-weight:900;font-size:58px;line-height:.75;
-    float:left;padding:6px 10px 0 0;color:var(--gold-text);
-  }
-
   /* RECORD */
-  .record{list-style:none;}
+  .record{list-style:none;position:relative;z-index:1;}
   .record-item{
     display:grid;grid-template-columns:100px 1fr;gap:28px;
     padding:28px 0;border-top:1px solid #e8e6dc;
   }
   .record:last-child .record-item:last-child{border-bottom:1px solid #e8e6dc;}
-  .record-year{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;color:var(--gold-text);}
+  .record-year{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;color:var(--red-text);}
   .record-title{font-size:17px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .champion-tag{
-    font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-text);
-    border:1px solid var(--gold);padding:3px 9px;border-radius:999px;
+    font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--red-text);
+    border:1px solid var(--red);padding:3px 9px;border-radius:999px;
   }
   .record-note{font-size:14px;color:#7a7a6c;max-width:560px;}
   @media(max-width:600px){
@@ -186,17 +208,17 @@
   .schedule-empty{font-size:14.5px;color:#8a8a7c;font-style:italic;padding-top:28px;border-top:1px solid #e8e6dc;}
 
   /* CONTACT */
-  .contact-section{background:var(--green);border-bottom:none;}
-  .contact-section .eyebrow{color:var(--gold);}
+  .contact-section{background:var(--black-soft);border-bottom:none;}
+  .contact-section .eyebrow{color:var(--red);}
   .contact-section .section-title{color:#fff;}
-  .contact-body{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .contact-body{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative;z-index:1;}
   .contact-body p{color:rgba(255,255,255,.6);font-size:15px;max-width:420px;}
   .contact-cta{
     display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-    color:var(--green);background:var(--gold);padding:15px 30px;border-radius:2px;white-space:nowrap;
+    color:#fff;background:var(--red);padding:15px 30px;border-radius:2px;white-space:nowrap;
   }
 
-  footer{max-width:1080px;margin:0 auto;padding:28px 32px;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--green);display:flex;align-items:center;justify-content:center;gap:10px;}
+  footer{max-width:1080px;margin:0 auto;padding:28px 32px;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);display:flex;align-items:center;justify-content:center;gap:10px;}
   footer img{width:22px;height:22px;border-radius:50%;}
   .contact-section, footer{color:#fff;}
 </style>
@@ -205,9 +227,10 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-mark"><img src="/static/images/logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
+    <div class="nav-mark"><img src="/static/images/bcg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#roots">Roots</a></li>
       <li><a href="#poy">Player of the Year</a></li>
       <li><a href="#record">The Record</a></li>
       <li><a href="#schedule">Schedule</a></li>
@@ -224,22 +247,69 @@
 </div>
 
 <div class="hero">
-  <img class="hero-photo-img" src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway with the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
-  <img class="hero-seal" src="/static/images/logo.png" alt="Bryan Conway Golf — Love Fore Golf">
-  <div class="hero-content">
+  <div class="hero-text">
     <div class="hero-badge">2026 Senior Stroke Play Champion</div>
     <div class="hero-name">Bryan<br>Conway</div>
-    <p class="hero-tagline">Two-time Kentucky Golf Association champion. University of Louisville golf alum, still winning three decades later.</p>
+    <p class="hero-tagline">Franklin County state champion turned Canadian PGA Tour pro — now the man to beat in Kentucky senior golf.</p>
+  </div>
+  <div class="hero-photo">
+    <img class="hero-photo-img" src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway holding the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
+    <img class="hero-seal" src="/static/images/bcg_logo.png" alt="Bryan Conway Golf">
   </div>
   <div class="scroll-cue">Scroll</div>
 </div>
 
 <div class="stats">
   <div class="stat"><div class="stat-num">2x</div><div class="stat-lbl">State Champion</div></div>
-  <div class="stat"><div class="stat-num">31</div><div class="stat-lbl">Years Competing</div></div>
+  <div class="stat"><div class="stat-num">Pro</div><div class="stat-lbl">Canadian PGA Tour</div></div>
   <div class="stat"><div class="stat-num">69</div><div class="stat-lbl">Low Round, 3-Under</div></div>
-  <div class="stat"><div class="stat-num">UofL</div><div class="stat-lbl">Louisville Golf</div></div>
+  <div class="stat"><div class="stat-num">31</div><div class="stat-lbl">Years Competing</div></div>
 </div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">About</div>
+      <h2 class="section-title">Three decades of Kentucky golf.</h2>
+    </div>
+    <div class="about-body">
+      <p>Bryan Conway won his first Kentucky Golf Association title in 1995, taking the Kentucky Amateur Championship at Kearney Hill Links as a member of The Players Club. Thirty-one years later, he's still adding to the record — a 2026 Kentucky Men's Senior Stroke Play Championship at Bardstown Country Club, and a deep run through that summer's Kentucky Senior Match Play Championship.</p>
+      <p>A University of Louisville golf alum, Conway played on the Canadian PGA Tour before returning to Kentucky's amateur ranks — where he plays out of the senior division today with the same game that made him a state champion in his twenties, still competing, still contending, still adding chapters to the record below.</p>
+    </div>
+  </div>
+</section>
+
+<section id="roots">
+  <img class="roots-watermark" src="/static/images/silhouette.png" alt="">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where It Started</div>
+      <h2 class="section-title">Franklin County, Kentucky. A family game.</h2>
+    </div>
+    <div class="about-body">
+      <p>Conway's name has been on Kentucky golf trophies since he was a teenager. He and his brother Ben helped Franklin County High School win back-to-back Kentucky boys' state championships in 1990 and 1991, following their father Walter Conway into the game — Bryan and Walter would each go on to hold the same rare double: a state championship team title and a local country club championship.</p>
+    </div>
+    <div class="roots-gallery">
+      <figure>
+        <img src="/static/images/roots_team_1991.png" alt="Franklin County High School boys golf team with the 1991 state championship trophy">
+        <figcaption>Franklin County, 1991 Kentucky Boys Golf State Champions</figcaption>
+      </figure>
+      <figure>
+        <img src="/static/images/roots_solo_1991.png" alt="Bryan Conway with the 1991 KHSAA Boys Golf Team trophy">
+        <figcaption>Bryan with the '91 KHSAA state trophy</figcaption>
+      </figure>
+      <figure>
+        <img src="/static/images/roots_national_winner.png" alt="Bryan Conway with the National Winner trophy plate">
+        <figcaption>National Winner, Class 1A</figcaption>
+      </figure>
+      <figure>
+        <img src="/static/images/roots_franklin_county.png" alt="Franklin County golf team with Regional Winner trophies">
+        <figcaption>Franklin County, Regional Champions</figcaption>
+      </figure>
+    </div>
+    <a class="roots-link" href="/static/images/frankfort_golf_history.png" target="_blank" rel="noopener">View the full Frankfort golf history →</a>
+  </div>
+</section>
 
 <section id="poy">
   <div class="wrap">
@@ -305,19 +375,6 @@
   </div>
 </section>
 
-<section id="about">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">About</div>
-      <h2 class="section-title">Three decades of Kentucky golf.</h2>
-    </div>
-    <div class="about-body">
-      <p>Bryan Conway won his first Kentucky Golf Association title in 1995, taking the Kentucky Amateur Championship at Kearney Hill Links as a member of The Players Club. Thirty-one years later, he's still adding to the record — a 2026 Kentucky Men's Senior Stroke Play Championship at Bardstown Country Club, and a deep run through that summer's Kentucky Senior Match Play Championship.</p>
-      <p>A University of Louisville golf alum, Conway plays out of Kentucky's senior amateur ranks with the same game that made him a state champion in his twenties — still competing, still contending, still adding chapters to the record below.</p>
-    </div>
-  </div>
-</section>
-
 <section id="record">
   <div class="wrap">
     <div class="section-head">
@@ -360,15 +417,22 @@
           <div class="record-note">Won the Kentucky State Amateur Championship at Kearney Hill Links, representing The Players Club, with a score of 281.</div>
         </div>
       </li>
+      <li class="record-item">
+        <div class="record-year">1990&ndash;91</div>
+        <div class="record-body">
+          <div class="record-title">Franklin County High School — Back-to-Back State Champions <span class="champion-tag">Champion</span></div>
+          <div class="record-note">Won consecutive KHSAA Boys Golf State Championships with Franklin County High School, alongside brother Ben Conway.</div>
+        </div>
+      </li>
     </ul>
   </div>
 </section>
 
 <div class="trophy-section">
   <div class="trophy-photo">
-    <img src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway receiving the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
+    <img src="/static/images/action_swing_2.jpg" alt="Bryan Conway following through on a tee shot">
   </div>
-  <div class="trophy-caption">2026 Kentucky Senior Stroke Play Champion &mdash; Bardstown Country Club</div>
+  <div class="trophy-caption">Still playing, still winning &mdash; three decades in.</div>
 </div>
 
 <section id="schedule">
@@ -394,7 +458,7 @@
   </div>
 </section>
 
-<footer><img src="/static/images/logo.png" alt=""> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</footer>
+<footer><img src="/static/images/bcg_logo.png" alt=""> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</footer>
 
 <script>
   var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
