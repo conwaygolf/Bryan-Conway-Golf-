@@ -56,6 +56,21 @@
     .nav-toggle{display:flex;}
   }
 
+  /* LIVE BANNER */
+  .live-banner{
+    background:var(--green-deep);color:#fff;
+    display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+    padding:11px 24px;font-size:13px;text-align:center;
+  }
+  .live-dot{
+    width:8px;height:8px;border-radius:50%;background:#ff5a4e;flex-shrink:0;
+    animation:live-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .live-label{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;color:var(--gold);}
+  .live-detail{color:rgba(255,255,255,.85);font-weight:500;}
+  .live-detail strong{color:#fff;font-weight:800;}
+
   /* HERO */
   .hero{position:relative;height:clamp(460px,72vh,680px);overflow:hidden;}
   .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;}
@@ -104,6 +119,28 @@
   @media(max-width:680px){
     .stats{grid-template-columns:repeat(2,1fr);}
     .stat{padding:26px 14px;}
+  }
+
+  /* PLAYER OF THE YEAR */
+  .poy-table{width:100%;border-collapse:collapse;}
+  .poy-table th{
+    text-align:left;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8a8a7c;
+    padding:0 12px 12px;border-bottom:1px solid #e8e6dc;
+  }
+  .poy-table th.num,.poy-table td.num{text-align:right;}
+  .poy-table td{padding:14px 12px;border-bottom:1px solid #e8e6dc;font-size:14.5px;}
+  .poy-table tr.leader{background:rgba(224,180,48,.1);}
+  .poy-table tr.leader td{font-weight:800;}
+  .poy-rank{font-family:'Playfair Display',serif;font-weight:800;color:var(--gold-text);}
+  .poy-leader-tag{
+    display:inline-block;margin-left:8px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
+    color:var(--green);background:var(--gold);padding:2px 8px;border-radius:999px;vertical-align:middle;
+  }
+  .poy-city{color:#8a8a7c;font-size:12.5px;}
+  .poy-note{margin-top:16px;font-size:12px;color:#8a8a7c;font-style:italic;}
+  @media(max-width:600px){
+    .poy-table{font-size:12px;}
+    .poy-table .th-city,.poy-table .td-city,.poy-table .th-events,.poy-table .td-events{display:none;}
   }
 
   /* SECTION SCAFFOLD */
@@ -170,6 +207,7 @@
     <div class="nav-mark"><img src="/static/images/logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#poy">Player of the Year</a></li>
       <li><a href="#record">The Record</a></li>
       <li><a href="#schedule">Schedule</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -177,6 +215,12 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<div class="live-banner">
+  <span class="live-dot"></span>
+  <span class="live-label">Live</span>
+  <span class="live-detail">Senior Match Play Quarterfinals — <strong>Bryan Conway</strong> vs. David Horning, tied thru 2</span>
+</div>
 
 <div class="hero">
   <img class="hero-photo-img" src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway with the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
@@ -195,6 +239,70 @@
   <div class="stat"><div class="stat-num">69</div><div class="stat-lbl">Low Round, 3-Under</div></div>
   <div class="stat"><div class="stat-num">UofL</div><div class="stat-lbl">Louisville Golf</div></div>
 </div>
+
+<section id="poy">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Tom Musselman Award &middot; Men's Senior</div>
+      <h2 class="section-title">Leading the 2026 Player of the Year race.</h2>
+    </div>
+    <table class="poy-table">
+      <thead>
+        <tr>
+          <th class="th-rank">Rank</th>
+          <th>Player</th>
+          <th class="th-city">City</th>
+          <th class="num th-events">Events</th>
+          <th class="num th-events">Wins</th>
+          <th class="num">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="leader">
+          <td class="poy-rank">1</td>
+          <td>Bryan Conway<span class="poy-leader-tag">Leader</span></td>
+          <td class="poy-city td-city">Frankfort</td>
+          <td class="num td-events">6</td>
+          <td class="num td-events">4</td>
+          <td class="num">206.25</td>
+        </tr>
+        <tr>
+          <td class="poy-rank">2</td>
+          <td>Tony Wise</td>
+          <td class="poy-city td-city">Georgetown</td>
+          <td class="num td-events">4</td>
+          <td class="num td-events">0</td>
+          <td class="num">195.00</td>
+        </tr>
+        <tr>
+          <td class="poy-rank">3</td>
+          <td>Pj McDougal</td>
+          <td class="poy-city td-city">Bowling Green</td>
+          <td class="num td-events">5</td>
+          <td class="num td-events">1</td>
+          <td class="num">154.00</td>
+        </tr>
+        <tr>
+          <td class="poy-rank">4</td>
+          <td>Mark Knecht</td>
+          <td class="poy-city td-city">Paducah</td>
+          <td class="num td-events">2</td>
+          <td class="num td-events">0</td>
+          <td class="num">145.00</td>
+        </tr>
+        <tr>
+          <td class="poy-rank">5</td>
+          <td>Mark LaLonde</td>
+          <td class="poy-city td-city">Lexington</td>
+          <td class="num td-events">2</td>
+          <td class="num td-events">0</td>
+          <td class="num">130.00</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="poy-note">Standings as of August 11, 2026 &middot; Golf House Kentucky / Kentucky Golf Association</p>
+  </div>
+</section>
 
 <section id="about">
   <div class="wrap">
