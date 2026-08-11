@@ -73,40 +73,36 @@
   .live-detail strong{color:#fff;font-weight:800;}
 
   /* HERO */
-  .hero{position:relative;display:flex;min-height:clamp(460px,72vh,640px);overflow:hidden;background:var(--black);}
-  .hero-text{
-    flex:1 1 56%;display:flex;flex-direction:column;justify-content:center;
-    padding:60px clamp(32px,5vw,72px);position:relative;z-index:2;
-  }
-  .hero-photo{flex:1 1 44%;position:relative;overflow:hidden;min-height:280px;}
-  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;}
-  .hero-photo::after{
+  .hero{position:relative;height:clamp(460px,72vh,680px);overflow:hidden;background:var(--black);}
+  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 46%;display:block;}
+  .hero::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(100deg,rgba(20,17,16,.85) 0%,rgba(20,17,16,0) 22%);
+    background:linear-gradient(180deg,rgba(20,17,16,.1) 0%,rgba(20,17,16,.25) 45%,rgba(20,17,16,.94) 100%);
   }
   .hero-seal{
-    position:absolute;top:20px;right:20px;z-index:2;
-    width:clamp(56px,7vw,80px);height:clamp(56px,7vw,80px);
+    position:absolute;top:24px;right:24px;z-index:2;
+    width:clamp(64px,9vw,96px);height:clamp(64px,9vw,96px);
     border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.45);
   }
+  .hero-content{position:absolute;left:0;right:0;bottom:0;padding:0 32px 52px;max-width:1080px;margin:0 auto;}
   .hero-badge{
     display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
     color:#fff;background:var(--red);padding:6px 14px;border-radius:2px;margin-bottom:18px;
   }
-  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(38px,6.5vw,72px);font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px;}
-  .hero-tagline{font-size:16px;color:rgba(255,255,255,.72);max-width:420px;font-weight:500;}
+  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px;}
+  .hero-tagline{font-size:16px;color:rgba(255,255,255,.72);max-width:500px;font-weight:500;}
   .scroll-cue{
-    position:absolute;bottom:22px;left:clamp(32px,5vw,72px);
-    font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);
-    display:flex;align-items:center;gap:8px;z-index:2;
+    position:absolute;bottom:22px;right:32px;
+    font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);
+    display:flex;align-items:center;gap:8px;
   }
-  @media(max-width:800px){
-    .hero{flex-direction:column;min-height:0;}
-    .hero-photo{order:-1;min-height:0;aspect-ratio:4/3;}
-    .hero-photo-img{object-position:50% 16%;}
-    .hero-photo::after{background:linear-gradient(0deg,rgba(20,17,16,1) 0%,rgba(20,17,16,0) 30%);}
-    .hero-text{padding:32px 24px 40px;}
-    .hero-seal{top:16px;right:16px;width:52px;height:52px;}
+  .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
+  @media(max-width:720px){
+    .hero{height:auto;display:flex;flex-direction:column;}
+    .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 30%;}
+    .hero::after{display:none;}
+    .hero-seal{top:16px;right:16px;width:56px;height:56px;}
+    .hero-content{position:static;padding:26px 24px 34px;max-width:none;background:var(--black);}
     .scroll-cue{display:none;}
   }
 
@@ -247,14 +243,12 @@
 </div>
 
 <div class="hero">
-  <div class="hero-text">
+  <img class="hero-photo-img" src="/static/images/hero.jpg" alt="Bryan Conway holding the 2026 Lexington Senior City Championship trophy">
+  <img class="hero-seal" src="/static/images/bcg_logo.png" alt="Bryan Conway Golf">
+  <div class="hero-content">
     <div class="hero-badge">2026 Senior Stroke Play Champion</div>
     <div class="hero-name">Bryan<br>Conway</div>
     <p class="hero-tagline">Franklin County state champion turned Canadian PGA Tour pro — now the man to beat in Kentucky senior golf.</p>
-  </div>
-  <div class="hero-photo">
-    <img class="hero-photo-img" src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway holding the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
-    <img class="hero-seal" src="/static/images/bcg_logo.png" alt="Bryan Conway Golf">
   </div>
   <div class="scroll-cue">Scroll</div>
 </div>
