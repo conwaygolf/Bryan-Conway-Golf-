@@ -15,6 +15,7 @@
     --red-text:#8a1418;
     --black:#141110;
     --black-soft:#241a19;
+    --gold:#d4af37;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -89,8 +90,8 @@
     display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
     color:#fff;background:var(--red);padding:6px 14px;border-radius:2px;margin-bottom:18px;
   }
-  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px;}
-  .hero-tagline{font-size:16px;color:rgba(255,255,255,.72);max-width:500px;font-weight:500;}
+  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:var(--gold);line-height:.98;letter-spacing:-1px;margin-bottom:14px;text-shadow:0 2px 24px rgba(0,0,0,.5);}
+  .hero-tagline{font-size:16px;color:rgba(255,255,255,.8);max-width:500px;font-weight:500;}
   .scroll-cue{
     position:absolute;bottom:22px;right:32px;
     font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);
@@ -124,6 +125,13 @@
 
   /* SECTION SCAFFOLD */
   section{padding:88px 0;border-bottom:1px solid #e8e6dc;position:relative;overflow:hidden;}
+  .section-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .section-bg img{
+    width:100%;height:100%;object-fit:cover;opacity:.1;
+    filter:grayscale(1) contrast(1.1);
+    -webkit-mask-image:radial-gradient(ellipse 55% 55% at var(--mx,72%) var(--my,45%),#000 0%,transparent 72%);
+    mask-image:radial-gradient(ellipse 55% 55% at var(--mx,72%) var(--my,45%),#000 0%,transparent 72%);
+  }
   .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--red-text);margin-bottom:16px;}
   .section-head{max-width:640px;margin-bottom:48px;position:relative;z-index:1;}
   .section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,36px);font-weight:800;line-height:1.15;}
@@ -200,9 +208,6 @@
   .trophy-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;}
   .trophy-caption{padding:16px 32px;font-size:12.5px;color:#8a8a7c;text-align:center;font-style:italic;}
 
-  /* SCHEDULE */
-  .schedule-empty{font-size:14.5px;color:#8a8a7c;font-style:italic;padding-top:28px;border-top:1px solid #e8e6dc;}
-
   /* CONTACT */
   .contact-section{background:var(--black-soft);border-bottom:none;}
   .contact-section .eyebrow{color:var(--red);}
@@ -261,6 +266,7 @@
 </div>
 
 <section id="about">
+  <div class="section-bg" style="--mx:80%;--my:30%;"><img src="/static/images/action_swing.png" alt=""></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">About</div>
@@ -306,6 +312,7 @@
 </section>
 
 <section id="poy">
+  <div class="section-bg" style="--mx:78%;--my:60%;"><img src="/static/images/portrait_desert_course.jpg" alt=""></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Tom Musselman Award &middot; Men's Senior</div>
@@ -370,6 +377,7 @@
 </section>
 
 <section id="record">
+  <div class="section-bg" style="--mx:80%;--my:35%;"><img src="/static/images/action_swing_3.jpg" alt=""></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Career</div>
@@ -430,12 +438,29 @@
 </div>
 
 <section id="schedule">
+  <div class="section-bg" style="--mx:75%;--my:50%;"><img src="/static/images/roots_family_walter.jpg" alt=""></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">2026 Season</div>
-      <h2 class="section-title">Schedule</h2>
+      <h2 class="section-title">Remaining Kentucky senior events.</h2>
     </div>
-    <div class="schedule-empty">Upcoming events to be announced.</div>
+    <ul class="record">
+      <li class="record-item">
+        <div class="record-year">Aug 17&ndash;18</div>
+        <div class="record-body">
+          <div class="record-title">Kentucky Senior Open</div>
+          <div class="record-note">Country Club of Paducah &mdash; a KPGA partner event on the KGA calendar.</div>
+        </div>
+      </li>
+      <li class="record-item">
+        <div class="record-year">Sep 28&ndash;29</div>
+        <div class="record-body">
+          <div class="record-title">Clark's Pump-N-Shop Kentucky Men's Senior Amateur</div>
+          <div class="record-note">Frankfort Country Club &mdash; Conway's home county.</div>
+        </div>
+      </li>
+    </ul>
+    <p class="poy-note">Per the Kentucky Golf Association's official 2026 schedule (kygolf.org) &mdash; not a confirmed entry list.</p>
   </div>
 </section>
 
