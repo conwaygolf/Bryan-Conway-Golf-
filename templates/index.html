@@ -39,12 +39,12 @@
   .nav-inner{max-width:1080px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;}
   .nav-mark{display:flex;align-items:center;gap:11px;}
   .nav-mark img{width:38px;height:38px;border-radius:50%;display:block;}
-  .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;color:var(--red);}
+  .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;color:var(--gold);}
   .nav-links{display:flex;gap:32px;list-style:none;}
-  .nav-links a{font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);transition:color .15s;}
-  .nav-links a:hover{color:var(--gold);}
+  .nav-links a{font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);transition:color .15s;}
+  .nav-links a:hover{color:var(--red);}
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
-  .nav-toggle span{width:22px;height:2px;background:var(--red);}
+  .nav-toggle span{width:22px;height:2px;background:var(--gold);}
   @media(max-width:800px){
     .nav-links{
       position:fixed;top:72px;left:0;right:0;
@@ -91,7 +91,7 @@
     color:#fff;background:var(--red);padding:6px 14px;border-radius:2px;margin-bottom:18px;
   }
   .hero-name{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:var(--gold);line-height:.98;letter-spacing:-1px;margin-bottom:14px;text-shadow:0 2px 24px rgba(0,0,0,.5);}
-  .hero-tagline{font-size:16px;color:#fff;max-width:500px;font-weight:600;text-shadow:0 2px 14px rgba(0,0,0,.85);}
+  .hero-tagline{font-size:16px;color:#fff;font-weight:600;background:rgba(10,8,7,.6);display:inline-block;max-width:500px;padding:10px 14px;border-radius:3px;line-height:1.5;}
   .scroll-cue{
     position:absolute;bottom:22px;right:32px;
     font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);
@@ -219,7 +219,8 @@
     color:#fff;background:var(--red);padding:15px 30px;border-radius:2px;white-space:nowrap;
   }
 
-  footer{max-width:1080px;margin:0 auto;padding:28px 32px;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);display:flex;align-items:center;justify-content:center;gap:10px;}
+  footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
+  footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;}
   footer img{width:22px;height:22px;border-radius:50%;}
   .contact-section, footer{color:#fff;}
 </style>
@@ -477,7 +478,7 @@
   </div>
 </section>
 
-<footer><img src="/static/images/bcg_logo.png" alt=""> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</footer>
+<footer><div class="wrap"><img src="/static/images/bcg_logo.png" alt=""> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</div></footer>
 
 <script>
   var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
