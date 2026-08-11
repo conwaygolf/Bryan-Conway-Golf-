@@ -8,7 +8,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="/static/images/logo.png">
 <style>
+  :root{
+    --gold:#e0b430;
+    --gold-text:#a5761f;
+    --green:#0a3323;
+    --green-deep:#052f1d;
+  }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -29,10 +36,12 @@
     border-bottom:1px solid #e8e6dc;
   }
   .nav-inner{max-width:1080px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;}
-  .nav-mark{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;}
+  .nav-mark{display:flex;align-items:center;gap:11px;}
+  .nav-mark img{width:38px;height:38px;border-radius:50%;display:block;}
+  .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;}
   .nav-links{display:flex;gap:36px;list-style:none;}
   .nav-links a{font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#3a3a30;transition:color .15s;}
-  .nav-links a:hover{color:#a5761f;}
+  .nav-links a:hover{color:var(--gold-text);}
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
   .nav-toggle span{width:22px;height:2px;background:#18180f;}
   @media(max-width:720px){
@@ -49,15 +58,20 @@
 
   /* HERO */
   .hero{position:relative;height:clamp(460px,72vh,680px);overflow:hidden;}
-  .hero img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;}
+  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;}
   .hero::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(10,10,6,.05) 0%,rgba(10,10,6,.15) 45%,rgba(8,8,5,.88) 100%);
+    background:linear-gradient(180deg,rgba(5,47,29,.08) 0%,rgba(5,47,29,.2) 45%,rgba(5,47,29,.92) 100%);
+  }
+  .hero-seal{
+    position:absolute;top:24px;right:24px;z-index:2;
+    width:clamp(64px,9vw,96px);height:clamp(64px,9vw,96px);
+    border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.35);
   }
   .hero-content{position:absolute;left:0;right:0;bottom:0;padding:0 32px 52px;max-width:1080px;margin:0 auto;}
   .hero-badge{
     display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
-    color:#18180f;background:#d4ab53;padding:6px 14px;border-radius:2px;margin-bottom:18px;
+    color:var(--green);background:var(--gold);padding:6px 14px;border-radius:2px;margin-bottom:18px;
   }
   .hero-name{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px;}
   .hero-tagline{font-size:16px;color:rgba(255,255,255,.72);max-width:480px;font-weight:500;}
@@ -69,9 +83,10 @@
   .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
-    .hero img{position:static;aspect-ratio:4/3;object-position:50% 55%;}
+    .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 55%;}
     .hero::after{display:none;}
-    .hero-content{position:static;padding:26px 24px 34px;max-width:none;background:#0f0f0a;}
+    .hero-seal{top:16px;right:16px;width:56px;height:56px;}
+    .hero-content{position:static;padding:26px 24px 34px;max-width:none;background:var(--green);}
     .scroll-cue{display:none;}
   }
 
@@ -81,7 +96,7 @@
     border-bottom:1px solid #e8e6dc;
   }
   .stat{
-    padding:36px 20px;text-align:center;border-right:1px solid #e8e6dc;border-top:3px solid #d4ab53;
+    padding:36px 20px;text-align:center;border-right:1px solid #e8e6dc;border-top:3px solid var(--gold);
   }
   .stat:last-child{border-right:none;}
   .stat-num{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,38px);font-weight:900;color:#18180f;line-height:1;margin-bottom:8px;}
@@ -93,7 +108,7 @@
 
   /* SECTION SCAFFOLD */
   section{padding:88px 0;border-bottom:1px solid #e8e6dc;}
-  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#a5761f;margin-bottom:16px;}
+  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-text);margin-bottom:16px;}
   .section-head{max-width:640px;margin-bottom:48px;}
   .section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,36px);font-weight:800;line-height:1.15;}
 
@@ -102,7 +117,7 @@
   .about-body p{margin-bottom:18px;}
   .about-body p:first-of-type::first-letter{
     font-family:'Playfair Display',serif;font-weight:900;font-size:58px;line-height:.75;
-    float:left;padding:6px 10px 0 0;color:#a5761f;
+    float:left;padding:6px 10px 0 0;color:var(--gold-text);
   }
 
   /* RECORD */
@@ -112,11 +127,11 @@
     padding:28px 0;border-top:1px solid #e8e6dc;
   }
   .record:last-child .record-item:last-child{border-bottom:1px solid #e8e6dc;}
-  .record-year{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;color:#a5761f;}
+  .record-year{font-family:'Playfair Display',serif;font-weight:800;font-size:20px;color:var(--gold-text);}
   .record-title{font-size:17px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .champion-tag{
-    font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#a5761f;
-    border:1px solid #d4ab53;padding:3px 9px;border-radius:999px;
+    font-size:9.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-text);
+    border:1px solid var(--gold);padding:3px 9px;border-radius:999px;
   }
   .record-note{font-size:14px;color:#7a7a6c;max-width:560px;}
   @media(max-width:600px){
@@ -133,17 +148,18 @@
   .schedule-empty{font-size:14.5px;color:#8a8a7c;font-style:italic;padding-top:28px;border-top:1px solid #e8e6dc;}
 
   /* CONTACT */
-  .contact-section{background:#0f0f0a;border-bottom:none;}
-  .contact-section .eyebrow{color:#d4ab53;}
+  .contact-section{background:var(--green);border-bottom:none;}
+  .contact-section .eyebrow{color:var(--gold);}
   .contact-section .section-title{color:#fff;}
   .contact-body{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
   .contact-body p{color:rgba(255,255,255,.6);font-size:15px;max-width:420px;}
   .contact-cta{
     display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
-    color:#0f0f0a;background:#d4ab53;padding:15px 30px;border-radius:2px;white-space:nowrap;
+    color:var(--green);background:var(--gold);padding:15px 30px;border-radius:2px;white-space:nowrap;
   }
 
-  footer{max-width:1080px;margin:0 auto;padding:28px 32px;font-size:11.5px;color:#a0a08f;text-align:center;background:#0f0f0a;}
+  footer{max-width:1080px;margin:0 auto;padding:28px 32px;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--green);display:flex;align-items:center;justify-content:center;gap:10px;}
+  footer img{width:22px;height:22px;border-radius:50%;}
   .contact-section, footer{color:#fff;}
 </style>
 </head>
@@ -151,7 +167,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-mark">BRYAN CONWAY</div>
+    <div class="nav-mark"><img src="/static/images/logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#record">The Record</a></li>
@@ -163,7 +179,8 @@
 </nav>
 
 <div class="hero">
-  <img src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway with the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
+  <img class="hero-photo-img" src="/static/images/dorkandfirl.jpeg" alt="Bryan Conway with the 2026 Kentucky Senior Stroke Play Championship trophy at Bardstown Country Club">
+  <img class="hero-seal" src="/static/images/logo.png" alt="Bryan Conway Golf — Love Fore Golf">
   <div class="hero-content">
     <div class="hero-badge">2026 Senior Stroke Play Champion</div>
     <div class="hero-name">Bryan<br>Conway</div>
@@ -261,7 +278,7 @@
   </div>
 </section>
 
-<footer>Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</footer>
+<footer><img src="/static/images/logo.png" alt=""> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</footer>
 
 <script>
   var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
