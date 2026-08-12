@@ -19,6 +19,18 @@ ARCHIVE_CARDS = [
         "original_url": None,
     },
     {
+        "id": "2004-qschool-round2",
+        "title": "Americans Share Canadian Q-School Lead",
+        "source": "NBC Sports — The Sports Network",
+        "reporter": "Marty Henwood",
+        "date": "February 4, 2004",
+        "era": "professional-years",
+        "summary": "Conway fired a 4-under 68 to share the lead with Scott Stiles after two rounds of Canadian Q-School's final stage, reaching 8-under 136 at Dufferin Heights GC.",
+        "stats": "36-hole score: 136 (-8)  ·  Position after Round 2: T-1 (co-leader)",
+        "image": "press_2004_nbc_sports_qschool_round2.png",
+        "original_url": None,
+    },
+    {
         "id": "2004-qschool-lead",
         "title": "Conway Leads Canadian Tour Q-School",
         "source": "Golf Channel",
