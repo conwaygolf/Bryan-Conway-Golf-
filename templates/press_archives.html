@@ -31,23 +31,6 @@
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
 
-  /* NAV (matches main site) */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(20,17,16,.96);backdrop-filter:blur(10px);border-bottom:1px solid #3a2a28;}
-  .nav-inner{max-width:1180px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;}
-  .nav-mark{display:flex;align-items:center;gap:11px;}
-  .nav-mark img{width:38px;height:38px;border-radius:50%;display:block;}
-  .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;color:var(--gold);white-space:nowrap;}
-  .nav-links{display:flex;gap:20px;list-style:none;}
-  .nav-links a{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);transition:color .15s;white-space:nowrap;}
-  .nav-links a:hover, .nav-links a.current{color:var(--red);}
-  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
-  .nav-toggle span{width:22px;height:2px;background:var(--gold);}
-  @media(max-width:860px){
-    .nav-links{position:fixed;top:72px;left:0;right:0;flex-direction:column;gap:0;background:rgba(20,17,16,.98);border-bottom:1px solid #3a2a28;max-height:0;overflow:hidden;transition:max-height .25s ease;}
-    .nav-links.open{max-height:400px;}
-    .nav-links a{display:block;padding:16px 32px;border-top:1px solid #3a2a28;}
-    .nav-toggle{display:flex;}
-  }
 
   /* HEADER */
   .archive-header{background:var(--black);color:#fff;padding:64px 0 44px;text-align:center;}
@@ -143,22 +126,6 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <div class="nav-mark"><img src="/static/images/lfg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/#about">About</a></li>
-      <li><a href="/roots">Roots</a></li>
-      <li><a href="/#poy">Player of the Year</a></li>
-      <li><a href="/#record">The Record</a></li>
-      <li><a href="/press-archives" class="current">Press &amp; Archives</a></li>
-      <li><a href="/#schedule">Schedule</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  </div>
-</nav>
-
 <div class="archive-header">
   <div class="wrap">
     <div class="archive-eyebrow">Career Archive</div>
@@ -205,9 +172,6 @@
 </div>
 
 <script>
-  var navT=document.getElementById('navToggle'), navL=document.getElementById('navLinks');
-  navT.addEventListener('click',function(){navL.classList.toggle('open');});
-
   var CARDS = {{ cards | tojson }};
   var cardEls = document.querySelectorAll('.card');
 
