@@ -108,6 +108,15 @@
     color:var(--red-text);margin-bottom:8px;
   }
   .dedication-close{font-style:italic;font-weight:700;color:var(--ink);margin-top:4px;}
+  .dedication-photo{
+    width:132px;height:132px;border-radius:50%;object-fit:cover;object-position:50% 15%;
+    border:3px solid #fbf7ec;box-shadow:0 0 0 1px #d8cca8,0 10px 24px rgba(60,45,20,.3);
+    filter:grayscale(1) sepia(.2) contrast(1.05);margin:0 auto 26px;display:block;
+  }
+  .dedication-photo-caption{
+    font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);
+    font-style:normal;margin-top:-16px;margin-bottom:34px;font-family:'Inter',sans-serif;
+  }
 
   /* WALTER TRIBUTE */
   .walter-wrap{max-width:760px;margin:0 auto;}
@@ -139,6 +148,8 @@
   .clipping-block{
     display:flex;gap:28px;align-items:flex-start;margin:26px 0 10px;flex-wrap:wrap;
   }
+  .clipping-block.centered{justify-content:center;}
+  .walter-name.compact{font-size:clamp(22px,3.2vw,30px);}
   .clipping-frame{
     flex:0 0 240px;background:#e9dfc2;border:1px solid #cdbd8e;
     display:flex;align-items:center;justify-content:center;text-align:center;
@@ -199,7 +210,7 @@
 </nav>
 
 <div class="archive-header">
-  <img class="hdr-photo" src="/static/images/roots_family_walter.jpg" alt="">
+  <img class="hdr-photo" src="/static/images/roots_banner_vintage.jpg" alt="">
   <div class="wrap">
     <div class="archive-eyebrow">Family &middot; Kentucky Golf</div>
     <h1 class="archive-title">Roots</h1>
@@ -210,6 +221,8 @@
 <section class="dedication">
   <div class="wrap">
     <div class="page-card dedication-wrap">
+      <img class="dedication-photo" src="/static/images/ben_conway.jpg" alt="Ben Conway as a young golfer, wearing a PING cap and Franklin County golf team jacket">
+      <p class="dedication-photo-caption">Ben Conway</p>
       <p class="dedication-lead">For Ben, Walter &amp; Judy</p>
       <p>Behind every round Bryan Conway plays is a story that began long before the first tee.</p>
       <p>It is a story of family.</p>
@@ -255,15 +268,21 @@
       <p>Walter was a University of Kentucky graduate, accomplished golfer, Vietnam veteran and recipient of the Bronze Star Medal for heroism in ground combat.</p>
 
       <div class="walter-subhead">The Conway Golf Legacy Begins</div>
-      <p>Walter was a talented competitive golfer and a Daniel Boone Golf Tournament champion at Frankfort Country Club.</p>
-      <p>Years later, Bryan would follow his father's path and capture the Daniel Boone himself&mdash;not once, but twice.</p>
+      <p>Walter was a talented competitive golfer and a 1967 Daniel Boone Golf Tournament champion at Frankfort Country Club.</p>
+      <p>Years later, Bryan would follow his father's path and capture the Daniel Boone himself&mdash;not once, but twice, in 1995 and 2018.</p>
       <p>That gives the Conway family a remarkable place in the tournament's history:</p>
       <div class="trophy-case">
-        <div class="tc-line"><div class="tc-name">Walter Conway</div><div class="tc-title">Daniel Boone Champion</div></div>
+        <div class="tc-line"><div class="tc-name">Walter Conway</div><div class="tc-title">1967 Daniel Boone Champion</div></div>
         <div class="tc-div">&mdash;</div>
-        <div class="tc-line"><div class="tc-name">Bryan Conway</div><div class="tc-title">Two-Time Daniel Boone Champion</div></div>
+        <div class="tc-line"><div class="tc-name">Bryan Conway</div><div class="tc-title">1995 &amp; 2018 Daniel Boone Champion</div></div>
       </div>
-      <p class="pull-quote">Father and son. Three championships. Two generations of Conway golf.</p>
+      <p class="pull-quote">Father and son. Three championships, 51 years apart. Two generations of Conway golf.</p>
+      <div class="clipping-block">
+        <div class="clipping-frame"><img src="/static/images/walter_daniel_boone_1967.png" alt="Framed photo: Walter B. Conway Jr., 1967 Daniel Boone Champion, Frankfort Country Club, with trophy presentation and gallery photos"></div>
+        <div class="clipping-caption">
+          <p>Walter accepting the Daniel Boone trophy at Frankfort Country Club, and teeing off in front of the gallery&mdash;the same tournament Bryan would go on to win twice, more than a generation later.</p>
+        </div>
+      </div>
 
       <div class="walter-subhead">Service &amp; Sacrifice</div>
       <p>Walter's story extended far beyond golf. While serving with the United States Army in Vietnam, he was awarded the Bronze Star Medal for heroism in ground combat.</p>
@@ -285,6 +304,26 @@
         <p>A brother who played beside him.</p>
         <p>Parents who believed in them.</p>
         <p>A legacy Bryan continues to carry forward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-divider"></div>
+
+<section class="mentor">
+  <div class="wrap">
+    <div class="page-card walter-wrap">
+      <div class="walter-head">
+        <div class="walter-name compact">Learning From a Masters Champion</div>
+        <div class="walter-subtitle">A Guiding Influence</div>
+      </div>
+      <div class="clipping-block centered">
+        <div class="clipping-frame"><img src="/static/images/roots_mentor_gay_brewer.jpg" alt="Bryan Conway with his mentor Gay Brewer, 1967 Masters Champion, at a driving range"></div>
+        <div class="clipping-caption">
+          <p>Bryan's development as a golfer was shaped by more than family&mdash;he also learned directly from one of the game's true major champions.</p>
+          <p><strong>Gay Brewer</strong>, winner of the 1967 Masters Tournament, took Bryan under his wing as a mentor, passing along the kind of knowledge that only a major champion can offer.</p>
+        </div>
       </div>
     </div>
   </div>
