@@ -57,10 +57,11 @@
     .nav-toggle{display:flex;}
   }
 
-  /* HEADER — just the photo, dark text */
+  /* HEADER — just the banner photo, text hidden but kept for a11y/SEO */
   .archive-header{
     position:relative;color:var(--ink);padding:110px 0 64px;text-align:center;overflow:hidden;
   }
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
   .archive-header img.hdr-photo{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;
     filter:grayscale(1) contrast(1.05);z-index:-1;
@@ -222,7 +223,7 @@
 
 <div class="archive-header">
   <img class="hdr-photo" src="/static/images/roots_banner_vintage.jpg" alt="">
-  <div class="wrap">
+  <div class="wrap sr-only">
     <div class="archive-eyebrow">Family &middot; Kentucky Golf</div>
     <h1 class="archive-title">Roots</h1>
     <p class="archive-sub">Where Bryan Conway's story began — and the people who made it possible.</p>
