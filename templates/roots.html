@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roots | Bryan Conway</title>
+<meta name="description" content="The family and formative years behind Bryan Conway's golf career — Franklin County, brother Ben Conway, and the foundation his parents Walter and Judy built.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="/static/images/bcg_logo.png">
+<style>
+  :root{
+    --red:#a8171c;
+    --red-text:#8a1418;
+    --black:#141110;
+    --black-soft:#241a19;
+    --gold:#d4af37;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:#fdfdfb;
+    color:#18180f;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* NAV (matches main site) */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(20,17,16,.96);backdrop-filter:blur(10px);border-bottom:1px solid #3a2a28;}
+  .nav-inner{max-width:1180px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-mark{display:flex;align-items:center;gap:11px;}
+  .nav-mark img{width:38px;height:38px;border-radius:50%;display:block;}
+  .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;color:var(--gold);}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);transition:color .15s;}
+  .nav-links a:hover, .nav-links a.current{color:var(--red);}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{width:22px;height:2px;background:var(--gold);}
+  @media(max-width:860px){
+    .nav-links{position:fixed;top:72px;left:0;right:0;flex-direction:column;gap:0;background:rgba(20,17,16,.98);border-bottom:1px solid #3a2a28;max-height:0;overflow:hidden;transition:max-height .25s ease;}
+    .nav-links.open{max-height:400px;}
+    .nav-links a{display:block;padding:16px 32px;border-top:1px solid #3a2a28;}
+    .nav-toggle{display:flex;}
+  }
+
+  /* HEADER */
+  .archive-header{background:var(--black);color:#fff;padding:64px 0 44px;text-align:center;}
+  .archive-eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+  .archive-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,52px);font-weight:900;color:var(--gold);margin-bottom:14px;}
+  .archive-sub{font-size:15px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto;}
+
+  /* DEDICATION */
+  .dedication{background:#f7f4ec;padding:76px 0 84px;border-bottom:1px solid #e8e6dc;}
+  .dedication-wrap{max-width:620px;margin:0 auto;padding:0 32px;text-align:center;}
+  .dedication-lead{
+    font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(22px,3.2vw,28px);
+    color:var(--red-text);margin-bottom:38px;letter-spacing:.3px;
+  }
+  .dedication-wrap p{
+    font-family:'Playfair Display',serif;font-style:italic;font-size:17px;line-height:1.9;
+    color:#3a362e;margin-bottom:20px;
+  }
+  .dedication-names{margin:44px 0 18px;padding-top:36px;border-top:1px solid rgba(168,23,28,.25);}
+  .dedication-names p{
+    font-style:normal;font-weight:800;font-size:15px;letter-spacing:1.8px;text-transform:uppercase;
+    color:var(--red-text);margin-bottom:8px;
+  }
+  .dedication-close{font-style:italic;font-weight:700;color:#3a362e;margin-top:4px;}
+
+  /* SECTION SCAFFOLD */
+  section{padding:72px 0;position:relative;overflow:hidden;}
+  .section-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .section-bg img{
+    width:100%;height:100%;object-fit:cover;opacity:.1;
+    filter:grayscale(1) contrast(1.1);
+  }
+  .eyebrow{font-size:11.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--red-text);margin-bottom:16px;}
+  .section-head{max-width:640px;margin-bottom:32px;position:relative;z-index:1;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,36px);font-weight:800;line-height:1.15;}
+
+  /* YEARBOOK */
+  .yearbook-watermark{
+    position:absolute;top:-40px;right:-60px;width:420px;max-width:60vw;opacity:.05;
+    pointer-events:none;z-index:0;
+  }
+  .yearbook-intro{max-width:660px;font-size:17px;color:#45453c;position:relative;z-index:1;margin-bottom:8px;}
+  .yearbook-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;position:relative;z-index:1;}
+  .yearbook-gallery figure{margin:0;}
+  .yearbook-gallery img{
+    width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:3px;
+    filter:grayscale(1) contrast(1.05);
+  }
+  .yearbook-gallery figcaption{font-size:10.5px;color:#8a8a7c;margin-top:8px;line-height:1.4;}
+  @media(max-width:800px){.yearbook-gallery{grid-template-columns:repeat(2,1fr);}}
+  .yearbook-link{
+    display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:12.5px;font-weight:700;
+    color:var(--red-text);border-bottom:1px solid var(--red);padding-bottom:2px;position:relative;z-index:1;
+  }
+
+  footer{padding:28px 0; font-size:11.5px; color:#a0a08f; text-align:center; background:var(--black-soft);}
+  footer .wrap{display:flex; align-items:center; justify-content:center; gap:10px;}
+  footer img{width:22px; height:22px; border-radius:50%;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-mark"><img src="/static/images/bcg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/roots" class="current">Roots</a></li>
+      <li><a href="/#poy">Player of the Year</a></li>
+      <li><a href="/#record">The Record</a></li>
+      <li><a href="/press-archives">Press &amp; Archives</a></li>
+      <li><a href="/#schedule">Schedule</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="archive-header">
+  <div class="wrap">
+    <div class="archive-eyebrow">Family &middot; Kentucky Golf</div>
+    <h1 class="archive-title">Roots</h1>
+    <p class="archive-sub">Where Bryan Conway's story began — and the people who made it possible.</p>
+  </div>
+</div>
+
+<section class="dedication">
+  <div class="wrap dedication-wrap">
+    <p class="dedication-lead">For Ben, Walter &amp; Judy</p>
+    <p>Behind every round Bryan Conway plays is a story that began long before the first tee.</p>
+    <p>It is a story of family.</p>
+    <p>Bryan's brother, Ben Conway, was more than his brother. He was his teammate, his friend, and an important part of those formative years when golf became such a defining part of their lives.</p>
+    <p>Ben played alongside Bryan during their championship years in high school. He was a gifted golfer in his own right, with tremendous talent and a future that held so much promise.</p>
+    <p>Tragically, Ben's life was cut short while still in high school.</p>
+    <p>There are some losses that time can never erase. Ben never had the opportunity to see where Bryan's journey would eventually lead&mdash;the victories, the professional golf, the years away from competition, or the remarkable return to the game decades later.</p>
+    <p>But his place in that journey never disappeared.</p>
+    <p>Every old team photograph, every memory from those championship years, and every story about two brothers growing up together serves as a reminder that Ben Conway will always be part of Bryan Conway's golf story.</p>
+    <p>And behind both boys were their parents, Walter and Judy Conway.</p>
+    <p>To Mom and Dad&mdash;thank you.</p>
+    <p>Thank you for the sacrifices that nobody saw.</p>
+    <p>Thank you for the rides to practices and tournaments, the entry fees, the equipment, the encouragement, the long days, the difficult days, and the countless little things parents do that children often don't fully understand until much later in life.</p>
+    <p>Thank you for believing in your boys.</p>
+    <p>Walter and Judy are no longer here to watch Bryan compete, but the foundation they built remains with him every time he steps onto a golf course.</p>
+    <p>Today, when Bryan tees it up again at 51 years old, he carries more than a golf bag.</p>
+    <p>He carries his history.</p>
+    <p>He carries the lessons of his parents.</p>
+    <p>He carries the memory of his brother.</p>
+    <p>And he carries the Conway name.</p>
+    <p>The scorecard may say Bryan Conway, but this journey has never belonged to Bryan alone.</p>
+    <div class="dedication-names">
+      <p>For Ben.</p>
+      <p>For Walter.</p>
+      <p>For Judy.</p>
+    </div>
+    <p class="dedication-close">Always remembered. Always part of the journey.</p>
+  </div>
+</section>
+
+<section id="yearbook">
+  <img class="yearbook-watermark" src="/static/images/silhouette.png" alt="">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Where It Started</div>
+      <h2 class="section-title">Franklin County, Kentucky. A family game.</h2>
+    </div>
+    <p class="yearbook-intro">Conway's name has been on Kentucky golf trophies since he was a teenager. He and his brother Ben helped Franklin County High School win back-to-back Kentucky boys' state championships in 1990 and 1991, following their father Walter Conway into the game &mdash; Bryan and Walter would each go on to hold the same rare double: a state championship team title and a local country club championship.</p>
+    <div class="yearbook-gallery">
+      <figure>
+        <img src="/static/images/roots_team_1991.png" alt="Franklin County High School boys golf team with the 1991 state championship trophy">
+        <figcaption>Franklin County, 1991 Kentucky Boys Golf State Champions</figcaption>
+      </figure>
+      <figure>
+        <img src="/static/images/roots_solo_1991.png" alt="Bryan Conway with the 1991 KHSAA Boys Golf Team trophy">
+        <figcaption>Bryan with the '91 KHSAA state trophy</figcaption>
+      </figure>
+      <figure>
+        <img src="/static/images/roots_national_winner.png" alt="Bryan Conway with the National Winner trophy plate">
+        <figcaption>National Winner, Class 1A</figcaption>
+      </figure>
+      <figure>
+        <img src="/static/images/roots_franklin_county.png" alt="Franklin County golf team with Regional Winner trophies">
+        <figcaption>Franklin County, Regional Champions</figcaption>
+      </figure>
+    </div>
+    <a class="yearbook-link" href="/static/images/frankfort_golf_history.png" target="_blank" rel="noopener">View the full Frankfort golf history &rarr;</a>
+  </div>
+</section>
+
+<footer><div class="wrap"><img src="/static/images/bcg_logo.png" alt=""> Kentucky Golf &middot; Bryan Conway Golf</div></footer>
+
+<script>
+  var navT=document.getElementById('navToggle'), navL=document.getElementById('navLinks');
+  navT.addEventListener('click',function(){navL.classList.toggle('open');});
+</script>
+</body>
+</html>

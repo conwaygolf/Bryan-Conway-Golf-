@@ -77,5 +77,10 @@ def press_archives():
     return render_template("press_archives.html", cards=ARCHIVE_CARDS, eras=ERAS)
 
 
+@app.route("/roots")
+def roots():
+    return render_template("roots.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5053)

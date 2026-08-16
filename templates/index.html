@@ -144,24 +144,6 @@
     float:left;padding:6px 10px 0 0;color:var(--red-text);
   }
 
-  /* ROOTS */
-  .roots-watermark{
-    position:absolute;top:-40px;right:-60px;width:420px;max-width:60vw;opacity:.05;
-    pointer-events:none;z-index:0;
-  }
-  .roots-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px;position:relative;z-index:1;}
-  .roots-gallery figure{margin:0;}
-  .roots-gallery img{
-    width:100%;aspect-ratio:4/5;object-fit:cover;display:block;border-radius:3px;
-    filter:grayscale(1) contrast(1.05);
-  }
-  .roots-gallery figcaption{font-size:10.5px;color:#8a8a7c;margin-top:8px;line-height:1.4;}
-  @media(max-width:800px){.roots-gallery{grid-template-columns:repeat(2,1fr);}}
-  .roots-link{
-    display:inline-flex;align-items:center;gap:8px;margin-top:28px;font-size:12.5px;font-weight:700;
-    color:var(--red-text);border-bottom:1px solid var(--red);padding-bottom:2px;position:relative;z-index:1;
-  }
-
   /* PLAYER OF THE YEAR */
   .poy-table{width:100%;border-collapse:collapse;position:relative;z-index:1;}
   .poy-table th{
@@ -246,7 +228,7 @@
     <div class="nav-mark"><img src="/static/images/bcg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
-      <li><a href="#roots">Roots</a></li>
+      <li><a href="/roots">Roots</a></li>
       <li><a href="#poy">Player of the Year</a></li>
       <li><a href="#record">The Record</a></li>
       <li><a href="/press-archives">Press &amp; Archives</a></li>
@@ -292,38 +274,6 @@
       <p>Bryan Conway won his first Kentucky Golf Association title in 1995, taking the Kentucky Amateur Championship at Kearney Hill Links as a member of The Players Club. Thirty-one years later, he's still adding to the record — a 2026 Kentucky Men's Senior Stroke Play Championship at Bardstown Country Club, and a deep run through that summer's Kentucky Senior Match Play Championship.</p>
       <p>A University of Louisville golf alum, Conway played on the Canadian PGA Tour before returning to Kentucky's amateur ranks — where he plays out of the senior division today with the same game that made him a state champion in his twenties, still competing, still contending, still adding chapters to the record below.</p>
     </div>
-  </div>
-</section>
-
-<section id="roots">
-  <img class="roots-watermark" src="/static/images/silhouette.png" alt="">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Where It Started</div>
-      <h2 class="section-title">Franklin County, Kentucky. A family game.</h2>
-    </div>
-    <div class="about-body">
-      <p>Conway's name has been on Kentucky golf trophies since he was a teenager. He and his brother Ben helped Franklin County High School win back-to-back Kentucky boys' state championships in 1990 and 1991, following their father Walter Conway into the game — Bryan and Walter would each go on to hold the same rare double: a state championship team title and a local country club championship.</p>
-    </div>
-    <div class="roots-gallery">
-      <figure>
-        <img src="/static/images/roots_team_1991.png" alt="Franklin County High School boys golf team with the 1991 state championship trophy">
-        <figcaption>Franklin County, 1991 Kentucky Boys Golf State Champions</figcaption>
-      </figure>
-      <figure>
-        <img src="/static/images/roots_solo_1991.png" alt="Bryan Conway with the 1991 KHSAA Boys Golf Team trophy">
-        <figcaption>Bryan with the '91 KHSAA state trophy</figcaption>
-      </figure>
-      <figure>
-        <img src="/static/images/roots_national_winner.png" alt="Bryan Conway with the National Winner trophy plate">
-        <figcaption>National Winner, Class 1A</figcaption>
-      </figure>
-      <figure>
-        <img src="/static/images/roots_franklin_county.png" alt="Franklin County golf team with Regional Winner trophies">
-        <figcaption>Franklin County, Regional Champions</figcaption>
-      </figure>
-    </div>
-    <a class="roots-link" href="/static/images/frankfort_golf_history.png" target="_blank" rel="noopener">View the full Frankfort golf history →</a>
   </div>
 </section>
 
