@@ -57,22 +57,6 @@
     .nav-toggle{display:flex;}
   }
 
-  /* LIVE BANNER */
-  .live-banner{
-    background:var(--black);color:#fff;
-    display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
-    padding:11px 24px;font-size:13px;text-align:center;
-  }
-  .live-dot{
-    width:8px;height:8px;border-radius:50%;background:#ff5a4e;flex-shrink:0;
-    animation:live-pulse 1.6s ease-in-out infinite;
-  }
-  .live-dot.result{background:var(--red);animation:none;}
-  @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
-  .live-label{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;color:#ff8a86;}
-  .live-detail{color:rgba(255,255,255,.85);font-weight:500;}
-  .live-detail strong{color:#fff;font-weight:800;}
-
   /* HERO */
   .hero{position:relative;height:clamp(460px,72vh,680px);overflow:hidden;background:var(--black);}
   .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 46%;display:block;}
@@ -238,12 +222,6 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
-<div class="live-banner">
-  <span class="live-dot result"></span>
-  <span class="live-label">Result</span>
-  <span class="live-detail"><strong>Bryan Conway</strong> falls to Davis Boland 3 & 2 in the Senior Semi Finals</span>
-</div>
 
 <div class="hero">
   <img class="hero-photo-img" src="/static/images/hero.jpg" alt="Bryan Conway holding the 2026 Lexington Senior City Championship trophy">
