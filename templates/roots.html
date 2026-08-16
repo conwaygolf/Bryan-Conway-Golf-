@@ -140,12 +140,12 @@
     display:flex;gap:28px;align-items:flex-start;margin:26px 0 10px;flex-wrap:wrap;
   }
   .clipping-frame{
-    flex:0 0 220px;aspect-ratio:3/4;background:#e9dfc2;border:1px solid #cdbd8e;
+    flex:0 0 240px;background:#e9dfc2;border:1px solid #cdbd8e;
     display:flex;align-items:center;justify-content:center;text-align:center;
-    padding:18px;transform:rotate(-1deg);box-shadow:0 10px 24px rgba(60,45,20,.25);
+    padding:14px;transform:rotate(-1deg);box-shadow:0 10px 24px rgba(60,45,20,.25);
     font-size:11.5px;color:var(--ink-soft);line-height:1.6;
   }
-  .clipping-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+  .clipping-frame img{width:100%;height:auto;display:block;}
   .clipping-caption{flex:1 1 320px;font-size:14px;color:var(--ink-soft);}
   .citation-quote{
     font-family:'Playfair Display',serif;font-style:italic;font-size:16px;line-height:1.7;
@@ -269,9 +269,7 @@
       <p>Walter's story extended far beyond golf. While serving with the United States Army in Vietnam, he was awarded the Bronze Star Medal for heroism in ground combat.</p>
       <p>The original newspaper account documenting Walter's service and heroism is preserved here as part of the Conway family history.</p>
       <div class="clipping-block">
-        <!-- WALTER-CLIPPING-IMAGE: swap this placeholder for
-             <img src="/static/images/walter_bronze_star_clipping.jpg" alt="..."> once the scan is saved into static/images/ -->
-        <div class="clipping-frame">Pfc. Conway Awarded<br>Bronze Star in Vietnam<br><br>&mdash; clipping to be placed here &mdash;</div>
+        <div class="clipping-frame"><img src="/static/images/walter_bronze_star_clipping.png" alt="Newspaper clipping: Pfc. Conway Awarded Bronze Star In Vietnam, featuring a photo of W. B. Conway Jr. in uniform"></div>
         <div class="clipping-caption">
           <div class="citation-quote">&ldquo;Continually exposed himself to hostile fire as he assumed the immediate reaction force in repelling the attack&hellip; courageously led two men into hostile territory several hundred yards&hellip; Private First Class Conway's personal courage, unselfishness, perseverance and exemplary conduct are in keeping with the highest traditions of the military service.&rdquo;</div>
           <div class="citation-source">Bronze Star Medal citation &middot; Department of the Army</div>
