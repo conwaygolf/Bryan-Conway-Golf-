@@ -59,17 +59,12 @@
 
   /* HERO */
   .hero{position:relative;height:clamp(460px,72vh,680px);overflow:hidden;background:var(--black);}
-  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 46%;display:block;}
+  .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:50% 6%;display:block;}
   .hero::after{
     content:"";position:absolute;inset:0;
     background:linear-gradient(180deg,rgba(20,17,16,.1) 0%,rgba(20,17,16,.25) 45%,rgba(20,17,16,.94) 100%);
   }
-  .hero-content{position:absolute;left:0;right:0;bottom:0;padding:0 32px 52px;max-width:1080px;margin:0 auto;}
-  .hero-name{
-    font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,84px);font-weight:900;color:#0033a0;
-    line-height:.98;letter-spacing:-1px;margin-bottom:14px;
-    -webkit-text-stroke:2.5px #fff;paint-order:stroke fill;text-shadow:0 4px 30px rgba(0,0,0,.5);
-  }
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
   .scroll-cue{
     position:absolute;bottom:22px;right:32px;
     font-size:10.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);
@@ -78,9 +73,9 @@
   .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
-    .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 30%;}
+    .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 12%;}
     .hero::after{display:none;}
-    .hero-content{position:static;padding:26px 24px 34px;max-width:none;background:var(--black);}
+    .hero-content{display:none;}
     .scroll-cue{display:none;}
   }
 
@@ -227,9 +222,9 @@
 </nav>
 
 <div class="hero">
-  <img class="hero-photo-img" src="/static/images/hero.jpg" alt="Bryan Conway holding the 2026 Lexington Senior City Championship trophy">
-  <div class="hero-content">
-    <div class="hero-name">Bryan<br>Conway</div>
+  <img class="hero-photo-img" src="/static/images/action_swing.png" alt="Bryan Conway following through on a swing">
+  <div class="hero-content sr-only">
+    <h1>Bryan Conway</h1>
   </div>
   <div class="scroll-cue">Scroll</div>
 </div>
