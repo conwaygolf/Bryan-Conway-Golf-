@@ -79,22 +79,6 @@
     .scroll-cue{display:none;}
   }
 
-  /* STATS DASHBOARD */
-  .stats{
-    display:grid;grid-template-columns:repeat(4,1fr);
-    border-bottom:1px solid #e8e6dc;
-  }
-  .stat{
-    padding:36px 20px;text-align:center;border-right:1px solid #e8e6dc;border-top:3px solid var(--red);
-  }
-  .stat:last-child{border-right:none;}
-  .stat-num{font-family:'Playfair Display',serif;font-size:clamp(24px,3.6vw,36px);font-weight:900;color:#18180f;line-height:1;margin-bottom:8px;}
-  .stat-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8a8a7c;}
-  @media(max-width:680px){
-    .stats{grid-template-columns:repeat(2,1fr);}
-    .stat{padding:26px 14px;}
-  }
-
   /* SECTION SCAFFOLD */
   section{padding:56px 0;border-bottom:1px solid #e8e6dc;position:relative;overflow:hidden;}
   .section-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
@@ -227,13 +211,6 @@
     <h1>Bryan Conway</h1>
   </div>
   <div class="scroll-cue">Scroll</div>
-</div>
-
-<div class="stats">
-  <div class="stat"><div class="stat-num">2x</div><div class="stat-lbl">State Champion</div></div>
-  <div class="stat"><div class="stat-num">Pro</div><div class="stat-lbl">Canadian PGA Tour</div></div>
-  <div class="stat"><div class="stat-num">'95</div><div class="stat-lbl">Kentucky Amateur Champion</div></div>
-  <div class="stat"><div class="stat-num">31</div><div class="stat-lbl">Years Competing</div></div>
 </div>
 
 <section id="about">
