@@ -1,6 +1,17 @@
-from flask import Flask, render_template
+import os
+import smtplib
+from email.mime.text import MIMEText
+
+from dotenv import load_dotenv
+from flask import Flask, render_template, request, jsonify
+
+load_dotenv()
 
 app = Flask(__name__)
+
+GMAIL_USER = os.getenv("GMAIL_USER")
+GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
+CONTACT_TO = "info@bryanconwaygolf.com"
 
 # Press & Archives -- add new entries here as more archive cards are created.
 # era must be one of: early-years, franklin-county, college, professional-years,
@@ -128,6 +139,50 @@ def press_archives():
 @app.route("/roots")
 def roots():
     return render_template("roots.html")
+
+
+@app.route("/contact", methods=["POST"])
+def contact():
+    data = request.get_json(silent=True) or request.form
+
+    # honeypot -- real users never fill this hidden field, bots often do
+    if (data.get("website") or "").strip():
+        return jsonify({"ok": True})
+
+    name = (data.get("name") or "").strip()
+    email = (data.get("email") or "").strip()
+    reason = (data.get("reason") or "").strip()
+
+    if not name or not email or not reason:
+        return jsonify({"ok": False, "error": "Please fill in your name, email, and reason for reaching out."}), 400
+    if "@" not in email or "." not in email.split("@")[-1]:
+        return jsonify({"ok": False, "error": "That email address doesn't look right."}), 400
+
+    if not GMAIL_USER or not GMAIL_APP_PASSWORD:
+        return jsonify({"ok": False, "error": "The contact form isn't fully set up yet -- email info@bryanconwaygolf.com directly for now."}), 500
+
+    body = (
+        "New inquiry from the Bryan Conway Golf website contact form:\n\n"
+        f"Name: {name}\n"
+        f"Email: {email}\n\n"
+        f"Reason for inquiry:\n{reason}\n"
+    )
+    msg = MIMEText(body, "plain")
+    msg["From"] = GMAIL_USER
+    msg["To"] = CONTACT_TO
+    msg["Reply-To"] = email
+    msg["Subject"] = f"Bryan Conway Golf -- Inquiry from {name}"
+
+    try:
+        with smtplib.SMTP("smtp.gmail.com", 587) as s:
+            s.ehlo()
+            s.starttls()
+            s.login(GMAIL_USER, GMAIL_APP_PASSWORD)
+            s.sendmail(GMAIL_USER, [CONTACT_TO], msg.as_string())
+    except Exception:
+        return jsonify({"ok": False, "error": "Something went wrong sending your message. Try emailing info@bryanconwaygolf.com directly."}), 500
+
+    return jsonify({"ok": True})
 
 
 if __name__ == "__main__":
