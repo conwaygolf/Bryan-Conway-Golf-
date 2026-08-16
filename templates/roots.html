@@ -57,18 +57,25 @@
     .nav-toggle{display:flex;}
   }
 
-  /* HEADER — old family photo, dark vignette */
+  /* HEADER — just the photo, dark text */
   .archive-header{
-    position:relative;color:#fff;padding:96px 0 60px;text-align:center;overflow:hidden;
-    background:linear-gradient(180deg,rgba(10,8,6,.55) 0%,rgba(10,8,6,.82) 100%),#141110;
+    position:relative;color:var(--ink);padding:110px 0 64px;text-align:center;overflow:hidden;
   }
   .archive-header img.hdr-photo{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;
-    filter:grayscale(1) sepia(.25) contrast(1.05);opacity:.55;z-index:-1;
+    filter:grayscale(1) sepia(.15) contrast(1.05);z-index:-1;
   }
-  .archive-eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;position:relative;z-index:2;}
-  .archive-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,52px);font-weight:900;color:var(--gold);margin-bottom:14px;position:relative;z-index:2;}
-  .archive-sub{font-size:15px;color:rgba(255,255,255,.75);max-width:560px;margin:0 auto;position:relative;z-index:2;}
+  .archive-eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red-text);margin-bottom:14px;position:relative;z-index:2;}
+  .archive-title{
+    font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,58px);font-weight:900;color:#0a0806;
+    margin-bottom:14px;position:relative;z-index:2;
+    text-shadow:0 0 4px #fff,0 0 10px #fff,0 0 22px rgba(255,255,255,.9),0 0 40px rgba(255,255,255,.8);
+  }
+  .archive-sub{
+    font-size:15px;font-weight:800;color:#0a0806;max-width:560px;margin:0 auto;position:relative;z-index:2;
+    text-shadow:0 0 3px #fff,0 0 8px #fff,0 0 16px rgba(255,255,255,.9);
+  }
+  .archive-eyebrow{text-shadow:0 0 3px #fff,0 0 8px #fff,0 0 14px rgba(255,255,255,.85);}
 
   /* SECTION SCAFFOLD */
   section{padding:64px 0;position:relative;z-index:2;}
