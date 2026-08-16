@@ -64,11 +64,6 @@
     content:"";position:absolute;inset:0;
     background:linear-gradient(180deg,rgba(20,17,16,.1) 0%,rgba(20,17,16,.25) 45%,rgba(20,17,16,.94) 100%);
   }
-  .hero-seal{
-    position:absolute;top:24px;left:24px;z-index:2;
-    width:clamp(64px,9vw,96px);height:clamp(64px,9vw,96px);
-    border-radius:50%;box-shadow:0 6px 20px rgba(0,0,0,.45);
-  }
   .hero-content{position:absolute;left:0;right:0;bottom:0;padding:0 32px 52px;max-width:1080px;margin:0 auto;}
   .hero-badge{
     display:inline-block;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
@@ -86,7 +81,6 @@
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 30%;}
     .hero::after{display:none;}
-    .hero-seal{top:110px;left:12px;width:52px;height:52px;}
     .hero-content{position:static;padding:26px 24px 34px;max-width:none;background:var(--black);}
     .scroll-cue{display:none;}
   }
@@ -189,13 +183,23 @@
   .trophy-caption{padding:16px 32px;font-size:12.5px;color:#8a8a7c;text-align:center;font-style:italic;}
 
   /* CONTACT */
-  .contact-section{background:var(--black-soft);border-bottom:none;}
+  .contact-section{background:var(--black-soft);border-bottom:none;text-align:center;}
+  .contact-section .section-head{max-width:640px;margin:0 auto 28px;}
   .contact-section .eyebrow{color:var(--red);}
   .contact-section .section-title{color:#fff;}
-  .contact-body{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;position:relative;z-index:1;}
-  .contact-body p{color:rgba(255,255,255,.6);font-size:15px;max-width:420px;}
+  .contact-taglines{
+    margin-top:16px;font-size:12.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--gold);
+  }
+  .contact-body{max-width:520px;margin:0 auto;position:relative;z-index:1;}
+  .contact-lead{color:#fff;font-size:17px;font-weight:700;margin-bottom:14px;}
+  .contact-body p{color:rgba(255,255,255,.6);font-size:15px;}
+  .contact-label{
+    margin:30px 0 14px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    color:rgba(255,255,255,.5);
+  }
   .contact-cta{
-    display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:800;letter-spacing:.3px;
     color:#fff;background:var(--red);padding:15px 30px;border-radius:2px;white-space:nowrap;
   }
 
@@ -209,7 +213,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <div class="nav-mark"><img src="/static/images/bcg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
+    <div class="nav-mark"><img src="/static/images/lfg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="/roots">Roots</a></li>
@@ -225,7 +229,6 @@
 
 <div class="hero">
   <img class="hero-photo-img" src="/static/images/hero.jpg" alt="Bryan Conway holding the 2026 Lexington Senior City Championship trophy">
-  <img class="hero-seal" src="/static/images/bcg_logo.png" alt="Bryan Conway Golf">
   <div class="hero-content">
     <div class="hero-badge">2026 Senior Stroke Play Champion</div>
     <div class="hero-name">Bryan<br>Conway</div>
@@ -483,11 +486,14 @@
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Get In Touch</div>
-      <h2 class="section-title">Sponsorship &amp; event inquiries</h2>
+      <h2 class="section-title">Let's Work Together</h2>
+      <div class="contact-taglines">Sponsorships &middot; Media &middot; Events &middot; Collaborations</div>
     </div>
     <div class="contact-body">
-      <p>For updates, sponsorship, or event info, reach out directly.</p>
-      <a class="contact-cta" href="mailto:info@bryanconwaygolf.com">Contact</a>
+      <p class="contact-lead">Interested in partnering with Bryan Conway Golf?</p>
+      <p>We're open to brand partnerships, sponsorship opportunities, media appearances, golf outings, social media collaborations and special events.</p>
+      <div class="contact-label">Partnership &amp; Media Inquiries</div>
+      <a class="contact-cta" href="mailto:info@bryanconwaygolf.com">&#9993;&nbsp; info@bryanconwaygolf.com</a>
     </div>
   </div>
 </section>
