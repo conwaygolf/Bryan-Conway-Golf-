@@ -64,7 +64,7 @@ WIDGET_URL = "https://www.golfgenius.com/leagues/511281/widgets/tournament_resul
 PLAYER_NAME = "Bryan Conway"
 VENUE = "Country Club of Paducah"
 EVENT_LABEL = "27th Kentucky Senior Open"
-STOP_DATE = date(2026, 8, 18)  # script no-ops (and should be disabled) after this date
+STOP_DATE = date(2026, 8, 21)  # script no-ops (and should be disabled) after this date -- kept up a few extra days past the Aug 17-18 event per Jimmy's request, since it "looks great"
 # -------------------------------------------------------------------------
 
 
