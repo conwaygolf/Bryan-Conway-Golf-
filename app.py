@@ -2,6 +2,7 @@ import os
 import re
 import smtplib
 import time
+from datetime import date
 from email.mime.text import MIMEText
 
 import requests
@@ -208,9 +209,13 @@ ERAS = [
 ]
 
 
+GG_BANNER_SHOW_FROM = date(2026, 8, 18)  # hide the top live-banner strip until Bryan tees off Round 2
+
+
 @app.route("/")
 def index():
-    return render_template("index.html", leaderboard=fetch_top7_leaderboard())
+    show_live_banner = date.today() >= GG_BANNER_SHOW_FROM
+    return render_template("index.html", leaderboard=fetch_top7_leaderboard(), show_live_banner=show_live_banner)
 
 
 @app.route("/press-archives")
