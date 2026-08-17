@@ -144,8 +144,8 @@ SPONSORS = [
     {
         "name": "Brushy Creek Outfitters",
         "blurb": "A proud supporter of Bryan Conway Golf.",
-        "url": None,
-        "logo": None,
+        "url": "https://brushycreekoutfitters.com",
+        "logo": "brushy_creek_logo.png",
     },
 ]
 
