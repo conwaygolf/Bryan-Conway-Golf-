@@ -113,6 +113,40 @@ ARCHIVE_CARDS = [
         "image": "press_2018_usga_midam_field.png",
         "original_url": None,
     },
+    {
+        "id": "2019-chichi-rodriguez",
+        "title": "The One and Only Chi Chi Rodriguez",
+        "source": "Bryan Conway",
+        "reporter": None,
+        "date": "March 14, 2019",
+        "era": "the-comeback",
+        "summary": "Out practicing one morning, Conway ran into World Golf Hall of Famer Chi Chi Rodriguez -- an eight-time PGA TOUR winner and one of the game's most beloved legends.",
+        "stats": "Chi Chi Rodriguez, 1935–2024  ·  World Golf Hall of Fame",
+        "image": "press_2019_chichi_rodriguez.png",
+        "original_url": None,
+    },
+]
+
+# Photo Gallery -- action shots and candid photos, separate from the
+# newspaper/press-style cards above. Add new entries here as photos come in.
+GALLERY_PHOTOS = [
+    {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
+    {"image": "gallery_swing_2.jpg", "caption": "Eyes on the ball flight."},
+    {"image": "gallery_portrait_1.jpg", "caption": "Between shots, framed up by the flowers."},
+    {"image": "gallery_portrait_2.jpg", "caption": "Locked in mid-round."},
+    {"image": "action_swing.png", "caption": "Follow-through."},
+    {"image": "action_swing_2.jpg", "caption": "Watching it land."},
+    {"image": "dorkandfirl.jpeg", "caption": "Trophy in hand at Bardstown CC."},
+]
+
+# Sponsors -- grows over time as Bryan adds partners. Add new entries here.
+SPONSORS = [
+    {
+        "name": "Brushy Creek Outfitters",
+        "blurb": "A proud supporter of Bryan Conway Golf.",
+        "url": None,
+        "logo": None,
+    },
 ]
 
 ERAS = [
@@ -139,6 +173,16 @@ def press_archives():
 @app.route("/roots")
 def roots():
     return render_template("roots.html")
+
+
+@app.route("/gallery")
+def gallery():
+    return render_template("gallery.html", photos=GALLERY_PHOTOS)
+
+
+@app.route("/sponsors")
+def sponsors():
+    return render_template("sponsors.html", sponsors=SPONSORS)
 
 
 @app.route("/contact", methods=["POST"])
