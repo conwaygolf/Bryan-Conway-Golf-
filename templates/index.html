@@ -49,6 +49,22 @@
   .nav-links a:hover{color:var(--red);}
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
   .nav-toggle span{width:22px;height:2px;background:var(--gold);}
+
+  /* LIVE BANNER */
+  .live-banner{
+    background:var(--black);color:#fff;
+    display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+    padding:11px 24px;font-size:13px;text-align:center;
+  }
+  .live-dot{
+    width:8px;height:8px;border-radius:50%;background:#ff5a4e;flex-shrink:0;
+    animation:live-pulse 1.6s ease-in-out infinite;
+  }
+  .live-dot.result{background:var(--red);animation:none;}
+  @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+  .live-label{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;color:#ff8a86;}
+  .live-detail{color:rgba(255,255,255,.85);font-weight:500;}
+  .live-detail strong{color:#fff;font-weight:800;}
   @media(max-width:1400px){
     .nav-links{
       position:fixed;top:72px;left:0;right:0;
@@ -250,6 +266,12 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<div class="live-banner">
+  <span class="live-dot"></span>
+  <span class="live-label">Live</span>
+  <span class="live-detail"><strong>Bryan Conway</strong> &mdash; 27th Kentucky Senior Open, Country Club of Paducah</span>
+</div>
 
 <div class="hero">
   <img class="hero-photo-img" src="/static/images/action_swing.png" alt="Bryan Conway following through on a swing">
