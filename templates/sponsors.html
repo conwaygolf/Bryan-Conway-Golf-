@@ -8,14 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" href="/static/images/bcg_logo.png">
+<link rel="icon" href="/static/images/bc_logo_final.png">
 <style>
   :root{
     --red:#a8171c;
     --red-text:#8a1418;
-    --black:#141110;
-    --black-soft:#241a19;
-    --gold:#d4af37;
+    --black:#0a0d12;
+    --black-soft:#12161d;
+    --gold:#f4f4f2;
+    --blue:#3f6fb0;
+    --blue-deep:#1b3a63;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -26,24 +28,23 @@
   /* NAV (matches main site) */
   .nav{
     position:sticky;top:0;z-index:50;
-    background:linear-gradient(180deg,rgba(46,37,34,.97) 0%,rgba(20,17,16,.97) 55%,rgba(10,8,7,.98) 100%);
+    background:linear-gradient(180deg,rgba(20,26,36,.97) 0%,rgba(10,13,18,.97) 55%,rgba(5,6,9,.98) 100%);
     box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);border-bottom:1px solid #3a2a28;
+    backdrop-filter:blur(10px);border-bottom:1px solid #1b2530;
   }
-  .nav-inner{max-width:1440px;margin:0 auto;padding:0 32px;height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
-  .nav-mark{display:flex;align-items:center;gap:11px;}
-  .nav-mark img{width:38px;height:38px;border-radius:50%;display:block;}
-  .nav-mark span{font-family:'Playfair Display',serif;font-weight:900;font-size:19px;letter-spacing:.5px;color:var(--gold);white-space:nowrap;}
+  .nav-inner{max-width:1440px;margin:0 auto;padding:0 32px;height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .nav-mark{display:flex;align-items:center;}
+  .nav-mark img{height:60px;width:auto;display:block;}
   .nav-links{display:flex;gap:24px;list-style:none;}
   .nav-links a{
     font-size:13px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);
     transition:color .15s;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.4);
   }
-  .nav-links a:hover, .nav-links a.current{color:var(--red);}
+  .nav-links a:hover, .nav-links a.current{color:var(--blue);}
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
   .nav-toggle span{width:22px;height:2px;background:var(--gold);}
   @media(max-width:1400px){
-    .nav-links{position:fixed;top:72px;left:0;right:0;flex-direction:column;gap:0;background:rgba(20,17,16,.98);border-bottom:1px solid #3a2a28;max-height:0;overflow:hidden;transition:max-height .25s ease;}
+    .nav-links{position:fixed;top:80px;left:0;right:0;flex-direction:column;gap:0;background:rgba(20,17,16,.98);border-bottom:1px solid #3a2a28;max-height:0;overflow:hidden;transition:max-height .25s ease;}
     .nav-links.open{max-height:400px;}
     .nav-links a{display:block;padding:16px 32px;border-top:1px solid #3a2a28;}
     .nav-toggle{display:flex;}
@@ -79,14 +80,14 @@
 
   footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
   footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;}
-  footer img{width:22px;height:22px;border-radius:50%;}
+  footer img{height:34px;width:auto;}
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-mark" href="/"><img src="/static/images/lfg_logo.png" alt="Bryan Conway Golf"><span>BRYAN CONWAY GOLF</span></a>
+    <a class="nav-mark" href="/"><img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="/#about">About</a></li>
       <li><a href="/roots">Roots</a></li>
@@ -133,7 +134,7 @@
   </div>
 </div>
 
-<footer><div class="wrap"><img src="/static/images/bcg_logo.png" alt=""> Kentucky Golf &middot; Bryan Conway Golf</div></footer>
+<footer><div class="wrap"><img src="/static/images/bc_logo_final.png" alt=""> Kentucky Golf &middot; Bryan Conway Golf</div></footer>
 
 <script>
   var navT=document.getElementById('navToggle'), navL=document.getElementById('navLinks');
