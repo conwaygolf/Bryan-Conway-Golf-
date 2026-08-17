@@ -1,7 +1,11 @@
 import os
+import re
 import smtplib
+import time
 from email.mime.text import MIMEText
 
+import requests
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify
 
@@ -12,6 +16,50 @@ app = Flask(__name__)
 GMAIL_USER = os.getenv("GMAIL_USER")
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
 CONTACT_TO = "info@bryanconwaygolf.com"
+
+# --- TEMPORARY: live top-7 leaderboard overlay on the hero, for the
+# 27th Kentucky Senior Open (Aug 17-18, 2026). Pulls the same GolfGenius
+# data as tools/live_senior_open_tracker.py -- see that file for how this
+# was reverse-engineered. Remove this block (and the overlay in
+# index.html) once the tournament's over / the experiment's done.
+GG_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
+GG_OVERALL_SENIOR_EVENT_ID = "4427251"  # "Senior Division 50+" -- am + pro combined
+_leaderboard_cache = {"rows": [], "fetched_at": 0}
+
+
+def fetch_top7_leaderboard():
+    now = time.time()
+    if _leaderboard_cache["rows"] and now - _leaderboard_cache["fetched_at"] < 180:
+        return _leaderboard_cache["rows"]
+    try:
+        url = (f"https://www.golfgenius.com/v2tournaments/{GG_OVERALL_SENIOR_EVENT_ID}"
+               f"?player_stats_for_portal=true")
+        r = requests.get(url, headers=GG_HEADERS, timeout=8)
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+        rows = []
+        for tr in soup.find_all("tr", class_="aggregate-row")[:7]:
+            pos = tr.find("td", class_="pos")
+            name_link = tr.find("a", class_="open-aggregate-details")
+            affiliation = tr.find("div", class_="affiliation")
+            score = tr.find("td", class_="score")
+            thru = tr.find("td", class_="past_round_thru")
+            rows.append({
+                "pos": pos.get_text(strip=True) if pos else "",
+                "name": name_link.get_text(strip=True) if name_link else "",
+                "city": affiliation.get_text(strip=True) if affiliation else "",
+                "score": score.get_text(strip=True) if score else "",
+                "thru": (thru.get_text(" ", strip=True) if thru else "").replace("*", "").strip(),
+            })
+        if rows:
+            _leaderboard_cache["rows"] = rows
+            _leaderboard_cache["fetched_at"] = now
+    except requests.RequestException:
+        pass
+    return _leaderboard_cache["rows"]
 
 # Press & Archives -- add new entries here as more archive cards are created.
 # era must be one of: early-years, franklin-county, college, professional-years,
@@ -162,7 +210,7 @@ ERAS = [
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", leaderboard=fetch_top7_leaderboard())
 
 
 @app.route("/press-archives")

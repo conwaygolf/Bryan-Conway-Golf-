@@ -91,12 +91,33 @@
     display:flex;align-items:center;gap:8px;
   }
   .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
+
+  /* TEMPORARY: hero leaderboard overlay experiment */
+  .hero-lb{
+    position:absolute;top:24px;right:24px;z-index:3;
+    background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
+    border:1px solid rgba(212,175,55,.3);border-radius:6px;
+    padding:16px 18px;width:340px;max-width:calc(100% - 48px);
+    box-shadow:0 12px 30px rgba(0,0,0,.4);
+  }
+  .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:#ff5a4e;animation:live-pulse 1.6s ease-in-out infinite;}
+  .hero-lb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
+  .hero-lb-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .hero-lb-table td{padding:5px 4px;color:rgba(255,255,255,.85);}
+  .hero-lb-table tr.me{background:rgba(168,23,28,.35);}
+  .hero-lb-table tr.me td{font-weight:800;color:#fff;}
+  .hero-lb-pos{color:var(--gold);font-weight:800;width:26px;}
+  .hero-lb-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+  .hero-lb-score{text-align:right;font-weight:700;width:42px;}
+  .hero-lb-thru{text-align:right;color:rgba(255,255,255,.55);width:44px;}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:50% 12%;}
     .hero::after{display:none;}
     .hero-content{display:none;}
     .scroll-cue{display:none;}
+    .hero-lb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
   }
 
   /* SECTION SCAFFOLD */
@@ -278,6 +299,24 @@
   <div class="hero-content sr-only">
     <h1>Bryan Conway</h1>
   </div>
+  {% if leaderboard %}
+  <div class="hero-lb">
+    <div class="hero-lb-head">
+      <span class="hero-lb-dot"></span>
+      <span class="hero-lb-title">Live &middot; Kentucky Senior Open</span>
+    </div>
+    <table class="hero-lb-table">
+      {% for p in leaderboard %}
+      <tr class="{{ 'me' if 'Conway' in p.name else '' }}">
+        <td class="hero-lb-pos">{{ p.pos }}</td>
+        <td class="hero-lb-name">{{ p.name }}</td>
+        <td class="hero-lb-score">{{ 'E' if p.score == 'E' else p.score }}</td>
+        <td class="hero-lb-thru">{{ p.thru if p.thru and p.thru != '-' else '' }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
   <div class="scroll-cue">Scroll</div>
 </div>
 
