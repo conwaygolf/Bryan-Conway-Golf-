@@ -46,14 +46,14 @@ def fetch_top7_leaderboard():
         r = requests.get(url, headers=GG_HEADERS, timeout=8)
         r.raise_for_status()
         soup = BeautifulSoup(r.text, "html.parser")
-        rows = []
-        for tr in soup.find_all("tr", class_="aggregate-row")[:7]:
+        all_rows = []
+        for tr in soup.find_all("tr", class_="aggregate-row"):
             pos = tr.find("td", class_="pos")
             name_link = tr.find("a", class_="open-aggregate-details")
             affiliation = tr.find("div", class_="affiliation")
             score = tr.find("td", class_="score")
             thru = tr.find("td", class_="past_round_thru")
-            rows.append({
+            all_rows.append({
                 "pos": pos.get_text(strip=True) if pos else "",
                 "name": name_link.get_text(strip=True) if name_link else "",
                 "city": affiliation.get_text(strip=True) if affiliation else "",
@@ -61,6 +61,13 @@ def fetch_top7_leaderboard():
                 "thru": (thru.get_text(" ", strip=True) if thru else "").replace("*", "").strip(),
                 "aggregate_id": tr.get("data-aggregate-id", ""),
             })
+        rows = all_rows[:7]
+        # Bryan drops out of the top 7 -- pin him on as an 8th row (with a
+        # divider) rather than losing him off the widget entirely.
+        if rows and not any("Conway" in r["name"] for r in rows):
+            bryan = next((r for r in all_rows if "Conway" in r["name"]), None)
+            if bryan:
+                rows.append({**bryan, "pinned": True})
         if rows:
             _leaderboard_cache["rows"] = rows
             _leaderboard_cache["fetched_at"] = now

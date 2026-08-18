@@ -127,6 +127,7 @@
   .hero-lb-table tr.me td{font-weight:800;color:#fff;}
   .hero-lb-table tr.clickable{cursor:pointer;}
   .hero-lb-table tr.clickable:hover{background:rgba(212,175,55,.18);}
+  .hero-lb-table tr.pinned td{border-top:1px dashed rgba(255,255,255,.3);padding-top:9px;}
   .hero-lb-pos{color:var(--gold);font-weight:800;width:26px;}
   .hero-lb-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
   .hero-lb-score{text-align:right;font-weight:700;width:42px;}
@@ -345,7 +346,7 @@
     </div>
     <table class="hero-lb-table">
       {% for p in leaderboard %}
-      <tr class="{{ 'me' if 'Conway' in p.name else '' }}{{ ' clickable' if p.aggregate_id else '' }}"
+      <tr class="{{ 'me' if 'Conway' in p.name else '' }}{{ ' clickable' if p.aggregate_id else '' }}{{ ' pinned' if p.pinned else '' }}"
           {% if p.aggregate_id %}data-aggregate-id="{{ p.aggregate_id }}" data-name="{{ p.name }}"{% endif %}>
         <td class="hero-lb-pos">{{ p.pos }}</td>
         <td class="hero-lb-name">{{ p.name }}</td>
