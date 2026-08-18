@@ -276,11 +276,12 @@ ERAS = [
 
 
 GG_BANNER_SHOW_FROM = date(2026, 8, 18)  # hide the top live-banner strip until Bryan tees off Round 2
+GG_BANNER_MANUALLY_HIDDEN = True  # temporarily hidden 2026-08-18 -- hero leaderboard box covers this now; flip to False to bring it back
 
 
 @app.route("/")
 def index():
-    show_live_banner = date.today() >= GG_BANNER_SHOW_FROM
+    show_live_banner = date.today() >= GG_BANNER_SHOW_FROM and not GG_BANNER_MANUALLY_HIDDEN
     return render_template("index.html", leaderboard=fetch_top7_leaderboard(), show_live_banner=show_live_banner,
                             gg_leaderboard_url=GG_PUBLIC_LEADERBOARD_URL)
 
