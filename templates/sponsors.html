@@ -71,7 +71,8 @@
     text-align:center;transition:box-shadow .15s ease, transform .15s ease;
   }
   .sponsor-card:is(a):hover{box-shadow:0 12px 28px rgba(0,0,0,.1);transform:translateY(-2px);}
-  .sponsor-logo{width:100%;max-width:160px;height:auto;margin:0 auto 18px;display:block;}
+  .sponsor-logo-wrap{height:110px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .sponsor-logo{max-width:160px;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;}
   .sponsor-name{font-family:'Playfair Display',serif;font-weight:800;font-size:19px;margin-bottom:8px;}
   .sponsor-blurb{font-size:13.5px;color:#8a8a7c;}
   .sponsors-cta{
@@ -120,7 +121,7 @@
     <div class="sponsors-grid">
       {% for s in sponsors %}
         {% if s.url %}<a class="sponsor-card" href="{{ s.url }}" target="_blank" rel="noopener">{% else %}<div class="sponsor-card">{% endif %}
-          {% if s.logo %}<img class="sponsor-logo" src="/static/images/{{ s.logo }}" alt="{{ s.name }}">{% endif %}
+          {% if s.logo %}<div class="sponsor-logo-wrap"><img class="sponsor-logo" src="/static/images/{{ s.logo }}" alt="{{ s.name }}"></div>{% endif %}
           <div class="sponsor-name">{{ s.name }}</div>
           {% if s.blurb %}<div class="sponsor-blurb">{{ s.blurb }}</div>{% endif %}
         {% if s.url %}</a>{% else %}</div>{% endif %}
