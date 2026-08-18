@@ -3,3 +3,5 @@ __pycache__/
 *.pyc
 _private/
 .env
+static/images/Monday/
+static/images/Saturday/
