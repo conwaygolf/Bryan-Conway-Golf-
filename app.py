@@ -93,13 +93,31 @@ def fetch_scorecard(aggregate_id):
         label = label_link.get_text(strip=True) if label_link else ""
         label = re.sub(r"\s*-\s*[^-]+$", "", label)  # drop trailing "- Player Name (a)"
         holes = []
-        for hole_td in net_row.find_all("td", class_=re.compile(r"^hole\d+ ")):
-            n = int(re.match(r"hole(\d+)", hole_td["class"][0]).group(1))
+        for hole_td in net_row.find_all("td"):
+            classes = hole_td.get("class", [])
+            # GolfGenius doesn't keep a fixed class order -- a double bogey renders
+            # 'double_square hole3 score' (marker first) while a plain hole renders
+            # 'hole4 score' (marker absent) or 'hole1 score simple_circle' (marker
+            # last). Find the holeN token wherever it lands instead of assuming a
+            # position -- assuming "first class" here previously dropped any hole
+            # whose marker class came first (e.g. a double bogey), shifting every
+            # later hole in the display by one.
+            hole_class = next((c for c in classes if re.fullmatch(r"hole\d+", c)), None)
+            if not hole_class:
+                continue
+            n = int(hole_class[4:])
             box = hole_td.find("span", class_="score_box")
             strokes = box.get_text(strip=True) if box else ""
-            mark = "birdie" if "simple_circle" in hole_td["class"] else \
-                   "bogey" if "simple_square" in hole_td["class"] else "par"
+            if "double_circle" in classes:
+                mark = "birdie"  # eagle -- no distinct glyph yet, reuse birdie styling
+            elif "simple_circle" in classes:
+                mark = "birdie"
+            elif "double_square" in classes or "simple_square" in classes:
+                mark = "bogey"
+            else:
+                mark = "par"
             holes.append({"n": n, "strokes": strokes, "mark": mark})
+        holes.sort(key=lambda h: h["n"])
         if not any(h["strokes"] for h in holes):
             continue  # round not started yet
         out_td = net_row.find("td", class_="sum_front")
