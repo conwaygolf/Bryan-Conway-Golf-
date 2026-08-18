@@ -300,8 +300,11 @@
   @media(max-width:640px){.modal-photo{min-height:160px;}}
 
   footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
-  footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;}
+  footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
   footer img{height:34px;width:auto;}
+  .footer-credit{display:inline-flex;align-items:center;gap:6px;margin-left:14px;padding-left:14px;border-left:1px solid rgba(160,160,143,.3);color:#75756a;font-size:10.5px;}
+  .footer-credit:hover{color:#a0a08f;}
+  .footer-credit img{height:16px;width:16px;border-radius:50%;object-fit:cover;}
   .contact-section, footer{color:#fff;}
 </style>
 </head>
@@ -614,7 +617,9 @@
   </div>
 </section>
 
-<footer><div class="wrap"><img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf"> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)</div></footer>
+<footer><div class="wrap"><img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf"> Kentucky Golf &middot; Results sourced from Golf House Kentucky (kygolf.org)
+  <a class="footer-credit" href="https://jstoutinc.com" target="_blank" rel="noopener"><img src="/static/images/jimbino_logo.png" alt="JStoutInc">Powered by JStoutInc</a>
+</div></footer>
 
 <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-label="Contact Bryan Conway Golf">
   <div class="modal-card">

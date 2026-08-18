@@ -56,14 +56,8 @@
     .nav-toggle{display:flex;}
   }
 
-  /* HEADER */
-  .archive-header{background:var(--black);color:#fff;padding:64px 0 44px;text-align:center;}
-  .archive-eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
-  .archive-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,52px);font-weight:900;color:var(--gold);margin-bottom:14px;}
-  .archive-sub{font-size:15px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto;}
-
   /* SPONSORS */
-  .sponsors-wrap{padding:64px 0 80px;}
+  .sponsors-wrap{padding:80px 0 80px;}
   .sponsors-intro{max-width:640px;margin:0 auto 44px;text-align:center;font-size:16px;color:#45453c;}
   .sponsors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
   .sponsor-card{
@@ -85,8 +79,11 @@
   }
 
   footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
-  footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;}
+  footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
   footer img{height:34px;width:auto;}
+  .footer-credit{display:inline-flex;align-items:center;gap:6px;margin-left:14px;padding-left:14px;border-left:1px solid rgba(160,160,143,.3);color:#75756a;font-size:10.5px;}
+  .footer-credit:hover{color:#a0a08f;}
+  .footer-credit img{height:16px;width:16px;border-radius:50%;object-fit:cover;}
 </style>
 </head>
 <body>
@@ -106,14 +103,6 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
-
-<div class="archive-header">
-  <div class="wrap">
-    <div class="archive-eyebrow">Backing The Journey</div>
-    <h1 class="archive-title">Sponsors</h1>
-    <p class="archive-sub">The partners and supporters behind Bryan Conway Golf.</p>
-  </div>
-</div>
 
 <div class="sponsors-wrap">
   <div class="wrap">
@@ -138,7 +127,9 @@
   </div>
 </div>
 
-<footer><div class="wrap"><img src="/static/images/bc_logo_final.png" alt=""> Kentucky Golf &middot; Bryan Conway Golf</div></footer>
+<footer><div class="wrap"><img src="/static/images/bc_logo_final.png" alt=""> Kentucky Golf &middot; Bryan Conway Golf
+  <a class="footer-credit" href="https://jstoutinc.com" target="_blank" rel="noopener"><img src="/static/images/jimbino_logo.png" alt="JStoutInc">Powered by JStoutInc</a>
+</div></footer>
 
 <script>
   var navT=document.getElementById('navToggle'), navL=document.getElementById('navLinks');
