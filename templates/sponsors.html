@@ -51,13 +51,16 @@
     .nav-mark img{height:76px;}
     .nav-links{position:fixed;top:110px;left:0;right:0;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:0;flex:none;background:rgba(20,17,16,.98);border-bottom:1px solid #3a2a28;max-height:0;overflow:hidden;transition:max-height .25s ease;}
     .nav-links.open{max-height:420px;}
-    .nav-links a{display:block;padding:16px 32px;border-top:1px solid #3a2a28;background:none;border-radius:0;}
-    .nav-links a.cta{background:none;}
+    .nav-links a{display:block;margin:7px 18px;padding:14px 20px;border-radius:4px;}
     .nav-toggle{display:flex;}
   }
 
+  /* HEADER -- designed banner graphic */
+  .archive-header{background:var(--black);text-align:center;}
+  .archive-header img{width:auto;height:auto;max-width:100%;max-height:440px;display:inline-block;}
+
   /* SPONSORS */
-  .sponsors-wrap{padding:80px 0 80px;}
+  .sponsors-wrap{padding:56px 0 80px;}
   .sponsors-intro{max-width:640px;margin:0 auto 44px;text-align:center;font-size:16px;color:#45453c;}
   .sponsors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
   .sponsor-card{
@@ -103,6 +106,10 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<div class="archive-header">
+  <img src="/static/images/sponsors_header.jpg" alt="Sponsors -- Thank You For Believing in the Journey. Together, We Win.">
+</div>
 
 <div class="sponsors-wrap">
   <div class="wrap">
