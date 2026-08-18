@@ -185,7 +185,7 @@ GALLERY_PHOTOS = [
     {"image": "gallery_portrait_2.jpg", "caption": "Locked in mid-round."},
     {"image": "action_swing.png", "caption": "Follow-through."},
     {"image": "action_swing_2.jpg", "caption": "Watching it land."},
-    {"image": "dorkandfirl.jpeg", "caption": "Trophy in hand at Bardstown CC."},
+    {"image": "hero.jpg", "caption": "2026 Lexington Senior City Championship."},
 ]
 
 # Sponsors -- grows over time as Bryan adds partners. Add new entries here.
