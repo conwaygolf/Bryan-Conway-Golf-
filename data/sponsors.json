@@ -3,7 +3,8 @@
     "name": "Brushy Creek Outfitters",
     "blurb": "A proud supporter of Bryan Conway Golf.",
     "url": "https://brushycreekoutfitters.com",
-    "logo": "brushy_creek_logo.png"
+    "logo": "brushy_creek_logo.png",
+    "hidden": true
   },
   {
     "name": "Whitetail Heaven Outfitters",
