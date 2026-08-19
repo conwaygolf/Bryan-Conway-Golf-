@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | Bryan Conway Golf</title>
+<link rel="icon" href="/static/images/bc_logo_final.png">
+<style>
+  :root{
+    --red:#a8171c;
+    --red-text:#8a1418;
+    --black:#0a0d12;
+    --black-soft:#12161d;
+    --blue:#3f6fb0;
+    --blue-deep:#1b3a63;
+    --ok:#2f8a4e;
+    --warn:#b5850f;
+    --err:#a8171c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#f2f1ec;color:#18180f;line-height:1.5;}
+  .wrap{max-width:920px;margin:0 auto;padding:36px 24px 80px;}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+  header img{height:48px;width:auto;}
+  header h1{font-size:22px;font-weight:800;}
+  header .note{font-size:12px;color:#8a8a7c;margin-left:auto;text-align:right;max-width:260px;}
+  a.back{display:inline-block;margin-bottom:20px;font-size:12.5px;color:var(--blue-deep);text-decoration:none;}
+  a.back:hover{text-decoration:underline;}
+
+  .flash{padding:12px 16px;border-radius:4px;font-size:13.5px;margin-bottom:20px;}
+  .flash.ok{background:rgba(47,138,78,.1);border:1px solid rgba(47,138,78,.35);color:var(--ok);}
+  .flash.warn{background:rgba(181,133,15,.1);border:1px solid rgba(181,133,15,.35);color:var(--warn);}
+  .flash.error{background:rgba(168,23,28,.08);border:1px solid rgba(168,23,28,.3);color:var(--err);}
+
+  .card{background:#fff;border:1px solid #e0ded3;border-radius:6px;padding:24px 26px;margin-bottom:24px;}
+  .card h2{font-size:16px;font-weight:800;margin-bottom:4px;}
+  .card .desc{font-size:12.5px;color:#8a8a7c;margin-bottom:18px;}
+
+  label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#5a5a4f;margin:14px 0 5px;}
+  label:first-of-type{margin-top:0;}
+  input[type=text],input[type=url],textarea{
+    width:100%;padding:9px 11px;border:1px solid #d6d3c6;border-radius:4px;font-size:14px;font-family:inherit;background:#fdfdfb;
+  }
+  input[type=file]{font-size:13px;}
+  textarea{resize:vertical;min-height:56px;}
+  .hint{font-size:11.5px;color:#a0a08f;margin-top:4px;}
+  .btn{
+    margin-top:16px;display:inline-block;background:var(--blue);color:#fff;border:none;
+    font-size:12.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;
+    padding:11px 20px;border-radius:4px;cursor:pointer;
+  }
+  .btn:hover{background:var(--blue-deep);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:18px;}
+  .grid figure{margin:0;}
+  .grid img{width:100%;height:90px;object-fit:cover;border-radius:4px;display:block;background:#eee;}
+  .grid figcaption{font-size:10.5px;color:#8a8a7c;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+  .sponsor-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid #eee;}
+  .sponsor-row:first-child{border-top:none;}
+  .sponsor-row img{width:44px;height:44px;object-fit:contain;background:#fafaf5;border-radius:4px;padding:4px;}
+  .sponsor-row .name{font-weight:700;font-size:13.5px;}
+  .sponsor-row .url{font-size:11.5px;color:#8a8a7c;}
+
+  .hero-preview{position:relative;border-radius:6px;overflow:hidden;height:200px;background:var(--black);margin-top:16px;}
+  .hero-preview img{width:100%;height:100%;object-fit:cover;}
+  .hero-preview .tag{position:absolute;top:10px;background:rgba(10,8,7,.75);color:#f4f4f2;font-size:10.5px;padding:5px 10px;border-radius:4px;}
+  .hero-preview .tag.right{right:10px;}
+  .hero-preview .tag.left{left:10px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="/static/images/bc_logo_final.png" alt="">
+    <h1>Site Admin</h1>
+    <div class="note">No login yet -- this page isn't linked in the main nav, only reachable here or via the footer. Permissions coming in a later pass.</div>
+  </header>
+
+  <a class="back" href="/">&larr; Back to site</a>
+  <a class="back" href="/admin/logout" style="float:right;">Log out</a>
+
+  {% for category, msg in messages %}
+    <div class="flash {{ category }}">{{ msg }}</div>
+  {% endfor %}
+
+  <div class="card">
+    <h2>Gallery Photo</h2>
+    <div class="desc">Upload a photo -- it's automatically resized, re-compressed, and orientation-corrected before it's added to /gallery. HEIC (iPhone) files work fine.</div>
+    <form method="post" action="/admin/gallery/upload" enctype="multipart/form-data">
+      <label for="photo">Photo file</label>
+      <input type="file" id="photo" name="photo" accept="image/*,.heic,.heif" required>
+      <label for="caption">Caption</label>
+      <input type="text" id="caption" name="caption" placeholder="e.g. Lining up a putt on 18">
+      <button class="btn" type="submit">Add to Gallery</button>
+    </form>
+    {% if gallery %}
+    <div class="grid">
+      {% for p in gallery %}
+      <figure>
+        <img src="/static/images/{{ p.image }}" alt="{{ p.caption }}" loading="lazy">
+        <figcaption>{{ p.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Sponsor</h2>
+    <div class="desc">Give a name and website -- their logo is looked up and pulled from their site automatically. Or upload a logo file directly to skip the lookup.</div>
+    <form method="post" action="/admin/sponsors/add" enctype="multipart/form-data">
+      <label for="s-name">Sponsor name</label>
+      <input type="text" id="s-name" name="name" required>
+      <label for="s-url">Website</label>
+      <input type="url" id="s-url" name="url" placeholder="https://example.com">
+      <label for="s-blurb">Blurb (optional)</label>
+      <textarea id="s-blurb" name="blurb" placeholder="A proud supporter of Bryan Conway Golf."></textarea>
+      <label for="s-logo">Logo file (optional -- skips the website lookup)</label>
+      <input type="file" id="s-logo" name="logo" accept="image/*">
+      <button class="btn" type="submit">Add Sponsor</button>
+    </form>
+    {% if sponsors %}
+    <div style="margin-top:18px;">
+      {% for s in sponsors %}
+      <div class="sponsor-row">
+        {% if s.logo %}<img src="/static/images/{{ s.logo }}" alt="">{% endif %}
+        <div>
+          <div class="name">{{ s.name }}</div>
+          <div class="url">{{ s.url or 'no website' }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Hero Image</h2>
+    <div class="desc">Upload a new homepage hero photo. The crop and the live-scoreboard box position are both picked automatically based on where the photo is busiest vs. open.</div>
+    <form method="post" action="/admin/hero/upload" enctype="multipart/form-data">
+      <label for="hero">Hero photo</label>
+      <input type="file" id="hero" name="hero" accept="image/*,.heic,.heif" required>
+      <button class="btn" type="submit">Set as Hero</button>
+    </form>
+    <div class="hero-preview">
+      <img src="/static/images/{{ hero.image }}" style="object-position:{{ hero.object_position }};" alt="Current hero">
+      <span class="tag {{ 'left' if hero.lb_corner == 'top-left' else 'right' }}">Scoreboard sits here</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
