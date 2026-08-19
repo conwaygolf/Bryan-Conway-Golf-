@@ -62,21 +62,6 @@
   .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
   .nav-toggle span{width:22px;height:2px;background:var(--gold);}
 
-  /* LIVE BANNER */
-  .live-banner{
-    background:var(--black);color:#fff;
-    display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
-    padding:11px 24px;font-size:13px;text-align:center;
-  }
-  .live-dot{
-    width:8px;height:8px;border-radius:50%;background:#ff5a4e;flex-shrink:0;
-    animation:live-pulse 1.6s ease-in-out infinite;
-  }
-  .live-dot.result{background:var(--red);animation:none;}
-  @keyframes live-pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
-  .live-label{font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:11px;color:#ff8a86;}
-  .live-detail{color:rgba(255,255,255,.85);font-weight:500;}
-  .live-detail strong{color:#fff;font-weight:800;}
   @media(max-width:1100px){
     .nav-inner{min-height:110px;}
     .nav-mark img{height:76px;}
@@ -106,55 +91,29 @@
   }
   .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
 
-  /* TEMPORARY: hero leaderboard overlay experiment */
-  .hero-lb{
+  /* Hero corner card -- Facebook feed */
+  .hero-fb{
     position:absolute;top:24px;right:24px;z-index:3;
     background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
     border:1px solid rgba(212,175,55,.3);border-radius:6px;
-    padding:16px 18px;width:340px;max-width:calc(100% - 48px);
+    padding:14px 14px 4px;width:340px;max-width:calc(100% - 48px);
     box-shadow:0 12px 30px rgba(0,0,0,.4);
+    overflow:hidden;
   }
-  .hero-lb.lb-left{right:auto;left:24px;}
-  .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-  .hero-lb-head.linked{cursor:pointer;}
-  .hero-lb-head.linked:hover .hero-lb-title{text-decoration:underline;}
-  .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:#ff5a4e;animation:live-pulse 1.6s ease-in-out infinite;}
-  .hero-lb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
-  .hero-lb-full{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
-  .hero-lb-table{width:100%;border-collapse:collapse;font-size:12.5px;}
-  .hero-lb-table td{padding:5px 4px;color:rgba(255,255,255,.85);}
-  .hero-lb-table tr.me{background:rgba(168,23,28,.35);}
-  .hero-lb-table tr.me td{font-weight:800;color:#fff;}
-  .hero-lb-table tr.clickable{cursor:pointer;}
-  .hero-lb-table tr.clickable:hover{background:rgba(212,175,55,.18);}
-  .hero-lb-table tr.pinned td{border-top:1px dashed rgba(255,255,255,.3);padding-top:9px;}
-  .hero-lb-pos{color:var(--gold);font-weight:800;width:26px;}
-  .hero-lb-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
-  .hero-lb-score{text-align:right;font-weight:700;width:42px;}
-  .hero-lb-thru{text-align:right;color:rgba(255,255,255,.55);width:44px;}
-
-  /* SCORECARD MODAL */
-  #scorecardModal .modal-card{background:#151210;color:#fff;}
-  #scorecardModal .modal-eyebrow{color:#e2b53c;}
-  .sc-round{margin-bottom:22px;}
-  .sc-round:last-child{margin-bottom:0;}
-  .sc-round-label{font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-  .sc-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin-bottom:6px;}
-  .sc-hole{background:rgba(255,255,255,.06);border-radius:3px;padding:6px 2px;text-align:center;}
-  .sc-hole-n{font-size:9px;color:rgba(255,255,255,.45);margin-bottom:3px;}
-  .sc-hole-v{font-size:14px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;}
-  .sc-hole-v.birdie{border:2px solid #e2b53c;}
-  .sc-hole-v.bogey{border:2px solid #6c8fd1;border-radius:3px;}
-  .sc-round-totals{text-align:right;font-size:12px;color:rgba(255,255,255,.6);margin-top:2px;}
-  .sc-round-totals b{color:#fff;}
-  .sc-empty,.sc-loading{color:rgba(255,255,255,.6);font-size:14px;padding:8px 0;}
+  .hero-fb.lb-left{right:auto;left:24px;}
+  .hero-fb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .hero-fb-dot{width:7px;height:7px;border-radius:50%;background:#1877F2;}
+  .hero-fb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
+  .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
+  .hero-fb-link:hover{color:rgba(255,255,255,.8);}
+  .hero-fb .fb-page,.hero-fb iframe{width:100%!important;}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:var(--hero-obj-pos-mobile, 50% 12%);}
     .hero::after{display:none;}
     .hero-content{display:none;}
     .scroll-cue{display:none;}
-    .hero-lb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
+    .hero-fb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
   }
 
   /* SECTION SCAFFOLD */
@@ -312,6 +271,9 @@
 </head>
 <body>
 
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
+
 <nav class="nav">
   <div class="nav-inner">
     <a class="nav-mark" href="/"><img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf"></a>
@@ -328,40 +290,31 @@
   </div>
 </nav>
 
-{% if show_live_banner %}
-<div class="live-banner">
-  <span class="live-dot"></span>
-  <span class="live-label">Live</span>
-  <span class="live-detail">27th Kentucky Senior Open &mdash; <strong>Bryan Conway</strong> T3, +3, Thru F &middot; Country Club of Paducah</span>
-</div>
-{% endif %}
-
 <div class="hero" style="--hero-obj-pos:{{ hero.object_position }};--hero-obj-pos-mobile:{{ hero.object_position_mobile or hero.object_position }};">
   <img class="hero-photo-img" src="/static/images/{{ hero.image }}" alt="Bryan Conway">
   <div class="hero-content sr-only">
     <h1>Bryan Conway</h1>
   </div>
-  {% if leaderboard %}
-  <div class="hero-lb{{ ' lb-left' if hero.lb_corner == 'top-left' else '' }}">
-    <div class="hero-lb-head{{ ' linked' if gg_leaderboard_url else '' }}"
-         {% if gg_leaderboard_url %}onclick="window.open('{{ gg_leaderboard_url }}','_blank','noopener')"{% endif %}>
-      <span class="hero-lb-dot"></span>
-      <span class="hero-lb-title">Live &middot; Kentucky Senior Open</span>
-      {% if gg_leaderboard_url %}<span class="hero-lb-full">Full leaderboard &rarr;</span>{% endif %}
+  <div class="hero-fb{{ ' lb-left' if hero.lb_corner == 'top-left' else '' }}">
+    <div class="hero-fb-head">
+      <span class="hero-fb-dot"></span>
+      <span class="hero-fb-title">Latest News</span>
+      <a class="hero-fb-link" href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/" target="_blank" rel="noopener">Follow &rarr;</a>
     </div>
-    <table class="hero-lb-table">
-      {% for p in leaderboard %}
-      <tr class="{{ 'me' if 'Conway' in p.name else '' }}{{ ' clickable' if p.aggregate_id else '' }}{{ ' pinned' if p.pinned else '' }}"
-          {% if p.aggregate_id %}data-aggregate-id="{{ p.aggregate_id }}" data-name="{{ p.name }}"{% endif %}>
-        <td class="hero-lb-pos">{{ p.pos }}</td>
-        <td class="hero-lb-name">{{ p.name }}</td>
-        <td class="hero-lb-score">{{ 'E' if p.score == 'E' else p.score }}</td>
-        <td class="hero-lb-thru">{{ p.thru if p.thru and p.thru != '-' else '' }}</td>
-      </tr>
-      {% endfor %}
-    </table>
+    <div class="fb-page"
+         data-href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/"
+         data-tabs="timeline"
+         data-width=""
+         data-height="420"
+         data-small-header="true"
+         data-adapt-container-width="true"
+         data-hide-cover="false"
+         data-show-facepile="false">
+      <blockquote cite="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/" class="fb-xfbml-parse-ignore">
+        <a href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/">Bryan Conway Golf</a>
+      </blockquote>
+    </div>
   </div>
-  {% endif %}
   <div class="scroll-cue">Scroll</div>
 </div>
 
@@ -651,17 +604,6 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="scorecardModal" role="dialog" aria-modal="true" aria-label="Hole-by-hole scorecard">
-  <div class="modal-card sc-card">
-    <button class="modal-close" id="scorecardCloseBtn" aria-label="Close">&#10005;</button>
-    <div class="modal-body" style="flex-basis:100%;">
-      <div class="modal-eyebrow">Kentucky Senior Open</div>
-      <h3 class="modal-title" id="scorecardTitle" style="color:#fff;">&nbsp;</h3>
-      <div id="scorecardBody"></div>
-    </div>
-  </div>
-</div>
-
 <script>
   var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
   t.addEventListener('click',function(){l.classList.toggle('open');});
@@ -718,59 +660,6 @@
         btn.disabled = false;
         btn.textContent = 'Send Message';
       });
-  });
-
-  var scorecardModal = document.getElementById('scorecardModal');
-  var scorecardCloseBtn = document.getElementById('scorecardCloseBtn');
-  var scorecardTitle = document.getElementById('scorecardTitle');
-  var scorecardBody = document.getElementById('scorecardBody');
-
-  function closeScorecardModal(){ scorecardModal.classList.remove('open'); }
-  scorecardCloseBtn.addEventListener('click', closeScorecardModal);
-  scorecardModal.addEventListener('click', function(e){ if(e.target === scorecardModal) closeScorecardModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && scorecardModal.classList.contains('open')) closeScorecardModal(); });
-
-  function renderHoles(holes){
-    var out = '<div class="sc-grid">';
-    holes.slice(0,9).forEach(function(h){ out += holeCell(h); });
-    out += '</div><div class="sc-grid">';
-    holes.slice(9,18).forEach(function(h){ out += holeCell(h); });
-    out += '</div>';
-    return out;
-  }
-  function holeCell(h){
-    var cls = h.mark === 'birdie' ? 'birdie' : (h.mark === 'bogey' ? 'bogey' : '');
-    return '<div class="sc-hole"><div class="sc-hole-n">' + h.n + '</div>' +
-           '<span class="sc-hole-v ' + cls + '">' + (h.strokes || '&ndash;') + '</span></div>';
-  }
-
-  document.querySelectorAll('.hero-lb-table tr.clickable').forEach(function(row){
-    row.addEventListener('click', function(){
-      var id = row.getAttribute('data-aggregate-id');
-      var name = row.getAttribute('data-name');
-      scorecardTitle.textContent = name;
-      scorecardBody.innerHTML = '<div class="sc-loading">Loading scorecard&hellip;</div>';
-      scorecardModal.classList.add('open');
-      fetch('/api/scorecard/' + id)
-        .then(function(r){ return r.json(); })
-        .then(function(data){
-          if(!data.ok || !data.rounds.length){
-            scorecardBody.innerHTML = '<div class="sc-empty">' + (data.error || 'No scorecard yet.') + '</div>';
-            return;
-          }
-          var html = '';
-          data.rounds.forEach(function(rnd){
-            html += '<div class="sc-round"><div class="sc-round-label">' + rnd.label + '</div>' +
-                    renderHoles(rnd.holes) +
-                    '<div class="sc-round-totals">Out <b>' + rnd.out + '</b> &middot; In <b>' + rnd.in +
-                    '</b> &middot; Total <b>' + rnd.total + '</b></div></div>';
-          });
-          scorecardBody.innerHTML = html;
-        })
-        .catch(function(){
-          scorecardBody.innerHTML = '<div class="sc-empty">Couldn\'t load scorecard. Try again in a moment.</div>';
-        });
-    });
   });
 </script>
 </body>

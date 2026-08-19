@@ -4,10 +4,8 @@ import os
 import re
 import smtplib
 import subprocess
-import time
 import unicodedata
 import uuid
-from datetime import date
 from email.mime.text import MIMEText
 from functools import wraps
 from pathlib import Path
@@ -92,141 +90,6 @@ def admin_required(view):
             return redirect(url_for("admin_login", next=request.path))
         return view(*args, **kwargs)
     return wrapped
-
-# --- TEMPORARY: live top-7 leaderboard overlay on the hero, for the
-# 27th Kentucky Senior Open (Aug 17-18, 2026). Pulls the same GolfGenius
-# data as tools/live_senior_open_tracker.py -- see that file for how this
-# was reverse-engineered. Remove this block (and the overlay in
-# index.html) once the tournament's over / the experiment's done.
-GG_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-}
-GG_OVERALL_SENIOR_EVENT_ID = "4427251"  # "Senior Division 50+" -- am + pro combined
-# Clean (no site chrome) GolfGenius widget page -- same one this scraper reads,
-# but rendered live in a browser with real tabs across all 8 divisions. Link
-# here from the widget header so viewers can find anyone not in our top 7.
-GG_PUBLIC_LEADERBOARD_URL = ("https://www.golfgenius.com/leagues/511281/widgets/"
-                             "tournament_results?no_header=true&round=1575855&shared=false")
-_leaderboard_cache = {"rows": [], "fetched_at": 0}
-
-
-def fetch_top7_leaderboard():
-    now = time.time()
-    if _leaderboard_cache["rows"] and now - _leaderboard_cache["fetched_at"] < 180:
-        return _leaderboard_cache["rows"]
-    try:
-        url = (f"https://www.golfgenius.com/v2tournaments/{GG_OVERALL_SENIOR_EVENT_ID}"
-               f"?player_stats_for_portal=true")
-        r = requests.get(url, headers=GG_HEADERS, timeout=8)
-        r.raise_for_status()
-        soup = BeautifulSoup(r.text, "html.parser")
-        all_rows = []
-        for tr in soup.find_all("tr", class_="aggregate-row"):
-            pos = tr.find("td", class_="pos")
-            name_link = tr.find("a", class_="open-aggregate-details")
-            affiliation = tr.find("div", class_="affiliation")
-            score = tr.find("td", class_="score")
-            thru = tr.find("td", class_="past_round_thru")
-            all_rows.append({
-                "pos": pos.get_text(strip=True) if pos else "",
-                "name": name_link.get_text(strip=True) if name_link else "",
-                "city": affiliation.get_text(strip=True) if affiliation else "",
-                "score": score.get_text(strip=True) if score else "",
-                "thru": (thru.get_text(" ", strip=True) if thru else "").replace("*", "").strip(),
-                "aggregate_id": tr.get("data-aggregate-id", ""),
-            })
-        rows = all_rows[:7]
-        # Bryan drops out of the top 7 -- pin him on as an 8th row (with a
-        # divider) rather than losing him off the widget entirely.
-        if rows and not any("Conway" in r["name"] for r in rows):
-            bryan = next((r for r in all_rows if "Conway" in r["name"]), None)
-            if bryan:
-                rows.append({**bryan, "pinned": True})
-        if rows:
-            _leaderboard_cache["rows"] = rows
-            _leaderboard_cache["fetched_at"] = now
-    except requests.RequestException:
-        pass
-    return _leaderboard_cache["rows"]
-
-
-# Hole-by-hole scorecard popup, same GolfGenius data source. Each player's
-# "aggregate_id" (captured above) has its own details page with one
-# <tr class="net-line"> per round played so far -- see tools/live_senior_open_tracker.py
-# header comment for how the widget/event-id chain was reverse-engineered;
-# this endpoint was found the same way (data-remote link on the player name).
-_scorecard_cache = {}  # aggregate_id -> {"rounds": [...], "fetched_at": ts}
-SCORECARD_CACHE_TTL = 120
-
-
-def fetch_scorecard(aggregate_id):
-    cached = _scorecard_cache.get(aggregate_id)
-    now = time.time()
-    if cached and now - cached["fetched_at"] < SCORECARD_CACHE_TTL:
-        return cached["rounds"]
-    url = f"https://www.golfgenius.com/tournaments2/details/{aggregate_id}"
-    r = requests.get(url, headers=GG_HEADERS, timeout=8)
-    r.raise_for_status()
-    soup = BeautifulSoup(r.text, "html.parser")
-    rounds = []
-    for net_row in soup.find_all("tr", class_="net-line"):
-        label_link = net_row.find("a", class_="expand-tee-details")
-        label = label_link.get_text(strip=True) if label_link else ""
-        label = re.sub(r"\s*-\s*[^-]+$", "", label)  # drop trailing "- Player Name (a)"
-        holes = []
-        for hole_td in net_row.find_all("td"):
-            classes = hole_td.get("class", [])
-            # GolfGenius doesn't keep a fixed class order -- a double bogey renders
-            # 'double_square hole3 score' (marker first) while a plain hole renders
-            # 'hole4 score' (marker absent) or 'hole1 score simple_circle' (marker
-            # last). Find the holeN token wherever it lands instead of assuming a
-            # position -- assuming "first class" here previously dropped any hole
-            # whose marker class came first (e.g. a double bogey), shifting every
-            # later hole in the display by one.
-            hole_class = next((c for c in classes if re.fullmatch(r"hole\d+", c)), None)
-            if not hole_class:
-                continue
-            n = int(hole_class[4:])
-            box = hole_td.find("span", class_="score_box")
-            strokes = box.get_text(strip=True) if box else ""
-            if "double_circle" in classes:
-                mark = "birdie"  # eagle -- no distinct glyph yet, reuse birdie styling
-            elif "simple_circle" in classes:
-                mark = "birdie"
-            elif "double_square" in classes or "simple_square" in classes:
-                mark = "bogey"
-            else:
-                mark = "par"
-            holes.append({"n": n, "strokes": strokes, "mark": mark})
-        holes.sort(key=lambda h: h["n"])
-        if not any(h["strokes"] for h in holes):
-            continue  # round not started yet
-        out_td = net_row.find("td", class_="sum_front")
-        in_td = net_row.find("td", class_="sum_back")
-        total_td = net_row.find("td", class_="sum")
-        rounds.append({
-            "label": label,
-            "holes": holes,
-            "out": out_td.get_text(strip=True) if out_td else "",
-            "in": in_td.get_text(strip=True) if in_td else "",
-            "total": total_td.get_text(strip=True) if total_td else "",
-        })
-    _scorecard_cache[aggregate_id] = {"rounds": rounds, "fetched_at": now}
-    return rounds
-
-
-@app.route("/api/scorecard/<aggregate_id>")
-def api_scorecard(aggregate_id):
-    if not aggregate_id.isdigit():
-        return jsonify({"ok": False, "error": "bad id"}), 400
-    try:
-        rounds = fetch_scorecard(aggregate_id)
-    except requests.RequestException:
-        return jsonify({"ok": False, "error": "GolfGenius unavailable"}), 502
-    if not rounds:
-        return jsonify({"ok": False, "error": "No rounds started yet"})
-    return jsonify({"ok": True, "rounds": rounds})
 
 # Press & Archives -- add new entries here as more archive cards are created.
 # era must be one of: early-years, franklin-county, college, professional-years,
@@ -533,15 +396,9 @@ ERAS = [
 ]
 
 
-GG_BANNER_SHOW_FROM = date(2026, 8, 18)  # hide the top live-banner strip until Bryan tees off Round 2
-GG_BANNER_MANUALLY_HIDDEN = True  # temporarily hidden 2026-08-18 -- hero leaderboard box covers this now; flip to False to bring it back
-
-
 @app.route("/")
 def index():
-    show_live_banner = date.today() >= GG_BANNER_SHOW_FROM and not GG_BANNER_MANUALLY_HIDDEN
-    return render_template("index.html", leaderboard=fetch_top7_leaderboard(), show_live_banner=show_live_banner,
-                            gg_leaderboard_url=GG_PUBLIC_LEADERBOARD_URL, hero=HERO)
+    return render_template("index.html", hero=HERO)
 
 
 @app.route("/press-archives")
