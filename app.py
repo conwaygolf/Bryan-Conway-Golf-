@@ -400,9 +400,9 @@ HERO = load_json(HERO_JSON, DEFAULT_HERO)
 
 # ---------------------------------------------------------------------------
 # Admin image helpers -- upload/process for gallery photos, sponsor logos,
-# and the hero image. No auth yet (Jimmy's doing permissions in a later
-# pass) -- the /admin route is unlinked from the public nav, only reachable
-# via the discreet footer link or a direct URL.
+# and the hero image. Password-gated (see admin_required above); the
+# /admin route itself is unlinked from the public nav, only reachable via
+# the discreet footer link or a direct URL.
 # ---------------------------------------------------------------------------
 
 def slugify(text):
@@ -556,12 +556,12 @@ def roots():
 
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html", photos=GALLERY_PHOTOS)
+    return render_template("gallery.html", photos=[p for p in GALLERY_PHOTOS if not p.get("hidden")])
 
 
 @app.route("/sponsors")
 def sponsors():
-    return render_template("sponsors.html", sponsors=SPONSORS)
+    return render_template("sponsors.html", sponsors=[s for s in SPONSORS if not s.get("hidden")])
 
 
 @app.route("/contact", methods=["POST"])
@@ -645,7 +645,7 @@ def admin_gallery_upload():
     except Exception:
         flash("Couldn't process that image -- try a different file.", "error")
         return redirect(url_for("admin"))
-    GALLERY_PHOTOS.append({"image": filename, "caption": caption or "Bryan Conway Golf"})
+    GALLERY_PHOTOS.append({"image": filename, "caption": caption or "Bryan Conway Golf", "hidden": False})
     save_json(GALLERY_JSON, GALLERY_PHOTOS)
     git_publish([IMAGES_DIR / filename, GALLERY_JSON], f"Admin: add gallery photo ({caption or filename})")
     flash(f'Added "{caption or filename}" to the gallery.', "ok")
@@ -680,7 +680,7 @@ def admin_sponsors_add():
     except Exception:
         logo_note = " (couldn't find/fetch a logo from their site -- added without one, upload one manually if needed)"
 
-    SPONSORS.append({"name": name, "blurb": blurb, "url": site_url or None, "logo": logo_filename})
+    SPONSORS.append({"name": name, "blurb": blurb, "url": site_url or None, "logo": logo_filename, "hidden": False})
     save_json(SPONSORS_JSON, SPONSORS)
     publish_paths = [SPONSORS_JSON]
     if logo_filename:
@@ -709,6 +709,70 @@ def admin_hero_upload():
     save_json(HERO_JSON, HERO)
     git_publish([IMAGES_DIR / filename, HERO_JSON], "Admin: update hero image")
     flash("Hero image updated -- scoreboard repositioned automatically.", "ok")
+    return redirect(url_for("admin"))
+
+
+def _delete_image_file(filename):
+    if not filename:
+        return
+    path = IMAGES_DIR / filename
+    if path.exists():
+        path.unlink()
+
+
+@app.route("/admin/gallery/<int:idx>/delete", methods=["POST"])
+@admin_required
+def admin_gallery_delete(idx):
+    if not 0 <= idx < len(GALLERY_PHOTOS):
+        flash("That photo no longer exists.", "error")
+        return redirect(url_for("admin"))
+    photo = GALLERY_PHOTOS.pop(idx)
+    _delete_image_file(photo.get("image"))
+    save_json(GALLERY_JSON, GALLERY_PHOTOS)
+    git_publish([GALLERY_JSON, IMAGES_DIR], f"Admin: delete gallery photo ({photo.get('caption')})")
+    flash(f'Deleted "{photo.get("caption")}" from the gallery.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/gallery/<int:idx>/toggle", methods=["POST"])
+@admin_required
+def admin_gallery_toggle(idx):
+    if not 0 <= idx < len(GALLERY_PHOTOS):
+        flash("That photo no longer exists.", "error")
+        return redirect(url_for("admin"))
+    photo = GALLERY_PHOTOS[idx]
+    photo["hidden"] = not photo.get("hidden", False)
+    save_json(GALLERY_JSON, GALLERY_PHOTOS)
+    git_publish([GALLERY_JSON], f"Admin: {'hide' if photo['hidden'] else 'show'} gallery photo ({photo.get('caption')})")
+    flash(f'"{photo.get("caption")}" is now {"hidden" if photo["hidden"] else "visible"}.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/sponsors/<int:idx>/delete", methods=["POST"])
+@admin_required
+def admin_sponsors_delete(idx):
+    if not 0 <= idx < len(SPONSORS):
+        flash("That sponsor no longer exists.", "error")
+        return redirect(url_for("admin"))
+    sponsor = SPONSORS.pop(idx)
+    _delete_image_file(sponsor.get("logo"))
+    save_json(SPONSORS_JSON, SPONSORS)
+    git_publish([SPONSORS_JSON, IMAGES_DIR], f"Admin: delete sponsor ({sponsor.get('name')})")
+    flash(f'Deleted sponsor "{sponsor.get("name")}."', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/sponsors/<int:idx>/toggle", methods=["POST"])
+@admin_required
+def admin_sponsors_toggle(idx):
+    if not 0 <= idx < len(SPONSORS):
+        flash("That sponsor no longer exists.", "error")
+        return redirect(url_for("admin"))
+    sponsor = SPONSORS[idx]
+    sponsor["hidden"] = not sponsor.get("hidden", False)
+    save_json(SPONSORS_JSON, SPONSORS)
+    git_publish([SPONSORS_JSON], f"Admin: {'hide' if sponsor['hidden'] else 'show'} sponsor ({sponsor.get('name')})")
+    flash(f'"{sponsor.get("name")}" is now {"hidden" if sponsor["hidden"] else "visible"}.', "ok")
     return redirect(url_for("admin"))
 
 

@@ -24,7 +24,6 @@
   header{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
   header img{height:48px;width:auto;}
   header h1{font-size:22px;font-weight:800;}
-  header .note{font-size:12px;color:#8a8a7c;margin-left:auto;text-align:right;max-width:260px;}
   a.back{display:inline-block;margin-bottom:20px;font-size:12.5px;color:var(--blue-deep);text-decoration:none;}
   a.back:hover{text-decoration:underline;}
 
@@ -52,16 +51,31 @@
   }
   .btn:hover{background:var(--blue-deep);}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:18px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:18px;}
   .grid figure{margin:0;}
+  .grid .thumb{position:relative;}
   .grid img{width:100%;height:90px;object-fit:cover;border-radius:4px;display:block;background:#eee;}
+  .grid figure.is-hidden img{opacity:.35;}
   .grid figcaption{font-size:10.5px;color:#8a8a7c;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .item-actions{display:flex;gap:6px;margin-top:5px;}
+  .item-actions form{flex:1;}
+  .mini-btn{
+    width:100%;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;
+    border:1px solid #d6d3c6;background:#fdfdfb;color:#5a5a4f;border-radius:3px;padding:4px 0;cursor:pointer;
+  }
+  .mini-btn:hover{background:#efeee6;}
+  .mini-btn.danger{color:var(--err);border-color:rgba(168,23,28,.35);}
+  .mini-btn.danger:hover{background:rgba(168,23,28,.08);}
+  .hidden-badge{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--warn);}
 
   .sponsor-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid #eee;}
   .sponsor-row:first-child{border-top:none;}
+  .sponsor-row.is-hidden{opacity:.5;}
   .sponsor-row img{width:44px;height:44px;object-fit:contain;background:#fafaf5;border-radius:4px;padding:4px;}
   .sponsor-row .name{font-weight:700;font-size:13.5px;}
   .sponsor-row .url{font-size:11.5px;color:#8a8a7c;}
+  .sponsor-row .meta{flex:1;}
+  .sponsor-row .item-actions{margin-top:6px;max-width:180px;}
 
   .hero-preview{position:relative;border-radius:6px;overflow:hidden;height:200px;background:var(--black);margin-top:16px;}
   .hero-preview img{width:100%;height:100%;object-fit:cover;}
@@ -75,7 +89,6 @@
   <header>
     <img src="/static/images/bc_logo_final.png" alt="">
     <h1>Site Admin</h1>
-    <div class="note">No login yet -- this page isn't linked in the main nav, only reachable here or via the footer. Permissions coming in a later pass.</div>
   </header>
 
   <a class="back" href="/">&larr; Back to site</a>
@@ -98,9 +111,17 @@
     {% if gallery %}
     <div class="grid">
       {% for p in gallery %}
-      <figure>
+      <figure class="{{ 'is-hidden' if p.hidden else '' }}">
         <img src="/static/images/{{ p.image }}" alt="{{ p.caption }}" loading="lazy">
-        <figcaption>{{ p.caption }}</figcaption>
+        <figcaption>{{ p.caption }}{% if p.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</figcaption>
+        <div class="item-actions">
+          <form method="post" action="/admin/gallery/{{ loop.index0 }}/toggle">
+            <button class="mini-btn" type="submit">{{ 'Show' if p.hidden else 'Hide' }}</button>
+          </form>
+          <form method="post" action="/admin/gallery/{{ loop.index0 }}/delete" onsubmit="return confirm('Delete this photo permanently?');">
+            <button class="mini-btn danger" type="submit">Delete</button>
+          </form>
+        </div>
       </figure>
       {% endfor %}
     </div>
@@ -124,11 +145,19 @@
     {% if sponsors %}
     <div style="margin-top:18px;">
       {% for s in sponsors %}
-      <div class="sponsor-row">
+      <div class="sponsor-row {{ 'is-hidden' if s.hidden else '' }}">
         {% if s.logo %}<img src="/static/images/{{ s.logo }}" alt="">{% endif %}
-        <div>
-          <div class="name">{{ s.name }}</div>
+        <div class="meta">
+          <div class="name">{{ s.name }}{% if s.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</div>
           <div class="url">{{ s.url or 'no website' }}</div>
+          <div class="item-actions">
+            <form method="post" action="/admin/sponsors/{{ loop.index0 }}/toggle">
+              <button class="mini-btn" type="submit">{{ 'Show' if s.hidden else 'Hide' }}</button>
+            </form>
+            <form method="post" action="/admin/sponsors/{{ loop.index0 }}/delete" onsubmit="return confirm('Delete this sponsor permanently?');">
+              <button class="mini-btn danger" type="submit">Delete</button>
+            </form>
+          </div>
         </div>
       </div>
       {% endfor %}
