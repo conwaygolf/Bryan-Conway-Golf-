@@ -40,9 +40,12 @@ IMAGES_DIR = BASE_DIR / "static" / "images"
 
 # --- Admin auth + auto-publish -------------------------------------------
 # Single shared password, no user accounts -- fine for now since it's just
-# Jimmy/Bryan. Change via CONWAYGOLF_ADMIN_PASSWORD env var (local .env or
-# a Render env var) rather than editing this default.
-ADMIN_PASSWORD = os.getenv("CONWAYGOLF_ADMIN_PASSWORD", "BCGadmin2026!")
+# Jimmy/Bryan. MUST be set via CONWAYGOLF_ADMIN_PASSWORD env var (local .env
+# or a Render env var) -- deliberately NO hardcoded fallback here. This repo
+# is public (conwaygolf/Bryan-Conway-Golf-), so any default baked into this
+# file would be readable by anyone on github.com -- that happened once
+# already (BCGadmin2026!, now rotated) and cost a real security scare.
+ADMIN_PASSWORD = os.getenv("CONWAYGOLF_ADMIN_PASSWORD")
 
 # Every successful admin save commits + pushes to `origin` so Render's
 # auto-deploy publishes it -- that's the whole point of the admin page (no
@@ -469,10 +472,10 @@ def contact():
 def admin_login():
     error = None
     if request.method == "POST":
-        if request.form.get("password") == ADMIN_PASSWORD:
+        if ADMIN_PASSWORD and request.form.get("password") == ADMIN_PASSWORD:
             session["is_admin"] = True
             return redirect(request.args.get("next") or url_for("admin"))
-        error = "Wrong password."
+        error = "Wrong password." if ADMIN_PASSWORD else "Admin login isn't configured (CONWAYGOLF_ADMIN_PASSWORD not set)."
     return render_template("admin_login.html", error=error)
 
 
