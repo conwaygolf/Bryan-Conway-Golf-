@@ -11,5 +11,12 @@
     "blurb": "A proud supporter of Bryan Conway Golf.",
     "url": "https://whitetailheavenoutfitters.com",
     "logo": "whitetail_logo.png"
+  },
+  {
+    "name": "jstoutInc",
+    "blurb": "A proud supporter of Bryan Conway Golf.",
+    "url": "www.https://jstoutinc.com/",
+    "logo": null,
+    "hidden": false
   }
 ]
