@@ -85,6 +85,44 @@
     color:#fff;background:var(--red);padding:13px 26px;border-radius:2px;
   }
 
+  /* CONTACT MODAL */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(10,8,7,.82);z-index:100;
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-card{
+    background:#fbf9f4;max-width:760px;width:100%;max-height:92vh;overflow-y:auto;
+    border-radius:4px;display:flex;flex-wrap:wrap;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.5);
+  }
+  .modal-photo{flex:1 1 260px;min-height:220px;}
+  .modal-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .modal-body{flex:1 1 340px;padding:40px 36px;}
+  .modal-eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--red-text);margin-bottom:8px;}
+  .modal-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:#18180f;margin-bottom:22px;}
+  .modal-close{
+    position:absolute;top:14px;right:14px;z-index:2;width:34px;height:34px;border-radius:50%;
+    background:rgba(20,17,16,.55);color:#fff;border:none;cursor:pointer;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  #contactForm label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8a8a7c;margin-bottom:16px;}
+  #contactForm input,#contactForm textarea{
+    display:block;width:100%;margin-top:6px;padding:11px 12px;font-size:14px;font-family:inherit;
+    border:1px solid #d8d4c8;border-radius:2px;color:#18180f;background:#fff;
+  }
+  #contactForm textarea{resize:vertical;}
+  .hp-field{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .modal-submit{
+    display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
+    color:#fff;background:var(--red);border:none;padding:13px 26px;border-radius:2px;cursor:pointer;width:100%;
+  }
+  .modal-submit:hover{background:var(--red-text);}
+  .modal-submit:disabled{opacity:.6;cursor:default;}
+  .modal-status{margin-top:14px;font-size:13px;min-height:18px;}
+  .modal-status.ok{color:#1a7a3c;}
+  .modal-status.err{color:var(--red-text);}
+  @media(max-width:640px){.modal-photo{min-height:160px;}}
+
   footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
   footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
   footer img{height:34px;width:auto;}
@@ -107,7 +145,7 @@
       <li><a href="/gallery">Gallery</a></li>
       <li><a href="/sponsors" class="current">Sponsors</a></li>
       <li><a href="/#schedule">Schedule</a></li>
-      <li><a href="/#contact" class="cta">Contact</a></li>
+      <li><a href="/#contact" class="cta" id="navContactBtn">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -135,7 +173,34 @@
 
     <div class="sponsors-cta">
       <p>Interested in partnering with Bryan Conway Golf?</p>
-      <a href="/#contact">Get In Touch</a>
+      <a href="/#contact" id="sponsorsContactBtn">Get In Touch</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-label="Contact Bryan Conway Golf">
+  <div class="modal-card">
+    <button class="modal-close" id="contactCloseBtn" aria-label="Close">&#10005;</button>
+    <div class="modal-photo">
+      <img src="/static/images/portrait_desert_course.jpg" alt="Bryan Conway">
+    </div>
+    <div class="modal-body">
+      <div class="modal-eyebrow">Get In Touch</div>
+      <h3 class="modal-title">Let's start a conversation.</h3>
+      <form id="contactForm">
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+        <label>Name
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Reason for Inquiry
+          <textarea name="reason" rows="4" required placeholder="Sponsorship, media, event, collaboration..."></textarea>
+        </label>
+        <button type="submit" class="modal-submit">Send Message</button>
+        <div class="modal-status" id="contactStatus"></div>
+      </form>
     </div>
   </div>
 </div>
@@ -149,6 +214,61 @@
   var navT=document.getElementById('navToggle'), navL=document.getElementById('navLinks');
   navT.addEventListener('click',function(){navL.classList.toggle('open');});
   navL.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navL.classList.remove('open');});});
+
+  var contactModal = document.getElementById('contactModal');
+  var navContactBtn = document.getElementById('navContactBtn');
+  var sponsorsContactBtn = document.getElementById('sponsorsContactBtn');
+  var contactCloseBtn = document.getElementById('contactCloseBtn');
+  var contactForm = document.getElementById('contactForm');
+  var contactStatus = document.getElementById('contactStatus');
+
+  function openContactModal(){ contactModal.classList.add('open'); }
+  function closeContactModal(){ contactModal.classList.remove('open'); }
+
+  navContactBtn.addEventListener('click', function(e){ e.preventDefault(); openContactModal(); });
+  sponsorsContactBtn.addEventListener('click', function(e){ e.preventDefault(); openContactModal(); });
+  contactCloseBtn.addEventListener('click', closeContactModal);
+  contactModal.addEventListener('click', function(e){ if(e.target === contactModal) closeContactModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && contactModal.classList.contains('open')) closeContactModal(); });
+
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = contactForm.querySelector('.modal-submit');
+    var payload = {
+      name: contactForm.name.value,
+      email: contactForm.email.value,
+      reason: contactForm.reason.value,
+      website: contactForm.website.value
+    };
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    contactStatus.textContent = '';
+    contactStatus.className = 'modal-status';
+    fetch('/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json(); })
+      .then(function(body){
+        if(body.ok){
+          contactStatus.textContent = "Thanks — your message is on its way. We'll be in touch soon.";
+          contactStatus.className = 'modal-status ok';
+          contactForm.reset();
+          btn.textContent = 'Send Message';
+          setTimeout(closeContactModal, 2200);
+        } else {
+          contactStatus.textContent = body.error || 'Something went wrong. Please try again.';
+          contactStatus.className = 'modal-status err';
+          btn.disabled = false;
+          btn.textContent = 'Send Message';
+        }
+      }).catch(function(){
+        contactStatus.textContent = 'Something went wrong. Please try again, or email info@bryanconwaygolf.com directly.';
+        contactStatus.className = 'modal-status err';
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      });
+  });
 </script>
 </body>
 </html>
