@@ -106,6 +106,7 @@
   .hero-fb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
   .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
   .hero-fb-link:hover{color:rgba(255,255,255,.8);}
+  .hero-fb-namemask{position:absolute;left:1px;right:1px;top:101px;height:20px;background:#fff;z-index:2;}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:var(--hero-obj-pos-mobile, 50% 12%);}
@@ -308,7 +309,7 @@
        data-tabs="timeline"
        data-width=""
        data-height="780"
-       data-small-header="false"
+       data-small-header="true"
        data-adapt-container-width="true"
        data-hide-cover="false"
        data-show-facepile="false">
@@ -316,6 +317,7 @@
       <a href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/">Bryan Conway Golf</a>
     </blockquote>
   </div>
+  <div class="hero-fb-namemask"></div>
 </div>
 </div>
 
