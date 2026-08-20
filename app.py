@@ -218,6 +218,7 @@ HERO_JSON = DATA_DIR / "hero.json"
 RESULTS_JSON = DATA_DIR / "results.json"
 SCHEDULE_JSON = DATA_DIR / "schedule.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
+PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -366,6 +367,12 @@ DEFAULT_HERO = {
     "lb_corner": "top-right",
 }
 
+# Designed banner graphic (title/tagline baked into the image itself), not
+# a photo with overlay text -- rendered at a fixed 1983:793 aspect ratio via
+# CSS object-fit:cover, so no crop/overlay-position analysis needed here
+# unlike the hero image.
+DEFAULT_PRESS_HEADER = {"image": "press_archives_header.jpg"}
+
 
 def load_json(path, default):
     if path.exists():
@@ -384,6 +391,7 @@ HERO = load_json(HERO_JSON, DEFAULT_HERO)
 RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
 SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
+PRESS_HEADER = load_json(PRESS_HEADER_JSON, DEFAULT_PRESS_HEADER)
 
 
 # ---------------------------------------------------------------------------
@@ -452,6 +460,16 @@ def save_hero_image(file_storage):
     filename = f"hero_{uuid.uuid4().hex[:8]}.jpg"
     img.save(IMAGES_DIR / filename, "JPEG", quality=88, optimize=True)
     return filename, object_position, lb_corner
+
+
+def save_press_header_image(file_storage):
+    img = open_upload_image(file_storage).convert("RGB")
+    max_w = 2400
+    if img.width > max_w:
+        img = img.resize((max_w, round(img.height * max_w / img.width)), Image.LANCZOS)
+    filename = f"press_header_{uuid.uuid4().hex[:8]}.jpg"
+    img.save(IMAGES_DIR / filename, "JPEG", quality=88, optimize=True)
+    return filename
 
 
 LOGO_FETCH_HEADERS = {
@@ -529,7 +547,7 @@ def index():
 
 @app.route("/press-archives")
 def press_archives():
-    return render_template("press_archives.html", cards=ARCHIVE_CARDS, eras=ERAS)
+    return render_template("press_archives.html", cards=ARCHIVE_CARDS, eras=ERAS, header=PRESS_HEADER)
 
 
 @app.route("/roots")
@@ -612,7 +630,7 @@ def admin_logout():
 @admin_required
 def admin():
     return render_template("admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
-                            schedule=SCHEDULE, drafts=RESULT_DRAFTS,
+                            schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
                             messages=get_flashed_messages(with_categories=True))
 
 
@@ -755,6 +773,25 @@ def admin_hero_upload():
     save_json(HERO_JSON, HERO)
     git_publish([IMAGES_DIR / filename, HERO_JSON], "Admin: update hero image")
     flash("Hero image updated -- scoreboard repositioned automatically.", "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/press-header/upload", methods=["POST"])
+@admin_required
+def admin_press_header_upload():
+    file = request.files.get("press_header")
+    if not file or not file.filename:
+        flash("No image selected.", "error")
+        return redirect(url_for("admin"))
+    try:
+        filename = save_press_header_image(file)
+    except Exception:
+        flash("Couldn't process that image -- try a different file.", "error")
+        return redirect(url_for("admin"))
+    PRESS_HEADER["image"] = filename
+    save_json(PRESS_HEADER_JSON, PRESS_HEADER)
+    git_publish([IMAGES_DIR / filename, PRESS_HEADER_JSON], "Admin: update Press & Archives header")
+    flash("Press & Archives header updated.", "ok")
     return redirect(url_for("admin"))
 
 

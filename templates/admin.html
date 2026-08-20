@@ -276,6 +276,19 @@
       <span class="tag {{ 'left' if hero.lb_corner == 'top-left' else 'right' }}">Scoreboard sits here</span>
     </div>
   </div>
+
+  <div class="card">
+    <h2>Press &amp; Archives Header</h2>
+    <div class="desc">Replaces the designed banner graphic at the top of /press-archives. Upload a wide image (roughly 1983&times;793, but any size works -- it's cropped to fit).</div>
+    <form method="post" action="/admin/press-header/upload" enctype="multipart/form-data">
+      <label for="press-header">Header image</label>
+      <input type="file" id="press-header" name="press_header" accept="image/*,.heic,.heif" required>
+      <button class="btn" type="submit">Set as Header</button>
+    </form>
+    <div class="hero-preview" style="height:auto;aspect-ratio:1983/793;">
+      <img src="/static/images/{{ press_header.image }}" alt="Current Press &amp; Archives header">
+    </div>
+  </div>
 </div>
 </body>
 </html>
