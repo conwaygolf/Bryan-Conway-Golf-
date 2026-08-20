@@ -6,6 +6,7 @@ import smtplib
 import subprocess
 import unicodedata
 import uuid
+from datetime import date
 from email.mime.text import MIMEText
 from functools import wraps
 from pathlib import Path
@@ -215,6 +216,8 @@ GALLERY_JSON = DATA_DIR / "gallery.json"
 SPONSORS_JSON = DATA_DIR / "sponsors.json"
 HERO_JSON = DATA_DIR / "hero.json"
 RESULTS_JSON = DATA_DIR / "results.json"
+SCHEDULE_JSON = DATA_DIR / "schedule.json"
+RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -342,6 +345,20 @@ DEFAULT_RESULTS = [
     },
 ]
 
+# Real dates (not just display labels) so the daily event-completion checker
+# (tools/check_event_completion.py) knows when an event has actually ended.
+DEFAULT_SCHEDULE = [
+    {
+        "date_label": "Sep 28–29",
+        "start_date": "2026-09-28",
+        "end_date": "2026-09-29",
+        "title": "Clark's Pump-N-Shop Kentucky Men's Senior Amateur",
+        "note": "Frankfort Country Club — Conway's home county.",
+        "hidden": False,
+        "result_checked": False,
+    },
+]
+
 DEFAULT_HERO = {
     "image": "action_swing.png",
     "object_position": "50% 6%",
@@ -365,6 +382,8 @@ GALLERY_PHOTOS = load_json(GALLERY_JSON, DEFAULT_GALLERY_PHOTOS)
 SPONSORS = load_json(SPONSORS_JSON, DEFAULT_SPONSORS)
 HERO = load_json(HERO_JSON, DEFAULT_HERO)
 RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
+SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
+RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
 
 
 # ---------------------------------------------------------------------------
@@ -504,7 +523,8 @@ ERAS = [
 
 @app.route("/")
 def index():
-    return render_template("index.html", hero=HERO, results=[r for r in RESULTS if not r.get("hidden")])
+    return render_template("index.html", hero=HERO, results=[r for r in RESULTS if not r.get("hidden")],
+                            schedule=[s for s in SCHEDULE if not s.get("hidden")])
 
 
 @app.route("/press-archives")
@@ -592,6 +612,7 @@ def admin_logout():
 @admin_required
 def admin():
     return render_template("admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
+                            schedule=SCHEDULE, drafts=RESULT_DRAFTS,
                             messages=get_flashed_messages(with_categories=True))
 
 
@@ -671,6 +692,47 @@ def admin_results_add():
     save_json(RESULTS_JSON, RESULTS)
     git_publish([RESULTS_JSON], f"Admin: add result ({title})")
     flash(f'Added "{title}" to the top of Results.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/schedule/add", methods=["POST"])
+@admin_required
+def admin_schedule_add():
+    title = (request.form.get("title") or "").strip()
+    start_date = (request.form.get("start_date") or "").strip()
+    end_date = (request.form.get("end_date") or "").strip() or start_date
+    note = (request.form.get("note") or "").strip()
+
+    if not title or not start_date:
+        flash("Title and start date are required.", "error")
+        return redirect(url_for("admin"))
+
+    try:
+        start_dt = date.fromisoformat(start_date)
+        end_dt = date.fromisoformat(end_date)
+    except ValueError:
+        flash("Dates need to be in YYYY-MM-DD format.", "error")
+        return redirect(url_for("admin"))
+
+    # Build "Sep 28" / "Sep 28-29" / "Sep 28-Oct 1" without relying on
+    # platform-specific strftime flags for a no-leading-zero day (%-d is a
+    # glibc extension -- works on Render but not on Windows, where this is
+    # also run locally for testing).
+    start_label = f"{start_dt.strftime('%b')} {start_dt.day}"
+    if start_dt == end_dt:
+        date_label = start_label
+    elif start_dt.month == end_dt.month:
+        date_label = f"{start_label}–{end_dt.day}"
+    else:
+        date_label = f"{start_label}–{end_dt.strftime('%b')} {end_dt.day}"
+
+    SCHEDULE.append({
+        "date_label": date_label, "start_date": start_date, "end_date": end_date,
+        "title": title, "note": note, "hidden": False, "result_checked": False,
+    })
+    save_json(SCHEDULE_JSON, SCHEDULE)
+    git_publish([SCHEDULE_JSON], f"Admin: add schedule event ({title})")
+    flash(f'Added "{title}" to the schedule.', "ok")
     return redirect(url_for("admin"))
 
 
@@ -784,6 +846,69 @@ def admin_results_toggle(idx):
     save_json(RESULTS_JSON, RESULTS)
     git_publish([RESULTS_JSON], f"Admin: {'hide' if result['hidden'] else 'show'} result ({result.get('title')})")
     flash(f'"{result.get("title")}" is now {"hidden" if result["hidden"] else "visible"}.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/results/drafts/<int:idx>/publish", methods=["POST"])
+@admin_required
+def admin_results_draft_publish(idx):
+    if not 0 <= idx < len(RESULT_DRAFTS):
+        flash("That draft no longer exists.", "error")
+        return redirect(url_for("admin"))
+    date_ = (request.form.get("date") or "").strip()
+    title = (request.form.get("title") or "").strip()
+    note = (request.form.get("note") or "").strip()
+    tag = (request.form.get("tag") or "").strip() or None
+    if not date_ or not title:
+        flash("Date and title are required.", "error")
+        return redirect(url_for("admin"))
+
+    RESULT_DRAFTS.pop(idx)
+    save_json(RESULT_DRAFTS_JSON, RESULT_DRAFTS)
+    RESULTS.insert(0, {"date": date_, "title": title, "note": note, "tag": tag, "hidden": False})
+    save_json(RESULTS_JSON, RESULTS)
+    git_publish([RESULT_DRAFTS_JSON, RESULTS_JSON], f"Admin: publish result draft ({title})")
+    flash(f'Published "{title}" to Results.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/results/drafts/<int:idx>/dismiss", methods=["POST"])
+@admin_required
+def admin_results_draft_dismiss(idx):
+    if not 0 <= idx < len(RESULT_DRAFTS):
+        flash("That draft no longer exists.", "error")
+        return redirect(url_for("admin"))
+    draft = RESULT_DRAFTS.pop(idx)
+    save_json(RESULT_DRAFTS_JSON, RESULT_DRAFTS)
+    git_publish([RESULT_DRAFTS_JSON], f"Admin: dismiss result draft ({draft.get('title')})")
+    flash(f'Dismissed the draft for "{draft.get("title")}."', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/schedule/<int:idx>/delete", methods=["POST"])
+@admin_required
+def admin_schedule_delete(idx):
+    if not 0 <= idx < len(SCHEDULE):
+        flash("That event no longer exists.", "error")
+        return redirect(url_for("admin"))
+    event = SCHEDULE.pop(idx)
+    save_json(SCHEDULE_JSON, SCHEDULE)
+    git_publish([SCHEDULE_JSON], f"Admin: delete schedule event ({event.get('title')})")
+    flash(f'Deleted "{event.get("title")}" from the schedule.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/schedule/<int:idx>/toggle", methods=["POST"])
+@admin_required
+def admin_schedule_toggle(idx):
+    if not 0 <= idx < len(SCHEDULE):
+        flash("That event no longer exists.", "error")
+        return redirect(url_for("admin"))
+    event = SCHEDULE[idx]
+    event["hidden"] = not event.get("hidden", False)
+    save_json(SCHEDULE_JSON, SCHEDULE)
+    git_publish([SCHEDULE_JSON], f"Admin: {'hide' if event['hidden'] else 'show'} schedule event ({event.get('title')})")
+    flash(f'"{event.get("title")}" is now {"hidden" if event["hidden"] else "visible"}.', "ok")
     return redirect(url_for("admin"))
 
 

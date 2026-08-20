@@ -165,6 +165,32 @@
     {% endif %}
   </div>
 
+  {% if drafts %}
+  <div class="card" style="border:2px solid #a8171c;">
+    <h2>Pending Result Drafts <span class="hidden-badge" style="color:#a8171c;">{{ drafts|length }} waiting</span></h2>
+    <div class="desc">An event on the schedule ended and this was auto-filled from GolfGenius where possible &mdash; review, edit if needed, and publish. Nothing here shows on the live site until you publish it.</div>
+    {% for d in drafts %}
+    <form method="post" action="/admin/results/drafts/{{ loop.index0 }}/publish" style="border-top:1px solid #eee;padding-top:16px;margin-top:16px;">
+      <div class="desc">From schedule event: <strong>{{ d.source_event_title }}</strong> &middot; {{ 'auto-filled from GolfGenius' if d.auto_filled else 'auto-fetch could not find a result -- fill in manually' }}</div>
+      <label>Date / label</label>
+      <input type="text" name="date" value="{{ d.date }}" required>
+      <label>Title</label>
+      <input type="text" name="title" value="{{ d.title }}" required>
+      <label>Note</label>
+      <textarea name="note">{{ d.note }}</textarea>
+      <label>Red tag (optional)</label>
+      <input type="text" name="tag" value="{{ d.tag or '' }}" placeholder="e.g. Champion, Low Amateur, Runner-Up">
+      <div class="item-actions">
+        <button class="btn" type="submit">Publish to Results</button>
+      </div>
+    </form>
+    <form method="post" action="/admin/results/drafts/{{ loop.index0 }}/dismiss" onsubmit="return confirm('Dismiss this draft without publishing?');" style="margin-top:6px;">
+      <button class="mini-btn danger" type="submit">Dismiss</button>
+    </form>
+    {% endfor %}
+  </div>
+  {% endif %}
+
   <div class="card">
     <h2>Result</h2>
     <div class="desc">Adds to the top of the Results section (it's shown newest-first). Use this for a tournament recap once an event on the schedule wraps up, or any other career update.</div>
@@ -191,6 +217,42 @@
               <button class="mini-btn" type="submit">{{ 'Show' if r.hidden else 'Hide' }}</button>
             </form>
             <form method="post" action="/admin/results/{{ loop.index0 }}/delete" onsubmit="return confirm('Delete this result permanently?');">
+              <button class="mini-btn danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Schedule Event</h2>
+    <div class="desc">Upcoming events shown in the Schedule section. Once an event's end date passes, the daily checker looks for a final result on GolfGenius and drops a draft above for review.</div>
+    <form method="post" action="/admin/schedule/add">
+      <label for="sc-title">Title</label>
+      <input type="text" id="sc-title" name="title" placeholder="e.g. Clark's Pump-N-Shop Kentucky Men's Senior Amateur" required>
+      <label for="sc-start">Start date</label>
+      <input type="date" id="sc-start" name="start_date" required>
+      <label for="sc-end">End date (optional -- defaults to start date)</label>
+      <input type="date" id="sc-end" name="end_date">
+      <label for="sc-note">Note</label>
+      <textarea id="sc-note" name="note" placeholder="e.g. Frankfort Country Club &mdash; Conway's home county."></textarea>
+      <button class="btn" type="submit">Add to Schedule</button>
+    </form>
+    {% if schedule %}
+    <div style="margin-top:18px;">
+      {% for s in schedule %}
+      <div class="sponsor-row {{ 'is-hidden' if s.hidden else '' }}">
+        <div class="meta">
+          <div class="name">{{ s.date_label }} &mdash; {{ s.title }}{% if s.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}{% if s.result_checked %} <span class="hidden-badge" style="color:#5a5a4f;">Checked</span>{% endif %}</div>
+          <div class="url">{{ s.note }}</div>
+          <div class="item-actions">
+            <form method="post" action="/admin/schedule/{{ loop.index0 }}/toggle">
+              <button class="mini-btn" type="submit">{{ 'Show' if s.hidden else 'Hide' }}</button>
+            </form>
+            <form method="post" action="/admin/schedule/{{ loop.index0 }}/delete" onsubmit="return confirm('Delete this event permanently?');">
               <button class="mini-btn danger" type="submit">Delete</button>
             </form>
           </div>
