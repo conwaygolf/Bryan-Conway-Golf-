@@ -400,108 +400,26 @@
   </div>
 </section>
 
-<section id="record">
+<section id="results">
   <div class="section-bg" style="--mx:80%;--my:35%;"><img src="/static/images/action_swing_3.jpg" alt=""></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Career</div>
-      <h2 class="section-title">The Record</h2>
+      <h2 class="section-title">Results</h2>
     </div>
     <div class="about-body record-intro">
       <p>From back-to-back state championships to collegiate honors, a Kentucky Amateur title, professional golf and a championship resurgence more than three decades later, Bryan Conway's competitive record spans generations of Kentucky golf.</p>
     </div>
     <ul class="record">
+      {% for r in results %}
       <li class="record-item">
-        <div class="record-year">1990</div>
+        <div class="record-year">{{ r.date }}</div>
         <div class="record-body">
-          <div class="record-title">KHSAA State Champion <span class="champion-tag">Champion</span></div>
-          <div class="record-note">Helped lead Franklin County to a Kentucky high school state golf championship, establishing himself as one of the state's premier young players.</div>
+          <div class="record-title">{{ r.title }}{% if r.champion %} <span class="champion-tag">Champion</span>{% endif %}</div>
+          <div class="record-note">{{ r.note }}</div>
         </div>
       </li>
-      <li class="record-item">
-        <div class="record-year">1991</div>
-        <div class="record-body">
-          <div class="record-title">Back-to-Back KHSAA State Champion <span class="champion-tag">Champion</span></div>
-          <div class="record-note">Franklin County returned to the top the following season, giving Conway back-to-back state championships and cementing one of the defining chapters of his early career.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">MSU</div>
-        <div class="record-body">
-          <div class="record-title">Morehead State University — Collegiate Career</div>
-          <div class="record-note">Began his collegiate career at Morehead State and quickly established himself as one of the Ohio Valley Conference's top young golfers — named Freshman Player of the Year and finished third in the OVC Championship, then earned Most Valuable Player as a sophomore and First Team All-OVC honors in 1995.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">1995</div>
-        <div class="record-body">
-          <div class="record-title">Kentucky Amateur <span class="champion-tag">Champion</span></div>
-          <div class="record-note">Captured the Kentucky Amateur Championship at Kearney Hill Links, representing The Players Club, with a score of 281 — one of the signature victories of his career, won while still competing collegiately.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">UofL</div>
-        <div class="record-body">
-          <div class="record-title">University of Louisville — Collegiate Career</div>
-          <div class="record-note">Transferred to the University of Louisville, continuing his collegiate career at another Division I program.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">Pro</div>
-        <div class="record-body">
-          <div class="record-title">The Professional Years — Canadian Tour</div>
-          <div class="record-note">Turned professional and pursued tournament golf at the highest level, competing through multiple trips to Canadian Tour Qualifying School as he pursued his professional career — the next chapter in a progression from Kentucky high school champion to decorated collegiate golfer, Kentucky Amateur champion and professional competitor.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">5&times;</div>
-        <div class="record-body">
-          <div class="record-title">Frankfort City Champion</div>
-          <div class="record-note">Five-time Frankfort City Champion, adding victories in one of the region's longstanding competitive golf events.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">2&times;</div>
-        <div class="record-body">
-          <div class="record-title">Daniel Boone Invitational Champion</div>
-          <div class="record-note">Two-time Daniel Boone Invitational Champion (1995 &amp; 2018) — a title with a Conway family connection, as father Walter Conway won the same championship in 1968 during his own competitive career.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">2026</div>
-        <div class="record-body">
-          <div class="record-title">The Resurgence</div>
-          <div class="record-note">More than three decades after his first state championships, Conway has again emerged as one of Kentucky's most competitive golfers. At 51 years old, he's turned the 2026 season into another championship chapter in a career that began at the highest levels of Kentucky golf.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">2026</div>
-        <div class="record-body">
-          <div class="record-title">Kentucky Men's Senior Stroke Play <span class="champion-tag">Champion</span></div>
-          <div class="record-note">Won the Kentucky Golf Association Men's Senior Stroke Play Championship, July 27&ndash;28, at Bardstown Country Club — another statewide title more than 30 years after winning the Kentucky Amateur.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">2026</div>
-        <div class="record-body">
-          <div class="record-title">Kentucky Men's Match Play — Senior Division Qualifying Medalist</div>
-          <div class="record-note">Led the Senior Division qualifying round at the 14th Clark's Pump-N-Shop Kentucky Men's Match Play Championship, Kearney Hill Golf Links — three-under 69 with an eagle on hole 3 and birdies on 9 and 11.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">2026</div>
-        <div class="record-body">
-          <div class="record-title">Kentucky Senior Match Play — Semifinalist</div>
-          <div class="record-note">Won his opening match at the 15th Clark's Pump-N-Shop Kentucky Match Play Championship, Owensboro Country Club, 6&amp;5, then beat David Horning 3&amp;2 in the Quarterfinals before falling to G. Davis Boland 3&amp;2 in the Senior Semifinals — a season of deep championship runs against Kentucky's top senior competition.</div>
-        </div>
-      </li>
-      <li class="record-item">
-        <div class="record-year">2026</div>
-        <div class="record-body">
-          <div class="record-title">Player of the Year Contender</div>
-          <div class="record-note">Conway's 2026 performance has placed him prominently in multiple Kentucky PGA Player of the Year races, including the senior standings, while also competing among players of all ages.</div>
-        </div>
-      </li>
+      {% endfor %}
     </ul>
     <ul class="record-quickfacts">
       <li class="qf-chip">Back-to-Back KHSAA State Champion</li>
@@ -540,13 +458,6 @@
       <h2 class="section-title">Remaining Kentucky senior events.</h2>
     </div>
     <ul class="record">
-      <li class="record-item">
-        <div class="record-year">Aug 17&ndash;18</div>
-        <div class="record-body">
-          <div class="record-title">Kentucky Senior Open</div>
-          <div class="record-note">Country Club of Paducah &mdash; a KPGA partner event on the KGA calendar.</div>
-        </div>
-      </li>
       <li class="record-item">
         <div class="record-year">Sep 28&ndash;29</div>
         <div class="record-body">

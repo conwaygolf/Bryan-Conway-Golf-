@@ -166,6 +166,44 @@
   </div>
 
   <div class="card">
+    <h2>Result</h2>
+    <div class="desc">Adds to the top of the Results section (it's shown newest-first). Use this for a tournament recap once an event on the schedule wraps up, or any other career update.</div>
+    <form method="post" action="/admin/results/add">
+      <label for="r-date">Date / label</label>
+      <input type="text" id="r-date" name="date" placeholder="e.g. Aug 17&ndash;18, 2026" required>
+      <label for="r-title">Title</label>
+      <input type="text" id="r-title" name="title" placeholder="e.g. 27th Kentucky Senior Open" required>
+      <label for="r-note">Note</label>
+      <textarea id="r-note" name="note" placeholder="Course, finish, and any detail worth including."></textarea>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
+        <input type="checkbox" name="champion" value="1" style="width:auto;">
+        Show a "Champion" tag on this result
+      </label>
+      <button class="btn" type="submit">Add to Results</button>
+    </form>
+    {% if results %}
+    <div style="margin-top:18px;">
+      {% for r in results %}
+      <div class="sponsor-row {{ 'is-hidden' if r.hidden else '' }}">
+        <div class="meta">
+          <div class="name">{{ r.date }} &mdash; {{ r.title }}{% if r.champion %} <span class="hidden-badge" style="color:#a8171c;">Champion</span>{% endif %}{% if r.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</div>
+          <div class="url">{{ r.note }}</div>
+          <div class="item-actions">
+            <form method="post" action="/admin/results/{{ loop.index0 }}/toggle">
+              <button class="mini-btn" type="submit">{{ 'Show' if r.hidden else 'Hide' }}</button>
+            </form>
+            <form method="post" action="/admin/results/{{ loop.index0 }}/delete" onsubmit="return confirm('Delete this result permanently?');">
+              <button class="mini-btn danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
     <h2>Hero Image</h2>
     <div class="desc">Upload a new homepage hero photo. The crop and the live-scoreboard box position are both picked automatically based on where the photo is busiest vs. open.</div>
     <form method="post" action="/admin/hero/upload" enctype="multipart/form-data">
