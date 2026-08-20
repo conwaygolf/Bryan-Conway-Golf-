@@ -415,7 +415,7 @@
       <li class="record-item">
         <div class="record-year">{{ r.date }}</div>
         <div class="record-body">
-          <div class="record-title">{{ r.title }}{% if r.champion %} <span class="champion-tag">Champion</span>{% endif %}</div>
+          <div class="record-title">{{ r.title }}{% if r.tag %} <span class="champion-tag">{{ r.tag }}</span>{% endif %}</div>
           <div class="record-note">{{ r.note }}</div>
         </div>
       </li>

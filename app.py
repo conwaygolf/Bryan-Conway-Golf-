@@ -246,98 +246,98 @@ DEFAULT_RESULTS = [
         "date": "Aug 17–18, 2026",
         "title": "27th Kentucky Senior Open",
         "note": "Country Club of Paducah — a KPGA partner event on the KGA calendar. Conway finished T3 at +3.",
-        "champion": False,
+        "tag": "Low Amateur",
         "hidden": False,
     },
     {
         "date": "2026",
         "title": "Player of the Year Contender",
         "note": "Conway's 2026 performance has placed him prominently in multiple Kentucky PGA Player of the Year races, including the senior standings, while also competing among players of all ages.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "2026",
         "title": "Kentucky Senior Match Play — Semifinalist",
         "note": "Won his opening match at the 15th Clark's Pump-N-Shop Kentucky Match Play Championship, Owensboro Country Club, 6&5, then beat David Horning 3&2 in the Quarterfinals before falling to G. Davis Boland 3&2 in the Senior Semifinals — a season of deep championship runs against Kentucky's top senior competition.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "2026",
         "title": "Kentucky Men's Match Play — Senior Division Qualifying Medalist",
         "note": "Led the Senior Division qualifying round at the 14th Clark's Pump-N-Shop Kentucky Men's Match Play Championship, Kearney Hill Golf Links — three-under 69 with an eagle on hole 3 and birdies on 9 and 11.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "2026",
         "title": "Kentucky Men's Senior Stroke Play",
         "note": "Won the Kentucky Golf Association Men's Senior Stroke Play Championship, July 27–28, at Bardstown Country Club — another statewide title more than 30 years after winning the Kentucky Amateur.",
-        "champion": True,
+        "tag": "Champion",
         "hidden": False,
     },
     {
         "date": "2026",
         "title": "The Resurgence",
         "note": "More than three decades after his first state championships, Conway has again emerged as one of Kentucky's most competitive golfers. At 51 years old, he's turned the 2026 season into another championship chapter in a career that began at the highest levels of Kentucky golf.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "2×",
         "title": "Daniel Boone Invitational Champion",
         "note": "Two-time Daniel Boone Invitational Champion (1995 & 2018) — a title with a Conway family connection, as father Walter Conway won the same championship in 1968 during his own competitive career.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "5×",
         "title": "Frankfort City Champion",
         "note": "Five-time Frankfort City Champion, adding victories in one of the region's longstanding competitive golf events.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "Pro",
         "title": "The Professional Years — Canadian Tour",
         "note": "Turned professional and pursued tournament golf at the highest level, competing through multiple trips to Canadian Tour Qualifying School as he pursued his professional career — the next chapter in a progression from Kentucky high school champion to decorated collegiate golfer, Kentucky Amateur champion and professional competitor.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "UofL",
         "title": "University of Louisville — Collegiate Career",
         "note": "Transferred to the University of Louisville, continuing his collegiate career at another Division I program.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "1995",
         "title": "Kentucky Amateur",
         "note": "Captured the Kentucky Amateur Championship at Kearney Hill Links, representing The Players Club, with a score of 281 — one of the signature victories of his career, won while still competing collegiately.",
-        "champion": True,
+        "tag": "Champion",
         "hidden": False,
     },
     {
         "date": "MSU",
         "title": "Morehead State University — Collegiate Career",
         "note": "Began his collegiate career at Morehead State and quickly established himself as one of the Ohio Valley Conference's top young golfers — named Freshman Player of the Year and finished third in the OVC Championship, then earned Most Valuable Player as a sophomore and First Team All-OVC honors in 1995.",
-        "champion": False,
+        "tag": None,
         "hidden": False,
     },
     {
         "date": "1991",
         "title": "Back-to-Back KHSAA State Champion",
         "note": "Franklin County returned to the top the following season, giving Conway back-to-back state championships and cementing one of the defining chapters of his early career.",
-        "champion": True,
+        "tag": "Champion",
         "hidden": False,
     },
     {
         "date": "1990",
         "title": "KHSAA State Champion",
         "note": "Helped lead Franklin County to a Kentucky high school state golf championship, establishing himself as one of the state's premier young players.",
-        "champion": True,
+        "tag": "Champion",
         "hidden": False,
     },
 ]
@@ -659,7 +659,7 @@ def admin_results_add():
     date = (request.form.get("date") or "").strip()
     title = (request.form.get("title") or "").strip()
     note = (request.form.get("note") or "").strip()
-    champion = bool(request.form.get("champion"))
+    tag = (request.form.get("tag") or "").strip() or None
 
     if not date or not title:
         flash("Date and title are required.", "error")
@@ -667,7 +667,7 @@ def admin_results_add():
 
     # Reverse-chronological list -- a newly-added result is the newest thing
     # that happened, so it goes on top rather than at the end.
-    RESULTS.insert(0, {"date": date, "title": title, "note": note, "champion": champion, "hidden": False})
+    RESULTS.insert(0, {"date": date, "title": title, "note": note, "tag": tag, "hidden": False})
     save_json(RESULTS_JSON, RESULTS)
     git_publish([RESULTS_JSON], f"Admin: add result ({title})")
     flash(f'Added "{title}" to the top of Results.', "ok")

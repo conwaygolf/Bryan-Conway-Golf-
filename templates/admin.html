@@ -175,10 +175,8 @@
       <input type="text" id="r-title" name="title" placeholder="e.g. 27th Kentucky Senior Open" required>
       <label for="r-note">Note</label>
       <textarea id="r-note" name="note" placeholder="Course, finish, and any detail worth including."></textarea>
-      <label style="display:flex;align-items:center;gap:8px;font-weight:400;">
-        <input type="checkbox" name="champion" value="1" style="width:auto;">
-        Show a "Champion" tag on this result
-      </label>
+      <label for="r-tag">Red tag (optional)</label>
+      <input type="text" id="r-tag" name="tag" placeholder="e.g. Champion, Low Amateur, Runner-Up &mdash; leave blank for none">
       <button class="btn" type="submit">Add to Results</button>
     </form>
     {% if results %}
@@ -186,7 +184,7 @@
       {% for r in results %}
       <div class="sponsor-row {{ 'is-hidden' if r.hidden else '' }}">
         <div class="meta">
-          <div class="name">{{ r.date }} &mdash; {{ r.title }}{% if r.champion %} <span class="hidden-badge" style="color:#a8171c;">Champion</span>{% endif %}{% if r.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</div>
+          <div class="name">{{ r.date }} &mdash; {{ r.title }}{% if r.tag %} <span class="hidden-badge" style="color:#a8171c;">{{ r.tag }}</span>{% endif %}{% if r.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</div>
           <div class="url">{{ r.note }}</div>
           <div class="item-actions">
             <form method="post" action="/admin/results/{{ loop.index0 }}/toggle">
