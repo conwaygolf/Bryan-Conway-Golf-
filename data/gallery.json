@@ -30,21 +30,41 @@
   {
     "image": "gallery_senioropen_tee.jpg",
     "caption": "Teeing off at the 27th Kentucky Senior Open.",
-    "hidden": true
+    "hidden": false
   },
   {
     "image": "gallery_senioropen_bunker.jpg",
     "caption": "Reading a bunker shot at the Senior Open.",
-    "hidden": true
+    "hidden": false
   },
   {
     "image": "gallery_senioropen_approach.jpg",
     "caption": "Working the ball around the green.",
-    "hidden": true
+    "hidden": false
   },
   {
     "image": "gallery_senioropen_swing.jpg",
     "caption": "Full swing from the trees.",
+    "hidden": false
+  },
+  {
+    "image": "gallery_item_357155.jpg",
+    "caption": "Bryan Conway Golf",
     "hidden": true
+  },
+  {
+    "image": "gallery_item_17e365.jpg",
+    "caption": "Bryan Conway Golf",
+    "hidden": false
+  },
+  {
+    "image": "gallery_item_e5b762.jpg",
+    "caption": "Bryan Conway Golf",
+    "hidden": false
+  },
+  {
+    "image": "gallery_item_125ec0.jpg",
+    "caption": "Bryan Conway Golf",
+    "hidden": false
   }
 ]
