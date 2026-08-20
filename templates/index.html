@@ -106,7 +106,6 @@
   .hero-fb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
   .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
   .hero-fb-link:hover{color:rgba(255,255,255,.8);}
-  .hero-fb-namemask{position:absolute;left:1px;right:1px;top:101px;height:20px;background:#fff;z-index:2;}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:var(--hero-obj-pos-mobile, 50% 12%);}
@@ -317,7 +316,6 @@
       <a href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/">Bryan Conway Golf</a>
     </blockquote>
   </div>
-  <div class="hero-fb-namemask"></div>
 </div>
 </div>
 
@@ -458,13 +456,15 @@
       <h2 class="section-title">Remaining Kentucky senior events.</h2>
     </div>
     <ul class="record">
+      {% for s in schedule %}
       <li class="record-item">
-        <div class="record-year">Sep 28&ndash;29</div>
+        <div class="record-year">{{ s.date_label }}</div>
         <div class="record-body">
-          <div class="record-title">Clark's Pump-N-Shop Kentucky Men's Senior Amateur</div>
-          <div class="record-note">Frankfort Country Club &mdash; Conway's home county.</div>
+          <div class="record-title">{{ s.title }}</div>
+          <div class="record-note">{{ s.note }}</div>
         </div>
       </li>
+      {% endfor %}
     </ul>
     <p class="poy-note">Per the Kentucky Golf Association's official 2026 schedule (kygolf.org) &mdash; not a confirmed entry list.</p>
   </div>
