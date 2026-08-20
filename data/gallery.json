@@ -26,5 +26,30 @@
   {
     "image": "hero.jpg",
     "caption": "2026 Lexington Senior City Championship."
+  },
+  {
+    "image": "gallery_senioropen_tee.jpg",
+    "caption": "Teeing off at the 27th Kentucky Senior Open.",
+    "hidden": true
+  },
+  {
+    "image": "gallery_senioropen_bunker.jpg",
+    "caption": "Reading a bunker shot at the Senior Open.",
+    "hidden": true
+  },
+  {
+    "image": "gallery_senioropen_approach.jpg",
+    "caption": "Working the ball around the green.",
+    "hidden": true
+  },
+  {
+    "image": "gallery_senioropen_walk.jpg",
+    "caption": "Walking it in at the Senior Open.",
+    "hidden": true
+  },
+  {
+    "image": "gallery_senioropen_swing.jpg",
+    "caption": "Full swing from the trees.",
+    "hidden": true
   }
 ]
