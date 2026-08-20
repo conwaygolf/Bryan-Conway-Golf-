@@ -284,7 +284,7 @@
       <li><a href="/gallery">Gallery</a></li>
       <li><a href="/sponsors">Sponsors</a></li>
       <li><a href="#schedule">Schedule</a></li>
-      <li><a href="#contact" class="cta">Contact</a></li>
+      <li><a href="#contact" class="cta" id="navContactBtn">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </div>
@@ -614,6 +614,7 @@
 
   var contactModal = document.getElementById('contactModal');
   var contactOpenBtn = document.getElementById('contactOpenBtn');
+  var navContactBtn = document.getElementById('navContactBtn');
   var contactCloseBtn = document.getElementById('contactCloseBtn');
   var contactForm = document.getElementById('contactForm');
   var contactStatus = document.getElementById('contactStatus');
@@ -622,6 +623,7 @@
   function closeContactModal(){ contactModal.classList.remove('open'); }
 
   contactOpenBtn.addEventListener('click', openContactModal);
+  navContactBtn.addEventListener('click', function(e){ e.preventDefault(); openContactModal(); });
   contactCloseBtn.addEventListener('click', closeContactModal);
   contactModal.addEventListener('click', function(e){ if(e.target === contactModal) closeContactModal(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && contactModal.classList.contains('open')) closeContactModal(); });
