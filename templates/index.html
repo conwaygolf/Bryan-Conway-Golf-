@@ -170,6 +170,7 @@
   .poy-table td{padding:14px 12px;border-bottom:1px solid #e8e6dc;font-size:14.5px;}
   .poy-table tr.leader{background:rgba(168,23,28,.07);}
   .poy-table tr.leader td{font-weight:800;}
+  .poy-table tr.pinned td{border-top:2px dashed #d8d4c8;padding-top:20px;}
   .poy-rank{font-family:'Playfair Display',serif;font-weight:800;color:var(--red-text);}
   .poy-leader-tag{
     display:inline-block;margin-left:8px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
@@ -440,6 +441,40 @@
     <p class="poy-note">Standings as of August 16, 2026 &middot; Golf House Kentucky / Kentucky Golf Association</p>
   </div>
 </section>
+
+{% if brewer_standing %}
+<section id="am-tour">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Play Golf Lex AM Tour &middot; Brewer Flight</div>
+      <h2 class="section-title">Weekly Tates Creek tour standings.</h2>
+    </div>
+    <table class="poy-table">
+      <thead>
+        <tr>
+          <th class="th-rank">Rank</th>
+          <th>Player</th>
+          <th class="num th-events">Events</th>
+          <th class="num th-events">Wins</th>
+          <th class="num">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in brewer_standing %}
+        <tr class="{{ 'leader' if 'Conway' in p.name else '' }}{{ ' pinned' if p.pinned else '' }}">
+          <td class="poy-rank">{{ p.pos }}</td>
+          <td>{{ p.name }}{% if 'Conway' in p.name %}<span class="poy-leader-tag">Bryan</span>{% endif %}</td>
+          <td class="num td-events">{{ p.events }}</td>
+          <td class="num td-events">{{ p.wins }}</td>
+          <td class="num">{{ p.points }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="poy-note">Season points, updated automatically as each week's results are entered &middot; Play Golf Lex</p>
+  </div>
+</section>
+{% endif %}
 
 <section id="results">
   <div class="section-bg" style="--mx:80%;--my:35%;"><img src="/static/images/action_swing_3.jpg" alt=""></div>

@@ -208,6 +208,7 @@ SCHEDULE_JSON = DATA_DIR / "schedule.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
 BREWER_LEADERBOARD_JSON = DATA_DIR / "brewer_leaderboard.json"
+BREWER_STANDING_JSON = DATA_DIR / "brewer_season_standing.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -573,10 +574,12 @@ ERAS = [
 
 @app.route("/")
 def index():
+    brewer_standing = load_json(BREWER_STANDING_JSON, {}).get("top7", [])
     return render_template("index.html", hero=HERO, results=[r for r in RESULTS if not r.get("hidden")],
                             schedule=[s for s in SCHEDULE if not s.get("hidden")],
                             leaderboard=top7_with_pinned_bryan(BREWER_LEADERBOARD["field"]),
-                            leaderboard_meta=BREWER_LEADERBOARD)
+                            leaderboard_meta=BREWER_LEADERBOARD,
+                            brewer_standing=brewer_standing)
 
 
 @app.route("/press-archives")
