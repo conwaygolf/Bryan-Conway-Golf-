@@ -221,6 +221,51 @@
   .trophy-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block;}
   .trophy-caption{padding:16px 32px;font-size:12.5px;color:#8a8a7c;text-align:center;font-style:italic;}
 
+  /* CAREER-AT-A-GLANCE STAT STRIP */
+  .stat-strip{background:var(--black-soft);}
+  .stat-strip .wrap{display:flex;flex-wrap:wrap;justify-content:center;padding:0;}
+  .stat-item{flex:1 1 160px;text-align:center;padding:28px 20px;border-right:1px solid rgba(255,255,255,.12);}
+  .stat-item:last-child{border-right:none;}
+  .stat-num{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(24px,3.2vw,32px);color:var(--gold);line-height:1;margin-bottom:8px;}
+  .stat-label{font-size:10px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:rgba(244,244,242,.6);}
+  @media(max-width:700px){
+    .stat-item{flex:1 1 50%;border-right:none;border-bottom:1px solid rgba(255,255,255,.12);padding:20px 12px;}
+    .stat-item:nth-child(2n){border-left:1px solid rgba(255,255,255,.12);}
+  }
+
+  /* NEXT ON THE TEE */
+  .next-tee{background:#fff;border-bottom:1px solid #e8e6dc;}
+  .next-tee .wrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:18px 32px;}
+  .next-tee-eyebrow{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--red-text);white-space:nowrap;}
+  .next-tee-info{flex:1 1 320px;}
+  .next-tee-title{font-weight:800;font-size:15.5px;}
+  .next-tee-sub{font-size:12.5px;color:#7a7a6c;margin-top:2px;}
+  .next-tee-link{font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--red-text);white-space:nowrap;}
+  .next-tee-link:hover{text-decoration:underline;}
+
+  /* FROM THE ARCHIVES TEASER */
+  .press-teaser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px;position:relative;z-index:1;}
+  .press-teaser-card{background:#fff;border:1px solid #e8e6dc;border-radius:4px;overflow:hidden;display:block;transition:box-shadow .15s,transform .15s;}
+  .press-teaser-card:hover{box-shadow:0 14px 30px rgba(0,0,0,.12);transform:translateY(-2px);}
+  .press-teaser-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:#eee;}
+  .press-teaser-img img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15);}
+  .press-teaser-body{padding:16px 18px;}
+  .press-teaser-date{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--red-text);margin-bottom:6px;}
+  .press-teaser-title{font-weight:800;font-size:15px;line-height:1.3;}
+  .press-teaser-more{display:inline-block;margin-top:22px;font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--red-text);position:relative;z-index:1;}
+  .press-teaser-more:hover{text-decoration:underline;}
+  @media(max-width:760px){.press-teaser-grid{grid-template-columns:1fr;}}
+
+  /* SPONSOR STRIP */
+  .sponsor-strip{background:#f3f1e8;}
+  .sponsor-strip .section-head{margin:0 auto 28px;text-align:center;max-width:none;}
+  .sponsor-logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:40px;margin-bottom:26px;position:relative;z-index:1;}
+  .sponsor-logos a{display:flex;align-items:center;justify-content:center;height:64px;}
+  .sponsor-logos img{max-height:64px;max-width:180px;width:auto;height:auto;object-fit:contain;}
+  .sponsor-strip-cta{text-align:center;position:relative;z-index:1;}
+  .sponsor-strip-cta a{font-size:13px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--red-text);}
+  .sponsor-strip-cta a:hover{text-decoration:underline;}
+
   /* CONTACT */
   .contact-section{background:var(--black-soft);border-bottom:none;text-align:center;}
   .contact-section .section-head{max-width:640px;margin:0 auto 28px;}
@@ -363,6 +408,29 @@
 </div>
 </div>
 
+{% if next_event %}
+<div class="next-tee">
+  <div class="wrap">
+    <span class="next-tee-eyebrow">Next on the Tee</span>
+    <div class="next-tee-info">
+      <div class="next-tee-title">{{ next_event.title }}</div>
+      <div class="next-tee-sub">{{ next_event.date_label }}{% if next_event.note %} &middot; {{ next_event.note }}{% endif %}</div>
+    </div>
+    <a class="next-tee-link" href="#schedule">Full Schedule &rarr;</a>
+  </div>
+</div>
+{% endif %}
+
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat-item"><div class="stat-num">1995</div><div class="stat-label">Kentucky Amateur Champion</div></div>
+    <div class="stat-item"><div class="stat-num">2&times;</div><div class="stat-label">Daniel Boone Champion</div></div>
+    <div class="stat-item"><div class="stat-num">5&times;</div><div class="stat-label">Frankfort City Champion</div></div>
+    <div class="stat-item"><div class="stat-num">2026</div><div class="stat-label">KY Senior Stroke Play Champion</div></div>
+    <div class="stat-item"><div class="stat-num">4 Wins</div><div class="stat-label">2026 Season</div></div>
+  </div>
+</div>
+
 <section id="about">
   <div class="section-bg" style="--mx:80%;--my:30%;"><img src="/static/images/action_swing.png" alt=""></div>
   <div class="wrap">
@@ -372,7 +440,7 @@
     </div>
     <div class="about-body">
       <p>Bryan Conway won his first Kentucky Golf Association title in 1995, taking the Kentucky Amateur Championship at Kearney Hill Links as a member of The Players Club. Thirty-one years later, he's still adding to the record — a 2026 Kentucky Men's Senior Stroke Play Championship at Bardstown Country Club, and a deep run through that summer's Kentucky Senior Match Play Championship.</p>
-      <p>A University of Louisville golf alum, Conway played on the Canadian PGA Tour before returning to Kentucky's amateur ranks — where he plays out of the senior division today with the same game that made him a state champion in his twenties, still competing, still contending, still adding chapters to the record below.</p>
+      <p>A Morehead State and University of Louisville golf alum, Conway played on the Canadian PGA Tour before returning to Kentucky's amateur ranks — where he plays out of the senior division today with the same game that made him a state champion in his twenties, still competing, still contending, still adding chapters to the record below.</p>
     </div>
   </div>
 </section>
@@ -476,6 +544,29 @@
 </section>
 {% endif %}
 
+{% if archive_teaser %}
+<section id="archive-teaser">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">From the Archives</div>
+      <h2 class="section-title">Three decades of Kentucky golf, documented.</h2>
+    </div>
+    <div class="press-teaser-grid">
+      {% for c in archive_teaser %}
+      <a class="press-teaser-card" href="/press-archives">
+        <div class="press-teaser-img"><img src="/static/images/Press And Archives/{{ c.image }}" alt="{{ c.title }}"></div>
+        <div class="press-teaser-body">
+          <div class="press-teaser-date">{{ c.date }}</div>
+          <div class="press-teaser-title">{{ c.title }}</div>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <a class="press-teaser-more" href="/press-archives">View the Full Archive &rarr;</a>
+  </div>
+</section>
+{% endif %}
+
 <section id="results">
   <div class="section-bg" style="--mx:80%;--my:35%;"><img src="/static/images/action_swing_3.jpg" alt=""></div>
   <div class="wrap">
@@ -548,18 +639,38 @@
   </div>
 </section>
 
+{% if sponsors %}
+<section class="sponsor-strip">
+  <div class="section-bg" style="--mx:70%;--my:40%;"><img src="/static/images/portrait_desert_course.jpg" alt=""></div>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Partners</div>
+      <h2 class="section-title">Proudly supported by.</h2>
+    </div>
+    <div class="sponsor-logos">
+      {% for s in sponsors %}
+      <a href="{{ s.url }}" target="_blank" rel="noopener" title="{{ s.name }}">
+        <img src="/static/images/{{ s.logo }}" alt="{{ s.name }}">
+      </a>
+      {% endfor %}
+    </div>
+    <div class="sponsor-strip-cta"><a href="/sponsors">Interested in joining Team Conway? Explore Partnership Opportunities &rarr;</a></div>
+  </div>
+</section>
+{% endif %}
+
 <section id="contact" class="contact-section">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Get In Touch</div>
-      <h2 class="section-title">Let's Work Together</h2>
+      <h2 class="section-title">Partner With a Kentucky Golf Story Still Being Written</h2>
       <div class="contact-taglines">Sponsorships &middot; Media &middot; Events &middot; Collaborations</div>
     </div>
     <div class="contact-body">
-      <p class="contact-lead">Interested in partnering with Bryan Conway Golf?</p>
-      <p>We're open to brand partnerships, sponsorship opportunities, media appearances, golf outings, social media collaborations and special events.</p>
+      <p class="contact-lead">Championship golf, Kentucky roots, and a competitive 2026 season still in progress.</p>
+      <p>Bryan Conway offers partners a rare combination: three decades of Kentucky golf history, a current run at the state's top senior honors, and a competitive schedule that keeps his story in front of golfers and fans across the Commonwealth. We're open to brand partnerships, sponsorship opportunities, media appearances, golf outings, social media collaborations and special events.</p>
       <div class="contact-label">Partnership &amp; Media Inquiries</div>
-      <button type="button" class="contact-cta" id="contactOpenBtn">&#9993;&nbsp; Get In Touch</button>
+      <button type="button" class="contact-cta" id="contactOpenBtn">&#9993;&nbsp; Become a Partner</button>
     </div>
   </div>
 </section>
