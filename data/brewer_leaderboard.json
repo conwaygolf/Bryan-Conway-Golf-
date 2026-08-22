@@ -1,0 +1,76 @@
+{
+  "event_name": "Play Golf Lex AM Tour \u2014 Brewer Flight",
+  "round_label": "Round 1 (Sat, Aug 22)",
+  "format": "Stableford",
+  "course": "Tates Creek Golf Course",
+  "status": "final",
+  "field": [
+    {
+      "pos": "T1",
+      "name": "Woeste, Ed",
+      "points": "58",
+      "thru": "F"
+    },
+    {
+      "pos": "T1",
+      "name": "Conway, Bryan",
+      "points": "58",
+      "thru": "F"
+    },
+    {
+      "pos": "3",
+      "name": "Khounlavong, Ryan",
+      "points": "56",
+      "thru": "F"
+    },
+    {
+      "pos": "4",
+      "name": "Caldwell, Chase",
+      "points": "52",
+      "thru": "F"
+    },
+    {
+      "pos": "5",
+      "name": "Irving, Glenn",
+      "points": "49",
+      "thru": "F"
+    },
+    {
+      "pos": "6",
+      "name": "Rose, Lucas",
+      "points": "45",
+      "thru": "F"
+    },
+    {
+      "pos": "7",
+      "name": "Mitchell, Johnny",
+      "points": "42",
+      "thru": "F"
+    },
+    {
+      "pos": "8",
+      "name": "Hayes, Brian",
+      "points": "41",
+      "thru": "F"
+    },
+    {
+      "pos": "9",
+      "name": "Woods, Josh",
+      "points": "40",
+      "thru": "F*"
+    },
+    {
+      "pos": "10",
+      "name": "Whitehouse, Nicholas",
+      "points": "12",
+      "thru": "F"
+    },
+    {
+      "pos": "",
+      "name": "Laswell, Greg",
+      "points": "-",
+      "thru": "F"
+    }
+  ],
+  "last_updated": "2026-08-22"
+}

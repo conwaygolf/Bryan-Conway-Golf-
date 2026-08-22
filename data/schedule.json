@@ -1,10 +1,82 @@
 [
   {
-    "date_label": "Sep 28\u201329",
+    "date_label": "Aug 27",
+    "start_date": "2026-08-27",
+    "end_date": "2026-08-27",
+    "title": "KGA Amateur Series #5",
+    "note": "Mineral Mound Golf Course",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Sep 8",
+    "start_date": "2026-09-08",
+    "end_date": "2026-09-08",
+    "title": "KGA Amateur Series #6",
+    "note": "South Park Country Club",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Sep 21",
+    "start_date": "2026-09-21",
+    "end_date": "2026-09-21",
+    "title": "Titleist/FootJoy Team Championship",
+    "note": "Picadome Golf Course",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Sep 28–29",
     "start_date": "2026-09-28",
     "end_date": "2026-09-29",
     "title": "Clark's Pump-N-Shop Kentucky Men's Senior Amateur",
-    "note": "Frankfort Country Club \u2014 Conway's home county.",
+    "note": "Frankfort Country Club — Conway's home county.",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Oct 12",
+    "start_date": "2026-10-12",
+    "end_date": "2026-10-12",
+    "title": "US Amateur Four-Ball Qualifier",
+    "note": "Country Club of Paducah",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Oct 15–16",
+    "start_date": "2026-10-15",
+    "end_date": "2026-10-16",
+    "title": "32nd Clark's Pump-N-Shop Kentucky Mid-Amateur Championship",
+    "note": "Gibson Bay Golf Course",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Oct 20",
+    "start_date": "2026-10-20",
+    "end_date": "2026-10-20",
+    "title": "KGA Amateur Series Championship",
+    "note": "Lake Forest Country Club",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Oct 28",
+    "start_date": "2026-10-28",
+    "end_date": "2026-10-28",
+    "title": "5th Coomer Cup",
+    "note": "The Club @ Olde Stone",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Nov 2",
+    "start_date": "2026-11-02",
+    "end_date": "2026-11-02",
+    "title": "2nd Kentuckiana Cup",
+    "note": "Persimmon Ridge Golf Club",
     "hidden": false,
     "result_checked": false
   }

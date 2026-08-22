@@ -172,18 +172,6 @@ ARCHIVE_CARDS = [
         "original_url": None,
     },
     {
-        "id": "2005-florida-open",
-        "title": "2005 Florida Open",
-        "source": "Florida State Golf Association",
-        "reporter": None,
-        "date": "May 6–8, 2005",
-        "era": "professional-years",
-        "summary": "Conway finished T-10 and low amateur at the Florida Open at Lake City Country Club, a field that included PGA TOUR winner Corey Pavin.",
-        "stats": "54-hole score: 215 (-1)  ·  Finish: T-10  ·  Low Amateur in the field",
-        "image": "press_2005_florida_open.png",
-        "original_url": None,
-    },
-    {
         "id": "2018-usga-midam",
         "title": "38th U.S. Mid-Amateur Championship Field",
         "source": "United States Golf Association",
@@ -219,6 +207,7 @@ RESULTS_JSON = DATA_DIR / "results.json"
 SCHEDULE_JSON = DATA_DIR / "schedule.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
+BREWER_LEADERBOARD_JSON = DATA_DIR / "brewer_leaderboard.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -367,6 +356,35 @@ DEFAULT_HERO = {
     "lb_corner": "top-right",
 }
 
+# Live-tournament leaderboard overlay -- re-added 2026-08-22 for the Play Golf
+# Lex AM Tour "Brewer" flight (Stableford, Tates Creek). This event isn't on
+# GolfGenius's public share-cdn directory or kygolf.org, so unlike the earlier
+# Kentucky Senior Open tracker, this one has no discoverable scrape URL yet --
+# "field" below is a manually-entered snapshot (from a screenshot) rather than
+# live-scraped. Update by hand (or wire up real polling in
+# fetch_brewer_leaderboard() below) once a real GolfGenius URL is known.
+DEFAULT_BREWER_LEADERBOARD = {
+    "event_name": "Play Golf Lex AM Tour — Brewer Flight",
+    "round_label": "Round 1 (Sat, Aug 22)",
+    "format": "Stableford",
+    "course": "Tates Creek Golf Course",
+    "status": "final",
+    "field": [
+        {"pos": "T1", "name": "Woeste, Ed", "points": "58", "thru": "F"},
+        {"pos": "T1", "name": "Conway, Bryan", "points": "58", "thru": "F"},
+        {"pos": "3", "name": "Khounlavong, Ryan", "points": "56", "thru": "F"},
+        {"pos": "4", "name": "Caldwell, Chase", "points": "52", "thru": "F"},
+        {"pos": "5", "name": "Irving, Glenn", "points": "49", "thru": "F"},
+        {"pos": "6", "name": "Rose, Lucas", "points": "45", "thru": "F"},
+        {"pos": "7", "name": "Mitchell, Johnny", "points": "42", "thru": "F"},
+        {"pos": "8", "name": "Hayes, Brian", "points": "41", "thru": "F"},
+        {"pos": "9", "name": "Woods, Josh", "points": "40", "thru": "F*"},
+        {"pos": "10", "name": "Whitehouse, Nicholas", "points": "12", "thru": "F"},
+        {"pos": "", "name": "Laswell, Greg", "points": "-", "thru": "F"},
+    ],
+    "last_updated": "2026-08-22",
+}
+
 # Designed banner graphic (title/tagline baked into the image itself), not
 # a photo with overlay text -- rendered at a fixed 1983:793 aspect ratio via
 # CSS object-fit:cover, so no crop/overlay-position analysis needed here
@@ -392,6 +410,20 @@ RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
 SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
 PRESS_HEADER = load_json(PRESS_HEADER_JSON, DEFAULT_PRESS_HEADER)
+BREWER_LEADERBOARD = load_json(BREWER_LEADERBOARD_JSON, DEFAULT_BREWER_LEADERBOARD)
+
+
+def top7_with_pinned_bryan(field):
+    # Show the real top 7 by position; if Bryan drops out of it, pin him on
+    # as an extra row (dashed divider in the template) instead of losing him
+    # off the widget entirely. Same rule used for the earlier Senior Open
+    # tracker -- see project memory for why this matters to Jimmy.
+    rows = field[:7]
+    if rows and not any("Conway" in r["name"] for r in rows):
+        bryan = next((r for r in field if "Conway" in r["name"]), None)
+        if bryan:
+            rows.append({**bryan, "pinned": True})
+    return rows
 
 
 # ---------------------------------------------------------------------------
@@ -542,7 +574,9 @@ ERAS = [
 @app.route("/")
 def index():
     return render_template("index.html", hero=HERO, results=[r for r in RESULTS if not r.get("hidden")],
-                            schedule=[s for s in SCHEDULE if not s.get("hidden")])
+                            schedule=[s for s in SCHEDULE if not s.get("hidden")],
+                            leaderboard=top7_with_pinned_bryan(BREWER_LEADERBOARD["field"]),
+                            leaderboard_meta=BREWER_LEADERBOARD)
 
 
 @app.route("/press-archives")
