@@ -1,0 +1,324 @@
+{
+  "league": "Play Golf Lex AM Tour",
+  "category": "Brewer",
+  "field": [
+    {
+      "pos": "1",
+      "name": "Prewitt, Cory",
+      "events": "12",
+      "wins": "3",
+      "points": "2,170.00"
+    },
+    {
+      "pos": "2",
+      "name": "Reid, Dave",
+      "events": "16",
+      "wins": "0",
+      "points": "2,090.00"
+    },
+    {
+      "pos": "3",
+      "name": "Glenn Irving",
+      "events": "12",
+      "wins": "4",
+      "points": "1,900.00"
+    },
+    {
+      "pos": "4",
+      "name": "Mark Howard",
+      "events": "11",
+      "wins": "0",
+      "points": "1,820.00"
+    },
+    {
+      "pos": "5",
+      "name": "Wilson, Tyler",
+      "events": "9",
+      "wins": "2",
+      "points": "1,765.00"
+    },
+    {
+      "pos": "6",
+      "name": "Laswell, Greg",
+      "events": "8",
+      "wins": "1",
+      "points": "1,585.00"
+    },
+    {
+      "pos": "7",
+      "name": "Woeste, Ed",
+      "events": "10",
+      "wins": "1",
+      "points": "1,457.50"
+    },
+    {
+      "pos": "8",
+      "name": "Kyle Danaher",
+      "events": "12",
+      "wins": "0",
+      "points": "1,407.50"
+    },
+    {
+      "pos": "9",
+      "name": "Conway, Bryan",
+      "events": "8",
+      "wins": "1",
+      "points": "1,352.50"
+    },
+    {
+      "pos": "10",
+      "name": "Khounlavong, Ryan",
+      "events": "10",
+      "wins": "0",
+      "points": "1,292.50"
+    },
+    {
+      "pos": "11",
+      "name": "Kodrich , Matt",
+      "events": "7",
+      "wins": "0",
+      "points": "877.50"
+    },
+    {
+      "pos": "12",
+      "name": "Watson, Luke",
+      "events": "3",
+      "wins": "1",
+      "points": "816.67"
+    },
+    {
+      "pos": "13",
+      "name": "Bussell, Colin",
+      "events": "9",
+      "wins": "0",
+      "points": "795.00"
+    },
+    {
+      "pos": "14",
+      "name": "Brown, Chase",
+      "events": "9",
+      "wins": "0",
+      "points": "767.50"
+    },
+    {
+      "pos": "15",
+      "name": "Simmons, Jay",
+      "events": "3",
+      "wins": "0",
+      "points": "487.50"
+    },
+    {
+      "pos": "16",
+      "name": "Soale, Matt",
+      "events": "4",
+      "wins": "1",
+      "points": "472.50"
+    },
+    {
+      "pos": "17",
+      "name": "Kirkland, Nathan",
+      "events": "4",
+      "wins": "0",
+      "points": "457.50"
+    },
+    {
+      "pos": "18",
+      "name": "Wheeler, Gordon",
+      "events": "6",
+      "wins": "0",
+      "points": "455.00"
+    },
+    {
+      "pos": "19",
+      "name": "Brian Hayes",
+      "events": "2",
+      "wins": "0",
+      "points": "420.00"
+    },
+    {
+      "pos": "22",
+      "name": "Michael Crabtree",
+      "events": "2",
+      "wins": "1",
+      "points": "295.00"
+    },
+    {
+      "pos": "23",
+      "name": "Space, Carl",
+      "events": "2",
+      "wins": "1",
+      "points": "290.00"
+    },
+    {
+      "pos": "27",
+      "name": "Gosser, Christian",
+      "events": "4",
+      "wins": "0",
+      "points": "255.00"
+    },
+    {
+      "pos": "28",
+      "name": "Jerrod Watson",
+      "events": "1",
+      "wins": "0",
+      "points": "250.00"
+    },
+    {
+      "pos": "35",
+      "name": "Showalter, Alan",
+      "events": "2",
+      "wins": "0",
+      "points": "227.50"
+    },
+    {
+      "pos": "36",
+      "name": "Cornette, Charlie",
+      "events": "2",
+      "wins": "0",
+      "points": "222.50"
+    },
+    {
+      "pos": "37",
+      "name": "Billy Gayheart",
+      "events": "1",
+      "wins": "0",
+      "points": "210.00"
+    },
+    {
+      "pos": "38",
+      "name": "Andy Haymaker",
+      "events": "3",
+      "wins": "1",
+      "points": "195.00"
+    },
+    {
+      "pos": "41",
+      "name": "Alex Siefke",
+      "events": "2",
+      "wins": "0",
+      "points": "182.50"
+    },
+    {
+      "pos": "42",
+      "name": "Eddie Preston",
+      "events": "3",
+      "wins": "0",
+      "points": "180.00"
+    },
+    {
+      "pos": "43",
+      "name": "King, Eric",
+      "events": "1",
+      "wins": "0",
+      "points": "170.00"
+    },
+    {
+      "pos": "44",
+      "name": "Rose, David",
+      "events": "1",
+      "wins": "0",
+      "points": "162.50"
+    },
+    {
+      "pos": "45",
+      "name": "Browning, Peyton",
+      "events": "2",
+      "wins": "0",
+      "points": "160.00"
+    },
+    {
+      "pos": "46",
+      "name": "Fork, Jonathan",
+      "events": "3",
+      "wins": "0",
+      "points": "150.00"
+    },
+    {
+      "pos": "47",
+      "name": "Thompson, Ben",
+      "events": "1",
+      "wins": "0",
+      "points": "147.50"
+    },
+    {
+      "pos": "57",
+      "name": "Preston, Sean",
+      "events": "1",
+      "wins": "0",
+      "points": "132.50"
+    },
+    {
+      "pos": "60",
+      "name": "Gibbons, Daniel",
+      "events": "1",
+      "wins": "0",
+      "points": "102.50"
+    },
+    {
+      "pos": "90",
+      "name": "Harrison , Will",
+      "events": "1",
+      "wins": "0",
+      "points": "65.00"
+    }
+  ],
+  "top7": [
+    {
+      "pos": "1",
+      "name": "Prewitt, Cory",
+      "events": "12",
+      "wins": "3",
+      "points": "2,170.00"
+    },
+    {
+      "pos": "2",
+      "name": "Reid, Dave",
+      "events": "16",
+      "wins": "0",
+      "points": "2,090.00"
+    },
+    {
+      "pos": "3",
+      "name": "Glenn Irving",
+      "events": "12",
+      "wins": "4",
+      "points": "1,900.00"
+    },
+    {
+      "pos": "4",
+      "name": "Mark Howard",
+      "events": "11",
+      "wins": "0",
+      "points": "1,820.00"
+    },
+    {
+      "pos": "5",
+      "name": "Wilson, Tyler",
+      "events": "9",
+      "wins": "2",
+      "points": "1,765.00"
+    },
+    {
+      "pos": "6",
+      "name": "Laswell, Greg",
+      "events": "8",
+      "wins": "1",
+      "points": "1,585.00"
+    },
+    {
+      "pos": "7",
+      "name": "Woeste, Ed",
+      "events": "10",
+      "wins": "1",
+      "points": "1,457.50"
+    },
+    {
+      "pos": "9",
+      "name": "Conway, Bryan",
+      "events": "8",
+      "wins": "1",
+      "points": "1,352.50",
+      "pinned": true
+    }
+  ]
+}
