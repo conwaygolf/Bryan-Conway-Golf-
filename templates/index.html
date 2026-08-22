@@ -106,29 +106,6 @@
   .hero-fb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
   .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
   .hero-fb-link:hover{color:rgba(255,255,255,.8);}
-
-  /* Hero corner card -- live/recent tournament leaderboard, opposite corner from Facebook */
-  .hero-lb{
-    position:absolute;top:24px;left:24px;z-index:3;
-    background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
-    border:1px solid rgba(212,175,55,.3);border-radius:6px;
-    padding:16px 18px;width:320px;max-width:calc(100% - 48px);
-    box-shadow:0 12px 30px rgba(0,0,0,.4);
-  }
-  .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-  .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:#ff5a4e;}
-  .hero-lb-dot.final{background:var(--red);}
-  .hero-lb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
-  .hero-lb-sub{font-size:11px;color:rgba(255,255,255,.55);margin-bottom:10px;}
-  .hero-lb-table{width:100%;border-collapse:collapse;font-size:12.5px;}
-  .hero-lb-table td{padding:5px 4px;color:rgba(255,255,255,.85);}
-  .hero-lb-table tr.me{background:rgba(168,23,28,.35);}
-  .hero-lb-table tr.me td{font-weight:800;color:#fff;}
-  .hero-lb-table tr.pinned td{border-top:1px dashed rgba(255,255,255,.3);padding-top:9px;}
-  .hero-lb-pos{color:var(--gold);font-weight:800;width:26px;}
-  .hero-lb-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
-  .hero-lb-score{text-align:right;font-weight:700;width:42px;}
-  .hero-lb-thru{text-align:right;color:rgba(255,255,255,.55);width:36px;}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:var(--hero-obj-pos-mobile, 50% 12%);}
@@ -136,7 +113,6 @@
     .hero-content{display:none;}
     .scroll-cue{display:none;}
     .hero-fb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
-    .hero-lb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
   }
 
   /* SECTION SCAFFOLD */
@@ -170,7 +146,6 @@
   .poy-table td{padding:14px 12px;border-bottom:1px solid #e8e6dc;font-size:14.5px;}
   .poy-table tr.leader{background:rgba(168,23,28,.07);}
   .poy-table tr.leader td{font-weight:800;}
-  .poy-table tr.pinned td{border-top:2px dashed #d8d4c8;padding-top:20px;}
   .poy-rank{font-family:'Playfair Display',serif;font-weight:800;color:var(--red-text);}
   .poy-leader-tag{
     display:inline-block;margin-left:8px;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase;
@@ -367,25 +342,6 @@
   </div>
   <div class="scroll-cue">Scroll</div>
 </div>
-{% if leaderboard %}
-<div class="hero-lb">
-  <div class="hero-lb-head">
-    <span class="hero-lb-dot{{ ' final' if leaderboard_meta.status == 'final' else '' }}"></span>
-    <span class="hero-lb-title">{{ leaderboard_meta.event_name }}</span>
-  </div>
-  <div class="hero-lb-sub">{{ leaderboard_meta.round_label }} &middot; {{ leaderboard_meta.format }} &middot; {{ leaderboard_meta.course }}</div>
-  <table class="hero-lb-table">
-    {% for p in leaderboard %}
-    <tr class="{{ 'me' if 'Conway' in p.name else '' }}{{ ' pinned' if p.pinned else '' }}">
-      <td class="hero-lb-pos">{{ p.pos }}</td>
-      <td class="hero-lb-name">{{ p.name }}</td>
-      <td class="hero-lb-score">{{ p.points }}</td>
-      <td class="hero-lb-thru">{{ p.thru if p.thru and p.thru != '-' else '' }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-{% endif %}
 <div class="hero-fb{{ ' lb-left' if hero.lb_corner == 'top-left' else '' }}">
   <div class="hero-fb-head">
     <span class="hero-fb-dot"></span>
@@ -509,40 +465,6 @@
     <p class="poy-note">Standings as of August 16, 2026 &middot; Golf House Kentucky / Kentucky Golf Association</p>
   </div>
 </section>
-
-{% if brewer_standing %}
-<section id="am-tour">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Play Golf Lex AM Tour &middot; Brewer Flight</div>
-      <h2 class="section-title">Weekly Tates Creek tour standings.</h2>
-    </div>
-    <table class="poy-table">
-      <thead>
-        <tr>
-          <th class="th-rank">Rank</th>
-          <th>Player</th>
-          <th class="num th-events">Events</th>
-          <th class="num th-events">Wins</th>
-          <th class="num">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for p in brewer_standing %}
-        <tr class="{{ 'leader' if 'Conway' in p.name else '' }}{{ ' pinned' if p.pinned else '' }}">
-          <td class="poy-rank">{{ p.pos }}</td>
-          <td>{{ p.name }}{% if 'Conway' in p.name %}<span class="poy-leader-tag">Bryan</span>{% endif %}</td>
-          <td class="num td-events">{{ p.events }}</td>
-          <td class="num td-events">{{ p.wins }}</td>
-          <td class="num">{{ p.points }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <p class="poy-note">Season points, updated automatically as each week's results are entered &middot; Play Golf Lex</p>
-  </div>
-</section>
-{% endif %}
 
 {% if archive_teaser %}
 <section id="archive-teaser">
