@@ -56,7 +56,7 @@ ADMIN_PASSWORD = os.getenv("CONWAYGOLF_ADMIN_PASSWORD")
 # Set ADMIN_AUTO_PUBLISH=0 to save files locally without pushing (e.g. while
 # testing) -- defaults on.
 GITHUB_PUSH_TOKEN = os.getenv("GITHUB_PUSH_TOKEN")
-GITHUB_REPO = "jstout5/ConwayGolf-"
+GITHUB_REPO = os.getenv("GITHUB_REPO", "jstout5/ConwayGolf-")
 GIT_PUBLISH_ENABLED = os.getenv("ADMIN_AUTO_PUBLISH", "1") != "0"
 
 
