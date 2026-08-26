@@ -82,7 +82,7 @@
   .hero-photo-img{width:100%;height:100%;object-fit:cover;object-position:var(--hero-obj-pos, 50% 6%);display:block;}
   .hero::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(5,6,9,.85) 0%,rgba(15,14,14,.25) 12%,rgba(20,17,16,.3) 55%,rgba(20,17,16,.8) 88%,#fdfdfb 100%);
+    background:linear-gradient(180deg,rgba(5,6,9,.85) 0%,rgba(15,14,14,.25) 12%,rgba(20,17,16,.3) 55%,rgba(20,17,16,.8) 88%,var(--black) 100%);
   }
   .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;}
   .scroll-cue{
@@ -218,7 +218,7 @@
   .trophy-caption{padding:16px 32px;font-size:12.5px;color:#8a8a7c;text-align:center;font-style:italic;}
 
   /* CAREER-AT-A-GLANCE STAT STRIP */
-  .stat-strip{background:linear-gradient(180deg,#4a6fa0 0%,var(--navy) 55%,var(--navy-deep) 100%);}
+  .stat-strip{background:linear-gradient(180deg,var(--black) 0%,var(--navy-deep) 32%,var(--navy) 68%,#4a6fa0 100%);}
   .stat-strip .wrap{display:flex;flex-wrap:wrap;justify-content:center;padding:0;}
   .stat-item{flex:1 1 160px;text-align:center;padding:28px 20px;border-right:1px solid rgba(63,111,176,.5);}
   .stat-item:last-child{border-right:none;}
@@ -410,6 +410,16 @@
 </div>
 </div>
 
+<div class="stat-strip">
+  <div class="wrap">
+    <div class="stat-item"><div class="stat-num">1995</div><div class="stat-label">Kentucky Amateur Champion</div></div>
+    <div class="stat-item"><div class="stat-num">2&times;</div><div class="stat-label">Daniel Boone Champion</div></div>
+    <div class="stat-item"><div class="stat-num">5&times;</div><div class="stat-label">Frankfort City Champion</div></div>
+    <div class="stat-item"><div class="stat-num">2026</div><div class="stat-label">KY Senior Stroke Play Champion</div></div>
+    <div class="stat-item"><div class="stat-num">4 Wins</div><div class="stat-label">2026 Season</div></div>
+  </div>
+</div>
+
 {% if next_event %}
 <div class="next-tee">
   <div class="wrap">
@@ -422,16 +432,6 @@
   </div>
 </div>
 {% endif %}
-
-<div class="stat-strip">
-  <div class="wrap">
-    <div class="stat-item"><div class="stat-num">1995</div><div class="stat-label">Kentucky Amateur Champion</div></div>
-    <div class="stat-item"><div class="stat-num">2&times;</div><div class="stat-label">Daniel Boone Champion</div></div>
-    <div class="stat-item"><div class="stat-num">5&times;</div><div class="stat-label">Frankfort City Champion</div></div>
-    <div class="stat-item"><div class="stat-num">2026</div><div class="stat-label">KY Senior Stroke Play Champion</div></div>
-    <div class="stat-item"><div class="stat-num">4 Wins</div><div class="stat-label">2026 Season</div></div>
-  </div>
-</div>
 
 <section id="about">
   <div class="section-bg" style="--mx:80%;--my:30%;"><img src="/static/images/action_swing.png" alt=""></div>
