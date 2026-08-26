@@ -205,6 +205,7 @@ SPONSORS_JSON = DATA_DIR / "sponsors.json"
 HERO_JSON = DATA_DIR / "hero.json"
 RESULTS_JSON = DATA_DIR / "results.json"
 SCHEDULE_JSON = DATA_DIR / "schedule.json"
+POY_STANDING_JSON = DATA_DIR / "poy_season_standing.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
 
@@ -383,6 +384,7 @@ def save_json(path, data):
 GALLERY_PHOTOS = load_json(GALLERY_JSON, DEFAULT_GALLERY_PHOTOS)
 SPONSORS = load_json(SPONSORS_JSON, DEFAULT_SPONSORS)
 HERO = load_json(HERO_JSON, DEFAULT_HERO)
+POY_STANDING = load_json(POY_STANDING_JSON, {"league": None, "category": None, "field": [], "top7": []})
 RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
 SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
@@ -550,7 +552,8 @@ def index():
     return render_template("index.html", hero=HERO, results=[r for r in RESULTS if not r.get("hidden")],
                             schedule=visible_schedule, next_event=next_event,
                             archive_teaser=archive_teaser,
-                            sponsors=[s for s in SPONSORS if not s.get("hidden")])
+                            sponsors=[s for s in SPONSORS if not s.get("hidden")],
+                            poy_standing=POY_STANDING)
 
 
 @app.route("/press-archives")

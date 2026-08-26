@@ -467,6 +467,40 @@
   </div>
 </section>
 
+{% if poy_standing and poy_standing.top7 %}
+<section id="poy-overall">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">John C. Owens Award &middot; Men's Overall</div>
+      <h2 class="section-title">Bryan's spot in the statewide Player of the Year race.</h2>
+    </div>
+    <table class="poy-table">
+      <thead>
+        <tr>
+          <th class="th-rank">Rank</th>
+          <th>Player</th>
+          <th class="num th-events">Events</th>
+          <th class="num th-events">Wins</th>
+          <th class="num">Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in poy_standing.top7 %}
+        <tr class="{{ 'leader' if 'Conway' in r.name else '' }}">
+          <td class="poy-rank">{{ r.pos }}</td>
+          <td>{{ r.name }}{% if 'Conway' in r.name %}<span class="poy-leader-tag">Bryan</span>{% endif %}</td>
+          <td class="num td-events">{{ r.events }}</td>
+          <td class="num td-events">{{ r.wins }}</td>
+          <td class="num">{{ r.points }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p class="poy-note">{{ poy_standing.league }} &middot; every KGA event counts toward the overall race</p>
+  </div>
+</section>
+{% endif %}
+
 {% if archive_teaser %}
 <section id="archive-teaser">
   <div class="wrap">
