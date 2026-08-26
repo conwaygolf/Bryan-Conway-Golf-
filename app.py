@@ -208,6 +208,8 @@ SCHEDULE_JSON = DATA_DIR / "schedule.json"
 POY_STANDING_JSON = DATA_DIR / "poy_season_standing.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
+LEADERBOARD_CONFIG_JSON = DATA_DIR / "leaderboard_config.json"
+LIVE_LEADERBOARD_JSON = DATA_DIR / "live_leaderboard.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -369,6 +371,13 @@ DEFAULT_HERO = {
 # unlike the hero image.
 DEFAULT_PRESS_HEADER = {"image": "press_archives_header.jpg"}
 
+# Admin-toggled live leaderboard (hero top-left, opposite the Facebook card).
+# tools/update_live_leaderboard.py reads tournament_code/enabled from this
+# file and writes its polled results to LIVE_LEADERBOARD_JSON separately --
+# see that script's header for how a tournament_code is turned into real data.
+DEFAULT_LEADERBOARD_CONFIG = {"enabled": False, "tournament_code": "", "description": ""}
+DEFAULT_LIVE_LEADERBOARD = {"event_label": None, "venue": None, "rows": [], "updated": None, "note": None}
+
 
 def load_json(path, default):
     if path.exists():
@@ -387,6 +396,8 @@ HERO = load_json(HERO_JSON, DEFAULT_HERO)
 POY_STANDING = load_json(POY_STANDING_JSON, {"league": None, "category": None, "field": [], "top7": []})
 RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
 SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
+LEADERBOARD_CONFIG = load_json(LEADERBOARD_CONFIG_JSON, DEFAULT_LEADERBOARD_CONFIG)
+LIVE_LEADERBOARD = load_json(LIVE_LEADERBOARD_JSON, DEFAULT_LIVE_LEADERBOARD)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
 PRESS_HEADER = load_json(PRESS_HEADER_JSON, DEFAULT_PRESS_HEADER)
 
@@ -553,7 +564,8 @@ def index():
                             schedule=visible_schedule, next_event=next_event,
                             archive_teaser=archive_teaser,
                             sponsors=[s for s in SPONSORS if not s.get("hidden")],
-                            poy_standing=POY_STANDING)
+                            poy_standing=POY_STANDING,
+                            leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD)
 
 
 @app.route("/press-archives")
@@ -642,6 +654,7 @@ def admin_logout():
 def admin():
     return render_template("admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
                             schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
+                            leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD,
                             messages=get_flashed_messages(with_categories=True))
 
 
@@ -803,6 +816,31 @@ def admin_press_header_upload():
     save_json(PRESS_HEADER_JSON, PRESS_HEADER)
     git_publish([IMAGES_DIR / filename, PRESS_HEADER_JSON], "Admin: update Press & Archives header")
     flash("Press & Archives header updated.", "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/leaderboard/save", methods=["POST"])
+@admin_required
+def admin_leaderboard_save():
+    enabled = request.form.get("enabled") == "on"
+    tournament_code = (request.form.get("tournament_code") or "").strip()
+    description = (request.form.get("description") or "").strip()
+
+    was_enabled = LEADERBOARD_CONFIG.get("enabled")
+    LEADERBOARD_CONFIG["enabled"] = enabled
+    LEADERBOARD_CONFIG["tournament_code"] = tournament_code
+    LEADERBOARD_CONFIG["description"] = description
+    save_json(LEADERBOARD_CONFIG_JSON, LEADERBOARD_CONFIG)
+    git_publish([LEADERBOARD_CONFIG_JSON], "Admin: update live leaderboard config")
+
+    if enabled and not tournament_code:
+        flash("Leaderboard turned on, but no tournament code was entered yet -- it won't poll until one is set.", "warn")
+    elif enabled and not was_enabled:
+        flash("Leaderboard enabled. It'll go live on the site once the next poll finds real scores.", "ok")
+    elif not enabled:
+        flash("Leaderboard turned off.", "ok")
+    else:
+        flash("Leaderboard settings saved.", "ok")
     return redirect(url_for("admin"))
 
 

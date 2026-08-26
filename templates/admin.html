@@ -278,6 +278,25 @@
   </div>
 
   <div class="card">
+    <h2>LeaderBoard</h2>
+    <div class="desc">Live tournament leaderboard card, shown on the homepage opposite the Facebook feed (top-left of the hero photo) while it's turned on. Enter a GolfGenius tournament code (a full golfgenius.com widget/league URL, or a bare league ID) and, optionally, a description to help identify the right event -- then save. It goes live once the next poll finds real scores for Bryan.</div>
+    <form method="post" action="/admin/leaderboard/save">
+      <label style="display:flex;align-items:center;gap:8px;margin-top:0;">
+        <input type="checkbox" id="lb-enabled" name="enabled" {{ 'checked' if leaderboard_config.enabled else '' }} style="width:auto;">
+        <span style="text-transform:none;font-size:13.5px;font-weight:700;color:#18180f;">Leaderboard enabled</span>
+      </label>
+      <label for="lb-code">Tournament code</label>
+      <input type="text" id="lb-code" name="tournament_code" value="{{ leaderboard_config.tournament_code }}" placeholder="e.g. a golfgenius.com/leagues/... URL, or a league ID">
+      <label for="lb-desc">Tournament description (optional)</label>
+      <textarea id="lb-desc" name="description" placeholder="e.g. Kentucky Senior Amateur, Sep 2026, Bardstown CC -- helps confirm the right event">{{ leaderboard_config.description }}</textarea>
+      <button class="btn" type="submit">Save Leaderboard Settings</button>
+    </form>
+    {% if live_leaderboard and live_leaderboard.updated %}
+    <div class="desc" style="margin-top:16px;">Last polled: {{ live_leaderboard.updated }}{% if live_leaderboard.event_label %} &middot; {{ live_leaderboard.event_label }}{% endif %}{% if live_leaderboard.note %} &middot; {{ live_leaderboard.note }}{% endif %}</div>
+    {% endif %}
+  </div>
+
+  <div class="card">
     <h2>Press &amp; Archives Header</h2>
     <div class="desc">Replaces the designed banner graphic at the top of /press-archives. Upload a wide image (roughly 1983&times;793, but any size works -- it's cropped to fit).</div>
     <form method="post" action="/admin/press-header/upload" enctype="multipart/form-data">

@@ -107,6 +107,25 @@
   .hero-fb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
   .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
   .hero-fb-link:hover{color:rgba(255,255,255,.8);}
+
+  /* Hero corner card -- live leaderboard, opposite the Facebook card */
+  .hero-lb{
+    position:absolute;top:24px;left:24px;z-index:3;color:#f4f4f2;
+    background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
+    border:2px solid var(--red);border-radius:6px;
+    padding:14px 14px 10px;width:340px;max-width:calc(100% - 48px);
+    box-shadow:0 12px 30px rgba(0,0,0,.4);
+    max-height:clamp(308px,calc(56vh - 48px),468px);overflow-y:auto;
+  }
+  .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+  .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:var(--red);}
+  .hero-lb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
+  .hero-lb-sub{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.3px;color:rgba(255,255,255,.5);text-align:right;}
+  .hero-lb table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .hero-lb th{text-align:left;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.45);padding:0 6px 8px;}
+  .hero-lb th.num,.hero-lb td.num{text-align:right;}
+  .hero-lb td{padding:6px;border-top:1px solid rgba(255,255,255,.1);}
+  .hero-lb tr.leader td{color:#fff;font-weight:800;}
   @media(max-width:720px){
     .hero{height:auto;display:flex;flex-direction:column;}
     .hero-photo-img{position:static;aspect-ratio:4/3;object-position:var(--hero-obj-pos-mobile, 50% 12%);}
@@ -114,6 +133,7 @@
     .hero-content{display:none;}
     .scroll-cue{display:none;}
     .hero-fb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
+    .hero-lb{position:static;width:auto;max-width:none;margin:14px 14px 0;border-radius:6px;}
   }
 
   /* SECTION SCAFFOLD */
@@ -343,7 +363,32 @@
   </div>
   <div class="scroll-cue">Scroll</div>
 </div>
-<div class="hero-fb{{ ' lb-left' if hero.lb_corner == 'top-left' else '' }}">
+{% set lb_live = leaderboard_config and leaderboard_config.enabled and live_leaderboard and live_leaderboard.rows %}
+{% if lb_live %}
+<div class="hero-lb">
+  <div class="hero-lb-head">
+    <span class="hero-lb-dot"></span>
+    <span class="hero-lb-title">Live Leaderboard</span>
+    <span class="hero-lb-sub">{{ live_leaderboard.event_label or '' }}</span>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Pos</th><th>Player</th><th class="num">Score</th><th class="num">Thru</th></tr>
+    </thead>
+    <tbody>
+      {% for r in live_leaderboard.rows %}
+      <tr class="{{ 'leader' if 'Conway' in r.name else '' }}">
+        <td>{{ r.pos }}</td>
+        <td>{{ r.name }}</td>
+        <td class="num">{{ r.score }}</td>
+        <td class="num">{{ r.thru }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+<div class="hero-fb{{ ' lb-left' if (hero.lb_corner == 'top-left' and not lb_live) else '' }}">
   <div class="hero-fb-head">
     <span class="hero-fb-dot"></span>
     <span class="hero-fb-title">Latest News</span>
