@@ -256,13 +256,6 @@ DEFAULT_RESULTS = [
         "hidden": False,
     },
     {
-        "date": "2025",
-        "title": "Kentucky Men's Match Play — Senior Division Qualifying Medalist",
-        "note": "Led the Senior Division qualifying round at the 14th Clark's Pump-N-Shop Kentucky Men's Match Play Championship, Kearney Hill Golf Links — three-under 69 with an eagle on hole 3 and birdies on 9 and 11.",
-        "tag": None,
-        "hidden": False,
-    },
-    {
         "date": "2026",
         "title": "Kentucky Men's Senior Stroke Play",
         "note": "Won the Kentucky Golf Association Men's Senior Stroke Play Championship, July 27–28, at Bardstown Country Club — another statewide title more than 30 years after winning the Kentucky Amateur.",
@@ -273,6 +266,13 @@ DEFAULT_RESULTS = [
         "date": "2026",
         "title": "The Resurgence",
         "note": "More than three decades after his first state championships, Conway has again emerged as one of Kentucky's most competitive golfers. At 51 years old, he's turned the 2026 season into another championship chapter in a career that began at the highest levels of Kentucky golf.",
+        "tag": None,
+        "hidden": False,
+    },
+    {
+        "date": "2025",
+        "title": "Kentucky Men's Match Play — Senior Division Qualifying Medalist",
+        "note": "Led the Senior Division qualifying round at the 14th Clark's Pump-N-Shop Kentucky Men's Match Play Championship, Kearney Hill Golf Links — three-under 69 with an eagle on hole 3 and birdies on 9 and 11.",
         "tag": None,
         "hidden": False,
     },
