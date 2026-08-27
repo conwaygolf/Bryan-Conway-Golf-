@@ -1,7 +1,57 @@
 {
-  "event_label": null,
-  "venue": null,
-  "rows": [],
-  "updated": null,
+  "event_label": "KGA Amateur Series #5 \u2014 Mineral Mound Golf Course",
+  "venue": "EClub Kentucky North",
+  "rows": [
+    {
+      "pos": "1",
+      "name": "Mark Knecht",
+      "score": "+1",
+      "thru": "1",
+      "city": "Country Club of Paducah"
+    },
+    {
+      "pos": "2",
+      "name": "Ryan Bandy",
+      "score": "+3",
+      "thru": "1",
+      "city": "USGA/Kentucky GC"
+    },
+    {
+      "pos": "",
+      "name": "Matt Hughes",
+      "score": "-",
+      "thru": "8:40 AM",
+      "city": "USGA/Kentucky GC"
+    },
+    {
+      "pos": "",
+      "name": "Bryan Conway",
+      "score": "-",
+      "thru": "8:50 AM",
+      "city": "EClub Kentucky North"
+    },
+    {
+      "pos": "",
+      "name": "David Horning",
+      "score": "-",
+      "thru": "8:50 AM",
+      "city": "EClub Kentucky Central"
+    },
+    {
+      "pos": "",
+      "name": "Neal Thomas",
+      "score": "-",
+      "thru": "8:50 AM",
+      "city": "Woodhaven Country Club"
+    },
+    {
+      "pos": "",
+      "name": "David Rambo",
+      "score": "-",
+      "thru": "9:00 AM",
+      "city": "Silos Country Club"
+    }
+  ],
+  "updated": "2026-08-27T14:09+00:00",
   "note": null
 }
