@@ -4,61 +4,61 @@
   "rows": [
     {
       "pos": "1",
-      "name": "David Sykes",
-      "score": "+1",
-      "thru": "7",
-      "city": "Country Club of Paducah",
-      "aggregate_id": "2420562173"
-    },
-    {
-      "pos": "T2",
       "name": "Bryan Conway",
-      "score": "+2",
-      "thru": "8",
+      "score": "-1",
+      "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2420562169"
+      "aggregate_id": "2421155575"
     },
     {
-      "pos": "T2",
+      "pos": "2",
       "name": "Mark Knecht",
-      "score": "+2",
-      "thru": "7",
+      "score": "+1",
+      "thru": "F",
       "city": "Country Club of Paducah",
-      "aggregate_id": "2420562166"
+      "aggregate_id": "2421155572"
+    },
+    {
+      "pos": "3",
+      "name": "David Rambo",
+      "score": "+9",
+      "thru": "F",
+      "city": "Silos Country Club",
+      "aggregate_id": "2421155578"
     },
     {
       "pos": "4",
-      "name": "Ryan Bandy",
-      "score": "+4",
-      "thru": "9",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2420562167"
+      "name": "Adam Brooks",
+      "score": "+10",
+      "thru": "F",
+      "city": "EClub Kentucky West",
+      "aggregate_id": "2421155580"
     },
     {
       "pos": "5",
-      "name": "David Rambo",
-      "score": "+5",
-      "thru": "7",
-      "city": "Silos Country Club",
-      "aggregate_id": "2420562172"
+      "name": "David Sykes",
+      "score": "+14",
+      "thru": "F",
+      "city": "Country Club of Paducah",
+      "aggregate_id": "2421155579"
     },
     {
-      "pos": "T6",
+      "pos": "6",
+      "name": "Ryan Bandy",
+      "score": "+17",
+      "thru": "F",
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2421155573"
+    },
+    {
+      "pos": "7",
       "name": "David Horning",
-      "score": "+6",
-      "thru": "8",
+      "score": "+19",
+      "thru": "F",
       "city": "EClub Kentucky Central",
-      "aggregate_id": "2420562170"
-    },
-    {
-      "pos": "T6",
-      "name": "Adam Brooks",
-      "score": "+6",
-      "thru": "7",
-      "city": "EClub Kentucky West",
-      "aggregate_id": "2420562174"
+      "aggregate_id": "2421155576"
     }
   ],
-  "updated": "2026-08-27T16:00+00:00",
+  "updated": "2026-08-27T19:14+00:00",
   "note": null
 }
