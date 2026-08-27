@@ -4,6 +4,7 @@ import os
 import re
 import smtplib
 import subprocess
+import threading
 import time
 import unicodedata
 import uuid
@@ -438,6 +439,103 @@ def public_live_leaderboard():
     if staleness is not None and staleness > LEADERBOARD_STALE_AFTER_MINUTES:
         return {**LIVE_LEADERBOARD, "rows": []}
     return LIVE_LEADERBOARD
+
+
+# Server-side leaderboard poller, running in-process instead of relying only
+# on the Windows Scheduled Task on Jimmy's PC ("ConwayGolf Live Leaderboard
+# Poller"). That task still exists and still runs, but it's a single point
+# of failure -- confirmed 2026-08-27 when Jimmy shut his PC down to go play
+# and the leaderboard froze on stale scores for ~6.5 hours before anyone
+# noticed. This background thread does the exact same poll/publish cycle,
+# but lives on Render itself, so it keeps running whether or not the PC is
+# on. Reuses tools/update_live_leaderboard.py's resolution/parsing
+# functions (single source of truth for "how a tournament_code becomes real
+# scores") but publishes through THIS file's own git_publish() -- that
+# script's own git_publish() assumes cached local git credentials and would
+# fail on a fresh Render container with no cached login; this app's
+# git_publish() already knows how to push via GITHUB_PUSH_TOKEN, the same
+# mechanism the admin auto-publish routes already rely on.
+#
+# Caveat, worth checking if this doesn't seem to be running: if this
+# service is on Render's free tier, Render can spin the whole container
+# down after ~15 min with no inbound web traffic, which would pause this
+# thread too until the next visitor wakes it back up. A paid plan (no
+# idle spin-down) makes this fully reliable; confirm the plan in Render's
+# dashboard if live updates seem to lag on a quiet tournament day.
+from tools.update_live_leaderboard import (  # noqa: E402
+    resolve_widget_url, find_event_ids, fetch_event_html,
+    parse_stroke_play_field, top7_with_pinned_bryan, PLAYER_NAME,
+)
+
+LEADERBOARD_POLL_INTERVAL_SECONDS = 600  # 10 min, matches the Task Scheduler cadence
+
+
+def poll_live_leaderboard_once():
+    global LIVE_LEADERBOARD
+    if not LEADERBOARD_CONFIG.get("enabled"):
+        return
+    widget_url, err, matched_name = resolve_widget_url(LEADERBOARD_CONFIG.get("tournament_code", ""))
+    now = datetime.now(timezone.utc).isoformat(timespec="minutes")
+    label = LEADERBOARD_CONFIG.get("description") or matched_name or None
+    result = None
+
+    if err:
+        result = {"event_label": label, "venue": None, "rows": [], "updated": now, "note": err}
+    else:
+        try:
+            event_ids = find_event_ids(widget_url)
+        except requests.RequestException as e:
+            result = {"event_label": label, "venue": None, "rows": [], "updated": now,
+                      "note": f"Couldn't fetch widget: {e}"}
+        else:
+            for event_id in event_ids:
+                try:
+                    html = fetch_event_html(event_id)
+                except requests.RequestException:
+                    continue
+                if PLAYER_NAME not in html:
+                    continue
+                field = parse_stroke_play_field(html)
+                if not field:
+                    result = {"event_label": label, "venue": None, "rows": [], "updated": now,
+                              "note": ("Found Bryan Conway's division but it's not a flat stroke-play "
+                                       "leaderboard (likely a match-play bracket) -- needs a hand-port, "
+                                       "see live_match_tracker.py.")}
+                else:
+                    bryan = next((r for r in field if PLAYER_NAME in r["name"]), None)
+                    result = {"event_label": label, "venue": bryan["city"] if bryan else None,
+                              "rows": top7_with_pinned_bryan(field), "updated": now, "note": None}
+                break
+            if result is None:
+                result = {"event_label": label, "venue": None, "rows": [], "updated": now,
+                          "note": "Couldn't find Bryan Conway in any division of this tournament code right now."}
+
+    if result != LIVE_LEADERBOARD:
+        LIVE_LEADERBOARD = result
+        save_json(LIVE_LEADERBOARD_JSON, LIVE_LEADERBOARD)
+        git_publish([LIVE_LEADERBOARD_JSON], "Auto-update: live leaderboard (server-side poller)")
+
+
+def _leaderboard_poll_loop():
+    while True:
+        try:
+            poll_live_leaderboard_once()
+        except Exception as e:
+            print(f"[leaderboard poller] error: {type(e).__name__}: {e}")
+        time.sleep(LEADERBOARD_POLL_INTERVAL_SECONDS)
+
+
+def start_leaderboard_poller():
+    # Avoid a double-start under Flask's debug-mode reloader, which forks a
+    # watcher parent process in addition to the real running one -- only
+    # start in the actual running process. Under gunicorn (Render), app.debug
+    # is always False, so this never skips in production.
+    if app.debug and os.environ.get("WERKZEUG_RUN_MAIN") != "true":
+        return
+    threading.Thread(target=_leaderboard_poll_loop, daemon=True).start()
+
+
+start_leaderboard_poller()
 
 
 # Hole-by-hole scorecard popup for the live leaderboard, same GolfGenius
