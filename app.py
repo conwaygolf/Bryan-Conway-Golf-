@@ -4,6 +4,7 @@ import os
 import re
 import smtplib
 import subprocess
+import time
 import unicodedata
 import uuid
 from datetime import date
@@ -400,6 +401,81 @@ LEADERBOARD_CONFIG = load_json(LEADERBOARD_CONFIG_JSON, DEFAULT_LEADERBOARD_CONF
 LIVE_LEADERBOARD = load_json(LIVE_LEADERBOARD_JSON, DEFAULT_LIVE_LEADERBOARD)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
 PRESS_HEADER = load_json(PRESS_HEADER_JSON, DEFAULT_PRESS_HEADER)
+
+
+# Hole-by-hole scorecard popup for the live leaderboard, same GolfGenius
+# source as tools/update_live_leaderboard.py -- each row's aggregate_id
+# (captured by that script) has its own details page with one
+# <tr class="net-line"> per round played so far.
+GG_SCORECARD_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
+_scorecard_cache = {}  # aggregate_id -> {"rounds": [...], "fetched_at": ts}
+SCORECARD_CACHE_TTL = 120
+
+
+def fetch_scorecard(aggregate_id):
+    cached = _scorecard_cache.get(aggregate_id)
+    now = time.time()
+    if cached and now - cached["fetched_at"] < SCORECARD_CACHE_TTL:
+        return cached["rounds"]
+    url = f"https://www.golfgenius.com/tournaments2/details/{aggregate_id}"
+    r = requests.get(url, headers=GG_SCORECARD_HEADERS, timeout=8)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "html.parser")
+    rounds = []
+    for net_row in soup.find_all("tr", class_="net-line"):
+        label_link = net_row.find("a", class_="expand-tee-details")
+        label = label_link.get_text(strip=True) if label_link else ""
+        label = re.sub(r"\s*-\s*[^-]+$", "", label)  # drop trailing "- Player Name (a)"
+        holes = []
+        for hole_td in net_row.find_all("td"):
+            classes = hole_td.get("class", [])
+            # GolfGenius doesn't keep a fixed class order -- e.g. a double bogey
+            # renders 'double_square hole3 score' (marker first). Find the holeN
+            # token wherever it lands instead of assuming a position.
+            hole_class = next((c for c in classes if re.fullmatch(r"hole\d+", c)), None)
+            if not hole_class:
+                continue
+            n = int(hole_class[4:])
+            box = hole_td.find("span", class_="score_box")
+            strokes = box.get_text(strip=True) if box else ""
+            if "double_circle" in classes or "simple_circle" in classes:
+                mark = "birdie"
+            elif "double_square" in classes or "simple_square" in classes:
+                mark = "bogey"
+            else:
+                mark = "par"
+            holes.append({"n": n, "strokes": strokes, "mark": mark})
+        holes.sort(key=lambda h: h["n"])
+        if not any(h["strokes"] for h in holes):
+            continue  # round not started yet
+        out_td = net_row.find("td", class_="sum_front")
+        in_td = net_row.find("td", class_="sum_back")
+        total_td = net_row.find("td", class_="sum")
+        rounds.append({
+            "label": label,
+            "holes": holes,
+            "out": out_td.get_text(strip=True) if out_td else "",
+            "in": in_td.get_text(strip=True) if in_td else "",
+            "total": total_td.get_text(strip=True) if total_td else "",
+        })
+    _scorecard_cache[aggregate_id] = {"rounds": rounds, "fetched_at": now}
+    return rounds
+
+
+@app.route("/api/scorecard/<aggregate_id>")
+def api_scorecard(aggregate_id):
+    if not aggregate_id.isdigit():
+        return jsonify({"ok": False, "error": "bad id"}), 400
+    try:
+        rounds = fetch_scorecard(aggregate_id)
+    except requests.RequestException:
+        return jsonify({"ok": False, "error": "GolfGenius unavailable"}), 502
+    if not rounds:
+        return jsonify({"ok": False, "error": "No rounds started yet"})
+    return jsonify({"ok": True, "rounds": rounds})
 
 
 # ---------------------------------------------------------------------------

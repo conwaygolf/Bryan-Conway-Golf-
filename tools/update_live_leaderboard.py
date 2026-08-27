@@ -143,6 +143,7 @@ def parse_stroke_play_field(html):
             "score": score.get_text(strip=True) if score else "",
             "thru": (thru.get_text(" ", strip=True) if thru else "").replace("*", "").strip(),
             "city": affiliation.get_text(strip=True) if affiliation else "",
+            "aggregate_id": row.get("data-aggregate-id", ""),
         })
     return field
 
