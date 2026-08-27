@@ -1,12 +1,12 @@
 {
-  "event_label": "KGA Amateur Series #5 \u2014 Mineral Mound Golf Course",
+  "event_label": "KGA Amateur Series #5",
   "venue": "EClub Kentucky North",
   "rows": [
     {
       "pos": "T1",
       "name": "Mark Knecht",
       "score": "+1",
-      "thru": "5",
+      "thru": "6",
       "city": "Country Club of Paducah",
       "aggregate_id": "2420562166"
     },
@@ -43,15 +43,15 @@
       "aggregate_id": "2420562170"
     },
     {
-      "pos": "T6",
+      "pos": "6",
       "name": "Ryan Bandy",
-      "score": "+5",
-      "thru": "5",
+      "score": "+4",
+      "thru": "6",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2420562167"
     },
     {
-      "pos": "T6",
+      "pos": "7",
       "name": "Adam Brooks",
       "score": "+5",
       "thru": "4",
@@ -59,6 +59,6 @@
       "aggregate_id": "2420562174"
     }
   ],
-  "updated": "2026-08-27T15:11+00:00",
+  "updated": "2026-08-27T15:19+00:00",
   "note": null
 }
