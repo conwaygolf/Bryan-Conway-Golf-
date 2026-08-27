@@ -6,59 +6,59 @@
       "pos": "1",
       "name": "Bryan Conway",
       "score": "-1",
-      "thru": "F",
+      "thru": "",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2421155575"
+      "aggregate_id": "2421292873"
     },
     {
       "pos": "2",
       "name": "Mark Knecht",
       "score": "+1",
-      "thru": "F",
+      "thru": "",
       "city": "Country Club of Paducah",
-      "aggregate_id": "2421155572"
+      "aggregate_id": "2421292870"
     },
     {
       "pos": "3",
       "name": "David Rambo",
       "score": "+9",
-      "thru": "F",
+      "thru": "",
       "city": "Silos Country Club",
-      "aggregate_id": "2421155578"
+      "aggregate_id": "2421292876"
     },
     {
       "pos": "4",
       "name": "Adam Brooks",
       "score": "+10",
-      "thru": "F",
+      "thru": "",
       "city": "EClub Kentucky West",
-      "aggregate_id": "2421155580"
+      "aggregate_id": "2421292878"
     },
     {
       "pos": "5",
       "name": "David Sykes",
       "score": "+14",
-      "thru": "F",
+      "thru": "",
       "city": "Country Club of Paducah",
-      "aggregate_id": "2421155579"
+      "aggregate_id": "2421292877"
     },
     {
       "pos": "6",
       "name": "Ryan Bandy",
       "score": "+17",
-      "thru": "F",
+      "thru": "",
       "city": "USGA/Kentucky GC",
-      "aggregate_id": "2421155573"
+      "aggregate_id": "2421292871"
     },
     {
       "pos": "7",
       "name": "David Horning",
       "score": "+19",
-      "thru": "F",
+      "thru": "",
       "city": "EClub Kentucky Central",
-      "aggregate_id": "2421155576"
+      "aggregate_id": "2421292874"
     }
   ],
-  "updated": "2026-08-27T19:14+00:00",
+  "updated": "2026-08-27T22:41+00:00",
   "note": null
 }
