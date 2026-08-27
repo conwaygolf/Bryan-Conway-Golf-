@@ -331,16 +331,16 @@
   <div class="admin-panel" id="panel-leaderboard">
   <div class="card">
     <h2>LeaderBoard</h2>
-    <div class="desc">Live tournament leaderboard card, shown on the homepage opposite the Facebook feed (top-left of the hero photo) while it's turned on. Enter a GolfGenius tournament code (a full golfgenius.com widget/league URL, or a bare league ID) and, optionally, a description to help identify the right event -- then save. It goes live once the next poll finds real scores for Bryan.</div>
+    <div class="desc">Live tournament leaderboard card, shown on the homepage opposite the Facebook feed (top-left of the hero photo) while it's turned on. Just type the tournament's name (e.g. "KGA Amateur Series #5" or "Kentucky Senior Open") -- it's matched against the KGA's own schedule automatically, no GolfGenius link or code needed. A golfgenius.com URL or bare league ID still works too if you have one. Description is optional; leave it blank to use the real matched tournament name. Goes live once the next poll finds real scores for Bryan.</div>
     <form method="post" action="/admin/leaderboard/save">
       <label style="display:flex;align-items:center;gap:8px;margin-top:0;">
         <input type="checkbox" id="lb-enabled" name="enabled" {{ 'checked' if leaderboard_config.enabled else '' }} style="width:auto;">
         <span style="text-transform:none;font-size:13.5px;font-weight:700;color:#18180f;">Leaderboard enabled</span>
       </label>
-      <label for="lb-code">Tournament code</label>
-      <input type="text" id="lb-code" name="tournament_code" value="{{ leaderboard_config.tournament_code }}" placeholder="e.g. a golfgenius.com/leagues/... URL, or a league ID">
+      <label for="lb-code">Tournament name</label>
+      <input type="text" id="lb-code" name="tournament_code" value="{{ leaderboard_config.tournament_code }}" placeholder="e.g. KGA Amateur Series #5">
       <label for="lb-desc">Tournament description (optional)</label>
-      <textarea id="lb-desc" name="description" placeholder="e.g. Kentucky Senior Amateur, Sep 2026, Bardstown CC -- helps confirm the right event">{{ leaderboard_config.description }}</textarea>
+      <textarea id="lb-desc" name="description" placeholder="Leave blank to use the matched tournament name -- or override it here">{{ leaderboard_config.description }}</textarea>
       <button class="btn" type="submit">Save Leaderboard Settings</button>
     </form>
     {% if live_leaderboard and live_leaderboard.updated %}
