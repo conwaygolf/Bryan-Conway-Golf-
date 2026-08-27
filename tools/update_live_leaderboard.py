@@ -135,7 +135,7 @@ def parse_stroke_play_field(html):
             continue
         pos = row.find("td", class_="pos")
         score = row.find("td", class_="score")
-        thru = row.find("td", class_="past_round_thru")
+        thru = row.find("td", class_="past_round_thru") or row.find("td", class_="thru")
         affiliation = row.find("div", class_="affiliation")
         field.append({
             "pos": pos.get_text(strip=True) if pos else "",
