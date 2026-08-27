@@ -92,30 +92,34 @@
   }
   .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
 
-  /* Hero corner card -- Facebook feed */
+  /* Hero corner cards -- Facebook feed + live leaderboard, anchored together */
+  .hero-corner-cards{
+    position:absolute;top:24px;left:24px;right:24px;z-index:3;
+    display:flex;justify-content:flex-end;align-items:flex-start;gap:20px;
+  }
+  .hero-corner-cards.justify-start{justify-content:flex-start;}
   .hero-fb{
-    position:absolute;top:24px;right:24px;z-index:3;
     background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
     border:2px solid var(--blue);border-radius:6px;
-    padding:14px 14px 4px;width:420px;max-width:calc(100% - 48px);
+    padding:14px 14px 4px;width:420px;max-width:100%;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
     max-height:clamp(368px,calc(64vh - 48px),556px);overflow-y:auto;
   }
-  .hero-fb.lb-left{right:auto;left:24px;}
   .hero-fb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
   .hero-fb-dot{width:7px;height:7px;border-radius:50%;background:#1877F2;}
   .hero-fb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
   .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
   .hero-fb-link:hover{color:rgba(255,255,255,.8);}
 
-  /* Hero corner card -- live leaderboard, opposite the Facebook card */
+  /* Hero corner card -- live leaderboard, anchored next to the Facebook card */
   .hero-lb{
-    position:absolute;top:24px;left:24px;z-index:3;color:#f4f4f2;
+    color:#f4f4f2;
     background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
     border:2px solid var(--red);border-radius:6px;
-    padding:14px 14px 10px;width:340px;max-width:calc(100% - 48px);
+    padding:14px 14px 10px;width:340px;max-width:100%;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
     max-height:clamp(368px,calc(64vh - 48px),556px);overflow-y:auto;
+    flex-shrink:0;
   }
   .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
   .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:var(--red);}
@@ -132,8 +136,9 @@
     .hero::after{display:none;}
     .hero-content{display:none;}
     .scroll-cue{display:none;}
-    .hero-fb{position:static;width:auto;max-width:none;margin:14px;border-radius:6px;}
-    .hero-lb{position:static;width:auto;max-width:none;margin:14px 14px 0;border-radius:6px;}
+    .hero-corner-cards{position:static;display:block;}
+    .hero-fb{width:auto;max-width:none;margin:14px;border-radius:6px;}
+    .hero-lb{width:auto;max-width:none;margin:14px 14px 0;border-radius:6px;}
   }
 
   /* SECTION SCAFFOLD */
@@ -371,6 +376,7 @@
   <div class="scroll-cue">Scroll</div>
 </div>
 {% set lb_live = leaderboard_config and leaderboard_config.enabled and live_leaderboard and live_leaderboard.rows %}
+<div class="hero-corner-cards{{ ' justify-start' if (hero.lb_corner == 'top-left' and not lb_live) else '' }}">
 {% if lb_live %}
 <div class="hero-lb">
   <div class="hero-lb-head">
@@ -395,7 +401,7 @@
   </table>
 </div>
 {% endif %}
-<div class="hero-fb{{ ' lb-left' if (hero.lb_corner == 'top-left' and not lb_live) else '' }}">
+<div class="hero-fb">
   <div class="hero-fb-head">
     <span class="hero-fb-dot"></span>
     <span class="hero-fb-title">Latest News</span>
@@ -414,6 +420,7 @@
       <a href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/">Bryan Conway Golf</a>
     </blockquote>
   </div>
+</div>
 </div>
 </div>
 
