@@ -332,6 +332,11 @@
   <div class="card">
     <h2>LeaderBoard</h2>
     <div class="desc">Live tournament leaderboard card, shown on the homepage opposite the Facebook feed (top-left of the hero photo) while it's turned on. Just type the tournament's name (e.g. "KGA Amateur Series #5" or "Kentucky Senior Open") -- it's matched against the KGA's own schedule automatically, no GolfGenius link or code needed. A golfgenius.com URL or bare league ID still works too if you have one. Description is optional; leave it blank to use the real matched tournament name. Goes live once the next poll finds real scores for Bryan.</div>
+    {% if leaderboard_config.enabled and leaderboard_staleness_minutes is not none and leaderboard_staleness_minutes > 30 %}
+    <div class="flash warn">
+      ⚠ Poller hasn't updated in {{ (leaderboard_staleness_minutes / 60) | round(1) }} hours -- the homepage has already fallen back to hiding the leaderboard card so it doesn't show stale scores. This almost always means the PC running the "ConwayGolf Live Leaderboard Poller" scheduled task is off or asleep. Turn it back on to resume live updates.
+    </div>
+    {% endif %}
     <form method="post" action="/admin/leaderboard/save">
       <label style="display:flex;align-items:center;gap:8px;margin-top:0;">
         <input type="checkbox" id="lb-enabled" name="enabled" {{ 'checked' if leaderboard_config.enabled else '' }} style="width:auto;">

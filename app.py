@@ -7,7 +7,7 @@ import subprocess
 import time
 import unicodedata
 import uuid
-from datetime import date
+from datetime import date, datetime, timezone
 from email.mime.text import MIMEText
 from functools import wraps
 from pathlib import Path
@@ -403,6 +403,43 @@ RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
 PRESS_HEADER = load_json(PRESS_HEADER_JSON, DEFAULT_PRESS_HEADER)
 
 
+# tools/update_live_leaderboard.py runs via a Windows Scheduled Task on
+# Jimmy's own PC, not on Render -- if his PC is off, the poller simply
+# doesn't fire and live_leaderboard.json stops updating, but the site stays
+# up serving whatever was last deployed. Without a check like this, that
+# looks exactly like a real live score to a visitor (a frozen "LIVE" badge
+# showing hours-old numbers) instead of an obvious outage. Compare against
+# real wall-clock time on every request (not deploy time) so this catches
+# the gap even though nothing has redeployed since the outage started.
+LEADERBOARD_STALE_AFTER_MINUTES = 30
+
+
+def leaderboard_staleness_minutes():
+    """Minutes since the leaderboard was last actually polled, or None if
+    it's never been polled at all."""
+    updated = LIVE_LEADERBOARD.get("updated")
+    if not updated:
+        return None
+    try:
+        ts = datetime.fromisoformat(updated)
+    except ValueError:
+        return None
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - ts).total_seconds() / 60
+
+
+def public_live_leaderboard():
+    """What the public homepage shows -- same as LIVE_LEADERBOARD, but with
+    rows cleared if the poller has gone quiet too long, so the site quietly
+    falls back to the Facebook-only layout instead of displaying frozen,
+    possibly-wrong scores as if they were live."""
+    staleness = leaderboard_staleness_minutes()
+    if staleness is not None and staleness > LEADERBOARD_STALE_AFTER_MINUTES:
+        return {**LIVE_LEADERBOARD, "rows": []}
+    return LIVE_LEADERBOARD
+
+
 # Hole-by-hole scorecard popup for the live leaderboard, same GolfGenius
 # source as tools/update_live_leaderboard.py -- each row's aggregate_id
 # (captured by that script) has its own details page with one
@@ -641,7 +678,7 @@ def index():
                             archive_teaser=archive_teaser,
                             sponsors=[s for s in SPONSORS if not s.get("hidden")],
                             poy_standing=POY_STANDING,
-                            leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD)
+                            leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=public_live_leaderboard())
 
 
 @app.route("/press-archives")
@@ -731,6 +768,7 @@ def admin():
     return render_template("admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
                             schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
                             leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD,
+                            leaderboard_staleness_minutes=leaderboard_staleness_minutes(),
                             messages=get_flashed_messages(with_categories=True))
 
 
