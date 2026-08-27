@@ -12,27 +12,27 @@
     },
     {
       "pos": "T1",
-      "name": "David Rambo",
-      "score": "+1",
-      "thru": "4",
-      "city": "Silos Country Club",
-      "aggregate_id": "2420562172"
-    },
-    {
-      "pos": "T1",
       "name": "David Sykes",
       "score": "+1",
-      "thru": "4",
+      "thru": "5",
       "city": "Country Club of Paducah",
       "aggregate_id": "2420562173"
     },
     {
-      "pos": "4",
+      "pos": "T3",
       "name": "Bryan Conway",
       "score": "+2",
       "thru": "5",
       "city": "EClub Kentucky North",
       "aggregate_id": "2420562169"
+    },
+    {
+      "pos": "T3",
+      "name": "David Rambo",
+      "score": "+2",
+      "thru": "5",
+      "city": "Silos Country Club",
+      "aggregate_id": "2420562172"
     },
     {
       "pos": "5",
@@ -54,11 +54,11 @@
       "pos": "7",
       "name": "Adam Brooks",
       "score": "+5",
-      "thru": "4",
+      "thru": "5",
       "city": "EClub Kentucky West",
       "aggregate_id": "2420562174"
     }
   ],
-  "updated": "2026-08-27T15:19+00:00",
+  "updated": "2026-08-27T15:20+00:00",
   "note": null
 }
