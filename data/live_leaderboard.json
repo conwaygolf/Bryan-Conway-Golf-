@@ -4,45 +4,45 @@
   "rows": [
     {
       "pos": "1",
+      "name": "David Horning",
+      "score": "E",
+      "thru": "1",
+      "city": "EClub Kentucky Central"
+    },
+    {
+      "pos": "T2",
       "name": "Mark Knecht",
       "score": "+1",
-      "thru": "1",
+      "thru": "2",
       "city": "Country Club of Paducah"
     },
     {
-      "pos": "2",
+      "pos": "T2",
+      "name": "Bryan Conway",
+      "score": "+1",
+      "thru": "1",
+      "city": "EClub Kentucky North"
+    },
+    {
+      "pos": "4",
       "name": "Ryan Bandy",
       "score": "+3",
       "thru": "1",
       "city": "USGA/Kentucky GC"
     },
     {
-      "pos": "",
-      "name": "Matt Hughes",
-      "score": "-",
-      "thru": "8:40 AM",
-      "city": "USGA/Kentucky GC"
-    },
-    {
-      "pos": "",
-      "name": "Bryan Conway",
-      "score": "-",
-      "thru": "8:50 AM",
-      "city": "EClub Kentucky North"
-    },
-    {
-      "pos": "",
-      "name": "David Horning",
-      "score": "-",
-      "thru": "8:50 AM",
-      "city": "EClub Kentucky Central"
-    },
-    {
-      "pos": "",
+      "pos": "5",
       "name": "Neal Thomas",
-      "score": "-",
-      "thru": "8:50 AM",
+      "score": "+4",
+      "thru": "1",
       "city": "Woodhaven Country Club"
+    },
+    {
+      "pos": "6",
+      "name": "Matt Hughes",
+      "score": "+5",
+      "thru": "2",
+      "city": "USGA/Kentucky GC"
     },
     {
       "pos": "",
@@ -52,6 +52,6 @@
       "city": "Silos Country Club"
     }
   ],
-  "updated": "2026-08-27T14:10+00:00",
+  "updated": "2026-08-27T14:20+00:00",
   "note": null
 }
