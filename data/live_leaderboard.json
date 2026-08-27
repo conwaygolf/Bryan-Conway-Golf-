@@ -3,25 +3,25 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "T1",
-      "name": "David Rambo",
-      "score": "E",
-      "thru": "2",
-      "city": "Silos Country Club"
-    },
-    {
-      "pos": "T1",
+      "pos": "1",
       "name": "David Sykes",
       "score": "E",
-      "thru": "2",
+      "thru": "3",
       "city": "Country Club of Paducah"
     },
     {
-      "pos": "3",
+      "pos": "T2",
       "name": "Mark Knecht",
       "score": "+1",
-      "thru": "3",
+      "thru": "4",
       "city": "Country Club of Paducah"
+    },
+    {
+      "pos": "T2",
+      "name": "David Rambo",
+      "score": "+1",
+      "thru": "3",
+      "city": "Silos Country Club"
     },
     {
       "pos": "T4",
@@ -39,19 +39,19 @@
     },
     {
       "pos": "T6",
-      "name": "Ryan Bandy",
-      "score": "+3",
+      "name": "Adam Brooks",
+      "score": "+4",
       "thru": "3",
-      "city": "USGA/Kentucky GC"
+      "city": "EClub Kentucky West"
     },
     {
       "pos": "T6",
-      "name": "Adam Brooks",
-      "score": "+3",
+      "name": "Neal Thomas",
+      "score": "+4",
       "thru": "2",
-      "city": "EClub Kentucky West"
+      "city": "Woodhaven Country Club"
     }
   ],
-  "updated": "2026-08-27T14:40+00:00",
+  "updated": "2026-08-27T14:50+00:00",
   "note": null
 }
