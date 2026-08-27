@@ -3,15 +3,7 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "T1",
-      "name": "Mark Knecht",
-      "score": "+1",
-      "thru": "6",
-      "city": "Country Club of Paducah",
-      "aggregate_id": "2420562166"
-    },
-    {
-      "pos": "T1",
+      "pos": "1",
       "name": "David Sykes",
       "score": "+1",
       "thru": "5",
@@ -19,15 +11,23 @@
       "aggregate_id": "2420562173"
     },
     {
-      "pos": "T3",
+      "pos": "T2",
+      "name": "Mark Knecht",
+      "score": "+2",
+      "thru": "7",
+      "city": "Country Club of Paducah",
+      "aggregate_id": "2420562166"
+    },
+    {
+      "pos": "T2",
       "name": "Bryan Conway",
       "score": "+2",
-      "thru": "5",
+      "thru": "6",
       "city": "EClub Kentucky North",
       "aggregate_id": "2420562169"
     },
     {
-      "pos": "T3",
+      "pos": "T2",
       "name": "David Rambo",
       "score": "+2",
       "thru": "5",
@@ -38,7 +38,7 @@
       "pos": "5",
       "name": "David Horning",
       "score": "+3",
-      "thru": "5",
+      "thru": "6",
       "city": "EClub Kentucky Central",
       "aggregate_id": "2420562170"
     },
@@ -46,7 +46,7 @@
       "pos": "6",
       "name": "Ryan Bandy",
       "score": "+4",
-      "thru": "6",
+      "thru": "7",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2420562167"
     },
@@ -59,6 +59,6 @@
       "aggregate_id": "2420562174"
     }
   ],
-  "updated": "2026-08-27T15:20+00:00",
+  "updated": "2026-08-27T15:30+00:00",
   "note": null
 }
