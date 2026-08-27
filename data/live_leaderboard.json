@@ -24,34 +24,34 @@
       "city": "Silos Country Club"
     },
     {
-      "pos": "T4",
+      "pos": "4",
       "name": "Bryan Conway",
       "score": "+2",
-      "thru": "3",
+      "thru": "4",
       "city": "EClub Kentucky North"
     },
     {
-      "pos": "T4",
+      "pos": "5",
       "name": "David Horning",
-      "score": "+2",
-      "thru": "3",
+      "score": "+3",
+      "thru": "4",
       "city": "EClub Kentucky Central"
     },
     {
-      "pos": "T6",
+      "pos": "6",
       "name": "Adam Brooks",
       "score": "+4",
       "thru": "3",
       "city": "EClub Kentucky West"
     },
     {
-      "pos": "T6",
-      "name": "Neal Thomas",
-      "score": "+4",
-      "thru": "2",
-      "city": "Woodhaven Country Club"
+      "pos": "T7",
+      "name": "Ryan Bandy",
+      "score": "+5",
+      "thru": "4",
+      "city": "USGA/Kentucky GC"
     }
   ],
-  "updated": "2026-08-27T14:50+00:00",
+  "updated": "2026-08-27T15:00+00:00",
   "note": null
 }
