@@ -6,7 +6,7 @@
     "title": "KGA Amateur Series #5",
     "note": "Mineral Mound Golf Course",
     "hidden": false,
-    "result_checked": false
+    "result_checked": true
   },
   {
     "date_label": "Sep 8",
@@ -27,11 +27,11 @@
     "result_checked": false
   },
   {
-    "date_label": "Sep 28–29",
+    "date_label": "Sep 28\u201329",
     "start_date": "2026-09-28",
     "end_date": "2026-09-29",
     "title": "Clark's Pump-N-Shop Kentucky Men's Senior Amateur",
-    "note": "Frankfort Country Club — Conway's home county.",
+    "note": "Frankfort Country Club \u2014 Conway's home county.",
     "hidden": false,
     "result_checked": false
   },
@@ -45,7 +45,7 @@
     "result_checked": false
   },
   {
-    "date_label": "Oct 15–16",
+    "date_label": "Oct 15\u201316",
     "start_date": "2026-10-15",
     "end_date": "2026-10-16",
     "title": "32nd Clark's Pump-N-Shop Kentucky Mid-Amateur Championship",
