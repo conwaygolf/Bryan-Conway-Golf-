@@ -38,7 +38,7 @@
 
   label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#5a5a4f;margin:14px 0 5px;}
   label:first-of-type{margin-top:0;}
-  input[type=text],input[type=url],textarea{
+  input[type=text],input[type=url],textarea,select{
     width:100%;padding:9px 11px;border:1px solid #d6d3c6;border-radius:4px;font-size:14px;font-family:inherit;background:#fdfdfb;
   }
   input[type=file]{font-size:13px;}
@@ -137,6 +137,7 @@
     <button type="button" class="admin-tab" data-section="hero" style="--tab-color:#6a3fb0;">Hero Image</button>
     <button type="button" class="admin-tab" data-section="leaderboard" style="--tab-color:#c9682c;">LeaderBoard</button>
     <button type="button" class="admin-tab" data-section="press-header" style="--tab-color:#1b3a63;">Press Archives Header</button>
+    <button type="button" class="admin-tab" data-section="press-archives" style="--tab-color:#8a1418;">Press Archives</button>
   </nav>
 
   <div class="admin-panel" id="panel-gallery">
@@ -366,6 +367,56 @@
     <div class="hero-preview" style="height:auto;aspect-ratio:1983/793;">
       <img src="/static/images/{{ press_header.image }}" alt="Current Press &amp; Archives header">
     </div>
+  </div>
+  </div>
+
+  <div class="admin-panel" id="panel-press-archives">
+  <div class="card">
+    <h2>Press &amp; Archives</h2>
+    <div class="desc">Add a new corkboard card to /press-archives -- a real newspaper clipping, press photo, or similar. Fill in the same fields the existing cards have (source publication, byline, date, era, a short summary, and a one-line stats highlight) and upload the image; it's added to the board automatically.</div>
+    <form method="post" action="/admin/press-archives/add" enctype="multipart/form-data">
+      <label for="pa-title">Title / headline</label>
+      <input type="text" id="pa-title" name="title" placeholder="e.g. Conway Wins Regional Title" required>
+      <label for="pa-source">Source publication</label>
+      <input type="text" id="pa-source" name="source" placeholder="e.g. The State Journal" required>
+      <label for="pa-reporter">Reporter / byline (optional)</label>
+      <input type="text" id="pa-reporter" name="reporter" placeholder="e.g. Mike Folta">
+      <label for="pa-date">Date</label>
+      <input type="text" id="pa-date" name="date" placeholder="e.g. July 16, 1995 -- can be a range too" required>
+      <label for="pa-era">Era</label>
+      <select id="pa-era" name="era" required>
+        {% for value, display in eras %}
+        <option value="{{ value }}">{{ display }}</option>
+        {% endfor %}
+      </select>
+      <label for="pa-summary">Summary</label>
+      <textarea id="pa-summary" name="summary" rows="3" placeholder="A sentence or two on what happened -- shown on the card and in the lightbox." required></textarea>
+      <label for="pa-stats">Stats line (optional)</label>
+      <input type="text" id="pa-stats" name="stats" placeholder="e.g. 72-hole score: 213 (72-73-68)  &middot;  Margin: 5 shots">
+      <label for="pa-url">Original article URL (optional)</label>
+      <input type="url" id="pa-url" name="original_url" placeholder="https://...">
+      <label for="pa-image">Clipping / photo image</label>
+      <input type="file" id="pa-image" name="image" accept="image/*,.heic,.heif" required>
+      <button class="btn" type="submit">Add to Press &amp; Archives</button>
+    </form>
+    {% if archive_cards %}
+    <div class="grid" style="margin-top:24px;">
+      {% for c in archive_cards %}
+      <figure class="{{ 'is-hidden' if c.hidden else '' }}">
+        <img src="/static/images/Press And Archives/{{ c.image }}" alt="{{ c.title }}" loading="lazy">
+        <figcaption>{{ c.title }} <span class="hint">({{ c.date }})</span>{% if c.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</figcaption>
+        <div class="item-actions">
+          <form method="post" action="/admin/press-archives/{{ loop.index0 }}/toggle">
+            <button class="mini-btn" type="submit">{{ 'Show' if c.hidden else 'Hide' }}</button>
+          </form>
+          <form method="post" action="/admin/press-archives/{{ loop.index0 }}/delete" onsubmit="return confirm('Delete this archive card permanently?');">
+            <button class="mini-btn danger" type="submit">Delete</button>
+          </form>
+        </div>
+      </figure>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
   </div>
 </div>

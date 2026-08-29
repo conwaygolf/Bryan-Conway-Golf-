@@ -100,7 +100,7 @@ def admin_required(view):
 # Press & Archives -- add new entries here as more archive cards are created.
 # era must be one of: early-years, franklin-county, college, professional-years,
 # the-comeback, 2026 (matches the filter pills in press_archives.html).
-ARCHIVE_CARDS = [
+DEFAULT_ARCHIVE_CARDS = [
     {
         "id": "1995-khsaa-state-title",
         "title": "Conway Coasts to Five-Shot Victory",
@@ -112,6 +112,7 @@ ARCHIVE_CARDS = [
         "stats": "72-hole score: 213 (72-73-68)  ·  Margin: 5 shots  ·  KHSAA Class AAA Champion",
         "image": "press_1995_khsaa_state_journal.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "college-morehead-spotlight",
@@ -124,6 +125,7 @@ ARCHIVE_CARDS = [
         "stats": "1994: OVC Freshman of the Year, 3rd at OVC Championship  ·  1995: First Team All-OVC, KY Amateur Champion, Daniel Boone Champion  ·  Team MVP",
         "image": "press_college_morehead_spotlight.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "2001-qschool-qualify",
@@ -136,6 +138,7 @@ ARCHIVE_CARDS = [
         "stats": "72-hole score: 285 (-3)  ·  Finish: T-3  ·  Qualified for full 2002 Canadian Tour status",
         "image": "press_2001_nbc_sports_qschool_qualify.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "2004-qschool-round2",
@@ -148,6 +151,7 @@ ARCHIVE_CARDS = [
         "stats": "36-hole score: 136 (-8)  ·  Position after Round 2: T-1 (co-leader)",
         "image": "press_2004_nbc_sports_qschool_round2.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "2004-qschool-lead",
@@ -160,6 +164,7 @@ ARCHIVE_CARDS = [
         "stats": "54-hole score: 206 (-10)  ·  Position entering final round: 1st (leader)",
         "image": "press_2004_golf_channel_qschool_lead.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "2003-pga-tour-qualifying",
@@ -172,6 +177,7 @@ ARCHIVE_CARDS = [
         "stats": "First Stage score: 271  ·  Finish: 3rd  ·  Advanced to Second Stage (St. Augustine, Nov. 19–22, 2003)",
         "image": "press_2003_state_journal_pga_qualifying.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "2018-usga-midam",
@@ -184,6 +190,7 @@ ARCHIVE_CARDS = [
         "stats": "Charlotte Country Club & Carolina Golf Club, Charlotte, N.C.  ·  Sept. 22–27, 2018",
         "image": "press_2018_usga_midam_field.png",
         "original_url": None,
+        "hidden": False,
     },
     {
         "id": "2019-chichi-rodriguez",
@@ -196,6 +203,7 @@ ARCHIVE_CARDS = [
         "stats": "Chi Chi Rodriguez, 1935–2024  ·  World Golf Hall of Fame",
         "image": "press_2019_chichi_rodriguez.png",
         "original_url": None,
+        "hidden": False,
     },
 ]
 
@@ -207,6 +215,7 @@ SPONSORS_JSON = DATA_DIR / "sponsors.json"
 HERO_JSON = DATA_DIR / "hero.json"
 RESULTS_JSON = DATA_DIR / "results.json"
 SCHEDULE_JSON = DATA_DIR / "schedule.json"
+ARCHIVE_CARDS_JSON = DATA_DIR / "archive_cards.json"
 POY_STANDING_JSON = DATA_DIR / "poy_season_standing.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
@@ -398,6 +407,7 @@ HERO = load_json(HERO_JSON, DEFAULT_HERO)
 POY_STANDING = load_json(POY_STANDING_JSON, {"league": None, "category": None, "field": [], "top7": []})
 RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
 SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
+ARCHIVE_CARDS = load_json(ARCHIVE_CARDS_JSON, DEFAULT_ARCHIVE_CARDS)
 LEADERBOARD_CONFIG = load_json(LEADERBOARD_CONFIG_JSON, DEFAULT_LEADERBOARD_CONFIG)
 LIVE_LEADERBOARD = load_json(LIVE_LEADERBOARD_JSON, DEFAULT_LIVE_LEADERBOARD)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
@@ -691,6 +701,24 @@ def save_press_header_image(file_storage):
     return filename
 
 
+# Press & Archives card images live in their own subfolder (with a real
+# space in the name, matching the original hand-uploaded batch) rather than
+# flat under IMAGES_DIR like gallery/sponsor/hero images -- press_archives.html
+# already references /static/images/Press And Archives/<file>.
+PRESS_ARCHIVE_IMAGES_DIR = IMAGES_DIR / "Press And Archives"
+
+
+def save_archive_card_image(file_storage, title):
+    PRESS_ARCHIVE_IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    img = open_upload_image(file_storage).convert("RGB")
+    max_w = 1400  # these are read as text (newspaper clippings), keep them sharp
+    if img.width > max_w:
+        img = img.resize((max_w, round(img.height * max_w / img.width)), Image.LANCZOS)
+    filename = f"press_{slugify(title)}_{uuid.uuid4().hex[:6]}.jpg"
+    img.save(PRESS_ARCHIVE_IMAGES_DIR / filename, "JPEG", quality=90, optimize=True)
+    return filename
+
+
 LOGO_FETCH_HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
                   "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
@@ -769,7 +797,7 @@ def index():
     visible_schedule = [s for s in SCHEDULE if not s.get("hidden")]
     upcoming = [s for s in visible_schedule if s["end_date"] >= date.today().isoformat()]
     next_event = min(upcoming, key=lambda s: s["start_date"], default=None)
-    cards_by_id = {c["id"]: c for c in ARCHIVE_CARDS}
+    cards_by_id = {c["id"]: c for c in ARCHIVE_CARDS if not c.get("hidden")}
     archive_teaser = [cards_by_id[i] for i in ARCHIVE_TEASER_IDS if i in cards_by_id]
     return render_template("index.html", hero=HERO, results=[r for r in RESULTS if not r.get("hidden")],
                             schedule=visible_schedule, next_event=next_event,
@@ -781,7 +809,8 @@ def index():
 
 @app.route("/press-archives")
 def press_archives():
-    return render_template("press_archives.html", cards=ARCHIVE_CARDS, eras=ERAS, header=PRESS_HEADER)
+    return render_template("press_archives.html", cards=[c for c in ARCHIVE_CARDS if not c.get("hidden")],
+                            eras=ERAS, header=PRESS_HEADER)
 
 
 @app.route("/roots")
@@ -865,6 +894,7 @@ def admin_logout():
 def admin():
     return render_template("admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
                             schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
+                            archive_cards=ARCHIVE_CARDS, eras=ERAS[1:],  # skip the "All" filter-pill entry
                             leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD,
                             leaderboard_staleness_minutes=leaderboard_staleness_minutes(),
                             messages=get_flashed_messages(with_categories=True))
@@ -1028,6 +1058,88 @@ def admin_press_header_upload():
     save_json(PRESS_HEADER_JSON, PRESS_HEADER)
     git_publish([IMAGES_DIR / filename, PRESS_HEADER_JSON], "Admin: update Press & Archives header")
     flash("Press & Archives header updated.", "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/press-archives/add", methods=["POST"])
+@admin_required
+def admin_press_archives_add():
+    title = (request.form.get("title") or "").strip()
+    source = (request.form.get("source") or "").strip()
+    reporter = (request.form.get("reporter") or "").strip() or None
+    date_str = (request.form.get("date") or "").strip()
+    era = (request.form.get("era") or "").strip()
+    summary = (request.form.get("summary") or "").strip()
+    stats = (request.form.get("stats") or "").strip()
+    original_url = (request.form.get("original_url") or "").strip() or None
+    file = request.files.get("image")
+
+    if not title or not source or not date_str or not era or not summary:
+        flash("Title, source, date, era, and summary are all required.", "error")
+        return redirect(url_for("admin"))
+    if not file or not file.filename:
+        flash("An image is required -- upload the clipping/photo to match the rest of Press & Archives.", "error")
+        return redirect(url_for("admin"))
+    if era not in dict(ERAS):
+        flash("That era isn't recognized.", "error")
+        return redirect(url_for("admin"))
+
+    # Card id is a slug used for the homepage teaser lookup and the corkboard's
+    # data-index -- make it unique even if two cards share a title/date.
+    base_id = slugify(f"{date_str}-{title}")
+    existing_ids = {c["id"] for c in ARCHIVE_CARDS}
+    card_id = base_id
+    n = 2
+    while card_id in existing_ids:
+        card_id = f"{base_id}-{n}"
+        n += 1
+
+    try:
+        filename = save_archive_card_image(file, title)
+    except Exception:
+        flash("Couldn't process that image -- try a different file.", "error")
+        return redirect(url_for("admin"))
+
+    ARCHIVE_CARDS.append({
+        "id": card_id, "title": title, "source": source, "reporter": reporter,
+        "date": date_str, "era": era, "summary": summary, "stats": stats,
+        "image": filename, "original_url": original_url, "hidden": False,
+    })
+    save_json(ARCHIVE_CARDS_JSON, ARCHIVE_CARDS)
+    git_publish([PRESS_ARCHIVE_IMAGES_DIR / filename, ARCHIVE_CARDS_JSON], f"Admin: add press archive card ({title})")
+    flash(f'Added "{title}" to Press & Archives.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/press-archives/<int:idx>/toggle", methods=["POST"])
+@admin_required
+def admin_press_archives_toggle(idx):
+    if not 0 <= idx < len(ARCHIVE_CARDS):
+        flash("That archive card no longer exists.", "error")
+        return redirect(url_for("admin"))
+    card = ARCHIVE_CARDS[idx]
+    card["hidden"] = not card.get("hidden", False)
+    save_json(ARCHIVE_CARDS_JSON, ARCHIVE_CARDS)
+    git_publish([ARCHIVE_CARDS_JSON], f"Admin: {'hide' if card['hidden'] else 'show'} press archive card ({card.get('title')})")
+    flash(f'"{card.get("title")}" is now {"hidden" if card["hidden"] else "visible"}.', "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/press-archives/<int:idx>/delete", methods=["POST"])
+@admin_required
+def admin_press_archives_delete(idx):
+    if not 0 <= idx < len(ARCHIVE_CARDS):
+        flash("That archive card no longer exists.", "error")
+        return redirect(url_for("admin"))
+    card = ARCHIVE_CARDS.pop(idx)
+    image_name = card.get("image")
+    if image_name:
+        path = PRESS_ARCHIVE_IMAGES_DIR / image_name
+        if path.exists():
+            path.unlink()
+    save_json(ARCHIVE_CARDS_JSON, ARCHIVE_CARDS)
+    git_publish([ARCHIVE_CARDS_JSON, PRESS_ARCHIVE_IMAGES_DIR], f"Admin: delete press archive card ({card.get('title')})")
+    flash(f'Deleted "{card.get("title")}" from Press & Archives.', "ok")
     return redirect(url_for("admin"))
 
 
