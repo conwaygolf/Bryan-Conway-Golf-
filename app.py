@@ -701,6 +701,47 @@ def slugify(text):
     return re.sub(r"[\s_-]+", "-", text) or "item"
 
 
+_MONTH_DAY_RE = re.compile(
+    r"(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})"
+)
+_YEAR_RE = re.compile(r"\b(?:19|20)\d{2}\b")
+
+
+def parse_card_sort_key(date_str):
+    """Best-effort (year, month, day) sort key from a free-text Press &
+    Archives date like "July 16, 1995", "1994-1996", or "September 22-27,
+    2018" -- these are hand-typed, not real dates, so this can't be exact.
+    A year range sorts by its LATEST year (an era card sits alongside
+    events near when it ended); a date range uses its start day. Missing
+    pieces default to 0, which sorts before any real month/day in the same
+    year -- reasonable since a vague "sometime in 1996" card should read as
+    slightly older than a specifically-dated mid-1996 event."""
+    if not date_str:
+        return (0, 0, 0)
+    years = [int(y) for y in _YEAR_RE.findall(date_str)]
+    year = max(years) if years else 0
+    month, day = 0, 0
+    m = _MONTH_DAY_RE.search(date_str)
+    if m:
+        try:
+            month = datetime.strptime(m.group(1), "%B").month
+            day = int(m.group(2))
+        except ValueError:
+            pass
+    return (year, month, day)
+
+
+# Newest-first, regardless of insertion order in the JSON file -- Jimmy asked
+# for this 2026-08-28. Sorted once here at load (and persisted back to disk,
+# so the committed file itself reflects it too) so it's correct even if the
+# file on disk isn't; admin_press_archives_add() re-sorts after every add so
+# a new card always lands in the right chronological slot, not just at the
+# end.
+ARCHIVE_CARDS.sort(key=lambda c: parse_card_sort_key(c.get("date", "")), reverse=True)
+save_json(ARCHIVE_CARDS_JSON, ARCHIVE_CARDS)
+git_publish([ARCHIVE_CARDS_JSON], "Admin: sort Press & Archives cards newest-first")
+
+
 def open_upload_image(file_storage):
     img = Image.open(file_storage.stream)
     img.load()
@@ -1244,6 +1285,7 @@ def admin_press_archives_add():
         "date": date_str, "era": era, "summary": summary, "stats": stats,
         "image": filename, "original_url": original_url, "hidden": False,
     })
+    ARCHIVE_CARDS.sort(key=lambda c: parse_card_sort_key(c.get("date", "")), reverse=True)
     save_json(ARCHIVE_CARDS_JSON, ARCHIVE_CARDS)
     git_publish([PRESS_ARCHIVE_IMAGES_DIR / filename, ARCHIVE_CARDS_JSON], f"Admin: add press archive card ({title})")
     flash(f'Added "{title}" to Press & Archives.', "ok")
