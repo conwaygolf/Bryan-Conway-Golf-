@@ -115,9 +115,14 @@
   }
 
   /* ANALYTICS -- chart chrome tokens from the dataviz reference palette
-     (light-mode values only; this admin page has no dark theme), scoped so
-     they don't leak into the rest of the page. */
-  .analytics{
+     (light-mode values only; this admin page has no dark theme). Defined on
+     :root, not scoped to .analytics -- the detail-popup modal renders
+     outside that card in the DOM (sibling of .wrap, not a descendant), so a
+     var() defined only on .analytics silently fails to resolve inside the
+     modal: background-color (non-inherited) falls back to transparent,
+     making every bar/track invisible while borders/text still show fine
+     because color is inherited. Real bug, found live after shipping. */
+  :root{
     --viz-primary:#0b0b0b; --viz-secondary:#52514e; --viz-muted:#898781;
     --viz-grid:#e1e0d9; --viz-baseline:#c3c2b7; --viz-blue:#2a78d6;
   }
