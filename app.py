@@ -17,8 +17,11 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from flask import Flask, flash, get_flashed_messages, redirect, render_template, request, jsonify, session, url_for
+from flask import Flask, flash, g, get_flashed_messages, redirect, render_template, request, jsonify, session, url_for
 from PIL import Image, ImageFilter, ImageOps
+from werkzeug.middleware.proxy_fix import ProxyFix
+
+import analytics
 
 try:
     import pillow_heif
@@ -30,7 +33,42 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "conwaygolf-admin-dev-key")
+# Render sits behind a proxy -- without this, request.remote_addr would be
+# Render's internal load-balancer IP for every visitor, not the real one,
+# which would break analytics' geo lookup entirely.
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # 20MB upload cap
+
+# Self-hosted analytics (see analytics.py's own docstring for the full
+# rationale/tradeoffs) -- only the real content pages count as a "pageview",
+# not admin, the scorecard API, or static assets.
+ANALYTICS_TRACKED_PATHS = {"/", "/roots", "/gallery", "/sponsors", "/press-archives"}
+
+
+@app.before_request
+def _track_pageview():
+    if request.method != "GET" or request.path not in ANALYTICS_TRACKED_PATHS:
+        return
+    vid = request.cookies.get(analytics.VISITOR_COOKIE)
+    g.new_visitor = not vid
+    g.visitor_id = vid or uuid.uuid4().hex
+    analytics.track(
+        path=request.path,
+        referrer_url=request.referrer,
+        own_host=request.host,
+        user_agent_string=request.headers.get("User-Agent", ""),
+        ip=request.remote_addr,
+        visitor_id=g.visitor_id,
+    )
+
+
+@app.after_request
+def _set_visitor_cookie(response):
+    if getattr(g, "new_visitor", False):
+        response.set_cookie(analytics.VISITOR_COOKIE, g.visitor_id,
+                             max_age=60 * 60 * 24 * 365 * 2, httponly=True, samesite="Lax")
+    return response
+
 
 GMAIL_USER = os.getenv("GMAIL_USER")
 GMAIL_APP_PASSWORD = os.getenv("GMAIL_APP_PASSWORD")
@@ -221,6 +259,7 @@ RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
 LEADERBOARD_CONFIG_JSON = DATA_DIR / "leaderboard_config.json"
 LIVE_LEADERBOARD_JSON = DATA_DIR / "live_leaderboard.json"
+ANALYTICS_DAILY_JSON = DATA_DIR / "analytics_daily.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -546,6 +585,32 @@ def start_leaderboard_poller():
 
 
 start_leaderboard_poller()
+
+
+# Analytics daily rollup -- same background-thread pattern as the leaderboard
+# poller above, just on a longer interval since this only needs to survive a
+# redeploy with minimal lost granularity, not track something changing by the
+# minute. See analytics.py's docstring for why this doesn't git-commit every
+# single pageview.
+ANALYTICS_ROLLUP_INTERVAL_SECONDS = 900  # 15 min
+
+
+def _analytics_rollup_loop():
+    while True:
+        try:
+            analytics.rollup_today(load_json, save_json, git_publish, ANALYTICS_DAILY_JSON)
+        except Exception as e:
+            print(f"[analytics rollup] error: {type(e).__name__}: {e}")
+        time.sleep(ANALYTICS_ROLLUP_INTERVAL_SECONDS)
+
+
+def start_analytics_rollup():
+    if app.debug and os.environ.get("WERKZEUG_RUN_MAIN") != "true":
+        return
+    threading.Thread(target=_analytics_rollup_loop, daemon=True).start()
+
+
+start_analytics_rollup()
 
 
 # Hole-by-hole scorecard popup for the live leaderboard, same GolfGenius
@@ -889,15 +954,40 @@ def admin_logout():
     return redirect(url_for("admin_login"))
 
 
+PAGE_DISPLAY_NAMES = {"/": "Home", "/roots": "Roots", "/gallery": "Gallery",
+                       "/sponsors": "Sponsors", "/press-archives": "Press & Archives"}
+
+
+def _relabel(items, mapping):
+    return [(mapping.get(label, label), count) for label, count in items]
+
+
 @app.route("/admin")
 @admin_required
 def admin():
-    return render_template("admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
-                            schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
-                            archive_cards=ARCHIVE_CARDS, eras=ERAS[1:],  # skip the "All" filter-pill entry
-                            leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD,
-                            leaderboard_staleness_minutes=leaderboard_staleness_minutes(),
-                            messages=get_flashed_messages(with_categories=True))
+    today_stats = analytics.stats_today()
+    today_str = datetime.now(timezone.utc).date().isoformat()
+    history = [d for d in load_json(ANALYTICS_DAILY_JSON, []) if d.get("date") != today_str]
+    trend_bars, trend_max = analytics.daily_trend_bars(history, days=30)
+    recent_30 = history[-30:]
+    return render_template(
+        "admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
+        schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
+        archive_cards=ARCHIVE_CARDS, eras=ERAS[1:],  # skip the "All" filter-pill entry
+        leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD,
+        leaderboard_staleness_minutes=leaderboard_staleness_minutes(),
+        analytics_today=today_stats,
+        analytics_alltime_pageviews=sum(d.get("pageviews", 0) for d in history) + today_stats["pageviews"],
+        analytics_trend_bars=trend_bars, analytics_trend_max=trend_max,
+        analytics_device_segments=analytics.device_segments(today_stats["devices"]),
+        analytics_top_referrers=analytics.ranked_bars(
+            analytics.merge_ranked_over_period([d.get("top_referrers", []) for d in recent_30], today_stats["top_referrers"])),
+        analytics_top_pages=analytics.ranked_bars(_relabel(
+            analytics.merge_ranked_over_period([d.get("top_pages", []) for d in recent_30], today_stats["top_pages"]),
+            PAGE_DISPLAY_NAMES)),
+        analytics_top_countries=analytics.ranked_bars(
+            analytics.merge_ranked_over_period([d.get("top_countries", []) for d in recent_30], today_stats["top_countries"])),
+        messages=get_flashed_messages(with_categories=True))
 
 
 @app.route("/admin/gallery/upload", methods=["POST"])

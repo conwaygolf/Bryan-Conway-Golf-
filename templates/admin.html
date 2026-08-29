@@ -113,6 +113,52 @@
     .admin-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
     .admin-tab{padding:20px 10px;font-size:12.5px;text-align:center;white-space:normal;line-height:1.35;}
   }
+
+  /* ANALYTICS -- chart chrome tokens from the dataviz reference palette
+     (light-mode values only; this admin page has no dark theme), scoped so
+     they don't leak into the rest of the page. */
+  .analytics{
+    --viz-primary:#0b0b0b; --viz-secondary:#52514e; --viz-muted:#898781;
+    --viz-grid:#e1e0d9; --viz-baseline:#c3c2b7; --viz-blue:#2a78d6;
+  }
+  .kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:28px;}
+  .kpi-tile{background:#fbfaf6;border:1px solid #e5e2d5;border-radius:6px;padding:16px 18px;}
+  .kpi-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--viz-secondary);margin-bottom:6px;}
+  .kpi-value{font-size:28px;font-weight:700;color:var(--viz-primary);line-height:1;}
+  .viz-block{margin-bottom:30px;}
+  .viz-title{font-size:13px;font-weight:800;color:var(--viz-primary);margin-bottom:2px;}
+  .viz-subtitle{font-size:11.5px;color:var(--viz-muted);margin-bottom:14px;}
+  .viz-empty{font-size:13px;color:var(--viz-muted);padding:10px 0;}
+
+  /* Daily trend -- thin columns, baseline hairline, sparing labels */
+  .trend-chart{display:flex;align-items:flex-end;gap:3px;height:120px;border-bottom:1px solid var(--viz-baseline);padding-bottom:0;}
+  .trend-bar{flex:1 1 0;min-width:2px;background:var(--viz-blue);border-radius:2px 2px 0 0;position:relative;}
+  .trend-bar.is-max::after{
+    content:attr(data-value);position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+    font-size:10px;font-weight:700;color:var(--viz-secondary);white-space:nowrap;
+  }
+  .trend-axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--viz-muted);margin-top:6px;}
+
+  /* Device breakdown -- single 100%-stacked bar + legend */
+  .stack-bar{display:flex;height:22px;border-radius:4px;overflow:hidden;background:var(--viz-grid);}
+  .stack-seg{height:100%;display:flex;align-items:center;justify-content:center;}
+  .stack-seg span{font-size:10.5px;font-weight:700;color:#fff;}
+  .stack-legend{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;}
+  .stack-legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--viz-secondary);}
+  .stack-legend-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+
+  /* Ranked bar lists -- referrers / pages / countries */
+  .bar-list{display:flex;flex-direction:column;gap:9px;}
+  .bar-row{display:grid;grid-template-columns:120px 1fr 34px;align-items:center;gap:10px;}
+  .bar-row-label{font-size:12px;color:var(--viz-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bar-row-track{background:var(--viz-grid);border-radius:3px;height:14px;}
+  .bar-row-fill{background:var(--viz-blue);height:100%;border-radius:3px;min-width:3px;}
+  .bar-row-count{font-size:11.5px;color:var(--viz-muted);text-align:right;font-variant-numeric:tabular-nums;}
+  .viz-two-col{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  @media(max-width:700px){
+    .viz-two-col{grid-template-columns:1fr;}
+    .bar-row{grid-template-columns:90px 1fr 30px;}
+  }
 </style>
 </head>
 <body>
@@ -138,6 +184,7 @@
     <button type="button" class="admin-tab" data-section="leaderboard" style="--tab-color:#c9682c;">LeaderBoard</button>
     <button type="button" class="admin-tab" data-section="press-header" style="--tab-color:#1b3a63;">Press Archives Header</button>
     <button type="button" class="admin-tab" data-section="press-archives" style="--tab-color:#8a1418;">Press Archives</button>
+    <button type="button" class="admin-tab" data-section="analytics" style="--tab-color:#2a78d6;">Analytics</button>
   </nav>
 
   <div class="admin-panel" id="panel-gallery">
@@ -417,6 +464,113 @@
       {% endfor %}
     </div>
     {% endif %}
+  </div>
+  </div>
+
+  <div class="admin-panel" id="panel-analytics">
+  <div class="card analytics">
+    <h2>Analytics</h2>
+    <div class="desc">Self-hosted -- no external analytics account, no tracking cookie beyond an anonymous visitor id. "Today" is live and resets if the site redeploys (that can happen a few times a day); the 30-day trend and totals below are saved every 15 minutes and survive redeploys.</div>
+
+    <div class="kpi-row">
+      <div class="kpi-tile"><div class="kpi-label">Pageviews Today</div><div class="kpi-value">{{ analytics_today.pageviews }}</div></div>
+      <div class="kpi-tile"><div class="kpi-label">Unique Visitors Today</div><div class="kpi-value">{{ analytics_today.unique_visitors }}</div></div>
+      <div class="kpi-tile"><div class="kpi-label">Avg. Visit Length</div><div class="kpi-value">{{ analytics_today.avg_session_minutes }}<span style="font-size:14px;font-weight:600;color:var(--viz-muted);"> min</span></div></div>
+      <div class="kpi-tile"><div class="kpi-label">All-Time Pageviews</div><div class="kpi-value">{{ analytics_alltime_pageviews }}</div></div>
+    </div>
+
+    <div class="viz-block">
+      <div class="viz-title">Daily Pageviews</div>
+      <div class="viz-subtitle">Last 30 days -- today isn't finalized yet, see the live tile above</div>
+      {% if analytics_trend_bars %}
+      <div class="trend-chart">
+        {% for b in analytics_trend_bars %}
+        <div class="trend-bar{{ ' is-max' if (b.value == analytics_trend_max and analytics_trend_max > 0) else '' }}"
+             style="height:{{ b.pct }}%;" data-value="{{ b.value }}" title="{{ b.date }}: {{ b.value }} pageviews"></div>
+        {% endfor %}
+      </div>
+      <div class="trend-axis"><span>{{ analytics_trend_bars[0].date }}</span><span>{{ analytics_trend_bars[-1].date }}</span></div>
+      {% else %}
+      <div class="viz-empty">No history yet -- check back after the first daily rollup (runs every 15 min).</div>
+      {% endif %}
+    </div>
+
+    <div class="viz-two-col">
+      <div class="viz-block">
+        <div class="viz-title">Device Breakdown</div>
+        <div class="viz-subtitle">Today</div>
+        {% if analytics_today.pageviews %}
+        <div class="stack-bar">
+          {% for seg in analytics_device_segments %}{% if seg.pct > 0 %}
+          <div class="stack-seg" style="width:{{ seg.pct }}%;background:{{ seg.color }};">{% if seg.pct >= 12 %}<span>{{ seg.pct }}%</span>{% endif %}</div>
+          {% endif %}{% endfor %}
+        </div>
+        <div class="stack-legend">
+          {% for seg in analytics_device_segments %}
+          <div class="stack-legend-item"><span class="stack-legend-dot" style="background:{{ seg.color }};"></span>{{ seg.label }} ({{ seg.count }})</div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="viz-empty">No visits yet today.</div>
+        {% endif %}
+      </div>
+
+      <div class="viz-block">
+        <div class="viz-title">Top Referrers</div>
+        <div class="viz-subtitle">Last 30 days, first touch per visit</div>
+        {% if analytics_top_referrers %}
+        <div class="bar-list">
+          {% for r in analytics_top_referrers %}
+          <div class="bar-row">
+            <div class="bar-row-label" title="{{ r.label }}">{{ r.label }}</div>
+            <div class="bar-row-track"><div class="bar-row-fill" style="width:{{ r.pct }}%;"></div></div>
+            <div class="bar-row-count">{{ r.count }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="viz-empty">No referrer data yet -- most visits so far came directly.</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="viz-two-col">
+      <div class="viz-block">
+        <div class="viz-title">Top Pages</div>
+        <div class="viz-subtitle">Last 30 days</div>
+        {% if analytics_top_pages %}
+        <div class="bar-list">
+          {% for p in analytics_top_pages %}
+          <div class="bar-row">
+            <div class="bar-row-label" title="{{ p.label }}">{{ p.label }}</div>
+            <div class="bar-row-track"><div class="bar-row-fill" style="width:{{ p.pct }}%;"></div></div>
+            <div class="bar-row-count">{{ p.count }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="viz-empty">No pageview data yet.</div>
+        {% endif %}
+      </div>
+
+      <div class="viz-block">
+        <div class="viz-title">Top Countries</div>
+        <div class="viz-subtitle">Last 30 days</div>
+        {% if analytics_top_countries %}
+        <div class="bar-list">
+          {% for c in analytics_top_countries %}
+          <div class="bar-row">
+            <div class="bar-row-label" title="{{ c.label }}">{{ c.label }}</div>
+            <div class="bar-row-track"><div class="bar-row-fill" style="width:{{ c.pct }}%;"></div></div>
+            <div class="bar-row-count">{{ c.count }}</div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <div class="viz-empty">No location data yet.</div>
+        {% endif %}
+      </div>
+    </div>
   </div>
   </div>
 </div>
