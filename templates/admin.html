@@ -159,6 +159,27 @@
     .viz-two-col{grid-template-columns:1fr;}
     .bar-row{grid-template-columns:90px 1fr 30px;}
   }
+
+  /* Everything on this tab drills into a popup -- one consistent affordance */
+  [data-detail-type]{cursor:pointer;}
+  .kpi-tile[data-detail-type]:hover{background:#f2f0e6;}
+  .trend-bar:hover{filter:brightness(0.8);}
+  .trend-bar.is-today{opacity:.55;}
+  .stack-seg:hover{filter:brightness(0.85);}
+  .stack-legend-item[data-detail-type]:hover{color:var(--viz-primary);}
+  .bar-row[data-detail-type]:hover .bar-row-label{color:var(--blue-deep);text-decoration:underline;}
+
+  /* ANALYTICS DETAIL MODAL */
+  .a-modal-overlay{position:fixed;inset:0;background:rgba(10,8,7,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
+  .a-modal-overlay.open{display:flex;}
+  .a-modal-card{background:#fff;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;border-radius:8px;padding:28px 30px;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.4);}
+  .a-modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:#f2f1ec;border:none;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;color:#5a5a4f;}
+  .a-modal-close:hover{background:#e5e2d5;}
+  .a-modal-title{font-size:17px;font-weight:800;margin-bottom:2px;color:#18180f;padding-right:30px;}
+  .a-modal-subtitle{font-size:11.5px;color:#8a8a7c;margin-bottom:18px;}
+  .a-modal-body table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .a-modal-body th{text-align:left;color:var(--viz-muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;padding:0 8px 8px 0;}
+  .a-modal-body td{padding:7px 8px 7px 0;border-top:1px solid var(--viz-grid);}
 </style>
 </head>
 <body>
@@ -473,10 +494,10 @@
     <div class="desc">Self-hosted -- no external analytics account, no tracking cookie beyond an anonymous visitor id. "Today" is live and resets if the site redeploys (that can happen a few times a day); the 30-day trend and totals below are saved every 15 minutes and survive redeploys.</div>
 
     <div class="kpi-row">
-      <div class="kpi-tile"><div class="kpi-label">Pageviews Today</div><div class="kpi-value">{{ analytics_today.pageviews }}</div></div>
-      <div class="kpi-tile"><div class="kpi-label">Unique Visitors Today</div><div class="kpi-value">{{ analytics_today.unique_visitors }}</div></div>
-      <div class="kpi-tile"><div class="kpi-label">Avg. Visit Length</div><div class="kpi-value">{{ analytics_today.avg_session_minutes }}<span style="font-size:14px;font-weight:600;color:var(--viz-muted);"> min</span></div></div>
-      <div class="kpi-tile"><div class="kpi-label">All-Time Pageviews</div><div class="kpi-value">{{ analytics_alltime_pageviews }}</div></div>
+      <div class="kpi-tile" data-detail-type="kpi" data-detail-key="pageviews" data-detail-title="Pageviews by Hour (Today)"><div class="kpi-label">Pageviews Today</div><div class="kpi-value">{{ analytics_today.pageviews }}</div></div>
+      <div class="kpi-tile" data-detail-type="kpi" data-detail-key="visitors" data-detail-title="Unique Visitors by Hour (Today)"><div class="kpi-label">Unique Visitors Today</div><div class="kpi-value">{{ analytics_today.unique_visitors }}</div></div>
+      <div class="kpi-tile" data-detail-type="kpi" data-detail-key="avg_session" data-detail-title="Today's Visits"><div class="kpi-label">Avg. Visit Length</div><div class="kpi-value">{{ analytics_today.avg_session_minutes }}<span style="font-size:14px;font-weight:600;color:var(--viz-muted);"> min</span></div></div>
+      <div class="kpi-tile" data-detail-type="kpi" data-detail-key="alltime" data-detail-title="All-Time Pageviews"><div class="kpi-label">All-Time Pageviews</div><div class="kpi-value">{{ analytics_alltime_pageviews }}</div></div>
     </div>
 
     <div class="viz-block">
@@ -486,7 +507,8 @@
       <div class="trend-chart">
         {% for b in analytics_trend_bars %}
         <div class="trend-bar{{ ' is-max' if (b.value == analytics_trend_max and analytics_trend_max > 0) else '' }}"
-             style="height:{{ b.pct }}%;" data-value="{{ b.value }}" title="{{ b.date }}: {{ b.value }} pageviews"></div>
+             style="height:{{ b.pct }}%;" data-value="{{ b.value }}" title="{{ b.date }}: {{ b.value }} pageviews"
+             data-detail-type="day" data-detail-key="{{ b.date }}" data-detail-title="{{ b.date }}"></div>
         {% endfor %}
       </div>
       <div class="trend-axis"><span>{{ analytics_trend_bars[0].date }}</span><span>{{ analytics_trend_bars[-1].date }}</span></div>
@@ -502,12 +524,13 @@
         {% if analytics_today.pageviews %}
         <div class="stack-bar">
           {% for seg in analytics_device_segments %}{% if seg.pct > 0 %}
-          <div class="stack-seg" style="width:{{ seg.pct }}%;background:{{ seg.color }};">{% if seg.pct >= 12 %}<span>{{ seg.pct }}%</span>{% endif %}</div>
+          <div class="stack-seg" style="width:{{ seg.pct }}%;background:{{ seg.color }};"
+               data-detail-type="device" data-detail-key="{{ seg.label }}" data-detail-title="{{ seg.label }} -- Last 30 Days">{% if seg.pct >= 12 %}<span>{{ seg.pct }}%</span>{% endif %}</div>
           {% endif %}{% endfor %}
         </div>
         <div class="stack-legend">
           {% for seg in analytics_device_segments %}
-          <div class="stack-legend-item"><span class="stack-legend-dot" style="background:{{ seg.color }};"></span>{{ seg.label }} ({{ seg.count }})</div>
+          <div class="stack-legend-item" data-detail-type="device" data-detail-key="{{ seg.label }}" data-detail-title="{{ seg.label }} -- Last 30 Days"><span class="stack-legend-dot" style="background:{{ seg.color }};"></span>{{ seg.label }} ({{ seg.count }})</div>
           {% endfor %}
         </div>
         {% else %}
@@ -521,7 +544,7 @@
         {% if analytics_top_referrers %}
         <div class="bar-list">
           {% for r in analytics_top_referrers %}
-          <div class="bar-row">
+          <div class="bar-row" data-detail-type="referrer" data-detail-key="{{ r.label }}" data-detail-title="{{ r.label }} -- Last 30 Days">
             <div class="bar-row-label" title="{{ r.label }}">{{ r.label }}</div>
             <div class="bar-row-track"><div class="bar-row-fill" style="width:{{ r.pct }}%;"></div></div>
             <div class="bar-row-count">{{ r.count }}</div>
@@ -541,7 +564,7 @@
         {% if analytics_top_pages %}
         <div class="bar-list">
           {% for p in analytics_top_pages %}
-          <div class="bar-row">
+          <div class="bar-row" data-detail-type="page" data-detail-key="{{ p.label }}" data-detail-title="{{ p.label }} -- Last 30 Days">
             <div class="bar-row-label" title="{{ p.label }}">{{ p.label }}</div>
             <div class="bar-row-track"><div class="bar-row-fill" style="width:{{ p.pct }}%;"></div></div>
             <div class="bar-row-count">{{ p.count }}</div>
@@ -559,7 +582,7 @@
         {% if analytics_top_countries %}
         <div class="bar-list">
           {% for c in analytics_top_countries %}
-          <div class="bar-row">
+          <div class="bar-row" data-detail-type="country" data-detail-key="{{ c.label }}" data-detail-title="{{ c.label }} -- Last 30 Days">
             <div class="bar-row-label" title="{{ c.label }}">{{ c.label }}</div>
             <div class="bar-row-track"><div class="bar-row-fill" style="width:{{ c.pct }}%;"></div></div>
             <div class="bar-row-count">{{ c.count }}</div>
@@ -572,6 +595,15 @@
       </div>
     </div>
   </div>
+  </div>
+</div>
+
+<div class="a-modal-overlay" id="analyticsModal" role="dialog" aria-modal="true" aria-label="Analytics detail">
+  <div class="a-modal-card analytics">
+    <button class="a-modal-close" id="analyticsCloseBtn" aria-label="Close">&#10005;</button>
+    <div class="a-modal-title" id="analyticsModalTitle">&nbsp;</div>
+    <div class="a-modal-subtitle" id="analyticsModalSubtitle"></div>
+    <div class="a-modal-body" id="analyticsModalBody"></div>
   </div>
 </div>
 
@@ -595,6 +627,119 @@
   try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
   var isValid = tabs.some(function(t){ return t.dataset.section === saved; });
   activate(isValid ? saved : 'gallery');
+})();
+
+(function(){
+  var modal = document.getElementById('analyticsModal');
+  var closeBtn = document.getElementById('analyticsCloseBtn');
+  var titleEl = document.getElementById('analyticsModalTitle');
+  var subtitleEl = document.getElementById('analyticsModalSubtitle');
+  var bodyEl = document.getElementById('analyticsModalBody');
+
+  function close(){ modal.classList.remove('open'); }
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+  }); }
+
+  var PAGE_NAMES = {'/': 'Home', '/roots': 'Roots', '/gallery': 'Gallery',
+                     '/sponsors': 'Sponsors', '/press-archives': 'Press & Archives'};
+
+  function kpiTile(label, value){
+    return '<div class="kpi-tile"><div class="kpi-label">' + esc(label) + '</div>' +
+           '<div class="kpi-value" style="font-size:20px;">' + esc(value) + '</div></div>';
+  }
+
+  function rankedList(title, items){
+    var html = '<div class="viz-title" style="margin-top:18px;">' + esc(title) + '</div>';
+    if (!items || !items.length) { return html + '<div class="viz-empty">None recorded.</div>'; }
+    var maxV = 0;
+    items.forEach(function(i){ if (i[1] > maxV) maxV = i[1]; });
+    html += '<div class="bar-list">';
+    items.forEach(function(i){
+      var pct = maxV ? Math.round(i[1] / maxV * 100) : 0;
+      html += '<div class="bar-row"><div class="bar-row-label" title="' + esc(i[0]) + '">' + esc(i[0]) + '</div>' +
+              '<div class="bar-row-track"><div class="bar-row-fill" style="width:' + pct + '%;"></div></div>' +
+              '<div class="bar-row-count">' + i[1] + '</div></div>';
+    });
+    return html + '</div>';
+  }
+
+  function renderDay(d){
+    var html = '<div class="kpi-row" style="margin-bottom:6px;">' +
+      kpiTile('Pageviews', d.pageviews) + kpiTile('Unique Visitors', d.unique_visitors) +
+      kpiTile('Sessions', d.sessions) + kpiTile('Avg Visit', d.avg_session_minutes + ' min') +
+      '</div>';
+    html += rankedList('Top Referrers', d.top_referrers);
+    html += rankedList('Top Pages', d.top_pages.map(function(p){ return [PAGE_NAMES[p[0]] || p[0], p[1]]; }));
+    html += rankedList('Top Countries', d.top_countries);
+    return html;
+  }
+
+  function renderTrend(bars){
+    if (!bars.length) { return '<div class="viz-empty">Not enough history yet.</div>'; }
+    var html = '<div class="trend-chart">';
+    bars.forEach(function(b){
+      var cls = 'trend-bar' + (b.is_today ? ' is-today' : '');
+      html += '<div class="' + cls + '" style="height:' + b.pct + '%;" title="' + esc(b.date) + ': ' + b.value + '"></div>';
+    });
+    html += '</div>';
+    if (bars.length > 1) {
+      html += '<div class="trend-axis"><span>' + esc(bars[0].date) + '</span><span>' + esc(bars[bars.length - 1].date) + '</span></div>';
+    } else {
+      html += '<div class="trend-axis"><span>' + esc(bars[0].date) + ' (' + bars[0].value + ')</span></div>';
+    }
+    return html;
+  }
+
+  function renderHourly(hours, field){
+    var maxV = 0;
+    hours.forEach(function(h){ if (h[field] > maxV) maxV = h[field]; });
+    var html = '<div class="trend-chart">';
+    hours.forEach(function(h){
+      var v = h[field], pct = maxV ? Math.round(v / maxV * 100) : 0;
+      html += '<div class="trend-bar" style="height:' + pct + '%;" title="' + h.hour + ':00 UTC – ' + v + '"></div>';
+    });
+    html += '</div><div class="trend-axis"><span>00:00 UTC</span><span>23:00 UTC</span></div>';
+    return html;
+  }
+
+  function renderSessions(sessions){
+    if (!sessions.length) { return '<div class="viz-empty">No visits recorded yet today.</div>'; }
+    var html = '<table><thead><tr><th>Started</th><th>Device</th><th>Country</th><th>Referrer</th><th>Pages</th><th style="text-align:right;">Duration</th></tr></thead><tbody>';
+    sessions.forEach(function(s){
+      html += '<tr><td>' + esc(s.started) + '</td><td>' + esc(s.device) + '</td><td>' + esc(s.country) + '</td>' +
+              '<td>' + esc(s.referrer) + '</td><td>' + s.pages + '</td><td style="text-align:right;">' + s.duration_minutes + ' min</td></tr>';
+    });
+    return html + '</tbody></table>';
+  }
+
+  function openDetail(type, key, title){
+    titleEl.textContent = title;
+    subtitleEl.textContent = '';
+    bodyEl.innerHTML = '<div class="viz-empty">Loading&hellip;</div>';
+    modal.classList.add('open');
+    fetch('/admin/analytics/detail?type=' + encodeURIComponent(type) + '&key=' + encodeURIComponent(key))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (!data.ok) { bodyEl.innerHTML = '<div class="viz-empty">' + esc(data.error || 'No data.') + '</div>'; return; }
+        if (data.kind === 'day') { bodyEl.innerHTML = renderDay(data.data); }
+        else if (data.kind === 'trend') { bodyEl.innerHTML = renderTrend(data.bars); }
+        else if (data.kind === 'hourly') { bodyEl.innerHTML = renderHourly(data.hours, data.field); }
+        else if (data.kind === 'sessions') { bodyEl.innerHTML = renderSessions(data.sessions); }
+      })
+      .catch(function(){ bodyEl.innerHTML = '<div class="viz-empty">Couldn\'t load that. Try again.</div>'; });
+  }
+
+  document.querySelectorAll('[data-detail-type]').forEach(function(el){
+    el.addEventListener('click', function(){
+      openDetail(el.getAttribute('data-detail-type'), el.getAttribute('data-detail-key'),
+                 el.getAttribute('data-detail-title') || el.getAttribute('data-detail-key'));
+    });
+  });
 })();
 </script>
 </body>

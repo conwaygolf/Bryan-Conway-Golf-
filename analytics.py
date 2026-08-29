@@ -284,3 +284,97 @@ def rollup_today(load_json, save_json, git_publish, path, history_days=90):
     history = history[-history_days:]
     save_json(path, history)
     git_publish([path], f"Analytics: daily rollup ({today})")
+
+
+# ---------------------------------------------------------------------------
+# Drill-down detail -- everything below backs the "click anything for a
+# popup" interaction. All of it is read-only over data already gathered
+# above; nothing here changes what's tracked or stored.
+
+def hourly_breakdown_today():
+    """Today's live events (UTC hours) -- only real-time view this app can
+    offer, since durable history only stores one rollup per whole day."""
+    events = _snapshot(since_ts=today_start_ts())
+    buckets = [{"hour": h, "pageviews": 0, "vids": set()} for h in range(24)]
+    for e in events:
+        h = datetime.fromtimestamp(e["ts"], tz=timezone.utc).hour
+        buckets[h]["pageviews"] += 1
+        buckets[h]["vids"].add(e["vid"])
+    return [{"hour": b["hour"], "pageviews": b["pageviews"], "unique_visitors": len(b["vids"])}
+            for b in buckets]
+
+
+def _session_summary(evs):
+    start, end = evs[0]["ts"], evs[-1]["ts"]
+    # Geo lookups are async and cache by IP (see geo_lookup_cached) -- the
+    # very first pageview from a brand-new visitor often has no country yet
+    # even though a later pageview in the same session does once the
+    # background lookup finishes. Use whichever event actually caught it
+    # rather than assuming the first one did.
+    country = next((e["country"] for e in evs if e["country"]), None)
+    return {
+        "started": datetime.fromtimestamp(start, tz=timezone.utc).strftime("%H:%M UTC"),
+        "device": evs[0]["device"],
+        "country": country or "Unknown",
+        "referrer": evs[0]["referrer"] or "Direct",
+        "pages": len(evs),
+        "duration_minutes": round((end - start) / 60, 1),
+    }
+
+
+def sessions_today(limit=30):
+    """Today's individual visits, longest first -- what "Avg. Visit Length"
+    drills into, since an average alone hides the spread."""
+    events = _snapshot(since_ts=today_start_ts())
+    by_vid = {}
+    for e in events:
+        by_vid.setdefault(e["vid"], []).append(e)
+    sessions = []
+    for evs in by_vid.values():
+        evs.sort(key=lambda e: e["ts"])
+        current = [evs[0]]
+        for e in evs[1:]:
+            if e["ts"] - current[-1]["ts"] > SESSION_GAP_SECONDS:
+                sessions.append(_session_summary(current))
+                current = [e]
+            else:
+                current.append(e)
+        sessions.append(_session_summary(current))
+    sessions.sort(key=lambda s: s["duration_minutes"], reverse=True)
+    return sessions[:limit]
+
+
+def _bars_from_series(series):
+    max_v = max((v for _, v in series), default=0)
+    return [{"date": date, "value": v, "pct": round(v / max_v * 100) if max_v else 0,
+             "is_today": date == "today"}
+            for date, v in series]
+
+
+def dimension_trend(history, today_top_list, label, key):
+    """Daily count of one specific referrer/page/country over `history`
+    (already-ranked top-N per day, so a day where this label fell outside
+    that day's own top few reads as 0 -- an approximation, not exact, but
+    the daily file only keeps each day's top few to stay small) plus today
+    live. `key` is which stored list to read: top_referrers/top_pages/top_countries."""
+    series = [(d["date"], dict(d.get(key, [])).get(label, 0)) for d in history]
+    series.append(("today", dict(today_top_list).get(label, 0)))
+    return _bars_from_series(series)
+
+
+def device_trend(history, today_devices, device_label):
+    series = [(d["date"], d.get("devices", {}).get(device_label, 0)) for d in history]
+    series.append(("today", today_devices.get(device_label, 0)))
+    return _bars_from_series(series)
+
+
+def full_history_bars(history, today_pageviews):
+    series = [(d["date"], d.get("pageviews", 0)) for d in history]
+    series.append(("today", today_pageviews))
+    return _bars_from_series(series)
+
+
+def day_detail(history, date_str, today_stats, today_date_str):
+    if date_str == today_date_str:
+        return {**today_stats, "date": date_str, "is_today": True}
+    return next((d for d in history if d.get("date") == date_str), None)

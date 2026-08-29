@@ -956,10 +956,59 @@ def admin_logout():
 
 PAGE_DISPLAY_NAMES = {"/": "Home", "/roots": "Roots", "/gallery": "Gallery",
                        "/sponsors": "Sponsors", "/press-archives": "Press & Archives"}
+PAGE_RAW_PATHS = {v: k for k, v in PAGE_DISPLAY_NAMES.items()}
 
 
 def _relabel(items, mapping):
     return [(mapping.get(label, label), count) for label, count in items]
+
+
+@app.route("/admin/analytics/detail")
+@admin_required
+def admin_analytics_detail():
+    """Backs every click-for-detail popup on the Analytics tab. Read-only --
+    just re-slices data already gathered by the tracking/rollup above."""
+    kind = request.args.get("type", "")
+    key = request.args.get("key", "")
+    today_stats = analytics.stats_today()
+    today_str = datetime.now(timezone.utc).date().isoformat()
+    history = [d for d in load_json(ANALYTICS_DAILY_JSON, []) if d.get("date") != today_str]
+    recent_30 = history[-30:]
+
+    if kind == "day":
+        detail = analytics.day_detail(history, key, today_stats, today_str)
+        if not detail:
+            return jsonify({"ok": False, "error": "No data recorded for that day."})
+        return jsonify({"ok": True, "kind": "day", "data": detail})
+
+    if kind == "referrer":
+        bars = analytics.dimension_trend(recent_30, today_stats["top_referrers"], key, "top_referrers")
+        return jsonify({"ok": True, "kind": "trend", "bars": bars})
+
+    if kind == "page":
+        bars = analytics.dimension_trend(recent_30, today_stats["top_pages"], PAGE_RAW_PATHS.get(key, key), "top_pages")
+        return jsonify({"ok": True, "kind": "trend", "bars": bars})
+
+    if kind == "country":
+        bars = analytics.dimension_trend(recent_30, today_stats["top_countries"], key, "top_countries")
+        return jsonify({"ok": True, "kind": "trend", "bars": bars})
+
+    if kind == "device":
+        bars = analytics.device_trend(recent_30, today_stats["devices"], key)
+        return jsonify({"ok": True, "kind": "trend", "bars": bars})
+
+    if kind == "kpi" and key == "pageviews":
+        return jsonify({"ok": True, "kind": "hourly", "field": "pageviews", "hours": analytics.hourly_breakdown_today()})
+    if kind == "kpi" and key == "visitors":
+        return jsonify({"ok": True, "kind": "hourly", "field": "unique_visitors", "hours": analytics.hourly_breakdown_today()})
+    if kind == "kpi" and key == "avg_session":
+        return jsonify({"ok": True, "kind": "sessions", "sessions": analytics.sessions_today()})
+    if kind == "kpi" and key == "alltime":
+        full_history = [d for d in load_json(ANALYTICS_DAILY_JSON, []) if d.get("date") != today_str]
+        bars = analytics.full_history_bars(full_history, today_stats["pageviews"])
+        return jsonify({"ok": True, "kind": "trend", "bars": bars})
+
+    return jsonify({"ok": False, "error": "Unknown detail type."})
 
 
 @app.route("/admin")
