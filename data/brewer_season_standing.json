@@ -5,65 +5,65 @@
     {
       "pos": "1",
       "name": "Prewitt, Cory",
-      "events": "12",
+      "events": "13",
       "wins": "3",
-      "points": "2,170.00"
+      "points": "2,625.00"
     },
     {
       "pos": "2",
+      "name": "Mark Howard",
+      "events": "12",
+      "wins": "1",
+      "points": "2,420.00"
+    },
+    {
+      "pos": "3",
+      "name": "Glenn Irving",
+      "events": "14",
+      "wins": "4",
+      "points": "2,400.00"
+    },
+    {
+      "pos": "4",
+      "name": "Wilson, Tyler",
+      "events": "10",
+      "wins": "2",
+      "points": "2,125.00"
+    },
+    {
+      "pos": "5",
       "name": "Reid, Dave",
       "events": "16",
       "wins": "0",
       "points": "2,090.00"
     },
     {
-      "pos": "3",
-      "name": "Glenn Irving",
-      "events": "13",
-      "wins": "4",
-      "points": "2,040.00"
-    },
-    {
-      "pos": "4",
-      "name": "Mark Howard",
-      "events": "11",
-      "wins": "0",
-      "points": "1,820.00"
-    },
-    {
-      "pos": "5",
-      "name": "Wilson, Tyler",
-      "events": "9",
-      "wins": "2",
-      "points": "1,765.00"
-    },
-    {
       "pos": "6",
-      "name": "Woeste, Ed",
-      "events": "11",
-      "wins": "2",
-      "points": "1,657.50"
+      "name": "Conway, Bryan",
+      "events": "10",
+      "wins": "1",
+      "points": "2,077.50"
     },
     {
       "pos": "7",
       "name": "Laswell, Greg",
-      "events": "8",
+      "events": "9",
       "wins": "1",
-      "points": "1,585.00"
+      "points": "1,885.00"
     },
     {
       "pos": "8",
-      "name": "Conway, Bryan",
-      "events": "9",
-      "wins": "1",
-      "points": "1,537.50"
+      "name": "Woeste, Ed",
+      "events": "12",
+      "wins": "2",
+      "points": "1,877.50"
     },
     {
       "pos": "9",
       "name": "Khounlavong, Ryan",
-      "events": "11",
+      "events": "12",
       "wins": "0",
-      "points": "1,462.50"
+      "points": "1,722.50"
     },
     {
       "pos": "10",
@@ -103,61 +103,68 @@
     {
       "pos": "15",
       "name": "Brian Hayes",
-      "events": "3",
+      "events": "4",
       "wins": "0",
-      "points": "515.00"
+      "points": "705.00"
     },
     {
       "pos": "16",
+      "name": "Kane, Joe",
+      "events": "3",
+      "wins": "0",
+      "points": "685.00"
+    },
+    {
+      "pos": "17",
       "name": "Simmons, Jay",
       "events": "3",
       "wins": "0",
       "points": "487.50"
     },
     {
-      "pos": "17",
+      "pos": "18",
       "name": "Soale, Matt",
       "events": "4",
       "wins": "1",
       "points": "472.50"
     },
     {
-      "pos": "18",
+      "pos": "19",
       "name": "Kirkland, Nathan",
       "events": "4",
       "wins": "0",
       "points": "457.50"
     },
     {
-      "pos": "19",
+      "pos": "20",
       "name": "Wheeler, Gordon",
       "events": "6",
       "wins": "0",
       "points": "455.00"
     },
     {
-      "pos": "23",
+      "pos": "24",
       "name": "Michael Crabtree",
       "events": "2",
       "wins": "1",
       "points": "295.00"
     },
     {
-      "pos": "24",
+      "pos": "25",
       "name": "Space, Carl",
       "events": "2",
       "wins": "1",
       "points": "290.00"
     },
     {
-      "pos": "28",
+      "pos": "29",
       "name": "Gosser, Christian",
       "events": "4",
       "wins": "0",
       "points": "255.00"
     },
     {
-      "pos": "29",
+      "pos": "30",
       "name": "Jerrod Watson",
       "events": "1",
       "wins": "0",
@@ -294,59 +301,51 @@
     {
       "pos": "1",
       "name": "Prewitt, Cory",
-      "events": "12",
+      "events": "13",
       "wins": "3",
-      "points": "2,170.00"
+      "points": "2,625.00"
     },
     {
       "pos": "2",
+      "name": "Mark Howard",
+      "events": "12",
+      "wins": "1",
+      "points": "2,420.00"
+    },
+    {
+      "pos": "3",
+      "name": "Glenn Irving",
+      "events": "14",
+      "wins": "4",
+      "points": "2,400.00"
+    },
+    {
+      "pos": "4",
+      "name": "Wilson, Tyler",
+      "events": "10",
+      "wins": "2",
+      "points": "2,125.00"
+    },
+    {
+      "pos": "5",
       "name": "Reid, Dave",
       "events": "16",
       "wins": "0",
       "points": "2,090.00"
     },
     {
-      "pos": "3",
-      "name": "Glenn Irving",
-      "events": "13",
-      "wins": "4",
-      "points": "2,040.00"
-    },
-    {
-      "pos": "4",
-      "name": "Mark Howard",
-      "events": "11",
-      "wins": "0",
-      "points": "1,820.00"
-    },
-    {
-      "pos": "5",
-      "name": "Wilson, Tyler",
-      "events": "9",
-      "wins": "2",
-      "points": "1,765.00"
-    },
-    {
       "pos": "6",
-      "name": "Woeste, Ed",
-      "events": "11",
-      "wins": "2",
-      "points": "1,657.50"
+      "name": "Conway, Bryan",
+      "events": "10",
+      "wins": "1",
+      "points": "2,077.50"
     },
     {
       "pos": "7",
       "name": "Laswell, Greg",
-      "events": "8",
-      "wins": "1",
-      "points": "1,585.00"
-    },
-    {
-      "pos": "8",
-      "name": "Conway, Bryan",
       "events": "9",
       "wins": "1",
-      "points": "1,537.50",
-      "pinned": true
+      "points": "1,885.00"
     }
   ]
 }
