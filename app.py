@@ -99,6 +99,15 @@ GITHUB_PUSH_TOKEN = os.getenv("GITHUB_PUSH_TOKEN")
 GITHUB_REPO = os.getenv("GITHUB_REPO", "jstout5/ConwayGolf-")
 GIT_PUBLISH_ENABLED = os.getenv("ADMIN_AUTO_PUBLISH", "1") != "0"
 
+# Admin requests and the two background pollers (leaderboard, analytics
+# rollup) all call git_publish() from separate threads in the same process.
+# Without this lock, two concurrent git operations on the same working tree
+# can interleave (or one's push can land between the other's commit and
+# push, rejecting it) -- the loser's change was a real local commit that
+# never reached origin, and got silently wiped by the next Render restart
+# even though it briefly looked correct in /admin (same in-memory state).
+_git_publish_lock = threading.Lock()
+
 
 def git_publish(paths, message):
     """Best-effort commit + push of the given paths. Never raises -- an
@@ -106,6 +115,15 @@ def git_publish(paths, message):
     fails (no token configured yet, no network, etc.)."""
     if not GIT_PUBLISH_ENABLED:
         return
+    with _git_publish_lock:
+        _git_publish_locked(paths, message)
+
+
+def _git_publish_locked(paths, message):
+    if GITHUB_PUSH_TOKEN:
+        remote = f"https://x-access-token:{GITHUB_PUSH_TOKEN}@github.com/{GITHUB_REPO}.git"
+    else:
+        remote = "origin"
     try:
         subprocess.run(["git", "add", *[str(p) for p in paths]], cwd=BASE_DIR, check=True)
         staged = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=BASE_DIR)
@@ -116,11 +134,22 @@ def git_publish(paths, message):
              "commit", "-m", message],
             cwd=BASE_DIR, check=True,
         )
-        if GITHUB_PUSH_TOKEN:
-            remote = f"https://x-access-token:{GITHUB_PUSH_TOKEN}@github.com/{GITHUB_REPO}.git"
-        else:
-            remote = "origin"
-        subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR, check=True)
+        push = subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR)
+        if push.returncode != 0:
+            # Remote moved since we last fetched (another dyno, Jimmy's own
+            # machine, or -- pre-lock -- a same-process race). Rebase our
+            # commit on top and retry once rather than stranding it locally.
+            subprocess.run(["git", "fetch", remote, "main"], cwd=BASE_DIR, check=True)
+            rebase = subprocess.run(["git", "rebase", "FETCH_HEAD"], cwd=BASE_DIR)
+            if rebase.returncode != 0:
+                # A real content conflict (rare -- two admin edits to the
+                # same JSON file at once). Abort so the working tree isn't
+                # left stuck mid-rebase, which would break every future
+                # publish until someone fixes it by hand.
+                subprocess.run(["git", "rebase", "--abort"], cwd=BASE_DIR)
+                print("[admin publish] rebase conflict, change not published -- aborted cleanly")
+                return
+            subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR, check=True)
     except subprocess.CalledProcessError as e:
         print(f"[admin publish] git command failed (exit {e.returncode})")
     except Exception as e:
