@@ -600,7 +600,35 @@ def _leaderboard_poll_loop():
             poll_live_leaderboard_once()
         except Exception as e:
             print(f"[leaderboard poller] error: {type(e).__name__}: {e}")
-        time.sleep(LEADERBOARD_POLL_INTERVAL_SECONDS)
+        try:
+            time.sleep(LEADERBOARD_POLL_INTERVAL_SECONDS)
+        except Exception:
+            pass
+
+
+_leaderboard_thread = None
+
+
+def _spawn_leaderboard_thread():
+    global _leaderboard_thread
+    _leaderboard_thread = threading.Thread(target=_leaderboard_poll_loop, daemon=True)
+    _leaderboard_thread.start()
+
+
+def _leaderboard_watchdog():
+    # Real incident, 2026-08-27: the poller thread died from something its
+    # own try/except didn't catch and just never came back -- a plain
+    # background thread has no supervisor, so a dead thread stays dead
+    # until the next full process restart. That produced a real 64.7-hour
+    # outage during a live tournament before anyone noticed. Rather than
+    # trying to enumerate every possible failure mode, just check every 5
+    # min whether the thread is still alive and restart it if not -- cheap
+    # insurance against whatever the next unknown failure turns out to be.
+    while True:
+        time.sleep(300)
+        if _leaderboard_thread is None or not _leaderboard_thread.is_alive():
+            print("[leaderboard poller] watchdog: thread was dead, restarting")
+            _spawn_leaderboard_thread()
 
 
 def start_leaderboard_poller():
@@ -610,7 +638,8 @@ def start_leaderboard_poller():
     # is always False, so this never skips in production.
     if app.debug and os.environ.get("WERKZEUG_RUN_MAIN") != "true":
         return
-    threading.Thread(target=_leaderboard_poll_loop, daemon=True).start()
+    _spawn_leaderboard_thread()
+    threading.Thread(target=_leaderboard_watchdog, daemon=True).start()
 
 
 start_leaderboard_poller()
