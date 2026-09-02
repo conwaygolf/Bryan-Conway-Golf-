@@ -621,7 +621,7 @@ start_leaderboard_poller()
 # redeploy with minimal lost granularity, not track something changing by the
 # minute. See analytics.py's docstring for why this doesn't git-commit every
 # single pageview.
-ANALYTICS_ROLLUP_INTERVAL_SECONDS = 900  # 15 min
+ANALYTICS_ROLLUP_INTERVAL_SECONDS = 4 * 3600  # 4 hours -- was 15 min, cut down to reduce how often this collides with admin publishes
 
 
 def _analytics_rollup_loop():
