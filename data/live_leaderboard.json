@@ -1,64 +1,7 @@
 {
-  "event_label": "KGA Amateur Series #5",
-  "venue": "EClub Kentucky North",
-  "rows": [
-    {
-      "pos": "1",
-      "name": "Bryan Conway",
-      "score": "-1",
-      "thru": "",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2421292873"
-    },
-    {
-      "pos": "2",
-      "name": "Mark Knecht",
-      "score": "+1",
-      "thru": "",
-      "city": "Country Club of Paducah",
-      "aggregate_id": "2421292870"
-    },
-    {
-      "pos": "3",
-      "name": "David Rambo",
-      "score": "+9",
-      "thru": "",
-      "city": "Silos Country Club",
-      "aggregate_id": "2421292876"
-    },
-    {
-      "pos": "4",
-      "name": "Adam Brooks",
-      "score": "+10",
-      "thru": "",
-      "city": "EClub Kentucky West",
-      "aggregate_id": "2421292878"
-    },
-    {
-      "pos": "5",
-      "name": "David Sykes",
-      "score": "+14",
-      "thru": "",
-      "city": "Country Club of Paducah",
-      "aggregate_id": "2421292877"
-    },
-    {
-      "pos": "6",
-      "name": "Ryan Bandy",
-      "score": "+17",
-      "thru": "",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2421292871"
-    },
-    {
-      "pos": "7",
-      "name": "David Horning",
-      "score": "+19",
-      "thru": "",
-      "city": "EClub Kentucky Central",
-      "aggregate_id": "2421292874"
-    }
-  ],
-  "updated": "2026-08-27T22:53+00:00",
-  "note": null
+  "event_label": null,
+  "venue": null,
+  "rows": [],
+  "updated": "2026-09-02T20:26+00:00",
+  "note": "Couldn't find 'PGLAT Playoff at Lakeside Golf Course' in the KGA schedule, and it's not a golfgenius.com URL or league ID either -- check the spelling against kygolf.org's schedule."
 }

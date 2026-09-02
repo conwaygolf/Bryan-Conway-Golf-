@@ -79,5 +79,23 @@
     "note": "Persimmon Ridge Golf Club",
     "hidden": false,
     "result_checked": false
+  },
+  {
+    "date_label": "Aug 30",
+    "start_date": "2026-08-30",
+    "end_date": "2026-08-30",
+    "title": "PGLAT Playoff at Lakeside Golf Course",
+    "note": "",
+    "hidden": false,
+    "result_checked": false
+  },
+  {
+    "date_label": "Sep 12\u201313",
+    "start_date": "2026-09-12",
+    "end_date": "2026-09-13",
+    "title": "PGLAT Tour Championship",
+    "note": "Kearney Hills Golf Links",
+    "hidden": false,
+    "result_checked": false
   }
 ]
