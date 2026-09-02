@@ -1440,6 +1440,32 @@ def admin_results_toggle(idx):
     return redirect(url_for("admin"))
 
 
+@app.route("/admin/results/<int:idx>/edit", methods=["POST"])
+@admin_required
+def admin_results_edit(idx):
+    if not 0 <= idx < len(RESULTS):
+        flash("That result no longer exists.", "error")
+        return redirect(url_for("admin"))
+    date = (request.form.get("date") or "").strip()
+    title = (request.form.get("title") or "").strip()
+    note = (request.form.get("note") or "").strip()
+    tag = (request.form.get("tag") or "").strip() or None
+
+    if not date or not title:
+        flash("Date and title are required.", "error")
+        return redirect(url_for("admin"))
+
+    result = RESULTS[idx]
+    result["date"] = date
+    result["title"] = title
+    result["note"] = note
+    result["tag"] = tag
+    save_json(RESULTS_JSON, RESULTS)
+    git_publish([RESULTS_JSON], f"Admin: edit result ({title})")
+    flash(f'Updated "{title}".', "ok")
+    return redirect(url_for("admin"))
+
+
 @app.route("/admin/results/drafts/<int:idx>/publish", methods=["POST"])
 @admin_required
 def admin_results_draft_publish(idx):

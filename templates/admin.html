@@ -77,6 +77,19 @@
   .sponsor-row .meta{flex:1;}
   .sponsor-row .item-actions{margin-top:6px;max-width:180px;}
 
+  .result-row{padding:10px 0;border-top:1px solid #eee;}
+  .result-row:first-child{border-top:none;}
+  .result-row.is-hidden{opacity:.5;}
+  .result-row .name{font-weight:700;font-size:13.5px;}
+  .result-row .url{font-size:11.5px;color:#8a8a7c;}
+  .result-row .item-actions{margin-top:6px;max-width:180px;}
+  .result-edit{margin-top:8px;}
+  .result-edit summary{cursor:pointer;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;color:var(--blue-deep);list-style:none;}
+  .result-edit summary::-webkit-details-marker{display:none;}
+  .result-edit summary:hover{text-decoration:underline;}
+  .result-edit form{margin-top:10px;border-top:1px dashed #e0ded3;padding-top:10px;}
+  .result-edit .btn{margin-top:12px;}
+
   .hero-preview{position:relative;border-radius:6px;overflow:hidden;height:200px;background:var(--black);margin-top:16px;}
   .hero-preview img{width:100%;height:100%;object-fit:cover;}
   .hero-preview .tag{position:absolute;top:10px;background:rgba(10,8,7,.75);color:#f4f4f2;font-size:10.5px;padding:5px 10px;border-radius:4px;}
@@ -328,7 +341,7 @@
     {% if results %}
     <div style="margin-top:18px;">
       {% for r in results %}
-      <div class="sponsor-row {{ 'is-hidden' if r.hidden else '' }}">
+      <div class="result-row {{ 'is-hidden' if r.hidden else '' }}">
         <div class="meta">
           <div class="name">{{ r.date }} &mdash; {{ r.title }}{% if r.tag %} <span class="hidden-badge" style="color:#a8171c;">{{ r.tag }}</span>{% endif %}{% if r.hidden %} <span class="hidden-badge">Hidden</span>{% endif %}</div>
           <div class="url">{{ r.note }}</div>
@@ -340,6 +353,20 @@
               <button class="mini-btn danger" type="submit">Delete</button>
             </form>
           </div>
+          <details class="result-edit">
+            <summary>Edit</summary>
+            <form method="post" action="/admin/results/{{ loop.index0 }}/edit">
+              <label>Date / label</label>
+              <input type="text" name="date" value="{{ r.date }}" required>
+              <label>Title</label>
+              <input type="text" name="title" value="{{ r.title }}" required>
+              <label>Note</label>
+              <textarea name="note">{{ r.note }}</textarea>
+              <label>Red tag (optional)</label>
+              <input type="text" name="tag" value="{{ r.tag or '' }}" placeholder="e.g. Champion, Low Amateur, Runner-Up">
+              <button class="btn" type="submit">Save Changes</button>
+            </form>
+          </details>
         </div>
       </div>
       {% endfor %}
