@@ -224,6 +224,7 @@
     <button type="button" class="admin-tab" data-section="press-header" style="--tab-color:#1b3a63;">Press Archives Header</button>
     <button type="button" class="admin-tab" data-section="press-archives" style="--tab-color:#8a1418;">Press Archives</button>
     <button type="button" class="admin-tab" data-section="analytics" style="--tab-color:#2a78d6;">Analytics</button>
+    <button type="button" class="admin-tab" data-section="bag" style="--tab-color:#c9a227;">Bag</button>
   </nav>
 
   <div class="admin-panel" id="panel-gallery">
@@ -625,6 +626,49 @@
         <div class="viz-empty">No location data yet.</div>
         {% endif %}
       </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="admin-panel" id="panel-bag">
+  <div class="card">
+    <h2>What's In Bryan's Bag</h2>
+    <div class="desc">Feeds the "Bryan's Bag" page -- a fixed set of 8 items (no add/delete), each editable below. <strong>Not linked from the site nav yet</strong> -- that comes later, so this is safe to build out without it going live. Preview it anytime:</div>
+    <a class="btn" href="/bag" target="_blank" style="text-decoration:none;">View Draft Page &rarr;</a>
+
+    <div style="margin-top:22px;">
+      {% for item in bag_items %}
+      <div class="result-row">
+        <div class="meta">
+          <div class="name">{{ item.number }} &mdash; {{ item.category }}</div>
+          <div class="url">{{ item.specs|length }} spec{{ '' if item.specs|length == 1 else 's' }}{% if item.description %} &middot; has description{% endif %}</div>
+        </div>
+        <details class="result-edit">
+          <summary>Edit</summary>
+          <form method="post" action="/admin/bag/{{ item.id }}/edit" enctype="multipart/form-data">
+            <label>Specs</label>
+            {% set pad = [item.specs|length + 2, 6]|max %}
+            {% for i in range(pad) %}
+            {% set s = item.specs[i] if i < item.specs|length else None %}
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <input type="text" name="spec_label[]" placeholder="Label (e.g. Loft)" value="{{ s.label if s else '' }}" style="flex:1;">
+              <input type="text" name="spec_value[]" placeholder="Value" value="{{ s.value if s else '' }}" style="flex:2;">
+            </div>
+            {% endfor %}
+            <label>Notes (optional, short)</label>
+            <input type="text" name="notes" value="{{ item.notes or '' }}" placeholder="e.g. Draw biased setup, low spin">
+            <label>Description</label>
+            <textarea name="description" rows="3">{{ item.description or '' }}</textarea>
+            <label>Photo (optional -- shows a generic icon until one's uploaded)</label>
+            {% if item.image %}
+            <div style="margin:6px 0;"><img src="/static/images/{{ item.image }}" style="height:60px;width:60px;object-fit:contain;background:#0a1526;border-radius:4px;padding:6px;"></div>
+            {% endif %}
+            <input type="file" name="image" accept="image/*">
+            <button class="btn" type="submit">Save Changes</button>
+          </form>
+        </details>
+      </div>
+      {% endfor %}
     </div>
   </div>
   </div>

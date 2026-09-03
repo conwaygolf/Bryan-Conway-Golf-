@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's In Bryan's Bag | Bryan Conway Golf</title>
+<meta name="description" content="An inside look at Bryan Conway's tour equipment -- every club, ball, and glove he plays.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="/static/images/bc_logo_final.png">
+<style>
+  :root{
+    --red:#a8171c;
+    --red-text:#8a1418;
+    --black:#0a0d12;
+    --black-soft:#12161d;
+    --gold:#f4f4f2;
+    --blue:#3f6fb0;
+    --blue-deep:#1b3a63;
+    --bag-navy:#0a1526;
+    --bag-navy-2:#0f1f36;
+    --bag-gold:#c9a227;
+    --bag-gold-light:#e8cf7a;
+    --bag-border:rgba(201,162,39,.35);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:#fdfdfb;color:#18180f;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  /* NAV (matches main site) */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:linear-gradient(180deg,rgba(20,26,36,.97) 0%,rgba(10,13,18,.97) 55%,rgba(5,6,9,.98) 100%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+    backdrop-filter:blur(10px);border-bottom:1px solid #1b2530;
+  }
+  .nav-inner{max-width:1440px;margin:0 auto;padding:18px 40px;min-height:150px;display:flex;align-items:center;justify-content:space-between;gap:32px;}
+  .nav-mark{display:flex;align-items:center;flex-shrink:0;}
+  .nav-mark img{height:130px;width:auto;display:block;}
+  .nav-links{display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:6px;list-style:none;flex:1;}
+  .nav-links a{
+    font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#fff;
+    background:var(--blue);padding:11px 16px;border-radius:3px;
+    transition:background .15s;white-space:nowrap;display:block;
+  }
+  .nav-links a:hover, .nav-links a.current{background:var(--blue-deep);}
+  .nav-links a.cta{background:var(--red);}
+  .nav-links a.cta:hover{background:var(--red-text);}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{width:22px;height:2px;background:var(--gold);}
+  @media(max-width:1100px){
+    .nav-inner{min-height:110px;}
+    .nav-mark img{height:76px;}
+    .nav-links{position:fixed;top:110px;left:0;right:0;flex-direction:column;flex-wrap:nowrap;justify-content:flex-start;gap:0;flex:none;background:rgba(20,17,16,.98);border-bottom:1px solid #3a2a28;max-height:0;overflow:hidden;transition:max-height .25s ease;}
+    .nav-links.open{max-height:420px;}
+    .nav-links a{display:block;margin:7px 18px;padding:14px 20px;border-radius:4px;}
+    .nav-toggle{display:flex;}
+  }
+
+  /* BAG PAGE */
+  .bag-wrap{background:radial-gradient(ellipse at 50% -10%,#122544 0%,var(--bag-navy) 55%);padding:64px 0 80px;}
+  .bag-header{text-align:center;margin-bottom:44px;}
+  .bag-eyebrow{font-size:12px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--bag-gold-light);opacity:.85;margin-bottom:10px;}
+  .bag-title{font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:clamp(30px,5vw,48px);line-height:1.1;}
+  .bag-title span{color:var(--bag-gold);display:block;}
+  .bag-sub{color:rgba(255,255,255,.65);font-size:13.5px;letter-spacing:1px;text-transform:uppercase;margin-top:14px;}
+  .bag-rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px auto 0;max-width:360px;}
+  .bag-rule .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bag-border),transparent);}
+  .bag-rule .diamond{width:7px;height:7px;background:var(--bag-gold);transform:rotate(45deg);}
+
+  .bag-mark{display:flex;flex-direction:column;align-items:center;margin:36px 0 44px;}
+  .bag-mark img{height:120px;width:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,.5));}
+  .bag-mark .name{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;color:var(--bag-gold-light);font-size:22px;margin-top:14px;}
+  .bag-mark .tag{font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;}
+
+  .bag-hint{
+    display:inline-flex;align-items:center;gap:8px;margin:0 auto 48px;
+    border:1px solid var(--bag-border);border-radius:30px;padding:9px 20px;
+    color:var(--bag-gold-light);font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    background:rgba(201,162,39,.06);
+  }
+  .bag-hint-row{display:flex;justify-content:center;}
+
+  .bag-grid{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;}
+  @media(max-width:860px){.bag-grid{grid-template-columns:1fr;}}
+
+  .bag-panel{
+    background:var(--bag-navy-2);border:1px solid var(--bag-border);border-radius:10px;padding:26px;
+  }
+  .bag-panel-label{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--bag-gold);margin-bottom:18px;}
+
+  .bag-list{display:flex;flex-direction:column;gap:10px;}
+  .bag-list-item{
+    display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;
+    background:rgba(255,255,255,.02);border:1px solid var(--bag-border);border-radius:8px;
+    padding:13px 16px;color:#fff;font:inherit;transition:background .15s,border-color .15s;
+  }
+  .bag-list-item:hover{background:rgba(201,162,39,.08);}
+  .bag-list-item.active{background:rgba(201,162,39,.14);border-color:var(--bag-gold);}
+  .bag-list-item .num{color:var(--bag-gold);font-weight:800;font-size:13px;min-width:20px;}
+  .bag-list-item .cat{font-weight:700;font-size:14px;flex:1;}
+  .bag-list-item .chev{color:var(--bag-gold);opacity:.7;font-size:13px;}
+
+  .bag-detail{min-height:420px;}
+  .bag-detail-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .bag-detail-num{color:var(--bag-gold);font-family:'Playfair Display',serif;font-weight:800;font-size:20px;}
+  .bag-detail-cat{color:#fff;font-family:'Playfair Display',serif;font-weight:800;font-size:22px;letter-spacing:.5px;text-transform:uppercase;}
+
+  .bag-detail-body{display:grid;grid-template-columns:200px 1fr;gap:28px;}
+  @media(max-width:640px){.bag-detail-body{grid-template-columns:1fr;}}
+
+  .bag-detail-img{
+    width:100%;aspect-ratio:1;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid var(--bag-border);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+  }
+  .bag-detail-img img{width:100%;height:100%;object-fit:contain;padding:14px;}
+  .bag-detail-img svg{width:58%;height:58%;opacity:.9;}
+
+  .bag-specs{width:100%;border-collapse:collapse;}
+  .bag-specs tr{border-top:1px solid rgba(255,255,255,.08);}
+  .bag-specs tr:first-child{border-top:none;}
+  .bag-specs td{padding:9px 0;font-size:13.5px;vertical-align:top;}
+  .bag-specs td:first-child{color:var(--bag-gold-light);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:11px;width:110px;padding-top:11px;}
+  .bag-specs td:last-child{color:#fff;font-weight:500;}
+  .bag-notes{color:rgba(255,255,255,.55);font-size:12.5px;font-style:italic;margin-top:12px;}
+  .bag-desc{color:rgba(255,255,255,.75);font-size:14px;line-height:1.7;margin-top:18px;}
+  .bag-empty{color:rgba(255,255,255,.45);font-size:13.5px;font-style:italic;margin-top:8px;}
+
+  footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
+  footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
+  footer img{height:34px;width:auto;}
+  .footer-credit{display:inline-flex;align-items:center;gap:6px;margin-left:14px;padding-left:14px;border-left:1px solid rgba(160,160,143,.3);color:#75756a;font-size:10.5px;}
+  .footer-credit:hover{color:#a0a08f;}
+  .footer-credit img{height:16px;width:16px;border-radius:50%;object-fit:cover;}
+  .footer-admin{margin-left:14px;padding-left:14px;border-left:1px solid rgba(160,160,143,.3);color:rgba(160,160,143,.35);font-size:9px;letter-spacing:.5px;text-transform:uppercase;}
+  .footer-admin:hover{color:rgba(160,160,143,.8);}
+
+  /* CONTACT MODAL (matches main site) */
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,8,7,.82);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}
+  .modal-overlay.open{display:flex;}
+  .modal-card{background:#fbf9f4;max-width:760px;width:100%;max-height:92vh;overflow-y:auto;border-radius:4px;display:flex;flex-wrap:wrap;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.5);}
+  .modal-photo{flex:1 1 260px;min-height:220px;}
+  .modal-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .modal-body{flex:1 1 340px;padding:40px 36px;}
+  .modal-eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--red-text);margin-bottom:8px;}
+  .modal-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:#18180f;margin-bottom:22px;}
+  .modal-close{position:absolute;top:14px;right:14px;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(20,17,16,.55);color:#fff;border:none;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;}
+  #contactForm label{display:block;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#8a8a7c;margin-bottom:16px;}
+  #contactForm input,#contactForm textarea{display:block;width:100%;margin-top:6px;padding:11px 12px;font-size:14px;font-family:inherit;border:1px solid #d8d4c8;border-radius:2px;color:#18180f;background:#fff;}
+  #contactForm textarea{resize:vertical;}
+  .hp-field{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .modal-submit{display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:#fff;background:var(--red);border:none;padding:13px 26px;border-radius:2px;cursor:pointer;width:100%;}
+  .modal-submit:hover{background:var(--red-text);}
+  .modal-submit:disabled{opacity:.6;cursor:default;}
+  .modal-status{margin-top:14px;font-size:13px;min-height:18px;}
+  .modal-status.ok{color:#1a7a3c;}
+  .modal-status.err{color:var(--red-text);}
+  @media(max-width:640px){.modal-photo{min-height:160px;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-mark" href="/"><img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/roots">Roots</a></li>
+      <li><a href="/#poy">Player of the Year</a></li>
+      <li><a href="/press-archives">Press &amp; Archives</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/sponsors">Sponsors</a></li>
+      <li><a href="/#schedule">Schedule</a></li>
+      <li><a href="/#contact" class="cta" id="navContactBtn">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="bag-wrap">
+  <div class="wrap">
+
+    <div class="bag-header">
+      <div class="bag-eyebrow">Tour Equipment Profile</div>
+      <h1 class="bag-title">WHAT'S IN<span>BRYAN'S BAG?</span></h1>
+      <div class="bag-sub">A look at Bryan Conway's tour equipment</div>
+      <div class="bag-rule"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+    </div>
+
+    <div class="bag-mark">
+      <img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf">
+      <div class="name">Bryan Conway</div>
+      <div class="tag">Tour Equipment Setup</div>
+    </div>
+
+    <div class="bag-hint-row">
+      <div class="bag-hint">&#9432; Tap an item to view details</div>
+    </div>
+
+    <div class="bag-grid">
+      <div class="bag-panel">
+        <div class="bag-panel-label">Equipment</div>
+        <div class="bag-list" id="bagList">
+          {% for item in items %}
+          <button type="button" class="bag-list-item{{ ' active' if loop.first else '' }}" data-index="{{ loop.index0 }}">
+            <span class="num">{{ item.number }}</span>
+            <span class="cat">{{ item.category }}</span>
+            <span class="chev">&rarr;</span>
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="bag-panel bag-detail">
+        <div class="bag-detail-head">
+          <span class="bag-detail-num" id="detailNum"></span>
+          <span class="bag-detail-cat" id="detailCat"></span>
+        </div>
+        <div class="bag-detail-body">
+          <div class="bag-detail-img" id="detailImgWrap"></div>
+          <div>
+            <table class="bag-specs" id="detailSpecs"></table>
+            <div class="bag-notes" id="detailNotes"></div>
+            <div class="bag-desc" id="detailDesc"></div>
+            <div class="bag-empty" id="detailEmpty" style="display:none;">Specs coming soon.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer><div class="wrap"><img src="/static/images/bc_logo_final.png" alt=""> Kentucky Golf &middot; Bryan Conway Golf
+  <a class="footer-credit" href="https://jstoutinc.com" target="_blank" rel="noopener"><img src="/static/images/jimbino_logo.png" alt="JStoutInc">Powered by JStoutInc</a>
+  <a class="footer-admin" href="/admin">Admin</a>
+</div></footer>
+
+<div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-label="Contact Bryan Conway Golf">
+  <div class="modal-card">
+    <button class="modal-close" id="contactCloseBtn" aria-label="Close">&#10005;</button>
+    <div class="modal-photo">
+      <img src="/static/images/portrait_desert_course.jpg" alt="Bryan Conway">
+    </div>
+    <div class="modal-body">
+      <div class="modal-eyebrow">Get In Touch</div>
+      <h3 class="modal-title">Let's start a conversation.</h3>
+      <form id="contactForm">
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+        <label>Name
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Reason for Inquiry
+          <textarea name="reason" rows="4" required placeholder="Sponsorship, media, event, collaboration..."></textarea>
+        </label>
+        <button type="submit" class="modal-submit">Send Message</button>
+        <div class="modal-status" id="contactStatus"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  var navT=document.getElementById('navToggle'), navL=document.getElementById('navLinks');
+  navT.addEventListener('click',function(){navL.classList.toggle('open');});
+  navL.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){navL.classList.remove('open');});});
+
+  var contactModal = document.getElementById('contactModal');
+  var navContactBtn = document.getElementById('navContactBtn');
+  var contactCloseBtn = document.getElementById('contactCloseBtn');
+  var contactForm = document.getElementById('contactForm');
+  var contactStatus = document.getElementById('contactStatus');
+
+  function openContactModal(){ contactModal.classList.add('open'); }
+  function closeContactModal(){ contactModal.classList.remove('open'); }
+
+  navContactBtn.addEventListener('click', function(e){ e.preventDefault(); openContactModal(); });
+  contactCloseBtn.addEventListener('click', closeContactModal);
+  contactModal.addEventListener('click', function(e){ if(e.target === contactModal) closeContactModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && contactModal.classList.contains('open')) closeContactModal(); });
+
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = contactForm.querySelector('.modal-submit');
+    var payload = {
+      name: contactForm.name.value,
+      email: contactForm.email.value,
+      reason: contactForm.reason.value,
+      website: contactForm.website.value
+    };
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    contactStatus.textContent = '';
+    contactStatus.className = 'modal-status';
+    fetch('/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(r){ return r.json(); })
+      .then(function(body){
+        if(body.ok){
+          contactStatus.textContent = "Thanks — your message is on its way. We'll be in touch soon.";
+          contactStatus.className = 'modal-status ok';
+          contactForm.reset();
+          btn.textContent = 'Send Message';
+          setTimeout(closeContactModal, 2200);
+        } else {
+          contactStatus.textContent = body.error || 'Something went wrong. Please try again.';
+          contactStatus.className = 'modal-status err';
+          btn.disabled = false;
+          btn.textContent = 'Send Message';
+        }
+      }).catch(function(){
+        contactStatus.textContent = 'Something went wrong. Please try again, or email info@bryanconwaygolf.com directly.';
+        contactStatus.className = 'modal-status err';
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      });
+  });
+
+  // Generic gold line-icon per equipment category, shown whenever an item
+  // has no uploaded photo yet -- keeps the detail panel from ever looking
+  // broken/empty while real product photos get added over time via /admin.
+  var ICONS = {
+    'driver': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M30 85 L62 30 Q78 22 74 40 Q70 55 50 58 Z"/><line x1="30" y1="85" x2="20" y2="95"/></svg>',
+    '3-wood': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M32 85 L58 32 Q72 26 68 42 Q64 54 46 56 Z"/><line x1="32" y1="85" x2="22" y2="95"/></svg>',
+    'hybrid-utility': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M34 85 L54 34 Q64 30 62 42 Q60 52 44 54 Z"/><line x1="34" y1="85" x2="24" y2="95"/></svg>',
+    'irons': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M40 85 L52 30 Q68 34 60 50 L40 58 Z"/><line x1="40" y1="85" x2="30" y2="95"/></svg>',
+    'wedges': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M42 85 L50 32 Q66 38 56 52 L42 58 Z"/><line x1="42" y1="85" x2="32" y2="95"/></svg>',
+    'putter': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M46 85 L46 28"/><rect x="34" y="50" width="24" height="10" rx="2"/><line x1="46" y1="85" x2="36" y2="95"/></svg>',
+    'golf-ball': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><circle cx="50" cy="50" r="26"/><circle cx="42" cy="42" r="1.5" fill="#c9a227"/><circle cx="54" cy="40" r="1.5" fill="#c9a227"/><circle cx="60" cy="52" r="1.5" fill="#c9a227"/><circle cx="46" cy="58" r="1.5" fill="#c9a227"/></svg>',
+    'glove': '<svg viewBox="0 0 100 100" fill="none" stroke="#c9a227" stroke-width="3"><path d="M38 90 V52 Q38 44 44 44 V30 Q44 24 48 24 Q52 24 52 30 V44 Q52 44 55 44 V28 Q55 22 59 22 Q63 22 63 28 V44 Q66 44 66 48 V60 Q72 62 72 70 V90 Z"/></svg>'
+  };
+
+  var ITEMS = {{ items | tojson }};
+  var listEls = document.querySelectorAll('.bag-list-item');
+  var detailNum = document.getElementById('detailNum');
+  var detailCat = document.getElementById('detailCat');
+  var detailImgWrap = document.getElementById('detailImgWrap');
+  var detailSpecs = document.getElementById('detailSpecs');
+  var detailNotes = document.getElementById('detailNotes');
+  var detailDesc = document.getElementById('detailDesc');
+  var detailEmpty = document.getElementById('detailEmpty');
+
+  function showItem(i){
+    var item = ITEMS[i];
+    listEls.forEach(function(el){ el.classList.toggle('active', parseInt(el.getAttribute('data-index'),10) === i); });
+
+    detailNum.textContent = item.number;
+    detailCat.textContent = item.category;
+
+    if(item.image){
+      detailImgWrap.innerHTML = '<img src="/static/images/' + item.image + '" alt="' + item.category + '">';
+    } else {
+      detailImgWrap.innerHTML = ICONS[item.id] || '';
+    }
+
+    detailSpecs.innerHTML = '';
+    (item.specs || []).forEach(function(s){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + s.label + '</td><td>' + s.value + '</td>';
+      detailSpecs.appendChild(tr);
+    });
+
+    detailNotes.textContent = item.notes || '';
+    detailDesc.textContent = item.description || '';
+    var hasContent = (item.specs && item.specs.length) || item.description;
+    detailEmpty.style.display = hasContent ? 'none' : 'block';
+  }
+
+  listEls.forEach(function(el){
+    el.addEventListener('click', function(){ showItem(parseInt(el.getAttribute('data-index'),10)); });
+  });
+
+  if(ITEMS.length) showItem(0);
+</script>
+</body>
+</html>

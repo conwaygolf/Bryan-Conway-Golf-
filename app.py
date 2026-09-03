@@ -289,6 +289,7 @@ PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
 LEADERBOARD_CONFIG_JSON = DATA_DIR / "leaderboard_config.json"
 LIVE_LEADERBOARD_JSON = DATA_DIR / "live_leaderboard.json"
 ANALYTICS_DAILY_JSON = DATA_DIR / "analytics_daily.json"
+BAG_JSON = DATA_DIR / "bag.json"
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -312,6 +313,43 @@ DEFAULT_SPONSORS = [
         "blurb": "A proud supporter of Bryan Conway Golf.",
         "url": "https://whitetailheavenoutfitters.com",
         "logo": "whitetail_logo.png",
+    },
+]
+
+# "What's In Bryan's Bag" -- a fixed 8-slot equipment list (not a free-add
+# collection like gallery/sponsors), so /admin only ever edits these in
+# place. Driver/Golf Ball/Glove have real specs from Jimmy's initial mockup;
+# the rest start with empty specs/description until the real gear info
+# comes in -- never invent plausible-looking specs for real equipment on a
+# real athlete's public page.
+DEFAULT_BAG_ITEMS = [
+    {
+        "id": "driver", "number": "01", "category": "Driver", "image": None,
+        "specs": [
+            {"label": "Model", "value": "Titleist TSR3"},
+            {"label": "Loft", "value": "9.0°"},
+            {"label": "Shaft", "value": "Fujikura Ventus TR Blue 6X"},
+            {"label": "Flex", "value": "X-Stiff"},
+            {"label": "Length", "value": "45.5\""},
+            {"label": "Grip", "value": "Golf Pride Tour Velvet"},
+        ],
+        "notes": "Draw biased setup, low spin.",
+        "description": "Bryan trusts the TSR3 driver for its workability, stability and penetrating ball flight off the tee.",
+    },
+    {"id": "3-wood", "number": "02", "category": "3-Wood", "image": None, "specs": [], "notes": "", "description": ""},
+    {"id": "hybrid-utility", "number": "03", "category": "Hybrid / Utility", "image": None, "specs": [], "notes": "", "description": ""},
+    {"id": "irons", "number": "04", "category": "Irons", "image": None, "specs": [], "notes": "", "description": ""},
+    {"id": "wedges", "number": "05", "category": "Wedges", "image": None, "specs": [], "notes": "", "description": ""},
+    {"id": "putter", "number": "06", "category": "Putter", "image": None, "specs": [], "notes": "", "description": ""},
+    {
+        "id": "golf-ball", "number": "07", "category": "Golf Ball", "image": None,
+        "specs": [{"label": "Model", "value": "Titleist Pro V1x"}],
+        "notes": "", "description": "Preferred for performance and consistency.",
+    },
+    {
+        "id": "glove", "number": "08", "category": "Glove", "image": None,
+        "specs": [{"label": "Model", "value": "FootJoy StaSof"}, {"label": "Size", "value": "Large"}],
+        "notes": "", "description": "Preferred for feel and durability.",
     },
 ]
 
@@ -480,6 +518,7 @@ LEADERBOARD_CONFIG = load_json(LEADERBOARD_CONFIG_JSON, DEFAULT_LEADERBOARD_CONF
 LIVE_LEADERBOARD = load_json(LIVE_LEADERBOARD_JSON, DEFAULT_LIVE_LEADERBOARD)
 RESULT_DRAFTS = load_json(RESULT_DRAFTS_JSON, [])
 PRESS_HEADER = load_json(PRESS_HEADER_JSON, DEFAULT_PRESS_HEADER)
+BAG_ITEMS = load_json(BAG_JSON, DEFAULT_BAG_ITEMS)
 
 
 # tools/update_live_leaderboard.py runs via a Windows Scheduled Task on
@@ -952,6 +991,18 @@ def save_sponsor_logo(img, slug):
     img.save(IMAGES_DIR / filename, "PNG", optimize=True)
     return filename
 
+
+def save_bag_item_image(file_storage, item_id):
+    img = open_upload_image(file_storage)
+    if img.mode not in ("RGBA", "LA"):
+        img = img.convert("RGBA")
+    max_dim = 1200
+    if max(img.width, img.height) > max_dim:
+        img.thumbnail((max_dim, max_dim), Image.LANCZOS)
+    filename = f"bag_{item_id}_{uuid.uuid4().hex[:6]}.png"
+    img.save(IMAGES_DIR / filename, "PNG", optimize=True)
+    return filename
+
 ERAS = [
     ("all", "All"),
     ("early-years", "Early Years"),
@@ -1003,6 +1054,13 @@ def gallery():
 @app.route("/sponsors")
 def sponsors():
     return render_template("sponsors.html", sponsors=[s for s in SPONSORS if not s.get("hidden")])
+
+
+# Not linked from the public nav yet (Jimmy wants to review it first) --
+# reachable directly, or via the preview link on the admin BAG tab.
+@app.route("/bag")
+def bag():
+    return render_template("bag.html", items=BAG_ITEMS)
 
 
 @app.route("/contact", methods=["POST"])
@@ -1135,6 +1193,7 @@ def admin():
         "admin.html", gallery=GALLERY_PHOTOS, sponsors=SPONSORS, hero=HERO, results=RESULTS,
         schedule=SCHEDULE, drafts=RESULT_DRAFTS, press_header=PRESS_HEADER,
         archive_cards=ARCHIVE_CARDS, eras=ERAS[1:],  # skip the "All" filter-pill entry
+        bag_items=BAG_ITEMS,
         leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=LIVE_LEADERBOARD,
         leaderboard_staleness_minutes=leaderboard_staleness_minutes(),
         analytics_today=today_stats,
@@ -1417,6 +1476,43 @@ def admin_leaderboard_save():
         flash("Leaderboard turned off.", "ok")
     else:
         flash("Leaderboard settings saved.", "ok")
+    return redirect(url_for("admin"))
+
+
+@app.route("/admin/bag/<item_id>/edit", methods=["POST"])
+@admin_required
+def admin_bag_edit(item_id):
+    item = next((b for b in BAG_ITEMS if b["id"] == item_id), None)
+    if item is None:
+        flash("That bag item doesn't exist.", "error")
+        return redirect(url_for("admin"))
+
+    # Specs are a variable-length list of label/value pairs -- the form
+    # submits them as spec_label[]/spec_value[] arrays so any club can have
+    # as many or as few rows as it actually needs (a driver has 6+ spec
+    # lines, a golf ball might just have "Model").
+    labels = request.form.getlist("spec_label[]")
+    values = request.form.getlist("spec_value[]")
+    specs = [{"label": l.strip(), "value": v.strip()} for l, v in zip(labels, values) if l.strip() and v.strip()]
+
+    item["specs"] = specs
+    item["notes"] = (request.form.get("notes") or "").strip()
+    item["description"] = (request.form.get("description") or "").strip()
+
+    publish_paths = [BAG_JSON]
+    file = request.files.get("image")
+    if file and file.filename:
+        try:
+            filename = save_bag_item_image(file, item_id)
+        except Exception:
+            flash("Couldn't process that image -- try a different file.", "error")
+            return redirect(url_for("admin"))
+        item["image"] = filename
+        publish_paths.append(IMAGES_DIR / filename)
+
+    save_json(BAG_JSON, BAG_ITEMS)
+    git_publish(publish_paths, f"Admin: update bag item ({item['category']})")
+    flash(f'Updated "{item["category"]}".', "ok")
     return redirect(url_for("admin"))
 
 
