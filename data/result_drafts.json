@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "date": "Aug 30",
+    "title": "PGLAT Playoff at Lakeside Golf Course",
+    "note": "Auto-fetch couldn't find a result on GolfGenius -- check kygolf.org and fill this in by hand.",
+    "tag": null,
+    "source_event_title": "PGLAT Playoff at Lakeside Golf Course",
+    "auto_filled": false
+  }
+]
