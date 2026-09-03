@@ -66,6 +66,10 @@
      fold -- everything sits side by side in one screen instead of
      stacked on top of it. */
   .bag-wrap{background:radial-gradient(ellipse at 50% -10%,#122544 0%,var(--bag-navy) 55%);padding:28px 0 40px;}
+  /* The shared .wrap caps at 1180px, which is fine for text-column pages
+     but left big dead margins on either side of this 3-column layout on
+     wide screens -- give the bag content its own wider container. */
+  .bag-wrap .wrap{max-width:1560px;}
 
   .bag-hint{
     display:inline-flex;align-items:center;gap:8px;margin:0 auto 20px;
