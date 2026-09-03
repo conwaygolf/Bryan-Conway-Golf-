@@ -60,74 +60,71 @@
     .nav-toggle{display:flex;}
   }
 
-  /* BAG PAGE */
-  .bag-wrap{background:radial-gradient(ellipse at 50% -10%,#122544 0%,var(--bag-navy) 55%);padding:64px 0 80px;}
-  .bag-header{text-align:center;margin-bottom:44px;}
-  .bag-eyebrow{font-size:12px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--bag-gold-light);opacity:.85;margin-bottom:10px;}
-  .bag-title{font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:clamp(30px,5vw,48px);line-height:1.1;}
-  .bag-title span{color:var(--bag-gold);display:block;}
-  .bag-sub{color:rgba(255,255,255,.65);font-size:13.5px;letter-spacing:1px;text-transform:uppercase;margin-top:14px;}
-  .bag-rule{display:flex;align-items:center;justify-content:center;gap:14px;margin:22px auto 0;max-width:360px;}
-  .bag-rule .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bag-border),transparent);}
-  .bag-rule .diamond{width:7px;height:7px;background:var(--bag-gold);transform:rotate(45deg);}
-
-  .bag-mark{display:flex;flex-direction:column;align-items:center;margin:36px 0 44px;}
-  .bag-mark img{height:120px;width:auto;filter:drop-shadow(0 8px 24px rgba(0,0,0,.5));}
-  .bag-mark .name{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;color:var(--bag-gold-light);font-size:22px;margin-top:14px;}
-  .bag-mark .tag{font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;}
+  /* BAG PAGE -- everything (header + list + detail) fits in one screen,
+     no scroll needed, so the header/logo block below is deliberately much
+     more compact than a typical hero section. */
+  .bag-wrap{background:radial-gradient(ellipse at 50% -10%,#122544 0%,var(--bag-navy) 55%);padding:22px 0 32px;}
+  .bag-header{text-align:center;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
+  .bag-header img{height:44px;width:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));}
+  .bag-header-text{text-align:left;}
+  .bag-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--bag-gold-light);opacity:.85;}
+  .bag-title{font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:clamp(20px,2.6vw,28px);line-height:1.15;}
+  .bag-title span{color:var(--bag-gold);}
+  .bag-sub{color:rgba(255,255,255,.6);font-size:11.5px;letter-spacing:.5px;}
 
   .bag-hint{
-    display:inline-flex;align-items:center;gap:8px;margin:0 auto 48px;
-    border:1px solid var(--bag-border);border-radius:30px;padding:9px 20px;
-    color:var(--bag-gold-light);font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:8px;margin:0 auto 16px;
+    border:1px solid var(--bag-border);border-radius:30px;padding:6px 16px;
+    color:var(--bag-gold-light);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
     background:rgba(201,162,39,.06);
   }
   .bag-hint-row{display:flex;justify-content:center;}
 
-  .bag-grid{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;}
+  .bag-grid{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start;}
   @media(max-width:860px){.bag-grid{grid-template-columns:1fr;}}
 
   .bag-panel{
-    background:var(--bag-navy-2);border:1px solid var(--bag-border);border-radius:10px;padding:26px;
+    background:var(--bag-navy-2);border:1px solid var(--bag-border);border-radius:10px;padding:16px 18px;
+    min-width:0;
   }
-  .bag-panel-label{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--bag-gold);margin-bottom:18px;}
+  .bag-panel-label{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--bag-gold);margin-bottom:10px;}
 
-  .bag-list{display:flex;flex-direction:column;gap:10px;}
+  .bag-list{display:flex;flex-direction:column;gap:7px;}
   .bag-list-item{
-    display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;
-    background:rgba(255,255,255,.02);border:1px solid var(--bag-border);border-radius:8px;
-    padding:13px 16px;color:#fff;font:inherit;transition:background .15s,border-color .15s;
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+    background:rgba(255,255,255,.02);border:1px solid var(--bag-border);border-radius:7px;
+    padding:9px 13px;color:#fff;font:inherit;transition:background .15s,border-color .15s;
   }
   .bag-list-item:hover{background:rgba(201,162,39,.08);}
   .bag-list-item.active{background:rgba(201,162,39,.14);border-color:var(--bag-gold);}
-  .bag-list-item .num{color:var(--bag-gold);font-weight:800;font-size:13px;min-width:20px;}
-  .bag-list-item .cat{font-weight:700;font-size:14px;flex:1;}
-  .bag-list-item .chev{color:var(--bag-gold);opacity:.7;font-size:13px;}
+  .bag-list-item .num{color:var(--bag-gold);font-weight:800;font-size:12px;min-width:18px;}
+  .bag-list-item .cat{font-weight:700;font-size:13px;flex:1;}
+  .bag-list-item .chev{color:var(--bag-gold);opacity:.7;font-size:12px;}
 
-  .bag-detail{min-height:420px;}
-  .bag-detail-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-  .bag-detail-num{color:var(--bag-gold);font-family:'Playfair Display',serif;font-weight:800;font-size:20px;}
-  .bag-detail-cat{color:#fff;font-family:'Playfair Display',serif;font-weight:800;font-size:22px;letter-spacing:.5px;text-transform:uppercase;}
+  .bag-detail-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .bag-detail-num{color:var(--bag-gold);font-family:'Playfair Display',serif;font-weight:800;font-size:16px;}
+  .bag-detail-cat{color:#fff;font-family:'Playfair Display',serif;font-weight:800;font-size:17px;letter-spacing:.5px;text-transform:uppercase;}
 
-  .bag-detail-body{display:grid;grid-template-columns:200px 1fr;gap:28px;}
+  .bag-detail-body{display:grid;grid-template-columns:120px 1fr;gap:16px;}
   @media(max-width:640px){.bag-detail-body{grid-template-columns:1fr;}}
 
   .bag-detail-img{
     width:100%;aspect-ratio:1;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid var(--bag-border);
-    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;overflow:hidden;min-width:0;
   }
-  .bag-detail-img img{width:100%;height:100%;object-fit:contain;padding:14px;}
+  .bag-detail-img img{width:100%;height:100%;object-fit:contain;padding:10px;}
   .bag-detail-img svg{width:58%;height:58%;opacity:.9;}
 
-  .bag-specs{width:100%;border-collapse:collapse;}
+  .bag-specs{width:100%;border-collapse:collapse;table-layout:fixed;}
   .bag-specs tr{border-top:1px solid rgba(255,255,255,.08);}
   .bag-specs tr:first-child{border-top:none;}
-  .bag-specs td{padding:9px 0;font-size:13.5px;vertical-align:top;}
-  .bag-specs td:first-child{color:var(--bag-gold-light);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:11px;width:110px;padding-top:11px;}
+  .bag-specs td{padding:7px 0;font-size:12.5px;vertical-align:top;word-wrap:break-word;overflow-wrap:break-word;}
+  .bag-specs td:first-child{color:var(--bag-gold-light);font-weight:700;letter-spacing:.5px;text-transform:uppercase;font-size:10px;width:80px;padding-top:9px;padding-right:8px;}
   .bag-specs td:last-child{color:#fff;font-weight:500;}
-  .bag-notes{color:rgba(255,255,255,.55);font-size:12.5px;font-style:italic;margin-top:12px;}
-  .bag-desc{color:rgba(255,255,255,.75);font-size:14px;line-height:1.7;margin-top:18px;}
-  .bag-empty{color:rgba(255,255,255,.45);font-size:13.5px;font-style:italic;margin-top:8px;}
+  .bag-detail-body > div{min-width:0;}
+  .bag-notes{color:rgba(255,255,255,.55);font-size:11.5px;font-style:italic;margin-top:8px;word-wrap:break-word;}
+  .bag-desc{color:rgba(255,255,255,.75);font-size:12.5px;line-height:1.55;margin-top:10px;word-wrap:break-word;}
+  .bag-empty{color:rgba(255,255,255,.45);font-size:12.5px;font-style:italic;margin-top:6px;}
 
   footer{padding:28px 0;font-size:11.5px;color:#a0a08f;text-align:center;background:var(--black-soft);}
   footer .wrap{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;}
@@ -183,16 +180,12 @@
   <div class="wrap">
 
     <div class="bag-header">
-      <div class="bag-eyebrow">Tour Equipment Profile</div>
-      <h1 class="bag-title">WHAT'S IN<span>BRYAN'S BAG?</span></h1>
-      <div class="bag-sub">A look at Bryan Conway's tour equipment</div>
-      <div class="bag-rule"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
-    </div>
-
-    <div class="bag-mark">
       <img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf">
-      <div class="name">Bryan Conway</div>
-      <div class="tag">Tour Equipment Setup</div>
+      <div class="bag-header-text">
+        <div class="bag-eyebrow">Tour Equipment Profile</div>
+        <h1 class="bag-title">WHAT'S IN <span>BRYAN'S BAG?</span></h1>
+        <div class="bag-sub">A look at Bryan Conway's tour equipment</div>
+      </div>
     </div>
 
     <div class="bag-hint-row">
