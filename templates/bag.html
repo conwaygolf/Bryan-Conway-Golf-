@@ -79,9 +79,15 @@
   }
   .bag-hint-row{display:flex;justify-content:center;}
 
-  /* Equal thirds: list | center | detail. */
+  /* Equal thirds: list | center | detail. Stacked (mobile/tablet), the
+     branding panel moves to the top instead of sitting between list and
+     detail -- source order stays list/center/detail (matches the desktop
+     column order), just visually reordered here. */
   .bag-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch;}
-  @media(max-width:1100px){.bag-grid{grid-template-columns:1fr;}}
+  @media(max-width:1100px){
+    .bag-grid{grid-template-columns:1fr;}
+    .bag-center{order:-1;}
+  }
 
   .bag-center{
     display:flex;flex-direction:column;align-items:center;justify-content:center;
