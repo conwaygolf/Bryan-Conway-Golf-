@@ -589,9 +589,22 @@ def poll_live_leaderboard_once():
                           "note": "Couldn't find Bryan Conway in any division of this tournament code right now."}
 
     if result != LIVE_LEADERBOARD:
+        # "updated" changes on literally every poll (it's a fresh timestamp),
+        # so comparing the full dicts here would commit+push every single
+        # 10-min cycle forever whenever the leaderboard is left enabled but
+        # nothing real is found (e.g. a tournament_code that never resolves)
+        # -- confirmed this actually happened, hundreds of identical "not
+        # found" commits while pointed at an already-finished tournament.
+        # Only git-publish when something a viewer would actually see
+        # differs; still update the in-memory/local copy every cycle so the
+        # admin staleness check (which needs a fresh "updated" to prove the
+        # poller itself is alive) keeps working correctly.
+        meaningful_keys = ("event_label", "venue", "rows", "note")
+        changed = any(result.get(k) != LIVE_LEADERBOARD.get(k) for k in meaningful_keys)
         LIVE_LEADERBOARD = result
         save_json(LIVE_LEADERBOARD_JSON, LIVE_LEADERBOARD)
-        git_publish([LIVE_LEADERBOARD_JSON], "Auto-update: live leaderboard (server-side poller)")
+        if changed:
+            git_publish([LIVE_LEADERBOARD_JSON], "Auto-update: live leaderboard (server-side poller)")
 
 
 def _leaderboard_poll_loop():
