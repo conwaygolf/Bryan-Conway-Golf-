@@ -73,5 +73,20 @@
       "Tablet": 0
     },
     "top_countries": []
+  },
+  {
+    "date": "2026-09-03",
+    "pageviews": 0,
+    "unique_visitors": 0,
+    "sessions": 0,
+    "avg_session_minutes": 0.0,
+    "top_referrers": [],
+    "top_pages": [],
+    "devices": {
+      "Desktop": 0,
+      "Mobile": 0,
+      "Tablet": 0
+    },
+    "top_countries": []
   }
 ]
