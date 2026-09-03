@@ -60,32 +60,39 @@
     .nav-toggle{display:flex;}
   }
 
-  /* BAG PAGE -- everything (header + list + detail) fits in one screen,
-     no scroll needed, so the header/logo block below is deliberately much
-     more compact than a typical hero section. */
-  .bag-wrap{background:radial-gradient(ellipse at 50% -10%,#122544 0%,var(--bag-navy) 55%);padding:22px 0 32px;}
-  .bag-header{text-align:center;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
-  .bag-header img{height:44px;width:auto;filter:drop-shadow(0 4px 12px rgba(0,0,0,.5));}
-  .bag-header-text{text-align:left;}
-  .bag-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--bag-gold-light);opacity:.85;}
-  .bag-title{font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:clamp(20px,2.6vw,28px);line-height:1.15;}
-  .bag-title span{color:var(--bag-gold);}
-  .bag-sub{color:rgba(255,255,255,.6);font-size:11.5px;letter-spacing:.5px;}
+  /* BAG PAGE -- 3 equal columns (list | center branding | detail) so the
+     big centered logo/title treatment Jimmy liked can have its own room
+     to breathe WITHOUT pushing the interactive list/detail below the
+     fold -- everything sits side by side in one screen instead of
+     stacked on top of it. */
+  .bag-wrap{background:radial-gradient(ellipse at 50% -10%,#122544 0%,var(--bag-navy) 55%);padding:28px 0 40px;}
 
   .bag-hint{
-    display:inline-flex;align-items:center;gap:8px;margin:0 auto 16px;
-    border:1px solid var(--bag-border);border-radius:30px;padding:6px 16px;
-    color:var(--bag-gold-light);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
+    display:inline-flex;align-items:center;gap:8px;margin:0 auto 20px;
+    border:1px solid var(--bag-border);border-radius:30px;padding:7px 18px;
+    color:var(--bag-gold-light);font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;
     background:rgba(201,162,39,.06);
   }
   .bag-hint-row{display:flex;justify-content:center;}
 
-  /* 3-column layout: list | detail card | spare column -- the detail card
-     was stretching edge-to-edge with a lot of dead space past the specs,
-     so it only spans the middle column now instead of 1fr. */
-  .bag-grid{display:grid;grid-template-columns:260px minmax(0,480px) 1fr;gap:18px;align-items:start;}
-  @media(max-width:1100px){.bag-grid{grid-template-columns:260px 1fr;}}
-  @media(max-width:860px){.bag-grid{grid-template-columns:1fr;}}
+  /* Equal thirds: list | center | detail. */
+  .bag-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch;}
+  @media(max-width:1100px){.bag-grid{grid-template-columns:1fr;}}
+
+  .bag-center{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:20px 16px;
+  }
+  .bag-eyebrow{font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--bag-gold-light);opacity:.85;margin-bottom:8px;}
+  .bag-title{font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:clamp(22px,2.4vw,32px);line-height:1.15;}
+  .bag-title span{color:var(--bag-gold);display:block;}
+  .bag-sub{color:rgba(255,255,255,.6);font-size:12px;letter-spacing:.5px;text-transform:uppercase;margin-top:10px;}
+  .bag-rule{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0;width:100%;max-width:220px;}
+  .bag-rule .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--bag-border),transparent);}
+  .bag-rule .diamond{width:6px;height:6px;background:var(--bag-gold);transform:rotate(45deg);flex-shrink:0;}
+  .bag-center img{height:84px;width:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5));}
+  .bag-center .name{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;color:var(--bag-gold-light);font-size:18px;margin-top:12px;}
+  .bag-center .tag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;}
 
   .bag-panel{
     background:var(--bag-navy-2);border:1px solid var(--bag-border);border-radius:10px;padding:16px 18px;
@@ -183,15 +190,6 @@
 <div class="bag-wrap">
   <div class="wrap">
 
-    <div class="bag-header">
-      <img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf">
-      <div class="bag-header-text">
-        <div class="bag-eyebrow">Tour Equipment Profile</div>
-        <h1 class="bag-title">WHAT'S IN <span>BRYAN'S BAG?</span></h1>
-        <div class="bag-sub">A look at Bryan Conway's tour equipment</div>
-      </div>
-    </div>
-
     <div class="bag-hint-row">
       <div class="bag-hint">&#9432; Tap an item to view details</div>
     </div>
@@ -208,6 +206,16 @@
           </button>
           {% endfor %}
         </div>
+      </div>
+
+      <div class="bag-center">
+        <div class="bag-eyebrow">Tour Equipment Profile</div>
+        <h1 class="bag-title">WHAT'S IN<span>BRYAN'S BAG?</span></h1>
+        <div class="bag-sub">A look at Bryan Conway's tour equipment</div>
+        <div class="bag-rule"><div class="line"></div><div class="diamond"></div><div class="line"></div></div>
+        <img src="/static/images/bc_logo_final.png" alt="Bryan Conway Golf">
+        <div class="name">Bryan Conway</div>
+        <div class="tag">Tour Equipment Setup</div>
       </div>
 
       <div class="bag-panel bag-detail">
