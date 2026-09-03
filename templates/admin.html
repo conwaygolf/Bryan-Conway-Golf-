@@ -651,8 +651,8 @@
             {% for i in range(pad) %}
             {% set s = item.specs[i] if i < item.specs|length else None %}
             <div style="display:flex;gap:8px;margin-bottom:8px;">
-              <input type="text" name="spec_label[]" placeholder="Label (e.g. Loft)" value="{{ s.label if s else '' }}" style="flex:1;">
-              <input type="text" name="spec_value[]" placeholder="Value" value="{{ s.value if s else '' }}" style="flex:2;">
+              <input type="text" name="spec_label[]" placeholder="Label (e.g. Loft)" value="{{ s.label if s else '' }}" maxlength="24" style="flex:1;">
+              <input type="text" name="spec_value[]" placeholder="Value" value="{{ s.value if s else '' }}" maxlength="50" style="flex:2;">
             </div>
             {% endfor %}
             <label>Notes (optional, short)</label>

@@ -290,6 +290,13 @@ LEADERBOARD_CONFIG_JSON = DATA_DIR / "leaderboard_config.json"
 LIVE_LEADERBOARD_JSON = DATA_DIR / "live_leaderboard.json"
 ANALYTICS_DAILY_JSON = DATA_DIR / "analytics_daily.json"
 BAG_JSON = DATA_DIR / "bag.json"
+# The detail card on /bag is intentionally narrow (Jimmy's ask, 2026-09-03 --
+# "cut this tile in half") -- text wraps to fit, but these caps are the hard
+# backstop so nobody can type a run-on sentence into a spec field and break
+# the layout even with wrapping. Same numbers are on the admin form's
+# maxlength attributes (templates/admin.html) -- keep both in sync.
+BAG_SPEC_LABEL_MAXLEN = 24
+BAG_SPEC_VALUE_MAXLEN = 50
 
 DEFAULT_GALLERY_PHOTOS = [
     {"image": "gallery_swing_1.jpg", "caption": "Full extension off the tee."},
@@ -1493,7 +1500,10 @@ def admin_bag_edit(item_id):
     # lines, a golf ball might just have "Model").
     labels = request.form.getlist("spec_label[]")
     values = request.form.getlist("spec_value[]")
-    specs = [{"label": l.strip(), "value": v.strip()} for l, v in zip(labels, values) if l.strip() and v.strip()]
+    specs = [
+        {"label": l.strip()[:BAG_SPEC_LABEL_MAXLEN], "value": v.strip()[:BAG_SPEC_VALUE_MAXLEN]}
+        for l, v in zip(labels, values) if l.strip() and v.strip()
+    ]
 
     item["specs"] = specs
     item["notes"] = (request.form.get("notes") or "").strip()

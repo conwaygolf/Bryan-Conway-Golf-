@@ -80,7 +80,11 @@
   }
   .bag-hint-row{display:flex;justify-content:center;}
 
-  .bag-grid{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start;}
+  /* 3-column layout: list | detail card | spare column -- the detail card
+     was stretching edge-to-edge with a lot of dead space past the specs,
+     so it only spans the middle column now instead of 1fr. */
+  .bag-grid{display:grid;grid-template-columns:260px minmax(0,480px) 1fr;gap:18px;align-items:start;}
+  @media(max-width:1100px){.bag-grid{grid-template-columns:260px 1fr;}}
   @media(max-width:860px){.bag-grid{grid-template-columns:1fr;}}
 
   .bag-panel{
