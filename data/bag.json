@@ -1,0 +1,118 @@
+[
+  {
+    "id": "driver",
+    "number": "01",
+    "category": "Driver",
+    "image": null,
+    "specs": [
+      {
+        "label": "Model",
+        "value": "Titleist TSR3"
+      },
+      {
+        "label": "Loft",
+        "value": "9.0\u00b0"
+      },
+      {
+        "label": "Shaft",
+        "value": "Fujikura Ventus TR Blue 6X"
+      },
+      {
+        "label": "Flex",
+        "value": "X-Stiff"
+      },
+      {
+        "label": "Length",
+        "value": "45.5\""
+      },
+      {
+        "label": "Grip",
+        "value": "Golf Pride Tour Velvet"
+      }
+    ],
+    "notes": "Draw biased setup, low spin.",
+    "description": "Bryan trusts the TSR3 driver for its workability, stability and penetrating ball flight off the tee."
+  },
+  {
+    "id": "3-wood",
+    "number": "02",
+    "category": "3-Wood",
+    "image": null,
+    "specs": [],
+    "notes": "",
+    "description": ""
+  },
+  {
+    "id": "hybrid-utility",
+    "number": "03",
+    "category": "Hybrid / Utility",
+    "image": null,
+    "specs": [],
+    "notes": "",
+    "description": ""
+  },
+  {
+    "id": "irons",
+    "number": "04",
+    "category": "Irons",
+    "image": null,
+    "specs": [],
+    "notes": "",
+    "description": ""
+  },
+  {
+    "id": "wedges",
+    "number": "05",
+    "category": "Wedges",
+    "image": "bag_wedges_b2aeb9.png",
+    "specs": [
+      {
+        "label": "54",
+        "value": "Titleist Vokey SM6"
+      }
+    ],
+    "notes": "12 degree bounce",
+    "description": "Test"
+  },
+  {
+    "id": "putter",
+    "number": "06",
+    "category": "Putter",
+    "image": null,
+    "specs": [],
+    "notes": "",
+    "description": ""
+  },
+  {
+    "id": "golf-ball",
+    "number": "07",
+    "category": "Golf Ball",
+    "image": null,
+    "specs": [
+      {
+        "label": "Model",
+        "value": "Titleist Pro V1x"
+      }
+    ],
+    "notes": "",
+    "description": "Preferred for performance and consistency."
+  },
+  {
+    "id": "glove",
+    "number": "08",
+    "category": "Glove",
+    "image": null,
+    "specs": [
+      {
+        "label": "Model",
+        "value": "FootJoy StaSof"
+      },
+      {
+        "label": "Size",
+        "value": "Large"
+      }
+    ],
+    "notes": "",
+    "description": "Preferred for feel and durability."
+  }
+]
