@@ -4,70 +4,61 @@
   "rows": [
     {
       "pos": "1",
-      "name": "William Carter",
-      "score": "7",
-      "thru": "5",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102031"
-    },
-    {
-      "pos": "T2",
-      "name": "Kyle Hubbard",
-      "score": "6",
-      "thru": "4",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102032"
-    },
-    {
-      "pos": "T2",
       "name": "Pj McDougal",
-      "score": "6",
-      "thru": "3",
+      "score": "10",
+      "thru": "4",
       "city": "Olde Stone (the Club at)",
       "aggregate_id": "2433102037"
     },
     {
-      "pos": "T4",
-      "name": "Greg Laswell",
-      "score": "5",
+      "pos": "2",
+      "name": "William Carter",
+      "score": "9",
+      "thru": "6",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102031"
+    },
+    {
+      "pos": "T3",
+      "name": "Kyle Hubbard",
+      "score": "8",
       "thru": "5",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102032"
+    },
+    {
+      "pos": "T3",
+      "name": "Bryan Conway",
+      "score": "8",
+      "thru": "4",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102035"
+    },
+    {
+      "pos": "5",
+      "name": "Greg Laswell",
+      "score": "7",
+      "thru": "6",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "T4",
-      "name": "Trae Joyce",
-      "score": "5",
-      "thru": "3",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102039"
-    },
-    {
-      "pos": "T6",
-      "name": "Neal Thomas",
-      "score": "4",
-      "thru": "3",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102034"
-    },
-    {
       "pos": "T6",
       "name": "Michael Columbus",
-      "score": "4",
-      "thru": "3",
+      "score": "6",
+      "thru": "4",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2433102036"
     },
     {
       "pos": "T6",
-      "name": "Bryan Conway",
-      "score": "4",
-      "thru": "2",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102035",
-      "pinned": true
+      "name": "Trae Joyce",
+      "score": "6",
+      "thru": "4",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102039"
     }
   ],
-  "updated": "2026-09-08T13:13+00:00",
+  "updated": "2026-09-08T13:24+00:00",
   "note": null
 }
