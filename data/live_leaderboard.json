@@ -8,7 +8,7 @@
       "score": "35",
       "thru": "15",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433102035"
+      "aggregate_id": "2433306322"
     },
     {
       "pos": "2",
@@ -16,7 +16,7 @@
       "score": "31",
       "thru": "17",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
+      "aggregate_id": "2433306317"
     },
     {
       "pos": "3",
@@ -24,31 +24,31 @@
       "score": "29",
       "thru": "14",
       "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433102037"
+      "aggregate_id": "2433306324"
     },
     {
-      "pos": "T4",
+      "pos": "4",
+      "name": "Trae Joyce",
+      "score": "27",
+      "thru": "15",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433306326"
+    },
+    {
+      "pos": "T5",
       "name": "Neal Thomas",
       "score": "25",
       "thru": "15",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102034"
+      "aggregate_id": "2433306321"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Michael Columbus",
       "score": "25",
       "thru": "15",
       "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433102036"
-    },
-    {
-      "pos": "T4",
-      "name": "Trae Joyce",
-      "score": "25",
-      "thru": "14",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102039"
+      "aggregate_id": "2433306323"
     },
     {
       "pos": "7",
@@ -56,9 +56,9 @@
       "score": "24",
       "thru": "14",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433102032"
+      "aggregate_id": "2433306319"
     }
   ],
-  "updated": "2026-09-08T15:50+00:00",
+  "updated": "2026-09-08T15:51+00:00",
   "note": null
 }
