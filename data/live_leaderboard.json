@@ -12,19 +12,19 @@
     },
     {
       "pos": "2",
+      "name": "Neal Thomas",
+      "score": "18",
+      "thru": "10",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102034"
+    },
+    {
+      "pos": "3",
       "name": "Pj McDougal",
       "score": "17",
       "thru": "8",
       "city": "Olde Stone (the Club at)",
       "aggregate_id": "2433102037"
-    },
-    {
-      "pos": "3",
-      "name": "Neal Thomas",
-      "score": "16",
-      "thru": "8",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102034"
     },
     {
       "pos": "T4",
@@ -59,6 +59,6 @@
       "aggregate_id": "2433102041"
     }
   ],
-  "updated": "2026-09-08T14:30+00:00",
+  "updated": "2026-09-08T14:31+00:00",
   "note": null
 }
