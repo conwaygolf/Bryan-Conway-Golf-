@@ -6,12 +6,20 @@
       "pos": "1",
       "name": "William Carter",
       "score": "6",
-      "thru": "3",
+      "thru": "4",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102031"
     },
     {
-      "pos": "2",
+      "pos": "T2",
+      "name": "Greg Laswell",
+      "score": "4",
+      "thru": "4",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "T2",
       "name": "Bryan Conway",
       "score": "4",
       "thru": "2",
@@ -19,7 +27,7 @@
       "aggregate_id": "2433102035"
     },
     {
-      "pos": "3",
+      "pos": "4",
       "name": "Kyle Hubbard",
       "score": "3",
       "thru": "2",
@@ -27,15 +35,7 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "T4",
-      "name": "Greg Laswell",
-      "score": "2",
-      "thru": "3",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
-    },
-    {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Pj McDougal",
       "score": "2",
       "thru": "1",
@@ -43,7 +43,7 @@
       "aggregate_id": "2433102037"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Trae Joyce",
       "score": "2",
       "thru": "1",
@@ -51,7 +51,7 @@
       "aggregate_id": "2433102039"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Mike LaFavers",
       "score": "2",
       "thru": "1",
@@ -59,6 +59,6 @@
       "aggregate_id": "2433102041"
     }
   ],
-  "updated": "2026-09-08T12:57+00:00",
+  "updated": "2026-09-08T13:01+00:00",
   "note": null
 }
