@@ -11,7 +11,7 @@
       "aggregate_id": "2433102031"
     },
     {
-      "pos": "2",
+      "pos": "T2",
       "name": "Kyle Hubbard",
       "score": "6",
       "thru": "4",
@@ -19,7 +19,15 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "T3",
+      "pos": "T2",
+      "name": "Pj McDougal",
+      "score": "6",
+      "thru": "3",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433102037"
+    },
+    {
+      "pos": "T4",
       "name": "Greg Laswell",
       "score": "5",
       "thru": "5",
@@ -27,7 +35,7 @@
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "T3",
+      "pos": "T4",
       "name": "Trae Joyce",
       "score": "5",
       "thru": "3",
@@ -35,7 +43,7 @@
       "aggregate_id": "2433102039"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Neal Thomas",
       "score": "4",
       "thru": "3",
@@ -43,7 +51,7 @@
       "aggregate_id": "2433102034"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Michael Columbus",
       "score": "4",
       "thru": "3",
@@ -51,14 +59,15 @@
       "aggregate_id": "2433102036"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Bryan Conway",
       "score": "4",
       "thru": "2",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433102035"
+      "aggregate_id": "2433102035",
+      "pinned": true
     }
   ],
-  "updated": "2026-09-08T13:12+00:00",
+  "updated": "2026-09-08T13:13+00:00",
   "note": null
 }
