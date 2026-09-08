@@ -8,57 +8,57 @@
       "score": "35",
       "thru": "15",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433306322"
+      "aggregate_id": "2433319535"
     },
     {
       "pos": "2",
       "name": "Greg Laswell",
-      "score": "31",
-      "thru": "17",
+      "score": "33",
+      "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433306317"
+      "aggregate_id": "2433319530"
     },
     {
       "pos": "3",
       "name": "Pj McDougal",
-      "score": "30",
-      "thru": "15",
+      "score": "31",
+      "thru": "16",
       "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433306324"
+      "aggregate_id": "2433319537"
     },
     {
-      "pos": "4",
+      "pos": "T4",
+      "name": "Kyle Hubbard",
+      "score": "28",
+      "thru": "17",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433319532"
+    },
+    {
+      "pos": "T4",
+      "name": "Neal Thomas",
+      "score": "28",
+      "thru": "17",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433319534"
+    },
+    {
+      "pos": "T6",
+      "name": "Adam Brooks",
+      "score": "27",
+      "thru": "16",
+      "city": "EClub Kentucky West",
+      "aggregate_id": "2433319538"
+    },
+    {
+      "pos": "T6",
       "name": "Trae Joyce",
       "score": "27",
       "thru": "15",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433306326"
-    },
-    {
-      "pos": "T5",
-      "name": "Neal Thomas",
-      "score": "25",
-      "thru": "15",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433306321"
-    },
-    {
-      "pos": "T5",
-      "name": "Michael Columbus",
-      "score": "25",
-      "thru": "15",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433306323"
-    },
-    {
-      "pos": "7",
-      "name": "Kyle Hubbard",
-      "score": "24",
-      "thru": "14",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433306319"
+      "aggregate_id": "2433319539"
     }
   ],
-  "updated": "2026-09-08T15:52+00:00",
+  "updated": "2026-09-08T16:03+00:00",
   "note": null
 }
