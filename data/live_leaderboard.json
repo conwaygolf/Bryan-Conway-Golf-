@@ -3,7 +3,15 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "T1",
+      "pos": "1",
+      "name": "Pj McDougal",
+      "score": "17",
+      "thru": "8",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433102037"
+    },
+    {
+      "pos": "T2",
       "name": "Neal Thomas",
       "score": "16",
       "thru": "8",
@@ -11,7 +19,7 @@
       "aggregate_id": "2433102034"
     },
     {
-      "pos": "T1",
+      "pos": "T2",
       "name": "Bryan Conway",
       "score": "16",
       "thru": "7",
@@ -19,46 +27,38 @@
       "aggregate_id": "2433102035"
     },
     {
-      "pos": "T1",
-      "name": "Pj McDougal",
-      "score": "16",
-      "thru": "7",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433102037"
-    },
-    {
-      "pos": "4",
-      "name": "Kyle Hubbard",
-      "score": "14",
-      "thru": "8",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102032"
-    },
-    {
-      "pos": "5",
+      "pos": "T4",
       "name": "Greg Laswell",
-      "score": "13",
-      "thru": "8",
+      "score": "15",
+      "thru": "9",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "T6",
-      "name": "William Carter",
-      "score": "11",
+      "pos": "T4",
+      "name": "Kyle Hubbard",
+      "score": "15",
       "thru": "9",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433102031"
+      "aggregate_id": "2433102032"
     },
     {
-      "pos": "T6",
+      "pos": "6",
       "name": "Michael Columbus",
-      "score": "11",
-      "thru": "7",
+      "score": "13",
+      "thru": "8",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2433102036"
+    },
+    {
+      "pos": "T7",
+      "name": "William Carter",
+      "score": "12",
+      "thru": "10",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102031"
     }
   ],
-  "updated": "2026-09-08T14:06+00:00",
+  "updated": "2026-09-08T14:22+00:00",
   "note": null
 }
