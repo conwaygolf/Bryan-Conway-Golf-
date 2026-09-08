@@ -1478,6 +1478,17 @@ def admin_leaderboard_save():
     if enabled and not tournament_code:
         flash("Leaderboard turned on, but no tournament code was entered yet -- it won't poll until one is set.", "warn")
     elif enabled and not was_enabled:
+        # Without this, LIVE_LEADERBOARD["updated"] stays frozen at whatever
+        # it was when the leaderboard was last turned off (often days ago,
+        # since it's only on during an active tournament) until the
+        # background loop's next 10-min cycle happens to run. That made the
+        # admin's staleness warning fire a scary multi-hour false alarm at
+        # the exact moment of enabling, every single time -- confirmed
+        # 2026-09-08. Polling once here refreshes the timestamp immediately.
+        try:
+            poll_live_leaderboard_once()
+        except Exception as e:
+            print(f"[leaderboard poller] immediate poll on enable failed: {type(e).__name__}: {e}")
         flash("Leaderboard enabled. It'll go live on the site once the next poll finds real scores.", "ok")
     elif not enabled:
         flash("Leaderboard turned off.", "ok")
