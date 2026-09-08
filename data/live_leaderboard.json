@@ -3,15 +3,15 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "T1",
+      "pos": "1",
       "name": "William Carter",
-      "score": "6",
-      "thru": "4",
+      "score": "7",
+      "thru": "5",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102031"
     },
     {
-      "pos": "T1",
+      "pos": "2",
       "name": "Kyle Hubbard",
       "score": "6",
       "thru": "4",
@@ -19,7 +19,15 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "3",
+      "pos": "T3",
+      "name": "Greg Laswell",
+      "score": "5",
+      "thru": "5",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "T3",
       "name": "Trae Joyce",
       "score": "5",
       "thru": "3",
@@ -27,15 +35,7 @@
       "aggregate_id": "2433102039"
     },
     {
-      "pos": "T4",
-      "name": "Greg Laswell",
-      "score": "4",
-      "thru": "4",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
-    },
-    {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Neal Thomas",
       "score": "4",
       "thru": "3",
@@ -43,7 +43,7 @@
       "aggregate_id": "2433102034"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Michael Columbus",
       "score": "4",
       "thru": "3",
@@ -51,7 +51,7 @@
       "aggregate_id": "2433102036"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Bryan Conway",
       "score": "4",
       "thru": "2",
