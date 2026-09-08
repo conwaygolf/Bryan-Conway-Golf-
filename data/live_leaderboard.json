@@ -27,7 +27,7 @@
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "4",
+      "pos": "T4",
       "name": "Kyle Hubbard",
       "score": "22",
       "thru": "13",
@@ -35,9 +35,9 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "5",
+      "pos": "T4",
       "name": "Trae Joyce",
-      "score": "21",
+      "score": "22",
       "thru": "12",
       "city": "Woodhaven Country Club",
       "aggregate_id": "2433102039"
@@ -59,6 +59,6 @@
       "aggregate_id": "2433102031"
     }
   ],
-  "updated": "2026-09-08T15:16+00:00",
+  "updated": "2026-09-08T15:17+00:00",
   "note": null
 }
