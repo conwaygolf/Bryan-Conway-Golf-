@@ -11,7 +11,23 @@
       "aggregate_id": "2433102035"
     },
     {
-      "pos": "T2",
+      "pos": "2",
+      "name": "Greg Laswell",
+      "score": "11",
+      "thru": "7",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "T3",
+      "name": "William Carter",
+      "score": "10",
+      "thru": "7",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102031"
+    },
+    {
+      "pos": "T3",
       "name": "Kyle Hubbard",
       "score": "10",
       "thru": "6",
@@ -19,7 +35,7 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "T2",
+      "pos": "T3",
       "name": "Neal Thomas",
       "score": "10",
       "thru": "6",
@@ -27,7 +43,7 @@
       "aggregate_id": "2433102034"
     },
     {
-      "pos": "T2",
+      "pos": "T3",
       "name": "Pj McDougal",
       "score": "10",
       "thru": "4",
@@ -35,30 +51,14 @@
       "aggregate_id": "2433102037"
     },
     {
-      "pos": "5",
-      "name": "William Carter",
+      "pos": "7",
+      "name": "Michael Columbus",
       "score": "9",
       "thru": "6",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102031"
-    },
-    {
-      "pos": "T6",
-      "name": "Greg Laswell",
-      "score": "7",
-      "thru": "6",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
-    },
-    {
-      "pos": "T6",
-      "name": "Michael Columbus",
-      "score": "7",
-      "thru": "5",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2433102036"
     }
   ],
-  "updated": "2026-09-08T13:32+00:00",
+  "updated": "2026-09-08T13:43+00:00",
   "note": null
 }
