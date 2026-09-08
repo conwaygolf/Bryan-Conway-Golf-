@@ -12,6 +12,14 @@
     },
     {
       "pos": "2",
+      "name": "Pj McDougal",
+      "score": "29",
+      "thru": "14",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433102037"
+    },
+    {
+      "pos": "3",
       "name": "Greg Laswell",
       "score": "27",
       "thru": "16",
@@ -19,15 +27,23 @@
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "3",
-      "name": "Pj McDougal",
+      "pos": "T4",
+      "name": "Neal Thomas",
       "score": "25",
-      "thru": "12",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433102037"
+      "thru": "15",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102034"
     },
     {
-      "pos": "4",
+      "pos": "T4",
+      "name": "Trae Joyce",
+      "score": "25",
+      "thru": "14",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102039"
+    },
+    {
+      "pos": "6",
       "name": "Kyle Hubbard",
       "score": "24",
       "thru": "14",
@@ -35,30 +51,14 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "5",
-      "name": "Trae Joyce",
-      "score": "23",
-      "thru": "13",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102039"
-    },
-    {
-      "pos": "6",
-      "name": "William Carter",
-      "score": "22",
-      "thru": "16",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102031"
-    },
-    {
       "pos": "7",
-      "name": "Neal Thomas",
-      "score": "21",
+      "name": "Michael Columbus",
+      "score": "23",
       "thru": "14",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102034"
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2433102036"
     }
   ],
-  "updated": "2026-09-08T15:28+00:00",
+  "updated": "2026-09-08T15:39+00:00",
   "note": null
 }
