@@ -11,20 +11,20 @@
       "aggregate_id": "2433102035"
     },
     {
-      "pos": "T2",
+      "pos": "2",
+      "name": "Pj McDougal",
+      "score": "25",
+      "thru": "12",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433102037"
+    },
+    {
+      "pos": "3",
       "name": "Greg Laswell",
       "score": "23",
       "thru": "14",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102030"
-    },
-    {
-      "pos": "T2",
-      "name": "Pj McDougal",
-      "score": "23",
-      "thru": "11",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433102037"
     },
     {
       "pos": "4",
@@ -59,6 +59,6 @@
       "aggregate_id": "2433102031"
     }
   ],
-  "updated": "2026-09-08T15:15+00:00",
+  "updated": "2026-09-08T15:16+00:00",
   "note": null
 }
