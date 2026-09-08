@@ -28,6 +28,14 @@
     },
     {
       "pos": "T2",
+      "name": "Pj McDougal",
+      "score": "2",
+      "thru": "1",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433078477"
+    },
+    {
+      "pos": "T2",
       "name": "Trae Joyce",
       "score": "2",
       "thru": "1",
@@ -35,7 +43,7 @@
       "aggregate_id": "2433078479"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Greg Laswell",
       "score": "1",
       "thru": "2",
@@ -43,20 +51,12 @@
       "aggregate_id": "2433078470"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Neal Thomas",
       "score": "1",
       "thru": "1",
       "city": "Woodhaven Country Club",
       "aggregate_id": "2433078474"
-    },
-    {
-      "pos": "T5",
-      "name": "Michael Columbus",
-      "score": "1",
-      "thru": "1",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433078476"
     }
   ],
   "updated": "2026-09-08T12:43+00:00",
