@@ -5,60 +5,60 @@
     {
       "pos": "1",
       "name": "Bryan Conway",
-      "score": "35",
-      "thru": "15",
+      "score": "38",
+      "thru": "17",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433306322"
+      "aggregate_id": "2433319535"
     },
     {
       "pos": "2",
       "name": "Greg Laswell",
       "score": "33",
-      "thru": "18",
+      "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433306317"
+      "aggregate_id": "2433319530"
     },
     {
       "pos": "3",
-      "name": "Pj McDougal",
-      "score": "30",
-      "thru": "15",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433306324"
-    },
-    {
-      "pos": "T4",
-      "name": "Kyle Hubbard",
-      "score": "28",
-      "thru": "17",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433306319"
-    },
-    {
-      "pos": "T4",
       "name": "Neal Thomas",
-      "score": "28",
-      "thru": "17",
+      "score": "32",
+      "thru": "18",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433306321"
+      "aggregate_id": "2433319534"
+    },
+    {
+      "pos": "4",
+      "name": "Pj McDougal",
+      "score": "31",
+      "thru": "16",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433319537"
+    },
+    {
+      "pos": "5",
+      "name": "Kyle Hubbard",
+      "score": "30",
+      "thru": "18",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433319532"
     },
     {
       "pos": "6",
-      "name": "Trae Joyce",
-      "score": "27",
-      "thru": "15",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433306326"
+      "name": "Michael Columbus",
+      "score": "28",
+      "thru": "17",
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2433319536"
     },
     {
-      "pos": "7",
-      "name": "Michael Columbus",
-      "score": "26",
+      "pos": "T7",
+      "name": "Adam Brooks",
+      "score": "27",
       "thru": "16",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433306323"
+      "city": "EClub Kentucky West",
+      "aggregate_id": "2433319538"
     }
   ],
-  "updated": "2026-09-08T16:00+00:00",
+  "updated": "2026-09-08T16:11+00:00",
   "note": null
 }
