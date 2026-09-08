@@ -3,39 +3,47 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "T1",
-      "name": "Greg Laswell",
-      "score": "22",
-      "thru": "13",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
-    },
-    {
-      "pos": "T1",
-      "name": "Pj McDougal",
-      "score": "22",
-      "thru": "10",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433102037"
-    },
-    {
-      "pos": "3",
+      "pos": "1",
       "name": "Bryan Conway",
-      "score": "21",
-      "thru": "10",
+      "score": "29",
+      "thru": "12",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102035"
     },
     {
+      "pos": "T2",
+      "name": "Greg Laswell",
+      "score": "23",
+      "thru": "14",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "T2",
+      "name": "Pj McDougal",
+      "score": "23",
+      "thru": "11",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433102037"
+    },
+    {
       "pos": "4",
       "name": "Kyle Hubbard",
-      "score": "20",
-      "thru": "12",
+      "score": "22",
+      "thru": "13",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "T5",
+      "pos": "5",
+      "name": "Trae Joyce",
+      "score": "21",
+      "thru": "12",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102039"
+    },
+    {
+      "pos": "6",
       "name": "Neal Thomas",
       "score": "19",
       "thru": "12",
@@ -43,22 +51,14 @@
       "aggregate_id": "2433102034"
     },
     {
-      "pos": "T5",
-      "name": "Trae Joyce",
-      "score": "19",
-      "thru": "11",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102039"
-    },
-    {
-      "pos": "7",
-      "name": "Michael Columbus",
+      "pos": "T7",
+      "name": "William Carter",
       "score": "18",
-      "thru": "11",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433102036"
+      "thru": "14",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102031"
     }
   ],
-  "updated": "2026-09-08T15:05+00:00",
+  "updated": "2026-09-08T15:15+00:00",
   "note": null
 }
