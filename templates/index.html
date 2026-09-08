@@ -102,6 +102,7 @@
   .hero-corner-cards{
     position:absolute;top:24px;left:24px;right:24px;bottom:24px;z-index:3;
     display:flex;flex-direction:column;align-items:flex-end;gap:16px;
+    overflow-y:auto;
   }
   .hero-corner-cards.justify-start{align-items:flex-start;}
   .hero-fb{
@@ -109,8 +110,7 @@
     border:2px solid var(--blue);border-radius:6px;
     padding:14px 14px 4px;width:420px;max-width:100%;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
-    max-height:clamp(368px,calc(64vh - 48px),556px);overflow-y:auto;
-    flex:1 1 auto;min-height:0;
+    height:410px;flex:0 0 auto;overflow:hidden;
   }
   .hero-fb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
   .hero-fb-dot{width:7px;height:7px;border-radius:50%;background:#1877F2;}
@@ -125,7 +125,7 @@
     border:2px solid var(--red);border-radius:6px;
     padding:14px 14px 10px;width:420px;max-width:100%;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
-    max-height:45%;overflow-y:auto;
+    max-height:280px;overflow-y:auto;
     flex:0 0 auto;
   }
   .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
@@ -437,7 +437,7 @@
        data-href="https://www.facebook.com/p/Bryan-Conway-Golf-61592533985435/"
        data-tabs="timeline"
        data-width=""
-       data-height="780"
+       data-height="360"
        data-small-header="false"
        data-adapt-container-width="true"
        data-hide-cover="false"
