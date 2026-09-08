@@ -448,6 +448,8 @@
       <input type="text" id="lb-code" name="tournament_code" value="{{ leaderboard_config.tournament_code }}" placeholder="e.g. KGA Amateur Series #5">
       <label for="lb-desc">Tournament description (optional)</label>
       <textarea id="lb-desc" name="description" placeholder="Leave blank to use the matched tournament name -- or override it here">{{ leaderboard_config.description }}</textarea>
+      <label for="lb-format-note">Scoring format note (optional)</label>
+      <input type="text" id="lb-format-note" name="format_note" value="{{ leaderboard_config.format_note or '' }}" placeholder="e.g. Stableford Scoring -- shown as a small tag under the leaderboard title">
       <button class="btn" type="submit">Save Leaderboard Settings</button>
     </form>
     {% if live_leaderboard and live_leaderboard.updated %}

@@ -132,6 +132,7 @@
   .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:var(--red);}
   .hero-lb-title{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);}
   .hero-lb-sub{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.3px;color:rgba(255,255,255,.5);text-align:right;}
+  .hero-lb-format{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(212,175,55,.5);border-radius:3px;padding:2px 7px;margin-bottom:10px;}
   .hero-lb table{width:100%;border-collapse:collapse;font-size:12.5px;}
   .hero-lb th{text-align:left;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.45);padding:0 6px 8px;}
   .hero-lb th.num,.hero-lb td.num{text-align:right;}
@@ -409,6 +410,9 @@
     <span class="hero-lb-title">Live Leaderboard</span>
     <span class="hero-lb-sub">{{ live_leaderboard.event_label or '' }}</span>
   </div>
+  {% if leaderboard_config.format_note %}
+  <div class="hero-lb-format">{{ leaderboard_config.format_note }}</div>
+  {% endif %}
   <table>
     <thead>
       <tr><th>Pos</th><th>Player</th><th class="num">Score</th><th class="num">Thru</th></tr>

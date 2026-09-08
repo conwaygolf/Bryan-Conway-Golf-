@@ -499,7 +499,7 @@ DEFAULT_PRESS_HEADER = {"image": "press_archives_header.jpg"}
 # tools/update_live_leaderboard.py reads tournament_code/enabled from this
 # file and writes its polled results to LIVE_LEADERBOARD_JSON separately --
 # see that script's header for how a tournament_code is turned into real data.
-DEFAULT_LEADERBOARD_CONFIG = {"enabled": False, "tournament_code": "", "description": ""}
+DEFAULT_LEADERBOARD_CONFIG = {"enabled": False, "tournament_code": "", "description": "", "format_note": ""}
 DEFAULT_LIVE_LEADERBOARD = {"event_label": None, "venue": None, "rows": [], "updated": None, "note": None}
 
 
@@ -1467,11 +1467,13 @@ def admin_leaderboard_save():
     enabled = request.form.get("enabled") == "on"
     tournament_code = (request.form.get("tournament_code") or "").strip()
     description = (request.form.get("description") or "").strip()
+    format_note = (request.form.get("format_note") or "").strip()
 
     was_enabled = LEADERBOARD_CONFIG.get("enabled")
     LEADERBOARD_CONFIG["enabled"] = enabled
     LEADERBOARD_CONFIG["tournament_code"] = tournament_code
     LEADERBOARD_CONFIG["description"] = description
+    LEADERBOARD_CONFIG["format_note"] = format_note
     save_json(LEADERBOARD_CONFIG_JSON, LEADERBOARD_CONFIG)
     git_publish([LEADERBOARD_CONFIG_JSON], "Admin: update live leaderboard config")
 
