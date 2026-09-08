@@ -5,10 +5,10 @@
     {
       "pos": "1",
       "name": "Bryan Conway",
-      "score": "38",
-      "thru": "17",
+      "score": "42",
+      "thru": "18",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433319535"
+      "aggregate_id": "2433334870"
     },
     {
       "pos": "2",
@@ -16,15 +16,15 @@
       "score": "33",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433319530"
+      "aggregate_id": "2433334865"
     },
     {
       "pos": "3",
       "name": "Neal Thomas",
       "score": "32",
-      "thru": "18",
+      "thru": "F",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433319534"
+      "aggregate_id": "2433334869"
     },
     {
       "pos": "4",
@@ -32,33 +32,33 @@
       "score": "31",
       "thru": "16",
       "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433319537"
+      "aggregate_id": "2433334872"
     },
     {
-      "pos": "5",
+      "pos": "T5",
       "name": "Kyle Hubbard",
       "score": "30",
-      "thru": "18",
+      "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433319532"
+      "aggregate_id": "2433334867"
     },
     {
-      "pos": "6",
+      "pos": "T5",
       "name": "Michael Columbus",
-      "score": "28",
-      "thru": "17",
+      "score": "30",
+      "thru": "18",
       "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433319536"
+      "aggregate_id": "2433334871"
     },
     {
-      "pos": "T7",
-      "name": "Adam Brooks",
-      "score": "27",
-      "thru": "16",
-      "city": "EClub Kentucky West",
-      "aggregate_id": "2433319538"
+      "pos": "7",
+      "name": "Trae Joyce",
+      "score": "29",
+      "thru": "17",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433334874"
     }
   ],
-  "updated": "2026-09-08T16:11+00:00",
+  "updated": "2026-09-08T16:22+00:00",
   "note": null
 }
