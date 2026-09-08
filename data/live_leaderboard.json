@@ -5,13 +5,21 @@
     {
       "pos": "1",
       "name": "Bryan Conway",
-      "score": "29",
-      "thru": "12",
+      "score": "31",
+      "thru": "13",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102035"
     },
     {
       "pos": "2",
+      "name": "Greg Laswell",
+      "score": "27",
+      "thru": "16",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "3",
       "name": "Pj McDougal",
       "score": "25",
       "thru": "12",
@@ -19,46 +27,38 @@
       "aggregate_id": "2433102037"
     },
     {
-      "pos": "3",
-      "name": "Greg Laswell",
-      "score": "23",
-      "thru": "14",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
-    },
-    {
-      "pos": "T4",
+      "pos": "4",
       "name": "Kyle Hubbard",
-      "score": "22",
-      "thru": "13",
+      "score": "24",
+      "thru": "14",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "T4",
+      "pos": "5",
       "name": "Trae Joyce",
-      "score": "22",
-      "thru": "12",
+      "score": "23",
+      "thru": "13",
       "city": "Woodhaven Country Club",
       "aggregate_id": "2433102039"
     },
     {
       "pos": "6",
-      "name": "Neal Thomas",
-      "score": "19",
-      "thru": "12",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102034"
-    },
-    {
-      "pos": "T7",
       "name": "William Carter",
-      "score": "18",
-      "thru": "14",
+      "score": "22",
+      "thru": "16",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102031"
+    },
+    {
+      "pos": "7",
+      "name": "Neal Thomas",
+      "score": "21",
+      "thru": "14",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102034"
     }
   ],
-  "updated": "2026-09-08T15:17+00:00",
+  "updated": "2026-09-08T15:28+00:00",
   "note": null
 }
