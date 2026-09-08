@@ -5,60 +5,60 @@
     {
       "pos": "1",
       "name": "William Carter",
-      "score": "4",
-      "thru": "2",
+      "score": "6",
+      "thru": "3",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433078471"
+      "aggregate_id": "2433102031"
     },
     {
       "pos": "2",
+      "name": "Bryan Conway",
+      "score": "4",
+      "thru": "2",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102035"
+    },
+    {
+      "pos": "3",
       "name": "Kyle Hubbard",
       "score": "3",
       "thru": "2",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433078472"
+      "aggregate_id": "2433102032"
     },
     {
-      "pos": "T3",
-      "name": "Bryan Conway",
+      "pos": "T4",
+      "name": "Greg Laswell",
       "score": "2",
-      "thru": "1",
+      "thru": "3",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433078475"
+      "aggregate_id": "2433102030"
     },
     {
-      "pos": "T3",
+      "pos": "T4",
       "name": "Pj McDougal",
       "score": "2",
       "thru": "1",
       "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433078477"
+      "aggregate_id": "2433102037"
     },
     {
-      "pos": "T3",
+      "pos": "T4",
       "name": "Trae Joyce",
       "score": "2",
       "thru": "1",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433078479"
+      "aggregate_id": "2433102039"
     },
     {
-      "pos": "T6",
-      "name": "Greg Laswell",
-      "score": "1",
-      "thru": "2",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433078470"
-    },
-    {
-      "pos": "T6",
-      "name": "Neal Thomas",
-      "score": "1",
+      "pos": "T4",
+      "name": "Mike LaFavers",
+      "score": "2",
       "thru": "1",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433078474"
+      "city": "EClub Kentucky Central",
+      "aggregate_id": "2433102041"
     }
   ],
-  "updated": "2026-09-08T12:46+00:00",
+  "updated": "2026-09-08T12:57+00:00",
   "note": null
 }
