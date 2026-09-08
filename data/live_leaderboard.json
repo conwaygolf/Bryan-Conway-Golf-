@@ -3,7 +3,7 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "1",
+      "pos": "T1",
       "name": "William Carter",
       "score": "6",
       "thru": "4",
@@ -11,7 +11,23 @@
       "aggregate_id": "2433102031"
     },
     {
-      "pos": "T2",
+      "pos": "T1",
+      "name": "Kyle Hubbard",
+      "score": "6",
+      "thru": "4",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102032"
+    },
+    {
+      "pos": "3",
+      "name": "Trae Joyce",
+      "score": "5",
+      "thru": "3",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102039"
+    },
+    {
+      "pos": "T4",
       "name": "Greg Laswell",
       "score": "4",
       "thru": "4",
@@ -19,46 +35,30 @@
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "T2",
+      "pos": "T4",
+      "name": "Neal Thomas",
+      "score": "4",
+      "thru": "3",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102034"
+    },
+    {
+      "pos": "T4",
+      "name": "Michael Columbus",
+      "score": "4",
+      "thru": "3",
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2433102036"
+    },
+    {
+      "pos": "T4",
       "name": "Bryan Conway",
       "score": "4",
       "thru": "2",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102035"
-    },
-    {
-      "pos": "4",
-      "name": "Kyle Hubbard",
-      "score": "3",
-      "thru": "2",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102032"
-    },
-    {
-      "pos": "T5",
-      "name": "Pj McDougal",
-      "score": "2",
-      "thru": "1",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433102037"
-    },
-    {
-      "pos": "T5",
-      "name": "Trae Joyce",
-      "score": "2",
-      "thru": "1",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102039"
-    },
-    {
-      "pos": "T5",
-      "name": "Mike LaFavers",
-      "score": "2",
-      "thru": "1",
-      "city": "EClub Kentucky Central",
-      "aggregate_id": "2433102041"
     }
   ],
-  "updated": "2026-09-08T13:01+00:00",
+  "updated": "2026-09-08T13:12+00:00",
   "note": null
 }
