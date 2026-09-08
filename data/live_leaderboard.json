@@ -3,20 +3,20 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "",
-      "name": "Greg Laswell",
-      "score": "-",
-      "thru": "8:00 AM",
+      "pos": "1",
+      "name": "William Carter",
+      "score": "2",
+      "thru": "1",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433061624"
+      "aggregate_id": "2433078471"
     },
     {
-      "pos": "",
-      "name": "William Carter",
-      "score": "-",
-      "thru": "8:00 AM",
+      "pos": "2",
+      "name": "Greg Laswell",
+      "score": "1",
+      "thru": "1",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433061625"
+      "aggregate_id": "2433078470"
     },
     {
       "pos": "",
@@ -24,15 +24,15 @@
       "score": "-",
       "thru": "8:09 AM",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433061626"
+      "aggregate_id": "2433078472"
     },
     {
       "pos": "",
-      "name": "Josh Garr",
+      "name": "Neal Thomas",
       "score": "-",
       "thru": "8:09 AM",
-      "city": "Shawnee Golf Course",
-      "aggregate_id": "2433061627"
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433078474"
     },
     {
       "pos": "",
@@ -40,15 +40,7 @@
       "score": "-",
       "thru": "8:18 AM",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433061628"
-    },
-    {
-      "pos": "",
-      "name": "Neal Thomas",
-      "score": "-",
-      "thru": "8:18 AM",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433061629"
+      "aggregate_id": "2433078475"
     },
     {
       "pos": "",
@@ -56,9 +48,17 @@
       "score": "-",
       "thru": "8:18 AM",
       "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433061630"
+      "aggregate_id": "2433078476"
+    },
+    {
+      "pos": "",
+      "name": "Pj McDougal",
+      "score": "-",
+      "thru": "8:27 AM",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2433078477"
     }
   ],
-  "updated": "2026-09-08T12:01+00:00",
+  "updated": "2026-09-08T12:19+00:00",
   "note": null
 }
