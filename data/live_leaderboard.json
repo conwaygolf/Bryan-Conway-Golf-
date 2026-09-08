@@ -5,26 +5,26 @@
     {
       "pos": "1",
       "name": "Bryan Conway",
-      "score": "31",
-      "thru": "13",
+      "score": "35",
+      "thru": "15",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102035"
     },
     {
       "pos": "2",
+      "name": "Greg Laswell",
+      "score": "31",
+      "thru": "17",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "3",
       "name": "Pj McDougal",
       "score": "29",
       "thru": "14",
       "city": "Olde Stone (the Club at)",
       "aggregate_id": "2433102037"
-    },
-    {
-      "pos": "3",
-      "name": "Greg Laswell",
-      "score": "27",
-      "thru": "16",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
     },
     {
       "pos": "T4",
@@ -36,6 +36,14 @@
     },
     {
       "pos": "T4",
+      "name": "Michael Columbus",
+      "score": "25",
+      "thru": "15",
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2433102036"
+    },
+    {
+      "pos": "T4",
       "name": "Trae Joyce",
       "score": "25",
       "thru": "14",
@@ -43,22 +51,14 @@
       "aggregate_id": "2433102039"
     },
     {
-      "pos": "6",
+      "pos": "7",
       "name": "Kyle Hubbard",
       "score": "24",
       "thru": "14",
       "city": "EClub Kentucky North",
       "aggregate_id": "2433102032"
-    },
-    {
-      "pos": "7",
-      "name": "Michael Columbus",
-      "score": "23",
-      "thru": "14",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433102036"
     }
   ],
-  "updated": "2026-09-08T15:39+00:00",
+  "updated": "2026-09-08T15:49+00:00",
   "note": null
 }
