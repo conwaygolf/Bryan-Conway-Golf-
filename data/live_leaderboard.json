@@ -8,7 +8,7 @@
       "score": "42",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433459009"
+      "aggregate_id": "2433475728"
     },
     {
       "pos": "2",
@@ -16,7 +16,7 @@
       "score": "34",
       "thru": "F",
       "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433459011"
+      "aggregate_id": "2433475730"
     },
     {
       "pos": "3",
@@ -24,7 +24,7 @@
       "score": "33",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433459004"
+      "aggregate_id": "2433475723"
     },
     {
       "pos": "4",
@@ -32,7 +32,7 @@
       "score": "32",
       "thru": "F",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433459008"
+      "aggregate_id": "2433475727"
     },
     {
       "pos": "5",
@@ -40,7 +40,7 @@
       "score": "31",
       "thru": "F",
       "city": "Woodhaven Country Club",
-      "aggregate_id": "2433459013"
+      "aggregate_id": "2433475732"
     },
     {
       "pos": "T6",
@@ -48,7 +48,7 @@
       "score": "30",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433459006"
+      "aggregate_id": "2433475725"
     },
     {
       "pos": "T6",
@@ -56,9 +56,9 @@
       "score": "30",
       "thru": "F",
       "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433459010"
+      "aggregate_id": "2433475729"
     }
   ],
-  "updated": "2026-09-08T17:31+00:00",
+  "updated": "2026-09-08T17:42+00:00",
   "note": null
 }
