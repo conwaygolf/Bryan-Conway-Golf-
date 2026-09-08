@@ -20,6 +20,14 @@
     },
     {
       "pos": "T2",
+      "name": "Neal Thomas",
+      "score": "10",
+      "thru": "6",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102034"
+    },
+    {
+      "pos": "T2",
       "name": "Pj McDougal",
       "score": "10",
       "thru": "4",
@@ -27,7 +35,7 @@
       "aggregate_id": "2433102037"
     },
     {
-      "pos": "4",
+      "pos": "5",
       "name": "William Carter",
       "score": "9",
       "thru": "6",
@@ -35,7 +43,7 @@
       "aggregate_id": "2433102031"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Greg Laswell",
       "score": "7",
       "thru": "6",
@@ -43,22 +51,14 @@
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Michael Columbus",
       "score": "7",
       "thru": "5",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2433102036"
-    },
-    {
-      "pos": "T7",
-      "name": "Neal Thomas",
-      "score": "6",
-      "thru": "4",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433102034"
     }
   ],
-  "updated": "2026-09-08T13:31+00:00",
+  "updated": "2026-09-08T13:32+00:00",
   "note": null
 }
