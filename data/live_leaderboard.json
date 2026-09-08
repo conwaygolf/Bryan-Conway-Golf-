@@ -3,7 +3,15 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "1",
+      "pos": "T1",
+      "name": "Greg Laswell",
+      "score": "22",
+      "thru": "13",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2433102030"
+    },
+    {
+      "pos": "T1",
       "name": "Pj McDougal",
       "score": "22",
       "thru": "10",
@@ -11,7 +19,7 @@
       "aggregate_id": "2433102037"
     },
     {
-      "pos": "2",
+      "pos": "3",
       "name": "Bryan Conway",
       "score": "21",
       "thru": "10",
@@ -19,46 +27,38 @@
       "aggregate_id": "2433102035"
     },
     {
-      "pos": "3",
-      "name": "Greg Laswell",
+      "pos": "4",
+      "name": "Kyle Hubbard",
       "score": "20",
       "thru": "12",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433102030"
+      "aggregate_id": "2433102032"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
       "name": "Neal Thomas",
-      "score": "18",
-      "thru": "10",
+      "score": "19",
+      "thru": "12",
       "city": "Woodhaven Country Club",
       "aggregate_id": "2433102034"
     },
     {
-      "pos": "T4",
+      "pos": "T5",
+      "name": "Trae Joyce",
+      "score": "19",
+      "thru": "11",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433102039"
+    },
+    {
+      "pos": "7",
       "name": "Michael Columbus",
       "score": "18",
       "thru": "11",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2433102036"
-    },
-    {
-      "pos": "6",
-      "name": "Kyle Hubbard",
-      "score": "17",
-      "thru": "10",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102032"
-    },
-    {
-      "pos": "T7",
-      "name": "William Carter",
-      "score": "15",
-      "thru": "12",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433102031"
     }
   ],
-  "updated": "2026-09-08T14:55+00:00",
+  "updated": "2026-09-08T15:06+00:00",
   "note": null
 }
