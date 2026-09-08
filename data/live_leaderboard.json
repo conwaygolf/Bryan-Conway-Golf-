@@ -27,7 +27,7 @@
       "aggregate_id": "2433102030"
     },
     {
-      "pos": "4",
+      "pos": "T4",
       "name": "William Carter",
       "score": "11",
       "thru": "8",
@@ -35,7 +35,15 @@
       "aggregate_id": "2433102031"
     },
     {
-      "pos": "T5",
+      "pos": "T4",
+      "name": "Michael Columbus",
+      "score": "11",
+      "thru": "7",
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2433102036"
+    },
+    {
+      "pos": "T6",
       "name": "Kyle Hubbard",
       "score": "10",
       "thru": "6",
@@ -43,22 +51,14 @@
       "aggregate_id": "2433102032"
     },
     {
-      "pos": "T5",
+      "pos": "T6",
       "name": "Neal Thomas",
       "score": "10",
       "thru": "6",
       "city": "Woodhaven Country Club",
       "aggregate_id": "2433102034"
-    },
-    {
-      "pos": "T7",
-      "name": "Michael Columbus",
-      "score": "9",
-      "thru": "6",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433102036"
     }
   ],
-  "updated": "2026-09-08T13:54+00:00",
+  "updated": "2026-09-08T13:55+00:00",
   "note": null
 }
