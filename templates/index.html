@@ -92,18 +92,25 @@
   }
   .scroll-cue::after{content:"";width:1px;height:24px;background:rgba(255,255,255,.4);}
 
-  /* Hero corner cards -- Facebook feed + live leaderboard, anchored together */
+  /* Hero corner cards -- live leaderboard stacked above the Facebook feed,
+     anchored together on one side. Was a side-by-side row until 2026-09-08;
+     switched to a column so the leaderboard (short, fixed-ish height) sits
+     above the Facebook embed (tall, already scrolls internally) -- bottom:24px
+     on the container gives flexbox a bounded height to distribute, so the fb
+     card's flex:1 + min-height:0 below lets it shrink and scroll internally
+     instead of pushing the stack past the hero photo. */
   .hero-corner-cards{
-    position:absolute;top:24px;left:24px;right:24px;z-index:3;
-    display:flex;justify-content:flex-end;align-items:flex-start;gap:20px;
+    position:absolute;top:24px;left:24px;right:24px;bottom:24px;z-index:3;
+    display:flex;flex-direction:column;align-items:flex-end;gap:16px;
   }
-  .hero-corner-cards.justify-start{justify-content:flex-start;}
+  .hero-corner-cards.justify-start{align-items:flex-start;}
   .hero-fb{
     background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
     border:2px solid var(--blue);border-radius:6px;
     padding:14px 14px 4px;width:420px;max-width:100%;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
     max-height:clamp(368px,calc(64vh - 48px),556px);overflow-y:auto;
+    flex:1 1 auto;min-height:0;
   }
   .hero-fb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
   .hero-fb-dot{width:7px;height:7px;border-radius:50%;background:#1877F2;}
@@ -111,15 +118,15 @@
   .hero-fb-link{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.5);text-transform:none;}
   .hero-fb-link:hover{color:rgba(255,255,255,.8);}
 
-  /* Hero corner card -- live leaderboard, anchored next to the Facebook card */
+  /* Hero corner card -- live leaderboard, stacked above the Facebook card */
   .hero-lb{
     color:#f4f4f2;
     background:rgba(10,8,7,.82);backdrop-filter:blur(6px);
     border:2px solid var(--red);border-radius:6px;
-    padding:14px 14px 10px;width:340px;max-width:100%;
+    padding:14px 14px 10px;width:420px;max-width:100%;
     box-shadow:0 12px 30px rgba(0,0,0,.4);
-    max-height:clamp(368px,calc(64vh - 48px),556px);overflow-y:auto;
-    flex-shrink:0;
+    max-height:45%;overflow-y:auto;
+    flex:0 0 auto;
   }
   .hero-lb-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
   .hero-lb-dot{width:7px;height:7px;border-radius:50%;background:var(--red);}
