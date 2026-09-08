@@ -43,22 +43,22 @@
       "aggregate_id": "2433334867"
     },
     {
-      "pos": "T6",
+      "pos": "6",
+      "name": "Trae Joyce",
+      "score": "29",
+      "thru": "17",
+      "city": "Woodhaven Country Club",
+      "aggregate_id": "2433334874"
+    },
+    {
+      "pos": "T7",
       "name": "Michael Columbus",
       "score": "28",
       "thru": "17",
       "city": "USGA/Kentucky GC",
       "aggregate_id": "2433334871"
-    },
-    {
-      "pos": "T6",
-      "name": "Adam Brooks",
-      "score": "28",
-      "thru": "17",
-      "city": "EClub Kentucky West",
-      "aggregate_id": "2433334873"
     }
   ],
-  "updated": "2026-09-08T16:15+00:00",
+  "updated": "2026-09-08T16:16+00:00",
   "note": null
 }
