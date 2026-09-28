@@ -685,10 +685,25 @@ def poll_live_leaderboard_once():
             git_publish([LIVE_LEADERBOARD_JSON], "Auto-update: live leaderboard (server-side poller)")
 
 
+POLL_CYCLE_HARD_TIMEOUT_SECONDS = 90  # real incident 2026-09-28: the poller
+# froze mid-cycle TWICE in one day even after adding timeouts to every git
+# subprocess call -- something else can still block it, root cause not
+# fully pinned down. Rather than chase each possible hang point one at a
+# time, run each cycle in its own throwaway thread with a hard wall-clock
+# ceiling: if it hasn't finished by then, stop waiting and try again next
+# cycle. The stuck thread (if any) is abandoned as a harmless daemon rather
+# than reused, so it can never block a later, fresh attempt.
+
+
 def _leaderboard_poll_loop():
     while True:
         try:
-            poll_live_leaderboard_once()
+            worker = threading.Thread(target=poll_live_leaderboard_once, daemon=True)
+            worker.start()
+            worker.join(timeout=POLL_CYCLE_HARD_TIMEOUT_SECONDS)
+            if worker.is_alive():
+                print(f"[leaderboard poller] cycle still running after {POLL_CYCLE_HARD_TIMEOUT_SECONDS}s "
+                      "-- abandoning it, will retry next cycle")
         except Exception as e:
             print(f"[leaderboard poller] error: {type(e).__name__}: {e}")
         try:
