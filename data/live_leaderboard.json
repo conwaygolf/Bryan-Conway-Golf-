@@ -3,63 +3,63 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "1",
+      "pos": "T1",
       "name": "Bryan Conway",
-      "score": "-3",
-      "thru": "16",
+      "score": "-2",
+      "thru": "17",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455441209"
+      "aggregate_id": "2455457117"
     },
     {
-      "pos": "2",
+      "pos": "T1",
       "name": "Tony Wise",
       "score": "-2",
       "thru": "13*",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2455441198"
+      "aggregate_id": "2455457151"
     },
     {
       "pos": "3",
       "name": "G Davis Boland",
       "score": "-1",
-      "thru": "16*",
+      "thru": "17*",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2455441203"
+      "aggregate_id": "2455457139"
     },
     {
-      "pos": "4",
-      "name": "Kevin Lawson",
-      "score": "E",
-      "thru": "13",
-      "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2455441218"
+      "pos": "T4",
+      "name": "John Fauls",
+      "score": "+1",
+      "thru": "18",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2455457112"
     },
     {
-      "pos": "5",
+      "pos": "T4",
       "name": "Paul Douglas",
       "score": "+1",
-      "thru": "15*",
+      "thru": "16*",
       "city": "London Country Club",
-      "aggregate_id": "2455441205"
+      "aggregate_id": "2455457143"
     },
     {
-      "pos": "T6",
-      "name": "John Fauls",
-      "score": "+2",
-      "thru": "17",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2455441228"
+      "pos": "T4",
+      "name": "Kevin Lawson",
+      "score": "+1",
+      "thru": "14",
+      "city": "Greenbrier Golf & Country Club",
+      "aggregate_id": "2455457131"
     },
     {
-      "pos": "T6",
-      "name": "Mike LaFavers",
+      "pos": "T7",
+      "name": "Olin Bryant",
       "score": "+2",
       "thru": "16",
-      "city": "EClub Kentucky Central",
-      "aggregate_id": "2455441216"
+      "city": "Lexington Country Club",
+      "aggregate_id": "2455457119"
     }
   ],
-  "updated": "2026-09-28T17:33+00:00",
+  "updated": "2026-09-28T17:43+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
