@@ -3,20 +3,20 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "T1",
+      "pos": "1",
+      "name": "Tony Wise",
+      "score": "-4",
+      "thru": "14*",
+      "city": "Frankfort Country Club",
+      "aggregate_id": "2455471993"
+    },
+    {
+      "pos": "2",
       "name": "Bryan Conway",
       "score": "-2",
       "thru": "17",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455457117"
-    },
-    {
-      "pos": "T1",
-      "name": "Tony Wise",
-      "score": "-2",
-      "thru": "13*",
-      "city": "Frankfort Country Club",
-      "aggregate_id": "2455457151"
+      "aggregate_id": "2455471962"
     },
     {
       "pos": "3",
@@ -24,23 +24,15 @@
       "score": "-1",
       "thru": "17*",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2455457139"
+      "aggregate_id": "2455471982"
     },
     {
       "pos": "T4",
       "name": "John Fauls",
       "score": "+1",
-      "thru": "18",
+      "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455457112"
-    },
-    {
-      "pos": "T4",
-      "name": "Paul Douglas",
-      "score": "+1",
-      "thru": "16*",
-      "city": "London Country Club",
-      "aggregate_id": "2455457143"
+      "aggregate_id": "2455471966"
     },
     {
       "pos": "T4",
@@ -48,18 +40,26 @@
       "score": "+1",
       "thru": "14",
       "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2455457131"
+      "aggregate_id": "2455471974"
     },
     {
-      "pos": "T7",
-      "name": "Olin Bryant",
+      "pos": "T6",
+      "name": "Paul Douglas",
       "score": "+2",
-      "thru": "16",
-      "city": "Lexington Country Club",
-      "aggregate_id": "2455457119"
+      "thru": "17*",
+      "city": "London Country Club",
+      "aggregate_id": "2455471985"
+    },
+    {
+      "pos": "T6",
+      "name": "Scott Ray",
+      "score": "+2",
+      "thru": "16*",
+      "city": "Central City Country Club",
+      "aggregate_id": "2455471990"
     }
   ],
-  "updated": "2026-09-28T17:43+00:00",
+  "updated": "2026-09-28T17:52+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
