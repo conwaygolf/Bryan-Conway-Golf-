@@ -583,7 +583,11 @@ def public_live_leaderboard():
     """What the public homepage shows -- same as LIVE_LEADERBOARD, but with
     rows cleared if the poller has gone quiet too long, so the site quietly
     falls back to the Facebook-only layout instead of displaying frozen,
-    possibly-wrong scores as if they were live."""
+    possibly-wrong scores as if they were live. Skipped entirely in "static"
+    mode (see poll_live_leaderboard_once()) -- a deliberately frozen display
+    has no live freshness to protect, so there's nothing to hide."""
+    if LEADERBOARD_CONFIG.get("static"):
+        return LIVE_LEADERBOARD
     staleness = leaderboard_staleness_minutes()
     if staleness is not None and staleness > LEADERBOARD_STALE_AFTER_MINUTES:
         return {**LIVE_LEADERBOARD, "rows": []}
@@ -637,6 +641,15 @@ def poll_live_leaderboard_once():
     global LIVE_LEADERBOARD
     _set_poll_phase("start")
     if not LEADERBOARD_CONFIG.get("enabled"):
+        return
+    if LEADERBOARD_CONFIG.get("static"):
+        # Deliberately frozen (e.g. overnight between tournament rounds, or
+        # while the real polling bug is being root-caused) -- do nothing at
+        # all: no network fetch, no git activity, just leave whatever's
+        # already in LIVE_LEADERBOARD/live_leaderboard.json displayed as-is.
+        # Toggle "static" back off (or remove it) in leaderboard_config.json
+        # to resume live polling.
+        _set_poll_phase("static_noop")
         return
 
     # Auto-off: once we've learned a resolved tournament's real end date (see
@@ -1566,13 +1579,16 @@ def admin_press_archives_delete(idx):
 @admin_required
 def admin_leaderboard_save():
     enabled = request.form.get("enabled") == "on"
+    static = request.form.get("static") == "on"
     tournament_code = (request.form.get("tournament_code") or "").strip()
     description = (request.form.get("description") or "").strip()
     format_note = (request.form.get("format_note") or "").strip()
 
     was_enabled = LEADERBOARD_CONFIG.get("enabled")
     was_code = LEADERBOARD_CONFIG.get("tournament_code")
+    was_static = LEADERBOARD_CONFIG.get("static")
     LEADERBOARD_CONFIG["enabled"] = enabled
+    LEADERBOARD_CONFIG["static"] = static
     LEADERBOARD_CONFIG["tournament_code"] = tournament_code
     LEADERBOARD_CONFIG["description"] = description
     LEADERBOARD_CONFIG["format_note"] = format_note
@@ -1587,7 +1603,7 @@ def admin_leaderboard_save():
 
     if enabled and not tournament_code:
         flash("Leaderboard turned on, but no tournament code was entered yet -- it won't poll until one is set.", "warn")
-    elif enabled and (not was_enabled or tournament_code != was_code):
+    elif enabled and (not was_enabled or tournament_code != was_code or (was_static and not static)):
         # Without this, LIVE_LEADERBOARD["updated"] stays frozen at whatever
         # it was when the leaderboard was last turned off (often days ago,
         # since it's only on during an active tournament) until the
