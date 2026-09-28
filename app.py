@@ -812,6 +812,16 @@ def fetch_scorecard(aggregate_id):
     return rounds
 
 
+@app.route("/api/leaderboard-debug")
+def api_leaderboard_debug():
+    # Temporary, read-only, no secrets exposed -- added to see the live
+    # server's actual in-memory leaderboard state from outside during a
+    # live-tournament outage where admin login wasn't available. Remove
+    # once the leaderboard is confirmed working again.
+    return jsonify({"config": LEADERBOARD_CONFIG, "live": LIVE_LEADERBOARD,
+                     "staleness_minutes": leaderboard_staleness_minutes()})
+
+
 @app.route("/api/scorecard/<aggregate_id>")
 def api_scorecard(aggregate_id):
     if not aggregate_id.isdigit():
