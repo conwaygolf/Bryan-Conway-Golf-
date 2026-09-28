@@ -1,64 +1,65 @@
 {
-  "event_label": "KGA Amateur Series #6",
+  "event_label": "40th Clark's Pump-N-Shop Kentucky Men's Senior Amateur Championship",
   "venue": "EClub Kentucky North",
   "rows": [
     {
       "pos": "1",
+      "name": "Tony Wise",
+      "score": "-3",
+      "thru": "11*",
+      "city": "Frankfort Country Club",
+      "aggregate_id": "2455376694"
+    },
+    {
+      "pos": "T2",
       "name": "Bryan Conway",
-      "score": "42",
-      "thru": "",
+      "score": "-2",
+      "thru": "14",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433710204"
+      "aggregate_id": "2455376702"
     },
     {
-      "pos": "2",
-      "name": "Pj McDougal",
-      "score": "34",
-      "thru": "",
-      "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2433710206"
-    },
-    {
-      "pos": "3",
-      "name": "Greg Laswell",
-      "score": "33",
-      "thru": "",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2433710199"
+      "pos": "T2",
+      "name": "Kevin Lawson",
+      "score": "-2",
+      "thru": "10",
+      "city": "Greenbrier Golf & Country Club",
+      "aggregate_id": "2455376715"
     },
     {
       "pos": "4",
-      "name": "Neal Thomas",
-      "score": "32",
-      "thru": "",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433710203"
+      "name": "G Davis Boland",
+      "score": "E",
+      "thru": "13*",
+      "city": "Midland Trail Golf Club",
+      "aggregate_id": "2455376685"
     },
     {
-      "pos": "5",
-      "name": "Trae Joyce",
-      "score": "31",
-      "thru": "",
-      "city": "Woodhaven Country Club",
-      "aggregate_id": "2433710208"
+      "pos": "T5",
+      "name": "Olin Bryant",
+      "score": "+1",
+      "thru": "13",
+      "city": "Lexington Country Club",
+      "aggregate_id": "2455376704"
     },
     {
-      "pos": "T6",
-      "name": "Kyle Hubbard",
-      "score": "30",
-      "thru": "",
+      "pos": "T5",
+      "name": "Paul Douglas",
+      "score": "+1",
+      "thru": "13*",
+      "city": "London Country Club",
+      "aggregate_id": "2455376725"
+    },
+    {
+      "pos": "T7",
+      "name": "John Fauls",
+      "score": "+2",
+      "thru": "14",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2433710201"
-    },
-    {
-      "pos": "T6",
-      "name": "Michael Columbus",
-      "score": "30",
-      "thru": "",
-      "city": "USGA/Kentucky GC",
-      "aggregate_id": "2433710205"
+      "aggregate_id": "2455376699"
     }
   ],
-  "updated": "2026-09-08T20:53+00:00",
-  "note": null
+  "updated": "2026-09-28T16:57+00:00",
+  "note": null,
+  "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
