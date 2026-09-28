@@ -3,63 +3,63 @@
   "venue": "EClub Kentucky North",
   "rows": [
     {
-      "pos": "1",
+      "pos": "T1",
+      "name": "Bryan Conway",
+      "score": "-3",
+      "thru": "15",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2455411196"
+    },
+    {
+      "pos": "T1",
       "name": "Tony Wise",
       "score": "-3",
-      "thru": "11*",
+      "thru": "12*",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2455376694"
+      "aggregate_id": "2455411226"
     },
     {
-      "pos": "T2",
-      "name": "Bryan Conway",
-      "score": "-2",
-      "thru": "14",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2455376702"
-    },
-    {
-      "pos": "T2",
+      "pos": "3",
       "name": "Kevin Lawson",
       "score": "-2",
-      "thru": "10",
+      "thru": "12",
       "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2455376715"
+      "aggregate_id": "2455411209"
     },
     {
-      "pos": "4",
+      "pos": "T4",
+      "name": "Paul Douglas",
+      "score": "E",
+      "thru": "14*",
+      "city": "London Country Club",
+      "aggregate_id": "2455411219"
+    },
+    {
+      "pos": "T4",
       "name": "G Davis Boland",
       "score": "E",
       "thru": "13*",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2455376685"
+      "aggregate_id": "2455411215"
     },
     {
-      "pos": "T5",
+      "pos": "6",
       "name": "Olin Bryant",
       "score": "+1",
-      "thru": "13",
+      "thru": "15",
       "city": "Lexington Country Club",
-      "aggregate_id": "2455376704"
-    },
-    {
-      "pos": "T5",
-      "name": "Paul Douglas",
-      "score": "+1",
-      "thru": "13*",
-      "city": "London Country Club",
-      "aggregate_id": "2455376725"
+      "aggregate_id": "2455411189"
     },
     {
       "pos": "T7",
-      "name": "John Fauls",
+      "name": "Mike LaFavers",
       "score": "+2",
-      "thru": "14",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2455376699"
+      "thru": "16",
+      "city": "EClub Kentucky Central",
+      "aggregate_id": "2455411229"
     }
   ],
-  "updated": "2026-09-28T16:57+00:00",
+  "updated": "2026-09-28T17:15+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
