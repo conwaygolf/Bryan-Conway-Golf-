@@ -619,8 +619,23 @@ from tools.update_live_leaderboard import (  # noqa: E402
 LEADERBOARD_POLL_INTERVAL_SECONDS = 600  # 10 min, matches the Task Scheduler cadence
 
 
+_poll_phase = {"phase": "never run", "at": None}
+
+
+def _set_poll_phase(phase):
+    # Real incident 2026-09-28: the poller keeps freezing somewhere inside
+    # a cycle and we had no visibility into WHERE, only that it eventually
+    # stopped updating -- burned real time guessing at git/lock/network
+    # theories one at a time. This just records the last phase reached and
+    # when, exposed via /api/leaderboard-debug, so the next check shows
+    # exactly which step is stuck instead of more guessing.
+    _poll_phase["phase"] = phase
+    _poll_phase["at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
 def poll_live_leaderboard_once():
     global LIVE_LEADERBOARD
+    _set_poll_phase("start")
     if not LEADERBOARD_CONFIG.get("enabled"):
         return
 
@@ -636,9 +651,11 @@ def poll_live_leaderboard_once():
         git_publish([LEADERBOARD_CONFIG_JSON], "Auto-disable: leaderboard tournament has ended")
         return
 
+    _set_poll_phase("resolving_widget_url")
     widget_url, err, matched_name, end_date = resolve_widget_url(LEADERBOARD_CONFIG.get("tournament_code", ""))
 
     if end_date and end_date != LEADERBOARD_CONFIG.get("_resolved_end_date"):
+        _set_poll_phase("publishing_auto_disable_date")
         LEADERBOARD_CONFIG["_resolved_end_date"] = end_date
         LEADERBOARD_CONFIG["auto_disable_after"] = (date.fromisoformat(end_date) + timedelta(days=1)).isoformat()
         save_json(LEADERBOARD_CONFIG_JSON, LEADERBOARD_CONFIG)
@@ -652,6 +669,7 @@ def poll_live_leaderboard_once():
         result = {"event_label": label, "venue": None, "rows": [], "updated": now, "note": err, "source_url": None}
     else:
         try:
+            _set_poll_phase("fetching_event_ids")
             event_ids = find_event_ids(widget_url)
         except requests.RequestException as e:
             result = {"event_label": label, "venue": None, "rows": [], "updated": now,
@@ -659,11 +677,13 @@ def poll_live_leaderboard_once():
         else:
             for event_id in event_ids:
                 try:
+                    _set_poll_phase(f"fetching_event_html:{event_id}")
                     html = fetch_event_html(event_id)
                 except requests.RequestException:
                     continue
                 if PLAYER_NAME not in html:
                     continue
+                _set_poll_phase(f"parsing_field:{event_id}")
                 field = parse_stroke_play_field(html)
                 if not field:
                     result = {"event_label": label, "venue": None, "rows": [], "updated": now,
@@ -695,9 +715,12 @@ def poll_live_leaderboard_once():
         meaningful_keys = ("event_label", "venue", "rows", "note")
         changed = any(result.get(k) != LIVE_LEADERBOARD.get(k) for k in meaningful_keys)
         LIVE_LEADERBOARD = result
+        _set_poll_phase("saving_local_json")
         save_json(LIVE_LEADERBOARD_JSON, LIVE_LEADERBOARD)
         if changed:
+            _set_poll_phase("git_publishing_live_leaderboard")
             git_publish([LIVE_LEADERBOARD_JSON], "Auto-update: live leaderboard (server-side poller)")
+    _set_poll_phase("done")
 
 
 POLL_CYCLE_HARD_TIMEOUT_SECONDS = 240  # real incident 2026-09-28: the poller
@@ -865,7 +888,9 @@ def api_leaderboard_debug():
     # live-tournament outage where admin login wasn't available. Remove
     # once the leaderboard is confirmed working again.
     return jsonify({"config": LEADERBOARD_CONFIG, "live": LIVE_LEADERBOARD,
-                     "staleness_minutes": leaderboard_staleness_minutes()})
+                     "staleness_minutes": leaderboard_staleness_minutes(),
+                     "poll_phase": _poll_phase,
+                     "poll_thread_alive": bool(_leaderboard_thread and _leaderboard_thread.is_alive())})
 
 
 @app.route("/api/scorecard/<aggregate_id>")
