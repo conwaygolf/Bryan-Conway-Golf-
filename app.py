@@ -115,8 +115,21 @@ def git_publish(paths, message):
     fails (no token configured yet, no network, etc.)."""
     if not GIT_PUBLISH_ENABLED:
         return
-    with _git_publish_lock:
+    # Real incident 2026-09-28: the fallback path (add/commit/push/fetch/
+    # rebase/push again) can take longer than the leaderboard poller's own
+    # 90s per-cycle ceiling in the worst case, so a cycle can get abandoned
+    # while still holding this lock -- and a plain `with lock:` blocks
+    # forever, so every cycle after that would wait on the lock permanently
+    # too. Acquiring with a timeout means no caller can ever be stuck longer
+    # than this, regardless of what's happening in whichever thread
+    # currently holds it.
+    if not _git_publish_lock.acquire(timeout=45):
+        print("[admin publish] couldn't get the git publish lock within 45s -- skipping this publish")
+        return
+    try:
         _git_publish_locked(paths, message)
+    finally:
+        _git_publish_lock.release()
 
 
 GIT_PUBLISH_TIMEOUT_SECONDS = 30  # real incident 2026-09-28: a hung git
@@ -687,14 +700,18 @@ def poll_live_leaderboard_once():
             git_publish([LIVE_LEADERBOARD_JSON], "Auto-update: live leaderboard (server-side poller)")
 
 
-POLL_CYCLE_HARD_TIMEOUT_SECONDS = 90  # real incident 2026-09-28: the poller
-# froze mid-cycle TWICE in one day even after adding timeouts to every git
-# subprocess call -- something else can still block it, root cause not
-# fully pinned down. Rather than chase each possible hang point one at a
-# time, run each cycle in its own throwaway thread with a hard wall-clock
-# ceiling: if it hasn't finished by then, stop waiting and try again next
-# cycle. The stuck thread (if any) is abandoned as a harmless daemon rather
-# than reused, so it can never block a later, fresh attempt.
+POLL_CYCLE_HARD_TIMEOUT_SECONDS = 240  # real incident 2026-09-28: the poller
+# kept freezing even after adding timeouts to every git subprocess call --
+# the actual gap was git_publish()'s own lock having no timeout, so a cycle
+# abandoned here while still holding that lock froze every future cycle
+# forever (now fixed separately with lock.acquire(timeout=45)). 240s
+# comfortably covers git_publish()'s worst legitimate case (up to ~7
+# sequential 30s git subprocess calls in the fetch/rebase/retry fallback
+# path) so a merely-slow-but-working cycle isn't falsely abandoned here;
+# the lock's own 45s timeout is what actually guarantees no caller can ever
+# be stuck indefinitely. Each cycle still runs in its own throwaway daemon
+# thread -- if it somehow exceeds even this, it's abandoned rather than
+# reused, so it can never block a later fresh attempt.
 
 
 def _leaderboard_poll_loop():
