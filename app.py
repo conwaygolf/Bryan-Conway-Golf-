@@ -119,37 +119,49 @@ def git_publish(paths, message):
         _git_publish_locked(paths, message)
 
 
+GIT_PUBLISH_TIMEOUT_SECONDS = 30  # real incident 2026-09-28: a hung git
+# subprocess (no timeout existed before) froze the leaderboard poller's
+# entire background thread forever on its very first successful publish --
+# the watchdog couldn't tell, since a blocked thread still reports
+# is_alive()=True. Every git call below now has a hard ceiling so a stuck
+# credential prompt or network stall can never wedge the thread permanently
+# again -- it just fails this cycle and retries in 10 minutes instead.
+
+
 def _git_publish_locked(paths, message):
     if GITHUB_PUSH_TOKEN:
         remote = f"https://x-access-token:{GITHUB_PUSH_TOKEN}@github.com/{GITHUB_REPO}.git"
     else:
         remote = "origin"
+    kw = dict(cwd=BASE_DIR, timeout=GIT_PUBLISH_TIMEOUT_SECONDS)
     try:
-        subprocess.run(["git", "add", *[str(p) for p in paths]], cwd=BASE_DIR, check=True)
-        staged = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=BASE_DIR)
+        subprocess.run(["git", "add", *[str(p) for p in paths]], check=True, **kw)
+        staged = subprocess.run(["git", "diff", "--cached", "--quiet"], **kw)
         if staged.returncode == 0:
             return  # nothing actually changed
         subprocess.run(
             ["git", "-c", "user.email=admin@bryanconwaygolf.com", "-c", "user.name=ConwayGolf Admin",
              "commit", "-m", message],
-            cwd=BASE_DIR, check=True,
+            check=True, **kw,
         )
-        push = subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR)
+        push = subprocess.run(["git", "push", remote, "HEAD:main"], **kw)
         if push.returncode != 0:
             # Remote moved since we last fetched (another dyno, Jimmy's own
             # machine, or -- pre-lock -- a same-process race). Rebase our
             # commit on top and retry once rather than stranding it locally.
-            subprocess.run(["git", "fetch", remote, "main"], cwd=BASE_DIR, check=True)
-            rebase = subprocess.run(["git", "rebase", "FETCH_HEAD"], cwd=BASE_DIR)
+            subprocess.run(["git", "fetch", remote, "main"], check=True, **kw)
+            rebase = subprocess.run(["git", "rebase", "FETCH_HEAD"], **kw)
             if rebase.returncode != 0:
                 # A real content conflict (rare -- two admin edits to the
                 # same JSON file at once). Abort so the working tree isn't
                 # left stuck mid-rebase, which would break every future
                 # publish until someone fixes it by hand.
-                subprocess.run(["git", "rebase", "--abort"], cwd=BASE_DIR)
+                subprocess.run(["git", "rebase", "--abort"], **kw)
                 print("[admin publish] rebase conflict, change not published -- aborted cleanly")
                 return
-            subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR, check=True)
+            subprocess.run(["git", "push", remote, "HEAD:main"], check=True, **kw)
+    except subprocess.TimeoutExpired as e:
+        print(f"[admin publish] git command timed out after {GIT_PUBLISH_TIMEOUT_SECONDS}s: {e.cmd}")
     except subprocess.CalledProcessError as e:
         print(f"[admin publish] git command failed (exit {e.returncode})")
     except Exception as e:
