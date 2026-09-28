@@ -408,7 +408,7 @@
   <div class="hero-lb-head">
     <span class="hero-lb-dot"></span>
     <span class="hero-lb-title">Live Leaderboard</span>
-    <span class="hero-lb-sub">{{ live_leaderboard.event_label or '' }}</span>
+    <span class="hero-lb-sub">{% if live_leaderboard.source_url %}<a href="{{ live_leaderboard.source_url }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">{{ live_leaderboard.event_label or '' }}</a>{% else %}{{ live_leaderboard.event_label or '' }}{% endif %}</span>
   </div>
   {% if leaderboard_config.format_note %}
   <div class="hero-lb-format">{{ leaderboard_config.format_note }}</div>

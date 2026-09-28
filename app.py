@@ -636,13 +636,13 @@ def poll_live_leaderboard_once():
     result = None
 
     if err:
-        result = {"event_label": label, "venue": None, "rows": [], "updated": now, "note": err}
+        result = {"event_label": label, "venue": None, "rows": [], "updated": now, "note": err, "source_url": None}
     else:
         try:
             event_ids = find_event_ids(widget_url)
         except requests.RequestException as e:
             result = {"event_label": label, "venue": None, "rows": [], "updated": now,
-                      "note": f"Couldn't fetch widget: {e}"}
+                      "note": f"Couldn't fetch widget: {e}", "source_url": widget_url}
         else:
             for event_id in event_ids:
                 try:
@@ -656,15 +656,17 @@ def poll_live_leaderboard_once():
                     result = {"event_label": label, "venue": None, "rows": [], "updated": now,
                               "note": ("Found Bryan Conway's division but it's not a flat stroke-play "
                                        "leaderboard (likely a match-play bracket) -- needs a hand-port, "
-                                       "see live_match_tracker.py.")}
+                                       "see live_match_tracker.py."), "source_url": widget_url}
                 else:
                     bryan = next((r for r in field if PLAYER_NAME in r["name"]), None)
                     result = {"event_label": label, "venue": bryan["city"] if bryan else None,
-                              "rows": top7_with_pinned_bryan(field), "updated": now, "note": None}
+                              "rows": top7_with_pinned_bryan(field), "updated": now, "note": None,
+                              "source_url": widget_url}
                 break
             if result is None:
                 result = {"event_label": label, "venue": None, "rows": [], "updated": now,
-                          "note": "Couldn't find Bryan Conway in any division of this tournament code right now."}
+                          "note": "Couldn't find Bryan Conway in any division of this tournament code right now.",
+                          "source_url": widget_url}
 
     if result != LIVE_LEADERBOARD:
         # "updated" changes on literally every poll (it's a fresh timestamp),
