@@ -455,6 +455,9 @@
     {% if live_leaderboard and live_leaderboard.updated %}
     <div class="desc" style="margin-top:16px;">Last polled: {{ live_leaderboard.updated }}{% if live_leaderboard.event_label %} &middot; {{ live_leaderboard.event_label }}{% endif %}{% if live_leaderboard.note %} &middot; {{ live_leaderboard.note }}{% endif %}</div>
     {% endif %}
+    {% if leaderboard_config.auto_disable_after %}
+    <div class="desc" style="margin-top:4px;">Auto-turns off after: {{ leaderboard_config.auto_disable_after }} (one day after the matched tournament's last day) -- no need to remember to uncheck it yourself.</div>
+    {% endif %}
   </div>
   </div>
 

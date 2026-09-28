@@ -104,9 +104,13 @@ SCHEDULE_CACHE_TTL = 3600  # the season schedule barely changes hour to hour
 
 
 def fetch_kga_schedule_leagues():
-    """{league_id: name} for every event on Golf House Kentucky's GolfGenius
-    schedule, across all categories. Paginated -- keep fetching until
-    noMoreData or a sane page cap (a full season fits in a handful of pages)."""
+    """{league_id: {"name": str, "end_date": "YYYY-MM-DD" or None}} for every
+    event on Golf House Kentucky's GolfGenius schedule, across all
+    categories. Paginated -- keep fetching until noMoreData or a sane page
+    cap (a full season fits in a handful of pages). end_date (GolfGenius's
+    own "endDate") is what auto-disable in app.py's poller uses to turn the
+    leaderboard off a day after a resolved tournament wraps, instead of it
+    being left on indefinitely until someone remembers to uncheck it."""
     cached = _schedule_cache["leagues"]
     if cached and time.time() - _schedule_cache["fetched_at"] < SCHEDULE_CACHE_TTL:
         return cached
@@ -116,7 +120,10 @@ def fetch_kga_schedule_leagues():
         r.raise_for_status()
         data = r.json()
         for lid, league in data.get("leagues", {}).items():
-            leagues[lid] = league.get("name", "").strip()
+            leagues[lid] = {
+                "name": league.get("name", "").strip(),
+                "end_date": league.get("endDate") or league.get("startDate"),
+            }
         if data.get("misc", {}).get("noMoreData"):
             break
     _schedule_cache["leagues"] = leagues
@@ -129,75 +136,79 @@ def find_league_by_name(name):
     schedule directory -- exact match, then substring either direction, then
     a shared-word-count fallback (>=2 meaningful words) to survive an admin
     typing e.g. "Senior Open" instead of "27th Kentucky Senior Open
-    Championship". Returns (league_id, matched_name) or (None, None)."""
+    Championship". Returns (league_id, matched_name, end_date) or
+    (None, None, None)."""
     leagues = fetch_kga_schedule_leagues()
     needle = name.strip().lower()
     if not needle:
-        return None, None
-    for lid, league_name in leagues.items():
-        if league_name.lower() == needle:
-            return lid, league_name
-    for lid, league_name in leagues.items():
-        lname = league_name.lower()
+        return None, None, None
+    for lid, info in leagues.items():
+        if info["name"].lower() == needle:
+            return lid, info["name"], info["end_date"]
+    for lid, info in leagues.items():
+        lname = info["name"].lower()
         if needle in lname or lname in needle:
-            return lid, league_name
+            return lid, info["name"], info["end_date"]
     needle_words = set(re.findall(r"[a-z0-9]+", needle))
-    best_id, best_name, best_overlap = None, None, 0
-    for lid, league_name in leagues.items():
-        words = set(re.findall(r"[a-z0-9]+", league_name.lower()))
+    best_id, best_name, best_end, best_overlap = None, None, None, 0
+    for lid, info in leagues.items():
+        words = set(re.findall(r"[a-z0-9]+", info["name"].lower()))
         overlap = len(needle_words & words)
         if overlap > best_overlap:
-            best_id, best_name, best_overlap = lid, league_name, overlap
+            best_id, best_name, best_end, best_overlap = lid, info["name"], info["end_date"], overlap
     if best_overlap >= 2:
-        return best_id, best_name
-    return None, None
+        return best_id, best_name, best_end
+    return None, None, None
 
 
 def resolve_widget_url(code):
-    """Returns (widget_url, err, matched_name). matched_name is only set
-    when resolution went through the name-search fallback, so callers can
-    use the real official tournament name as the event_label when an admin
-    didn't also type a separate description."""
+    """Returns (widget_url, err, matched_name, end_date). matched_name is
+    only set when resolution went through the name-search fallback, so
+    callers can use the real official tournament name as the event_label
+    when an admin didn't also type a separate description. end_date (a
+    "YYYY-MM-DD" string) is likewise only known via that same path -- it's
+    GolfGenius's own listed end date for the event, used by app.py's poller
+    to auto-disable the leaderboard a day after the tournament wraps."""
     code = code.strip()
     if not code:
-        return None, "No tournament code set.", None
+        return None, "No tournament code set.", None, None
 
     if "golfgenius.com" in code and "/widgets/" in code:
-        return code, None, None
+        return code, None, None, None
 
     m = SHARE_LINK_RE.search(code)
     if m:
         league_id, round_id = m.groups()
         return (f"https://www.golfgenius.com/leagues/{league_id}/widgets/"
-                f"tournament_results?no_header=true&round={round_id}&shared=false"), None, None
+                f"tournament_results?no_header=true&round={round_id}&shared=false"), None, None, None
 
     if "golfgenius.com" in code:
         try:
             r = requests.get(code, headers=HEADERS, timeout=15)
             r.raise_for_status()
         except requests.RequestException as e:
-            return None, f"Couldn't fetch the tournament code URL: {e}", None
+            return None, f"Couldn't fetch the tournament code URL: {e}", None, None
         found = re.search(r"data-custom_src='([^']*golfgenius\.com/leagues/\d+/widgets/[^']+)'", r.text)
         if found:
-            return found.group(1).replace("&amp;", "&"), None, None
+            return found.group(1).replace("&amp;", "&"), None, None, None
         m2 = LEAGUE_ID_RE.search(code)
         if m2:
-            return f"https://www.golfgenius.com/leagues/{m2.group(1)}/widgets/tournament_results?shared=false", None, None
-        return None, "Fetched the tournament code page but couldn't find an embedded widget URL in it.", None
+            return f"https://www.golfgenius.com/leagues/{m2.group(1)}/widgets/tournament_results?shared=false", None, None, None
+        return None, "Fetched the tournament code page but couldn't find an embedded widget URL in it.", None, None
 
     if code.isdigit():
-        return f"https://www.golfgenius.com/leagues/{code}/widgets/tournament_results?shared=false", None, None
+        return f"https://www.golfgenius.com/leagues/{code}/widgets/tournament_results?shared=false", None, None, None
 
     try:
-        league_id, matched_name = find_league_by_name(code)
+        league_id, matched_name, end_date = find_league_by_name(code)
     except requests.RequestException as e:
-        return None, f"Couldn't search the KGA schedule for '{code}': {e}", None
+        return None, f"Couldn't search the KGA schedule for '{code}': {e}", None, None
     if league_id:
         return (f"https://www.golfgenius.com/leagues/{league_id}/widgets/tournament_results?shared=false",
-                None, matched_name)
+                None, matched_name, end_date)
 
     return None, (f"Couldn't find '{code}' in the KGA schedule, and it's not a golfgenius.com URL or "
-                   f"league ID either -- check the spelling against kygolf.org's schedule."), None
+                   f"league ID either -- check the spelling against kygolf.org's schedule."), None, None
 
 
 def find_event_ids(widget_url):
@@ -277,7 +288,7 @@ def main():
         print("Leaderboard disabled in /admin. Skipping.")
         return 0
 
-    widget_url, err, matched_name = resolve_widget_url(config.get("tournament_code", ""))
+    widget_url, err, matched_name, _end_date = resolve_widget_url(config.get("tournament_code", ""))
     now = datetime.now(timezone.utc).isoformat(timespec="minutes")
     # If the admin only typed a tournament name (no separate description),
     # use the real official name the schedule search matched against.

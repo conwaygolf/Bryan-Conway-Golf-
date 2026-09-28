@@ -8,7 +8,7 @@ import threading
 import time
 import unicodedata
 import uuid
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from email.mime.text import MIMEText
 from functools import wraps
 from pathlib import Path
@@ -598,7 +598,27 @@ def poll_live_leaderboard_once():
     global LIVE_LEADERBOARD
     if not LEADERBOARD_CONFIG.get("enabled"):
         return
-    widget_url, err, matched_name = resolve_widget_url(LEADERBOARD_CONFIG.get("tournament_code", ""))
+
+    # Auto-off: once we've learned a resolved tournament's real end date (see
+    # below), turn the leaderboard off a day after it wraps instead of
+    # leaving it "enabled" indefinitely until someone remembers to uncheck
+    # it -- confirmed happening for real (KGA Amateur Series #6 sat enabled
+    # ~20 days after it ended, 2026-09-08 to 2026-09-28).
+    auto_disable_after = LEADERBOARD_CONFIG.get("auto_disable_after")
+    if auto_disable_after and date.today().isoformat() > auto_disable_after:
+        LEADERBOARD_CONFIG["enabled"] = False
+        save_json(LEADERBOARD_CONFIG_JSON, LEADERBOARD_CONFIG)
+        git_publish([LEADERBOARD_CONFIG_JSON], "Auto-disable: leaderboard tournament has ended")
+        return
+
+    widget_url, err, matched_name, end_date = resolve_widget_url(LEADERBOARD_CONFIG.get("tournament_code", ""))
+
+    if end_date and end_date != LEADERBOARD_CONFIG.get("_resolved_end_date"):
+        LEADERBOARD_CONFIG["_resolved_end_date"] = end_date
+        LEADERBOARD_CONFIG["auto_disable_after"] = (date.fromisoformat(end_date) + timedelta(days=1)).isoformat()
+        save_json(LEADERBOARD_CONFIG_JSON, LEADERBOARD_CONFIG)
+        git_publish([LEADERBOARD_CONFIG_JSON], "Auto-set leaderboard auto-disable date")
+
     now = datetime.now(timezone.utc).isoformat(timespec="minutes")
     label = LEADERBOARD_CONFIG.get("description") or matched_name or None
     result = None
@@ -1470,16 +1490,23 @@ def admin_leaderboard_save():
     format_note = (request.form.get("format_note") or "").strip()
 
     was_enabled = LEADERBOARD_CONFIG.get("enabled")
+    was_code = LEADERBOARD_CONFIG.get("tournament_code")
     LEADERBOARD_CONFIG["enabled"] = enabled
     LEADERBOARD_CONFIG["tournament_code"] = tournament_code
     LEADERBOARD_CONFIG["description"] = description
     LEADERBOARD_CONFIG["format_note"] = format_note
+    if tournament_code != was_code:
+        # A new tournament code invalidates whatever auto-disable date was
+        # learned for the previous one -- poll_live_leaderboard_once() below
+        # re-derives it fresh for the new tournament.
+        LEADERBOARD_CONFIG.pop("auto_disable_after", None)
+        LEADERBOARD_CONFIG.pop("_resolved_end_date", None)
     save_json(LEADERBOARD_CONFIG_JSON, LEADERBOARD_CONFIG)
     git_publish([LEADERBOARD_CONFIG_JSON], "Admin: update live leaderboard config")
 
     if enabled and not tournament_code:
         flash("Leaderboard turned on, but no tournament code was entered yet -- it won't poll until one is set.", "warn")
-    elif enabled and not was_enabled:
+    elif enabled and (not was_enabled or tournament_code != was_code):
         # Without this, LIVE_LEADERBOARD["updated"] stays frozen at whatever
         # it was when the leaderboard was last turned off (often days ago,
         # since it's only on during an active tournament) until the
@@ -1487,6 +1514,10 @@ def admin_leaderboard_save():
         # admin's staleness warning fire a scary multi-hour false alarm at
         # the exact moment of enabling, every single time -- confirmed
         # 2026-09-08. Polling once here refreshes the timestamp immediately.
+        # Also fires on a plain tournament-name edit while already enabled
+        # (not just an off->on flip) -- confirmed 2026-09-28 that editing the
+        # name alone left it silently waiting up to 10 min with no visible
+        # sign anything happened.
         try:
             poll_live_leaderboard_once()
         except Exception as e:
