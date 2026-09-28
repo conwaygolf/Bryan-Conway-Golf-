@@ -6,9 +6,9 @@
       "pos": "1",
       "name": "Tony Wise",
       "score": "-5",
-      "thru": "15*",
+      "thru": "F*",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2455490339"
+      "aggregate_id": "2455550402"
     },
     {
       "pos": "2",
@@ -16,50 +16,50 @@
       "score": "-3",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455490305"
+      "aggregate_id": "2455550376"
     },
     {
-      "pos": "T3",
+      "pos": "3",
       "name": "G Davis Boland",
       "score": "E",
-      "thru": "F*",
+      "thru": "18*",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2455490327"
+      "aggregate_id": "2455550390"
     },
     {
-      "pos": "T3",
-      "name": "Kevin Lawson",
-      "score": "E",
-      "thru": "15",
-      "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2455490319"
-    },
-    {
-      "pos": "5",
+      "pos": "T4",
       "name": "John Fauls",
       "score": "+1",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455490300"
+      "aggregate_id": "2455550371"
     },
     {
-      "pos": "T6",
+      "pos": "T4",
+      "name": "Kevin Lawson",
+      "score": "+1",
+      "thru": "17",
+      "city": "Greenbrier Golf & Country Club",
+      "aggregate_id": "2455550382"
+    },
+    {
+      "pos": "6",
       "name": "Paul Douglas",
       "score": "+2",
-      "thru": "17*",
+      "thru": "F*",
       "city": "London Country Club",
-      "aggregate_id": "2455490331"
+      "aggregate_id": "2455550394"
     },
     {
-      "pos": "T6",
-      "name": "Scott Ray",
-      "score": "+2",
-      "thru": "17*",
-      "city": "Central City Country Club",
-      "aggregate_id": "2455490336"
+      "pos": "T7",
+      "name": "Hunter Cassady",
+      "score": "+3",
+      "thru": "18*",
+      "city": "Standard Country Club",
+      "aggregate_id": "2455550387"
     }
   ],
-  "updated": "2026-09-28T18:04+00:00",
+  "updated": "2026-09-28T18:44+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
