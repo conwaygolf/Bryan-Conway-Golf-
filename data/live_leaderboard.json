@@ -5,42 +5,42 @@
     {
       "pos": "1",
       "name": "Tony Wise",
-      "score": "-4",
-      "thru": "14*",
+      "score": "-5",
+      "thru": "15*",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2455471993"
+      "aggregate_id": "2455490339"
     },
     {
       "pos": "2",
       "name": "Bryan Conway",
-      "score": "-2",
-      "thru": "17",
+      "score": "-3",
+      "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455471962"
+      "aggregate_id": "2455490305"
     },
     {
-      "pos": "3",
+      "pos": "T3",
       "name": "G Davis Boland",
-      "score": "-1",
-      "thru": "17*",
+      "score": "E",
+      "thru": "F*",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2455471982"
+      "aggregate_id": "2455490327"
     },
     {
-      "pos": "T4",
+      "pos": "T3",
+      "name": "Kevin Lawson",
+      "score": "E",
+      "thru": "15",
+      "city": "Greenbrier Golf & Country Club",
+      "aggregate_id": "2455490319"
+    },
+    {
+      "pos": "5",
       "name": "John Fauls",
       "score": "+1",
       "thru": "F",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455471966"
-    },
-    {
-      "pos": "T4",
-      "name": "Kevin Lawson",
-      "score": "+1",
-      "thru": "14",
-      "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2455471974"
+      "aggregate_id": "2455490300"
     },
     {
       "pos": "T6",
@@ -48,18 +48,18 @@
       "score": "+2",
       "thru": "17*",
       "city": "London Country Club",
-      "aggregate_id": "2455471985"
+      "aggregate_id": "2455490331"
     },
     {
       "pos": "T6",
       "name": "Scott Ray",
       "score": "+2",
-      "thru": "16*",
+      "thru": "17*",
       "city": "Central City Country Club",
-      "aggregate_id": "2455471990"
+      "aggregate_id": "2455490336"
     }
   ],
-  "updated": "2026-09-28T17:52+00:00",
+  "updated": "2026-09-28T18:04+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
