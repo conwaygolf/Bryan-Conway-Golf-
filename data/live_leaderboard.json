@@ -5,61 +5,61 @@
     {
       "pos": "1",
       "name": "Tony Wise",
-      "score": "-5",
-      "thru": "F*",
+      "score": "-1",
+      "thru": "1:40 PM",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2455550402"
+      "aggregate_id": "2456213713"
     },
     {
       "pos": "2",
       "name": "Bryan Conway",
-      "score": "-3",
-      "thru": "F",
+      "score": "E",
+      "thru": "1:40 PM",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2455550376"
+      "aggregate_id": "2456213679"
     },
     {
       "pos": "3",
-      "name": "G Davis Boland",
-      "score": "E",
-      "thru": "18*",
-      "city": "Midland Trail Golf Club",
-      "aggregate_id": "2455550390"
+      "name": "Scott Ray",
+      "score": "+2",
+      "thru": "1:40 PM",
+      "city": "Central City Country Club",
+      "aggregate_id": "2456213710"
     },
     {
       "pos": "T4",
-      "name": "John Fauls",
-      "score": "+1",
-      "thru": "F",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2455550371"
+      "name": "Paul Douglas",
+      "score": "+5",
+      "thru": "1:30 PM",
+      "city": "London Country Club",
+      "aggregate_id": "2456213705"
     },
     {
       "pos": "T4",
       "name": "Kevin Lawson",
-      "score": "+1",
-      "thru": "17",
+      "score": "+5",
+      "thru": "1:30 PM",
       "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2455550382"
+      "aggregate_id": "2456213693"
     },
     {
-      "pos": "6",
-      "name": "Paul Douglas",
-      "score": "+2",
-      "thru": "F*",
-      "city": "London Country Club",
-      "aggregate_id": "2455550394"
+      "pos": "T6",
+      "name": "James Volpenhein",
+      "score": "+6",
+      "thru": "1:20 PM",
+      "city": "EClub Kentucky",
+      "aggregate_id": "2456213685"
     },
     {
-      "pos": "T7",
-      "name": "Hunter Cassady",
-      "score": "+3",
-      "thru": "18*",
-      "city": "Standard Country Club",
-      "aggregate_id": "2455550387"
+      "pos": "T6",
+      "name": "G Davis Boland",
+      "score": "+6",
+      "thru": "1:30 PM",
+      "city": "Midland Trail Golf Club",
+      "aggregate_id": "2456213701"
     }
   ],
-  "updated": "2026-09-28T18:44+00:00",
+  "updated": "2026-09-29T16:19+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
