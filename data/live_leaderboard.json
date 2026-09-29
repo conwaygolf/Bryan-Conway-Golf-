@@ -8,15 +8,15 @@
       "score": "-2",
       "thru": "11",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2456592370"
+      "aggregate_id": "2456605994"
     },
     {
       "pos": "2",
       "name": "Bryan Conway",
       "score": "E",
-      "thru": "7",
+      "thru": "11",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2456592336"
+      "aggregate_id": "2456605960"
     },
     {
       "pos": "3",
@@ -24,7 +24,7 @@
       "score": "+4",
       "thru": "8",
       "city": "Central City Country Club",
-      "aggregate_id": "2456592367"
+      "aggregate_id": "2456605991"
     },
     {
       "pos": "4",
@@ -32,23 +32,23 @@
       "score": "+5",
       "thru": "12",
       "city": "London Country Club",
-      "aggregate_id": "2456592362"
+      "aggregate_id": "2456605986"
     },
     {
       "pos": "5",
       "name": "James Volpenhein",
       "score": "+7",
-      "thru": "12",
+      "thru": "14",
       "city": "EClub Kentucky",
-      "aggregate_id": "2456592342"
+      "aggregate_id": "2456605966"
     },
     {
       "pos": "T6",
       "name": "G Davis Boland",
       "score": "+8",
-      "thru": "12",
+      "thru": "13",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2456592358"
+      "aggregate_id": "2456605982"
     },
     {
       "pos": "T6",
@@ -56,10 +56,10 @@
       "score": "+8",
       "thru": "1:20 PM",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2456592335"
+      "aggregate_id": "2456605959"
     }
   ],
-  "updated": "2026-09-29T20:41+00:00",
+  "updated": "2026-09-29T20:51+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
