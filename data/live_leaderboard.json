@@ -4,19 +4,19 @@
   "rows": [
     {
       "pos": "1",
-      "name": "Bryan Conway",
+      "name": "Tony Wise",
       "score": "-1",
-      "thru": "1",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2456464386"
+      "thru": "3",
+      "city": "Frankfort Country Club",
+      "aggregate_id": "2456476755"
     },
     {
       "pos": "2",
-      "name": "Tony Wise",
+      "name": "Bryan Conway",
       "score": "E",
-      "thru": "2",
-      "city": "Frankfort Country Club",
-      "aggregate_id": "2456464420"
+      "thru": "3",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2456476721"
     },
     {
       "pos": "T3",
@@ -24,7 +24,7 @@
       "score": "+4",
       "thru": "3",
       "city": "London Country Club",
-      "aggregate_id": "2456464412"
+      "aggregate_id": "2456476747"
     },
     {
       "pos": "T3",
@@ -32,7 +32,7 @@
       "score": "+4",
       "thru": "2",
       "city": "Central City Country Club",
-      "aggregate_id": "2456464417"
+      "aggregate_id": "2456476752"
     },
     {
       "pos": "5",
@@ -40,7 +40,7 @@
       "score": "+6",
       "thru": "4",
       "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2456464400"
+      "aggregate_id": "2456476735"
     },
     {
       "pos": "6",
@@ -48,7 +48,7 @@
       "score": "+7",
       "thru": "4",
       "city": "EClub Kentucky",
-      "aggregate_id": "2456464392"
+      "aggregate_id": "2456476727"
     },
     {
       "pos": "T7",
@@ -56,10 +56,10 @@
       "score": "+8",
       "thru": "4",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2456464408"
+      "aggregate_id": "2456476743"
     }
   ],
-  "updated": "2026-09-29T18:41+00:00",
+  "updated": "2026-09-29T18:52+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
