@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "static": true,
+  "static": false,
   "tournament_code": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false",
   "description": "40th Clark's Pump-N-Shop Kentucky Men's Senior Amateur Championship",
   "format_note": ""
