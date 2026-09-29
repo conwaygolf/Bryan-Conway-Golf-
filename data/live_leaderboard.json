@@ -8,7 +8,7 @@
       "score": "-3",
       "thru": "6",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2456512105"
+      "aggregate_id": "2456524390"
     },
     {
       "pos": "2",
@@ -16,31 +16,31 @@
       "score": "E",
       "thru": "6",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2456512071"
+      "aggregate_id": "2456524356"
     },
     {
-      "pos": "T3",
+      "pos": "3",
       "name": "Scott Ray",
       "score": "+3",
       "thru": "6",
       "city": "Central City Country Club",
-      "aggregate_id": "2456512102"
+      "aggregate_id": "2456524387"
     },
     {
-      "pos": "T3",
-      "name": "Paul Douglas",
-      "score": "+3",
-      "thru": "5",
-      "city": "London Country Club",
-      "aggregate_id": "2456512097"
-    },
-    {
-      "pos": "5",
+      "pos": "T4",
       "name": "James Volpenhein",
       "score": "+5",
-      "thru": "7",
+      "thru": "8",
       "city": "EClub Kentucky",
-      "aggregate_id": "2456512077"
+      "aggregate_id": "2456524362"
+    },
+    {
+      "pos": "T4",
+      "name": "Paul Douglas",
+      "score": "+5",
+      "thru": "7",
+      "city": "London Country Club",
+      "aggregate_id": "2456524382"
     },
     {
       "pos": "6",
@@ -48,18 +48,18 @@
       "score": "+6",
       "thru": "6",
       "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2456512085"
+      "aggregate_id": "2456524370"
     },
     {
       "pos": "7",
       "name": "G Davis Boland",
       "score": "+7",
-      "thru": "6",
+      "thru": "7",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2456512093"
+      "aggregate_id": "2456524378"
     }
   ],
-  "updated": "2026-09-29T19:21+00:00",
+  "updated": "2026-09-29T19:31+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
