@@ -8,7 +8,7 @@
       "score": "-2",
       "thru": "9",
       "city": "Frankfort Country Club",
-      "aggregate_id": "2456573047"
+      "aggregate_id": "2456582182"
     },
     {
       "pos": "2",
@@ -16,7 +16,7 @@
       "score": "E",
       "thru": "7",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2456573013"
+      "aggregate_id": "2456582148"
     },
     {
       "pos": "3",
@@ -24,7 +24,7 @@
       "score": "+4",
       "thru": "8",
       "city": "Central City Country Club",
-      "aggregate_id": "2456573044"
+      "aggregate_id": "2456582179"
     },
     {
       "pos": "4",
@@ -32,15 +32,15 @@
       "score": "+5",
       "thru": "11",
       "city": "London Country Club",
-      "aggregate_id": "2456573039"
+      "aggregate_id": "2456582174"
     },
     {
       "pos": "5",
       "name": "James Volpenhein",
       "score": "+7",
-      "thru": "11",
+      "thru": "12",
       "city": "EClub Kentucky",
-      "aggregate_id": "2456573019"
+      "aggregate_id": "2456582154"
     },
     {
       "pos": "T6",
@@ -48,7 +48,7 @@
       "score": "+8",
       "thru": "11",
       "city": "Midland Trail Golf Club",
-      "aggregate_id": "2456573035"
+      "aggregate_id": "2456582170"
     },
     {
       "pos": "T6",
@@ -56,10 +56,10 @@
       "score": "+8",
       "thru": "1:20 PM",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2456573012"
+      "aggregate_id": "2456582147"
     }
   ],
-  "updated": "2026-09-29T20:21+00:00",
+  "updated": "2026-09-29T20:31+00:00",
   "note": null,
   "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
 }
