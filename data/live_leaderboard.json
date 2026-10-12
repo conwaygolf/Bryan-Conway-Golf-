@@ -1,73 +1,7 @@
 {
-  "event_label": "US Amateur Four-Ball Qualifier",
-  "venue": "Frankort, Kentucky",
-  "rows": [
-    {
-      "pos": "T1",
-      "name": "Robbie Keyes",
-      "score": "-3",
-      "thru": "9",
-      "city": "Louisville, Kentucky",
-      "aggregate_id": "2468525234"
-    },
-    {
-      "pos": "T1",
-      "name": "Eric Russell",
-      "score": "-3",
-      "thru": "9",
-      "city": "Pigeon Forge, Tennessee",
-      "aggregate_id": "2468525236"
-    },
-    {
-      "pos": "T1",
-      "name": "Michael Denner",
-      "score": "-3",
-      "thru": "7",
-      "city": "St. Louis, Missouri",
-      "aggregate_id": "2468525256"
-    },
-    {
-      "pos": "T1",
-      "name": "Brandon Beckham",
-      "score": "-3",
-      "thru": "5",
-      "city": "Bowling Green, Kentucky",
-      "aggregate_id": "2468525260"
-    },
-    {
-      "pos": "T5",
-      "name": "Oakley Gee",
-      "score": "-2",
-      "thru": "8",
-      "city": "Carmi, Illinois",
-      "aggregate_id": "2468525253"
-    },
-    {
-      "pos": "T5",
-      "name": "Nicholas Jones",
-      "score": "-2",
-      "thru": "6",
-      "city": "Paducah, Kentucky",
-      "aggregate_id": "2468525259"
-    },
-    {
-      "pos": "T5",
-      "name": "Draegen Majors",
-      "score": "-2",
-      "thru": "5",
-      "city": "Franklin, Tennessee",
-      "aggregate_id": "2468525244"
-    },
-    {
-      "pos": "",
-      "name": "Bryan Conway",
-      "score": "-",
-      "thru": "11:50 AM",
-      "city": "Frankort, Kentucky",
-      "aggregate_id": "2468525281",
-      "pinned": true
-    }
-  ],
-  "updated": "2026-10-12T15:12+00:00",
-  "note": null
+  "event_label": null,
+  "venue": null,
+  "rows": [],
+  "updated": "2026-10-12T15:25+00:00",
+  "note": "Fetched the tournament code page but couldn't find an embedded widget URL in it."
 }
