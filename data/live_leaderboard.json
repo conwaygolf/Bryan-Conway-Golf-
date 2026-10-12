@@ -1,65 +1,73 @@
 {
-  "event_label": "40th Clark's Pump-N-Shop Kentucky Men's Senior Amateur Championship",
-  "venue": "EClub Kentucky North",
+  "event_label": "US Amateur Four-Ball Qualifier",
+  "venue": "Frankort, Kentucky",
   "rows": [
     {
-      "pos": "1",
-      "name": "Tony Wise",
+      "pos": "T1",
+      "name": "Robbie Keyes",
       "score": "-3",
-      "thru": "F",
-      "city": "Frankfort Country Club",
-      "aggregate_id": "2456673085"
+      "thru": "9",
+      "city": "Louisville, Kentucky",
+      "aggregate_id": "2468525234"
     },
     {
-      "pos": "2",
+      "pos": "T1",
+      "name": "Eric Russell",
+      "score": "-3",
+      "thru": "7",
+      "city": "Pigeon Forge, Tennessee",
+      "aggregate_id": "2468525236"
+    },
+    {
+      "pos": "T1",
+      "name": "Michael Denner",
+      "score": "-3",
+      "thru": "6",
+      "city": "St. Louis, Missouri",
+      "aggregate_id": "2468525256"
+    },
+    {
+      "pos": "T1",
+      "name": "Brandon Beckham",
+      "score": "-3",
+      "thru": "5",
+      "city": "Bowling Green, Kentucky",
+      "aggregate_id": "2468525260"
+    },
+    {
+      "pos": "T5",
+      "name": "Oakley Gee",
+      "score": "-2",
+      "thru": "8",
+      "city": "Carmi, Illinois",
+      "aggregate_id": "2468525253"
+    },
+    {
+      "pos": "T5",
+      "name": "Nicholas Jones",
+      "score": "-2",
+      "thru": "6",
+      "city": "Paducah, Kentucky",
+      "aggregate_id": "2468525259"
+    },
+    {
+      "pos": "T5",
+      "name": "Dustin Thomas",
+      "score": "-2",
+      "thru": "3",
+      "city": "Nashville, Tennessee",
+      "aggregate_id": "2468525249"
+    },
+    {
+      "pos": "",
       "name": "Bryan Conway",
-      "score": "E",
-      "thru": "F",
-      "city": "EClub Kentucky North",
-      "aggregate_id": "2456673051"
-    },
-    {
-      "pos": "3",
-      "name": "Scott Ray",
-      "score": "+5",
-      "thru": "F",
-      "city": "Central City Country Club",
-      "aggregate_id": "2456673082"
-    },
-    {
-      "pos": "T4",
-      "name": "James Volpenhein",
-      "score": "+6",
-      "thru": "F",
-      "city": "EClub Kentucky",
-      "aggregate_id": "2456673057"
-    },
-    {
-      "pos": "T4",
-      "name": "G Davis Boland",
-      "score": "+6",
-      "thru": "F",
-      "city": "Midland Trail Golf Club",
-      "aggregate_id": "2456673073"
-    },
-    {
-      "pos": "6",
-      "name": "Paul Douglas",
-      "score": "+8",
-      "thru": "F",
-      "city": "London Country Club",
-      "aggregate_id": "2456673077"
-    },
-    {
-      "pos": "7",
-      "name": "Kevin Lawson",
-      "score": "+10",
-      "thru": "F",
-      "city": "Greenbrier Golf & Country Club",
-      "aggregate_id": "2456673065"
+      "score": "-",
+      "thru": "11:50 AM",
+      "city": "Frankort, Kentucky",
+      "aggregate_id": "2468525281",
+      "pinned": true
     }
   ],
-  "updated": "2026-09-29T22:41+00:00",
-  "note": null,
-  "source_url": "https://www.golfgenius.com/leagues/506591/widgets/tournament_results?shared=false"
+  "updated": "2026-10-12T14:59+00:00",
+  "note": null
 }
