@@ -186,8 +186,10 @@ def main():
 
     git("add", "templates/index.html")
     git("commit", "-m", "Auto-update live Senior Open leaderboard banner")
-    git("push", "origin", "main")
-    git("push", "bryan", "main")
+    # HEAD:main, not plain "main" -- see check_event_completion.py's comment
+    # on the same fix (bryan always rejected the literal local "main" ref).
+    git("push", "origin", "HEAD:main")
+    git("push", "bryan", "HEAD:main")
     print("Banner updated and pushed to both remotes:", info)
 
 

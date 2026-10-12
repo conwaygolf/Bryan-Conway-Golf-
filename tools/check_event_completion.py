@@ -198,8 +198,15 @@ def git_publish(paths, message):
              "commit", "-m", message],
             cwd=HERE, check=True,
         )
-        subprocess.run(["git", "push", "origin", "main"], cwd=HERE, check=True)
-        subprocess.run(["git", "push", "bryan", "main"], cwd=HERE, check=True)
+        # HEAD:main, not plain "main" -- "main" pushes whatever the LOCAL
+        # branch literally named main points at, which is origin's own
+        # history and gets rejected by bryan (a fully diverged, unrelated
+        # history on its own branch) every single time, regardless of what's
+        # actually checked out when this runs. HEAD:main pushes the current
+        # commit itself to each remote's main branch, which is what this
+        # always should have done -- see [[project_conwaygolf]] 2026-10-12.
+        subprocess.run(["git", "push", "origin", "HEAD:main"], cwd=HERE, check=True)
+        subprocess.run(["git", "push", "bryan", "HEAD:main"], cwd=HERE, check=True)
     except subprocess.CalledProcessError as e:
         print(f"[check_event_completion] git publish failed (exit {e.returncode})")
 
@@ -214,7 +221,7 @@ def send_notification(event, auto_filled):
             + ("A draft result was auto-filled from GolfGenius and is waiting in the admin panel.\n"
                if auto_filled else
                "Auto-fetch couldn't find a result -- a blank draft is waiting in the admin panel to fill in by hand.\n")
-            + "\nReview and publish at: https://conwaygolf.onrender.com/admin"
+            + "\nReview and publish at: https://bryanconwaygolf.com/admin"
         )
         send_email.send("frostbytehero@gmail.com", subject, body, from_name="ConwayGolf Site")
     except Exception as e:
@@ -241,6 +248,16 @@ def main():
         draft = build_draft(event)
         drafts.append(draft)
         event["result_checked"] = True
+        # Also hide it from the public Schedule section now -- the template
+        # renders every schedule.json entry unconditionally (no filter on
+        # result_checked at all), so without this an ended event just sits
+        # there forever even once its draft is ready. The actual RESULT
+        # text still needs a human Publish/Dismiss in /admin (deliberately
+        # not auto-published, see the 2026-08-20 design note) -- this only
+        # removes the now-stale schedule listing, which doesn't need the
+        # same review since it's not asserting any result, just the fact
+        # the event is over.
+        event["hidden"] = True
         changed = True
         send_notification(event, draft["auto_filled"])
 

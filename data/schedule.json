@@ -5,7 +5,7 @@
     "end_date": "2026-08-27",
     "title": "KGA Amateur Series #5",
     "note": "Mineral Mound Golf Course",
-    "hidden": false,
+    "hidden": true,
     "result_checked": true
   },
   {
@@ -14,7 +14,7 @@
     "end_date": "2026-09-08",
     "title": "KGA Amateur Series #6",
     "note": "South Park Country Club",
-    "hidden": false,
+    "hidden": true,
     "result_checked": true
   },
   {
@@ -23,7 +23,7 @@
     "end_date": "2026-09-29",
     "title": "Clark's Pump-N-Shop Kentucky Men's Senior Amateur",
     "note": "Frankfort Country Club \u2014 Conway's home county.",
-    "hidden": false,
+    "hidden": true,
     "result_checked": true
   },
   {
@@ -59,7 +59,7 @@
     "end_date": "2026-08-30",
     "title": "PGLAT Playoff at Lakeside Golf Course",
     "note": "",
-    "hidden": false,
+    "hidden": true,
     "result_checked": true
   },
   {
@@ -68,7 +68,7 @@
     "end_date": "2026-09-13",
     "title": "PGLAT Tour Championship",
     "note": "Kearney Hills Golf Links",
-    "hidden": false,
+    "hidden": true,
     "result_checked": true
   }
 ]

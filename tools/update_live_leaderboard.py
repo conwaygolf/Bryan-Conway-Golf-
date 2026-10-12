@@ -264,8 +264,12 @@ def git_publish(paths, message):
     if diff.returncode == 0:
         return False
     subprocess.run(["git", "commit", "-m", message], cwd=BASE_DIR, check=True)
-    subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, check=True)
-    subprocess.run(["git", "push", "bryan", "main"], cwd=BASE_DIR, check=False)
+    # HEAD:main, not plain "main" -- see check_event_completion.py's comment
+    # on the same fix for the full explanation (bryan always rejected the
+    # literal local "main" ref, since it's a fully diverged history on its
+    # own branch there).
+    subprocess.run(["git", "push", "origin", "HEAD:main"], cwd=BASE_DIR, check=True)
+    subprocess.run(["git", "push", "bryan", "HEAD:main"], cwd=BASE_DIR, check=False)
     return True
 
 
