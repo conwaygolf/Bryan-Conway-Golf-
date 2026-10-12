@@ -408,12 +408,12 @@ DEFAULT_BAG_ITEMS = [
         "description": "",
     },
     {
-        "id": "golf-ball", "number": "06", "category": "Golf Ball", "image": None,
+        "id": "golf-ball", "number": "06", "category": "Golf Ball", "image": "bag_ball_stock.jpg",
         "specs": [{"label": "Model", "value": "Titleist Pro V1x"}],
         "notes": "", "description": "Preferred for performance and consistency.",
     },
     {
-        "id": "glove", "number": "07", "category": "Glove", "image": None,
+        "id": "glove", "number": "07", "category": "Glove", "image": "bag_glove_stock.jpg",
         "specs": [{"label": "Brand", "value": "Titleist"}],
         "notes": "Exact model unconfirmed -- the source text cut off before the specific line name.",
         "description": "Preferred for feel and durability.",
