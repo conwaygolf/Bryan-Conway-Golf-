@@ -348,40 +348,75 @@ DEFAULT_SPONSORS = [
     },
 ]
 
-# "What's In Bryan's Bag" -- a fixed 8-slot equipment list (not a free-add
-# collection like gallery/sponsors), so /admin only ever edits these in
-# place. Driver/Golf Ball/Glove have real specs from Jimmy's initial mockup;
-# the rest start with empty specs/description until the real gear info
-# comes in -- never invent plausible-looking specs for real equipment on a
-# real athlete's public page.
+# "What's In Bryan's Bag" -- a free-form list keyed by id, not a fixed slot
+# count (removed the earlier "fixed 8-slot" assumption 2026-10-12 once real
+# gear info came in and the real bag turned out to be 7 clubs/items, no
+# 3-wood or hybrid at all -- confirmed directly by Bryan via text + his own
+# photos of each club, not guessed). /admin's edit-by-id route and the /bag
+# template both already iterate this list generically, so the count can
+# change freely. Never invent plausible-looking specs for real equipment on
+# a real athlete's public page -- every value below is either read directly
+# off a photo of Bryan's actual club, the real retail spec for a confirmed
+# model, or his own text to Jimmy; the one exception (glove) is flagged as
+# unconfirmed in its own notes field rather than guessed.
 DEFAULT_BAG_ITEMS = [
     {
-        "id": "driver", "number": "01", "category": "Driver", "image": None,
+        "id": "driver", "number": "01", "category": "Driver", "image": "bag_driver_ace7f9.png",
         "specs": [
-            {"label": "Model", "value": "Titleist TSR3"},
+            {"label": "Model", "value": "TaylorMade Qi10"},
             {"label": "Loft", "value": "9.0°"},
-            {"label": "Shaft", "value": "Fujikura Ventus TR Blue 6X"},
+            {"label": "Shaft", "value": "Fujikura Ventus TR Velocore 6-X"},
             {"label": "Flex", "value": "X-Stiff"},
             {"label": "Length", "value": "45.5\""},
-            {"label": "Grip", "value": "Golf Pride Tour Velvet"},
+            {"label": "Grip", "value": "Golf Pride Tour Velvet Midsize"},
         ],
         "notes": "Draw biased setup, low spin.",
-        "description": "Bryan trusts the TSR3 driver for its workability, stability and penetrating ball flight off the tee.",
+        "description": "",
     },
-    {"id": "3-wood", "number": "02", "category": "3-Wood", "image": None, "specs": [], "notes": "", "description": ""},
-    {"id": "hybrid-utility", "number": "03", "category": "Hybrid / Utility", "image": None, "specs": [], "notes": "", "description": ""},
-    {"id": "irons", "number": "04", "category": "Irons", "image": None, "specs": [], "notes": "", "description": ""},
-    {"id": "wedges", "number": "05", "category": "Wedges", "image": None, "specs": [], "notes": "", "description": ""},
-    {"id": "putter", "number": "06", "category": "Putter", "image": None, "specs": [], "notes": "", "description": ""},
     {
-        "id": "golf-ball", "number": "07", "category": "Golf Ball", "image": None,
+        "id": "mini-driver", "number": "02", "category": "Mini Driver", "image": "bag_mini_driver.jpg",
+        "specs": [
+            {"label": "Model", "value": "TaylorMade BRNR Mini Driver"},
+            {"label": "Loft", "value": "13.5° (adjusted to 14°)"},
+        ],
+        "notes": "Stock loft is 13.5° -- adjustable loft sleeve dialed up to 14°.",
+        "description": "60% fairway wood, 40% driver -- the gap-filler off the tee on tighter holes.",
+    },
+    {
+        "id": "irons", "number": "03", "category": "Irons", "image": "bag_irons_6b3a66.png",
+        "specs": [
+            {"label": "Model", "value": "TaylorMade Stealth"},
+            {"label": "Shaft", "value": "Fujikura Ventus 6-R"},
+            {"label": "Set", "value": "5-iron – PW"},
+        ],
+        "notes": "", "description": "",
+    },
+    {
+        "id": "wedges", "number": "04", "category": "Wedges", "image": "bag_wedges_vokey.jpeg",
+        "specs": [
+            {"label": "Model", "value": "Titleist Vokey SM11"},
+            {"label": "50°", "value": "8° bounce, F grind"},
+            {"label": "54°", "value": "12° bounce, D grind"},
+            {"label": "58°", "value": "10° bounce, S grind"},
+        ],
+        "notes": "", "description": "",
+    },
+    {
+        "id": "putter", "number": "05", "category": "Putter", "image": "bag_putter_cameron.jpeg",
+        "specs": [{"label": "Model", "value": "Scotty Cameron Studio Select Newport 2.5"}],
+        "notes": "Custom Superman-shield engraving in place of the usual circle-T stamps.",
+        "description": "",
+    },
+    {
+        "id": "golf-ball", "number": "06", "category": "Golf Ball", "image": None,
         "specs": [{"label": "Model", "value": "Titleist Pro V1x"}],
         "notes": "", "description": "Preferred for performance and consistency.",
     },
     {
-        "id": "glove", "number": "08", "category": "Glove", "image": None,
-        "specs": [{"label": "Model", "value": "FootJoy StaSof"}, {"label": "Size", "value": "Large"}],
-        "notes": "", "description": "Preferred for feel and durability.",
+        "id": "glove", "number": "07", "category": "Glove", "image": None,
+        "specs": [{"label": "Brand", "value": "Titleist"}],
+        "notes": "Exact model unconfirmed -- the source text cut off before the specific line name.",
+        "description": "Preferred for feel and durability.",
     },
 ]
 
