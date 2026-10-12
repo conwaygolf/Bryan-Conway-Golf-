@@ -24,7 +24,7 @@
     "title": "Clark's Pump-N-Shop Kentucky Men's Senior Amateur",
     "note": "Frankfort Country Club \u2014 Conway's home county.",
     "hidden": false,
-    "result_checked": false
+    "result_checked": true
   },
   {
     "date_label": "Oct 12",
@@ -69,6 +69,6 @@
     "title": "PGLAT Tour Championship",
     "note": "Kearney Hills Golf Links",
     "hidden": false,
-    "result_checked": false
+    "result_checked": true
   }
 ]
