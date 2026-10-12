@@ -267,9 +267,20 @@ def git_publish(paths, message):
     # HEAD:main, not plain "main" -- see check_event_completion.py's comment
     # on the same fix for the full explanation (bryan always rejected the
     # literal local "main" ref, since it's a fully diverged history on its
-    # own branch there).
-    subprocess.run(["git", "push", "origin", "HEAD:main"], cwd=BASE_DIR, check=True)
-    subprocess.run(["git", "push", "bryan", "HEAD:main"], cwd=BASE_DIR, check=False)
+    # own branch there). Each remote's push is independent (check=False,
+    # own try/except) -- origin and bryan are two genuinely different,
+    # routinely-diverged histories now, so one of them rejecting a push is
+    # an expected, non-fatal outcome depending on which branch happens to
+    # be checked out when this runs, not a reason to abandon the other
+    # remote entirely (real bug hit 2026-10-12: check=True on the origin
+    # push raised before the bryan push ever ran at all, so a live-event
+    # day's update silently never reached the real site despite the local
+    # commit succeeding).
+    for remote in ("origin", "bryan"):
+        try:
+            subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR, check=True)
+        except subprocess.CalledProcessError:
+            print(f"[update_live_leaderboard] push to {remote} rejected (likely diverged history) -- continuing")
     return True
 
 
