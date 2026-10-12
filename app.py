@@ -376,11 +376,11 @@ DEFAULT_BAG_ITEMS = [
     {
         "id": "mini-driver", "number": "02", "category": "Mini Driver", "image": "bag_mini_driver.jpg",
         "specs": [
-            {"label": "Model", "value": "TaylorMade BRNR Mini Driver"},
-            {"label": "Loft", "value": "13.5° (adjusted to 14°)"},
+            {"label": "Model", "value": "TaylorMade SLDR Mini Driver"},
+            {"label": "Loft", "value": "14°"},
         ],
-        "notes": "Stock loft is 13.5° -- adjustable loft sleeve dialed up to 14°.",
-        "description": "60% fairway wood, 40% driver -- the gap-filler off the tee on tighter holes.",
+        "notes": "",
+        "description": "Bridges the gap between a 3-wood and driver.",
     },
     {
         "id": "irons", "number": "03", "category": "Irons", "image": "bag_irons_6b3a66.png",
