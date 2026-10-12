@@ -14,7 +14,7 @@
       "pos": "T1",
       "name": "Eric Russell",
       "score": "-3",
-      "thru": "7",
+      "thru": "9",
       "city": "Pigeon Forge, Tennessee",
       "aggregate_id": "2468525236"
     },
@@ -52,11 +52,11 @@
     },
     {
       "pos": "T5",
-      "name": "Dustin Thomas",
+      "name": "Draegen Majors",
       "score": "-2",
-      "thru": "3",
-      "city": "Nashville, Tennessee",
-      "aggregate_id": "2468525249"
+      "thru": "5",
+      "city": "Franklin, Tennessee",
+      "aggregate_id": "2468525244"
     },
     {
       "pos": "",
@@ -68,7 +68,6 @@
       "pinned": true
     }
   ],
-  "updated": "2026-10-12T15:05+00:00",
-  "note": null,
-  "source_url": "https://www.golfgenius.com/leagues/504867/widgets/tournament_results?shared=false"
+  "updated": "2026-10-12T15:12+00:00",
+  "note": null
 }
