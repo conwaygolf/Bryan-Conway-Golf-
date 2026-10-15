@@ -1,7 +1,73 @@
 {
-  "event_label": null,
-  "venue": null,
-  "rows": [],
-  "updated": "2026-10-12T15:25+00:00",
-  "note": "Fetched the tournament code page but couldn't find an embedded widget URL in it."
+  "event_label": "32nd Clark's Pump-N-Shop Kentucky Mid-Amateur Championship",
+  "venue": "EClub Kentucky North",
+  "rows": [
+    {
+      "pos": "T1",
+      "name": "Austin Gutgsell",
+      "score": "-1",
+      "thru": "2",
+      "city": "Valhalla Golf Club",
+      "aggregate_id": "2470162600"
+    },
+    {
+      "pos": "T1",
+      "name": "Mark Howard",
+      "score": "-1",
+      "thru": "1",
+      "city": "USGA/Kentucky GC",
+      "aggregate_id": "2470162580"
+    },
+    {
+      "pos": "T3",
+      "name": "Andrew Buse",
+      "score": "E",
+      "thru": "4",
+      "city": "University of Louisville GC",
+      "aggregate_id": "2470162594"
+    },
+    {
+      "pos": "T3",
+      "name": "Chris Smith",
+      "score": "E",
+      "thru": "3",
+      "city": "Valhalla Golf Club",
+      "aggregate_id": "2470162571"
+    },
+    {
+      "pos": "T3",
+      "name": "Chandler McFadden",
+      "score": "E",
+      "thru": "1",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2470162581"
+    },
+    {
+      "pos": "T3",
+      "name": "Logan Smith",
+      "score": "E",
+      "thru": "1",
+      "city": "Wildwood Country Club",
+      "aggregate_id": "2470162584"
+    },
+    {
+      "pos": "T3",
+      "name": "Pj McDougal",
+      "score": "E",
+      "thru": "1",
+      "city": "Olde Stone (the Club at)",
+      "aggregate_id": "2470162607"
+    },
+    {
+      "pos": "WD",
+      "name": "Bryan Conway",
+      "score": "-",
+      "thru": "-",
+      "city": "EClub Kentucky North",
+      "aggregate_id": "2470162603",
+      "pinned": true
+    }
+  ],
+  "updated": "2026-10-15T13:08+00:00",
+  "note": null
 }
