@@ -8,7 +8,7 @@
       "score": "-1",
       "thru": "2",
       "city": "Valhalla Golf Club",
-      "aggregate_id": "2470162600"
+      "aggregate_id": "2470163045"
     },
     {
       "pos": "T1",
@@ -16,7 +16,7 @@
       "score": "-1",
       "thru": "1",
       "city": "USGA/Kentucky GC",
-      "aggregate_id": "2470162580"
+      "aggregate_id": "2470163028"
     },
     {
       "pos": "T3",
@@ -24,7 +24,7 @@
       "score": "E",
       "thru": "4",
       "city": "University of Louisville GC",
-      "aggregate_id": "2470162594"
+      "aggregate_id": "2470163040"
     },
     {
       "pos": "T3",
@@ -32,7 +32,7 @@
       "score": "E",
       "thru": "3",
       "city": "Valhalla Golf Club",
-      "aggregate_id": "2470162571"
+      "aggregate_id": "2470163059"
     },
     {
       "pos": "T3",
@@ -40,7 +40,7 @@
       "score": "E",
       "thru": "1",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2470162581"
+      "aggregate_id": "2470163029"
     },
     {
       "pos": "T3",
@@ -48,7 +48,7 @@
       "score": "E",
       "thru": "1",
       "city": "Wildwood Country Club",
-      "aggregate_id": "2470162584"
+      "aggregate_id": "2470163032"
     },
     {
       "pos": "T3",
@@ -56,7 +56,7 @@
       "score": "E",
       "thru": "1",
       "city": "Olde Stone (the Club at)",
-      "aggregate_id": "2470162607"
+      "aggregate_id": "2470163052"
     },
     {
       "pos": "WD",
@@ -64,10 +64,10 @@
       "score": "-",
       "thru": "-",
       "city": "EClub Kentucky North",
-      "aggregate_id": "2470162603",
+      "aggregate_id": "2470163048",
       "pinned": true
     }
   ],
-  "updated": "2026-10-15T13:08+00:00",
+  "updated": "2026-10-15T13:10+00:00",
   "note": null
 }
