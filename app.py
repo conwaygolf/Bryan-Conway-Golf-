@@ -749,6 +749,23 @@ def poll_live_leaderboard_once():
                           "note": "Couldn't find Bryan Conway in any division of this tournament code right now.",
                           "source_url": widget_url}
 
+    # Real bug found 2026-10-21: every failure path above (err, a
+    # RequestException, every event_id's html missing Bryan's name, a
+    # match-play bracket instead of stroke play, or Bryan just not found)
+    # produces a "note"-carrying, empty-rows result -- and this used to
+    # overwrite LIVE_LEADERBOARD unconditionally, wiping a perfectly good
+    # leaderboard the moment ANY single cycle hit a transient GolfGenius
+    # blip. That's exactly what "worked once from the admin, then the next
+    # poller cycle killed it" looked like -- not a thread death at all.
+    # If we already have real rows on display, leave LIVE_LEADERBOARD (and
+    # its "updated" timestamp) completely untouched on a failed cycle --
+    # the existing LEADERBOARD_STALE_AFTER_MINUTES staleness check is the
+    # mechanism that's supposed to hide it if the problem doesn't clear up
+    # within a few cycles, not an instant overwrite on the very first one.
+    if result.get("note") is not None and LIVE_LEADERBOARD.get("rows"):
+        _set_poll_phase(f"skipped_transient_failure: {result['note']}")
+        return
+
     if result != LIVE_LEADERBOARD:
         # "updated" changes on literally every poll (it's a fresh timestamp),
         # so comparing the full dicts here would commit+push every single
