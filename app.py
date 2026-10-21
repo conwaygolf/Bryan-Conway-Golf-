@@ -309,6 +309,7 @@ RESULTS_JSON = DATA_DIR / "results.json"
 SCHEDULE_JSON = DATA_DIR / "schedule.json"
 ARCHIVE_CARDS_JSON = DATA_DIR / "archive_cards.json"
 POY_STANDING_JSON = DATA_DIR / "poy_season_standing.json"
+MUSSELMAN_STANDING_JSON = DATA_DIR / "musselman_season_standing.json"
 RESULT_DRAFTS_JSON = DATA_DIR / "result_drafts.json"
 PRESS_HEADER_JSON = DATA_DIR / "press_header.json"
 LEADERBOARD_CONFIG_JSON = DATA_DIR / "leaderboard_config.json"
@@ -578,6 +579,7 @@ GALLERY_PHOTOS = load_json(GALLERY_JSON, DEFAULT_GALLERY_PHOTOS)
 SPONSORS = load_json(SPONSORS_JSON, DEFAULT_SPONSORS)
 HERO = load_json(HERO_JSON, DEFAULT_HERO)
 POY_STANDING = load_json(POY_STANDING_JSON, {"league": None, "category": None, "field": [], "top7": []})
+MUSSELMAN_STANDING = load_json(MUSSELMAN_STANDING_JSON, {"league": None, "category": None, "field": [], "top7": []})
 RESULTS = load_json(RESULTS_JSON, DEFAULT_RESULTS)
 SCHEDULE = load_json(SCHEDULE_JSON, DEFAULT_SCHEDULE)
 ARCHIVE_CARDS = load_json(ARCHIVE_CARDS_JSON, DEFAULT_ARCHIVE_CARDS)
@@ -1204,7 +1206,7 @@ def index():
                             schedule=visible_schedule, next_event=next_event,
                             archive_teaser=archive_teaser,
                             sponsors=[s for s in SPONSORS if not s.get("hidden")],
-                            poy_standing=POY_STANDING,
+                            poy_standing=POY_STANDING, musselman_standing=MUSSELMAN_STANDING,
                             leaderboard_config=LEADERBOARD_CONFIG, live_leaderboard=public_live_leaderboard())
 
 

@@ -492,12 +492,13 @@
   </div>
 </section>
 
+{% if musselman_standing and musselman_standing.top7 %}
 <section id="poy">
   <div class="section-bg" style="--mx:78%;--my:60%;"><img src="/static/images/portrait_desert_course.jpg" alt=""></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Tom Musselman Award &middot; Men's Senior</div>
-      <h2 class="section-title">Leading the race for the 2026 Player of the Year.</h2>
+      <h2 class="section-title">Bryan's spot in the Men's Senior Player of the Year race.</h2>
     </div>
     <table class="poy-table">
       <thead>
@@ -511,51 +512,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="leader">
-          <td class="poy-rank">1</td>
-          <td>Bryan Conway<span class="poy-leader-tag">Leader</span></td>
-          <td class="poy-city td-city">Frankfort</td>
-          <td class="num td-events">7</td>
-          <td class="num td-events">4</td>
-          <td class="num">331.25</td>
+        {% for r in musselman_standing.top7 %}
+        <tr class="{{ 'leader' if 'Conway' in r.name else '' }}">
+          <td class="poy-rank">{{ r.pos }}</td>
+          <td>{{ r.name }}{% if 'Conway' in r.name %}<span class="poy-leader-tag">Bryan</span>{% endif %}</td>
+          <td class="poy-city td-city">{{ r.city }}</td>
+          <td class="num td-events">{{ r.events }}</td>
+          <td class="num td-events">{{ r.wins }}</td>
+          <td class="num">{{ r.points }}</td>
         </tr>
-        <tr>
-          <td class="poy-rank">2</td>
-          <td>Mark Knecht</td>
-          <td class="poy-city td-city">Paducah</td>
-          <td class="num td-events">3</td>
-          <td class="num td-events">1</td>
-          <td class="num">315.00</td>
-        </tr>
-        <tr>
-          <td class="poy-rank">3</td>
-          <td>Pj McDougal</td>
-          <td class="poy-city td-city">Bowling Green</td>
-          <td class="num td-events">6</td>
-          <td class="num td-events">1</td>
-          <td class="num">251.50</td>
-        </tr>
-        <tr>
-          <td class="poy-rank">4</td>
-          <td>Tony Wise</td>
-          <td class="poy-city td-city">Georgetown</td>
-          <td class="num td-events">3</td>
-          <td class="num td-events">0</td>
-          <td class="num">170.00</td>
-        </tr>
-        <tr>
-          <td class="poy-rank">5</td>
-          <td>Mark LaLonde</td>
-          <td class="poy-city td-city">Lexington</td>
-          <td class="num td-events">3</td>
-          <td class="num td-events">0</td>
-          <td class="num">150.00</td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
-    <p class="poy-note">Standings as of August 16, 2026 &middot; Golf House Kentucky / Kentucky Golf Association</p>
+    <p class="poy-note">{{ musselman_standing.league }} &middot; Men's Senior division, updated daily</p>
   </div>
 </section>
+{% endif %}
 
 {% if poy_standing and poy_standing.top7 %}
 <section id="poy-overall">
