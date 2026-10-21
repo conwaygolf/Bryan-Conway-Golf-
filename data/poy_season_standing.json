@@ -12,574 +12,714 @@
     {
       "pos": "2",
       "name": "Bryan Conway",
-      "events": "11",
+      "events": "12",
       "wins": "6",
-      "points": "455.00"
+      "points": "459.00"
     },
     {
       "pos": "3",
+      "name": "Joshua Rhodes",
+      "events": "7",
+      "wins": "1",
+      "points": "435.00"
+    },
+    {
+      "pos": "4",
       "name": "Mark Knecht",
       "events": "5",
       "wins": "1",
       "points": "375.00"
     },
     {
-      "pos": "4",
-      "name": "Joshua Rhodes",
-      "events": "6",
-      "wins": "1",
-      "points": "365.00"
-    },
-    {
       "pos": "5",
       "name": "Pj McDougal",
-      "events": "9",
-      "wins": "1",
-      "points": "332.50"
+      "events": "10",
+      "wins": "2",
+      "points": "357.50"
     },
     {
       "pos": "6",
+      "name": "Andrew Buse",
+      "events": "9",
+      "wins": "2",
+      "points": "328.92"
+    },
+    {
+      "pos": "7",
+      "name": "Robbie Keyes",
+      "events": "6",
+      "wins": "1",
+      "points": "289.50"
+    },
+    {
+      "pos": "8",
+      "name": "Justin Tereshko",
+      "events": "3",
+      "wins": "1",
+      "points": "265.00"
+    },
+    {
+      "pos": "9",
+      "name": "Christian Tooley",
+      "events": "2",
+      "wins": "0",
+      "points": "245.00"
+    },
+    {
+      "pos": "10",
+      "name": "David Combs",
+      "events": "10",
+      "wins": "4",
+      "points": "240.00"
+    },
+    {
+      "pos": "11",
+      "name": "Jonathon Ice",
+      "events": "10",
+      "wins": "1",
+      "points": "236.50"
+    },
+    {
+      "pos": "14",
+      "name": "Mike Fannin",
+      "events": "5",
+      "wins": "1",
+      "points": "233.00"
+    },
+    {
+      "pos": "15",
       "name": "Brady Smith",
       "events": "3",
       "wins": "1",
       "points": "230.00"
     },
     {
-      "pos": "7",
-      "name": "Andrew Buse",
-      "events": "7",
-      "wins": "2",
-      "points": "227.25"
+      "pos": "16",
+      "name": "Alex Wright",
+      "events": "3",
+      "wins": "0",
+      "points": "226.67"
     },
     {
-      "pos": "8",
+      "pos": "17",
+      "name": "Matt Epperson",
+      "events": "5",
+      "wins": "0",
+      "points": "223.75"
+    },
+    {
+      "pos": "18",
+      "name": "G Davis Boland",
+      "events": "4",
+      "wins": "0",
+      "points": "219.00"
+    },
+    {
+      "pos": "19",
       "name": "Eric Fuldner",
       "events": "3",
       "wins": "0",
       "points": "215.00"
     },
     {
-      "pos": "15",
-      "name": "Robbie Keyes",
-      "events": "4",
+      "pos": "20",
+      "name": "Jay Kirchdorfer",
+      "events": "2",
       "wins": "0",
-      "points": "194.50"
+      "points": "200.00"
     },
     {
-      "pos": "16",
+      "pos": "21",
       "name": "Scott Ray",
       "events": "4",
       "wins": "1",
       "points": "190.00"
     },
     {
-      "pos": "17",
-      "name": "Matt Epperson",
-      "events": "4",
-      "wins": "0",
-      "points": "188.75"
-    },
-    {
-      "pos": "20",
+      "pos": "24",
       "name": "Levi Keith",
       "events": "4",
       "wins": "0",
       "points": "183.50"
     },
     {
-      "pos": "21",
-      "name": "Jonathon Ice",
-      "events": "8",
-      "wins": "1",
-      "points": "181.50"
+      "pos": "25",
+      "name": "Greg Laswell",
+      "events": "12",
+      "wins": "0",
+      "points": "182.50"
     },
     {
-      "pos": "24",
+      "pos": "28",
+      "name": "Kyle Jury",
+      "events": "5",
+      "wins": "0",
+      "points": "166.17"
+    },
+    {
+      "pos": "29",
       "name": "Jim Brown",
       "events": "2",
       "wins": "2",
       "points": "162.50"
     },
     {
-      "pos": "25",
-      "name": "Greg Laswell",
-      "events": "11",
-      "wins": "0",
-      "points": "161.50"
-    },
-    {
-      "pos": "26",
+      "pos": "30",
       "name": "David Horning",
-      "events": "12",
+      "events": "13",
       "wins": "0",
       "points": "160.00"
     },
     {
-      "pos": "29",
+      "pos": "31",
+      "name": "Jared Baysinger",
+      "events": "7",
+      "wins": "0",
+      "points": "157.92"
+    },
+    {
+      "pos": "32",
+      "name": "Michael Hall",
+      "events": "5",
+      "wins": "0",
+      "points": "155.50"
+    },
+    {
+      "pos": "35",
       "name": "Parker Smith",
       "events": "3",
       "wins": "0",
       "points": "154.00"
     },
     {
-      "pos": "30",
+      "pos": "36",
+      "name": "Chris Smith",
+      "events": "7",
+      "wins": "2",
+      "points": "151.10"
+    },
+    {
+      "pos": "37",
       "name": "Barney Sutley",
       "events": "4",
       "wins": "0",
       "points": "150.75"
     },
     {
-      "pos": "33",
-      "name": "Michael Hall",
-      "events": "4",
-      "wins": "0",
-      "points": "146.50"
+      "pos": "40",
+      "name": "Elmo Greer",
+      "events": "8",
+      "wins": "1",
+      "points": "148.00"
     },
     {
-      "pos": "34",
+      "pos": "41",
       "name": "David Reid",
       "events": "3",
       "wins": "1",
       "points": "146.25"
     },
     {
-      "pos": "37",
+      "pos": "42",
       "name": "Jeff Van Pelt",
-      "events": "9",
+      "events": "10",
       "wins": "1",
       "points": "144.75"
     },
     {
-      "pos": "38",
-      "name": "Jared Baysinger",
-      "events": "6",
+      "pos": "43",
+      "name": "Phillip Harper",
+      "events": "8",
       "wins": "0",
-      "points": "139.92"
+      "points": "141.00"
     },
     {
-      "pos": "39",
+      "pos": "44",
+      "name": "David Rudder",
+      "events": "8",
+      "wins": "1",
+      "points": "131.75"
+    },
+    {
+      "pos": "45",
       "name": "Andy Roberts",
       "events": "2",
       "wins": "0",
       "points": "131.25"
     },
     {
-      "pos": "42",
+      "pos": "46",
+      "name": "Seth Smith",
+      "events": "1",
+      "wins": "0",
+      "points": "130.00"
+    },
+    {
+      "pos": "47",
       "name": "Rodney Jackson",
       "events": "3",
       "wins": "0",
       "points": "128.75"
     },
     {
-      "pos": "43",
-      "name": "Phillip Harper",
-      "events": "7",
-      "wins": "0",
-      "points": "127.00"
-    },
-    {
-      "pos": "44",
+      "pos": "48",
       "name": "Stacy Russell",
-      "events": "6",
+      "events": "7",
       "wins": "2",
-      "points": "121.00"
+      "points": "128.00"
     },
     {
-      "pos": "45",
+      "pos": "49",
       "name": "Kent Bulle",
       "events": "2",
       "wins": "0",
       "points": "120.00"
     },
     {
-      "pos": "46",
+      "pos": "50",
       "name": "David Sykes",
       "events": "4",
       "wins": "0",
       "points": "119.00"
     },
     {
-      "pos": "47",
+      "pos": "51",
+      "name": "John Lott",
+      "events": "9",
+      "wins": "1",
+      "points": "118.00"
+    },
+    {
+      "pos": "52",
       "name": "Tommy Webb",
       "events": "2",
       "wins": "0",
       "points": "117.50"
     },
     {
-      "pos": "48",
-      "name": "David Rudder",
-      "events": "7",
-      "wins": "1",
-      "points": "115.75"
+      "pos": "53",
+      "name": "Luke Fuller",
+      "events": "2",
+      "wins": "0",
+      "points": "116.67"
     },
     {
-      "pos": "51",
+      "pos": "54",
+      "name": "Seth Barker",
+      "events": "2",
+      "wins": "0",
+      "points": "115.00"
+    },
+    {
+      "pos": "55",
       "name": "Mike LaFavers",
       "events": "4",
       "wins": "0",
       "points": "110.75"
     },
     {
-      "pos": "54",
+      "pos": "58",
       "name": "Jacob Settles",
       "events": "2",
       "wins": "0",
       "points": "105.00"
     },
     {
-      "pos": "55",
-      "name": "John Lott",
-      "events": "8",
+      "pos": "59",
+      "name": "Greg Engle",
+      "events": "3",
       "wins": "1",
-      "points": "102.00"
+      "points": "103.33"
     },
     {
-      "pos": "59",
+      "pos": "62",
       "name": "Jeff Snyder",
-      "events": "8",
+      "events": "9",
       "wins": "0",
       "points": "99.54"
     },
     {
-      "pos": "60",
+      "pos": "63",
       "name": "Jack Savage",
-      "events": "7",
+      "events": "8",
       "wins": "1",
       "points": "98.25"
     },
     {
-      "pos": "61",
+      "pos": "64",
+      "name": "Jim Caudill",
+      "events": "4",
+      "wins": "0",
+      "points": "92.00"
+    },
+    {
+      "pos": "65",
       "name": "Colton Woosley1",
       "events": "2",
       "wins": "0",
       "points": "91.67"
     },
     {
-      "pos": "67",
+      "pos": "66",
       "name": "John Doster",
-      "events": "4",
+      "events": "5",
       "wins": "0",
-      "points": "86.79"
+      "points": "90.12"
     },
     {
       "pos": "72",
+      "name": "Gerald Mozur",
+      "events": "8",
+      "wins": "0",
+      "points": "87.50"
+    },
+    {
+      "pos": "77",
       "name": "Benjamin Davenport",
       "events": "2",
       "wins": "0",
       "points": "81.67"
     },
     {
-      "pos": "76",
+      "pos": "80",
+      "name": "Steve Snow",
+      "events": "6",
+      "wins": "0",
+      "points": "79.79"
+    },
+    {
+      "pos": "81",
       "name": "Paul LaLonde",
       "events": "2",
       "wins": "0",
       "points": "78.75"
     },
     {
-      "pos": "80",
+      "pos": "85",
+      "name": "Scott Pottinger",
+      "events": "8",
+      "wins": "1",
+      "points": "73.04"
+    },
+    {
+      "pos": "86",
       "name": "Scott Hawkins",
-      "events": "3",
+      "events": "4",
       "wins": "0",
       "points": "71.75"
     },
     {
-      "pos": "88",
-      "name": "Chris Smith",
+      "pos": "87",
+      "name": "Randy Stambaugh",
       "events": "5",
-      "wins": "2",
-      "points": "66.60"
+      "wins": "0",
+      "points": "71.50"
     },
     {
-      "pos": "89",
+      "pos": "94",
+      "name": "Rob Crockett",
+      "events": "1",
+      "wins": "0",
+      "points": "67.50"
+    },
+    {
+      "pos": "95",
       "name": "Ben Carter",
       "events": "2",
       "wins": "0",
       "points": "65.00"
     },
     {
-      "pos": "90",
-      "name": "Scott Pottinger",
-      "events": "7",
-      "wins": "1",
-      "points": "64.04"
+      "pos": "96",
+      "name": "Miles Parroco",
+      "events": "1",
+      "wins": "0",
+      "points": "62.50"
     },
     {
-      "pos": "91",
+      "pos": "97",
       "name": "Bradford Lacefield",
       "events": "2",
       "wins": "0",
       "points": "61.67"
     },
     {
-      "pos": "92",
-      "name": "Gerald Mozur",
-      "events": "7",
+      "pos": "98",
+      "name": "Todd McDaniel",
+      "events": "3",
       "wins": "0",
-      "points": "61.50"
+      "points": "61.25"
     },
     {
-      "pos": "108",
+      "pos": "113",
       "name": "Rickey Crawford",
       "events": "1",
       "wins": "0",
       "points": "57.50"
     },
     {
-      "pos": "109",
+      "pos": "114",
       "name": "Happy Rakestraw",
       "events": "2",
       "wins": "1",
       "points": "56.50"
     },
     {
-      "pos": "112",
-      "name": "Steve Snow",
-      "events": "5",
+      "pos": "115",
+      "name": "Mike Smith",
+      "events": "7",
       "wins": "0",
-      "points": "53.79"
+      "points": "56.00"
     },
     {
-      "pos": "113",
+      "pos": "119",
       "name": "Richard Hayden",
       "events": "4",
       "wins": "0",
       "points": "53.00"
     },
     {
-      "pos": "114",
+      "pos": "120",
       "name": "Hunter Cassady",
       "events": "2",
       "wins": "0",
       "points": "51.25"
     },
     {
-      "pos": "118",
+      "pos": "124",
       "name": "Eric King",
       "events": "5",
       "wins": "1",
       "points": "49.00"
     },
     {
-      "pos": "119",
+      "pos": "125",
       "name": "Ken Francke",
       "events": "3",
       "wins": "0",
       "points": "48.25"
     },
     {
-      "pos": "120",
+      "pos": "126",
       "name": "Jim Orr",
       "events": "3",
       "wins": "0",
       "points": "48.00"
     },
     {
-      "pos": "123",
+      "pos": "129",
       "name": "Cameron Buse",
       "events": "4",
       "wins": "0",
       "points": "46.25"
     },
     {
-      "pos": "124",
-      "name": "Kyle Jury",
-      "events": "4",
-      "wins": "0",
-      "points": "46.17"
-    },
-    {
-      "pos": "125",
-      "name": "Mike Smith",
-      "events": "6",
-      "wins": "0",
-      "points": "46.00"
-    },
-    {
-      "pos": "126",
+      "pos": "130",
       "name": "Evan Beery",
       "events": "1",
       "wins": "0",
       "points": "45.00"
     },
     {
-      "pos": "127",
+      "pos": "131",
       "name": "David Rambo",
       "events": "3",
       "wins": "0",
       "points": "43.00"
     },
     {
-      "pos": "132",
+      "pos": "136",
       "name": "Scott Caldarelli",
-      "events": "4",
+      "events": "5",
       "wins": "1",
       "points": "42.00"
     },
     {
-      "pos": "136",
+      "pos": "139",
+      "name": "Max Marley",
+      "events": "3",
+      "wins": "0",
+      "points": "39.50"
+    },
+    {
+      "pos": "140",
       "name": "Cade Wilson",
       "events": "3",
       "wins": "0",
       "points": "39.00"
     },
     {
-      "pos": "137",
-      "name": "James Harper",
-      "events": "7",
-      "wins": "0",
-      "points": "38.50"
-    },
-    {
-      "pos": "138",
+      "pos": "143",
       "name": "Jerry Edwards",
-      "events": "8",
+      "events": "9",
       "wins": "0",
       "points": "38.00"
     },
     {
-      "pos": "141",
+      "pos": "144",
+      "name": "Bill Douglas",
+      "events": "1",
+      "wins": "0",
+      "points": "37.50"
+    },
+    {
+      "pos": "145",
       "name": "Bennett Myers",
       "events": "3",
       "wins": "0",
       "points": "36.67"
     },
     {
-      "pos": "158",
+      "pos": "160",
+      "name": "Chris Putman",
+      "events": "2",
+      "wins": "0",
+      "points": "33.00"
+    },
+    {
+      "pos": "161",
       "name": "Trae Joyce",
       "events": "6",
       "wins": "0",
       "points": "32.00"
     },
     {
-      "pos": "171",
+      "pos": "174",
+      "name": "Sean Preston",
+      "events": "7",
+      "wins": "0",
+      "points": "29.60"
+    },
+    {
+      "pos": "175",
+      "name": "Jerry Mayes",
+      "events": "9",
+      "wins": "0",
+      "points": "29.08"
+    },
+    {
+      "pos": "176",
       "name": "Terry Lester",
       "events": "5",
       "wins": "0",
       "points": "28.50"
     },
     {
-      "pos": "174",
+      "pos": "177",
+      "name": "Neal Thomas",
+      "events": "7",
+      "wins": "0",
+      "points": "28.00"
+    },
+    {
+      "pos": "184",
       "name": "Kevin Hoffmann",
       "events": "3",
       "wins": "0",
       "points": "27.00"
     },
     {
-      "pos": "177",
-      "name": "Jerry Mayes",
-      "events": "8",
+      "pos": "212",
+      "name": "Josh Garr",
+      "events": "4",
       "wins": "0",
-      "points": "25.75"
+      "points": "24.00"
     },
     {
-      "pos": "178",
-      "name": "Sean Preston",
-      "events": "5",
-      "wins": "0",
-      "points": "25.60"
-    },
-    {
-      "pos": "204",
+      "pos": "213",
       "name": "Larry Young",
-      "events": "7",
+      "events": "8",
       "wins": "1",
       "points": "23.50"
     },
     {
-      "pos": "205",
+      "pos": "214",
       "name": "Greg Pauley",
       "events": "2",
       "wins": "0",
       "points": "23.00"
     },
     {
-      "pos": "206",
+      "pos": "215",
       "name": "Bryan Baysinger",
       "events": "3",
       "wins": "0",
       "points": "22.25"
     },
     {
-      "pos": "210",
-      "name": "Max Marley",
-      "events": "2",
-      "wins": "0",
-      "points": "21.50"
-    },
-    {
-      "pos": "211",
+      "pos": "219",
       "name": "Taylor Kindervater",
       "events": "1",
       "wins": "0",
       "points": "21.00"
     },
     {
-      "pos": "212",
+      "pos": "220",
       "name": "Rusty Dyer",
-      "events": "6",
+      "events": "7",
       "wins": "0",
       "points": "20.96"
     },
     {
-      "pos": "220",
-      "name": "Vincent Kiteley",
-      "events": "1",
+      "pos": "221",
+      "name": "Tyler Wilson",
+      "events": "3",
       "wins": "0",
-      "points": "18.00"
+      "points": "20.67"
     },
     {
-      "pos": "227",
+      "pos": "237",
       "name": "Bill Leavell",
       "events": "4",
       "wins": "0",
       "points": "16.00"
     },
     {
-      "pos": "231",
+      "pos": "240",
       "name": "Matt Reynolds",
       "events": "2",
       "wins": "0",
       "points": "14.60"
     },
     {
-      "pos": "232",
-      "name": "Josh Garr",
-      "events": "3",
+      "pos": "247",
+      "name": "Bill Stout",
+      "events": "6",
       "wins": "0",
-      "points": "14.00"
+      "points": "12.50"
     },
     {
-      "pos": "248",
-      "name": "Kyle Hubbard",
+      "pos": "251",
+      "name": "Larry Cranfill",
       "events": "4",
       "wins": "0",
-      "points": "10.00"
+      "points": "11.50"
     },
     {
-      "pos": "249",
+      "pos": "259",
       "name": "Bob Halderman",
       "events": "1",
       "wins": "0",
       "points": "9.00"
     },
     {
-      "pos": "254",
+      "pos": "266",
       "name": "Jay Dietrich",
-      "events": "1",
+      "events": "2",
       "wins": "0",
       "points": "6.50"
     },
     {
-      "pos": "260",
+      "pos": "271",
       "name": "Scott Hansel",
       "events": "6",
       "wins": "0",
       "points": "5.25"
     },
     {
-      "pos": "272",
+      "pos": "282",
       "name": "Kenny Bates",
-      "events": "7",
+      "events": "8",
       "wins": "0",
       "points": "2.67"
     }
@@ -595,44 +735,44 @@
     {
       "pos": "2",
       "name": "Bryan Conway",
-      "events": "11",
+      "events": "12",
       "wins": "6",
-      "points": "455.00"
+      "points": "459.00"
     },
     {
       "pos": "3",
+      "name": "Joshua Rhodes",
+      "events": "7",
+      "wins": "1",
+      "points": "435.00"
+    },
+    {
+      "pos": "4",
       "name": "Mark Knecht",
       "events": "5",
       "wins": "1",
       "points": "375.00"
     },
     {
-      "pos": "4",
-      "name": "Joshua Rhodes",
-      "events": "6",
-      "wins": "1",
-      "points": "365.00"
-    },
-    {
       "pos": "5",
       "name": "Pj McDougal",
-      "events": "9",
-      "wins": "1",
-      "points": "332.50"
+      "events": "10",
+      "wins": "2",
+      "points": "357.50"
     },
     {
       "pos": "6",
-      "name": "Brady Smith",
-      "events": "3",
-      "wins": "1",
-      "points": "230.00"
+      "name": "Andrew Buse",
+      "events": "9",
+      "wins": "2",
+      "points": "328.92"
     },
     {
       "pos": "7",
-      "name": "Andrew Buse",
-      "events": "7",
-      "wins": "2",
-      "points": "227.25"
+      "name": "Robbie Keyes",
+      "events": "6",
+      "wins": "1",
+      "points": "289.50"
     }
   ]
 }
