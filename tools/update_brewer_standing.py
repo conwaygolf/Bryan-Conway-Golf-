@@ -72,7 +72,15 @@ def git_publish(paths, message):
     if diff.returncode == 0:
         return False  # nothing changed
     subprocess.run(["git", "commit", "-m", message], cwd=BASE_DIR, check=True)
-    subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, check=True)
+    # HEAD:main + try both remotes independently -- see
+    # update_live_leaderboard.py's git_publish for the full explanation.
+    # Same single-remote "push origin main" bug as update_poy_standing.py,
+    # fixed the same way (found/fixed together 2026-10-21).
+    for remote in ("origin", "bryan"):
+        try:
+            subprocess.run(["git", "push", remote, "HEAD:main"], cwd=BASE_DIR, check=True)
+        except subprocess.CalledProcessError:
+            print(f"[update_brewer_standing] push to {remote} rejected (likely diverged history) -- continuing")
     return True
 
 
