@@ -32,8 +32,8 @@
     "end_date": "2026-10-12",
     "title": "US Amateur Four-Ball Qualifier",
     "note": "Country Club of Paducah",
-    "hidden": false,
-    "result_checked": false
+    "hidden": true,
+    "result_checked": true
   },
   {
     "date_label": "Oct 15\u201316",
@@ -41,8 +41,8 @@
     "end_date": "2026-10-16",
     "title": "32nd Clark's Pump-N-Shop Kentucky Mid-Amateur Championship",
     "note": "Gibson Bay Golf Course",
-    "hidden": false,
-    "result_checked": false
+    "hidden": true,
+    "result_checked": true
   },
   {
     "date_label": "Oct 20",
@@ -50,8 +50,8 @@
     "end_date": "2026-10-20",
     "title": "KGA Amateur Series Championship",
     "note": "Lake Forest Country Club",
-    "hidden": false,
-    "result_checked": false
+    "hidden": true,
+    "result_checked": true
   },
   {
     "date_label": "Oct 23",

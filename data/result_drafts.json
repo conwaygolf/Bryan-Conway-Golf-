@@ -30,5 +30,29 @@
     "tag": null,
     "source_event_title": "PGLAT Tour Championship",
     "auto_filled": false
+  },
+  {
+    "date": "Oct 12",
+    "title": "US Amateur Four-Ball Qualifier",
+    "note": "Auto-fetch couldn't find a result on GolfGenius -- check kygolf.org and fill this in by hand.",
+    "tag": null,
+    "source_event_title": "US Amateur Four-Ball Qualifier",
+    "auto_filled": false
+  },
+  {
+    "date": "Oct 15\u201316",
+    "title": "32nd Clark's Pump-N-Shop Kentucky Mid-Amateur Championship",
+    "note": "Conway finished WD at -. Auto-filled -- verify before publishing.",
+    "tag": null,
+    "source_event_title": "32nd Clark's Pump-N-Shop Kentucky Mid-Amateur Championship",
+    "auto_filled": true
+  },
+  {
+    "date": "Oct 20",
+    "title": "KGA Amateur Series Championship",
+    "note": "Auto-fetch couldn't find a result on GolfGenius -- check kygolf.org and fill this in by hand.",
+    "tag": null,
+    "source_event_title": "KGA Amateur Series Championship",
+    "auto_filled": false
   }
 ]
